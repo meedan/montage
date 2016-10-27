@@ -1,6 +1,5 @@
 # Contributing
 
-- Contributions will not be accepted without tests.
 - Please read and check Github issues and pending pull requests before submitting new code.
 - If fixing a bug or adding a feature please post a new issue for discussion first.
 - Provide as much information and reproducability as possible when submitting an issue or pull request.
