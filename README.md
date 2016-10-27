@@ -342,7 +342,7 @@ Run `./bin/manage.py graph_models greenday_core -o greenday-erd.png`
 |django-nose                        |BSD|
 |enum34                             |BSD|
 |django-treebeard                   |Apache 2.0|
-|potatolondon/search                |this is ours but isn't licensed yet. I'll put an Apache 2.0 license on it|
+|potatolondon/search                |Apache 2.0|
 |GoogleAppEngineCloudStorageClient  |Apache 2.0|
 |sphinx                             |BSD|
 |sphinx-bootstrap-theme             |MIT|
