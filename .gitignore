@@ -60,6 +60,9 @@ docs/_build/
 # SASS
 .sass-cache/
 
+# virtualenv
+/GREENDAY
+
 
 # Montage stuff
 

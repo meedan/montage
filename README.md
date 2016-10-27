@@ -1,7 +1,8 @@
-Montage v0.2
-====================
+Montage v1.0
+============
 
 ## Development notes and must have things
+
 - [EditorConfig](http://editorconfig.org) plugin for your editor. Find one [here](http://editorconfig.org/#download).
 - [JSHint](http://www.jshint.com/) will be run on all javascript files upon save. Please check your terminal for errors.
 - It's highly recommended to have a proper linter for Javascript, Sass and Python files to get warned about the errors while you write code. If you are using Sublime Text, there's this awesome plugin: [Sublime Linter for ST2](https://github.com/SublimeLinter/SublimeLinter-for-ST2) - [Sublime Linter for ST3](https://github.com/SublimeLinter/SublimeLinter3). **LINTERS ARE NOT INCLUDED WITH SUBLIMELINTER 3. [Please read the installation documentation](http://sublimelinter.readthedocs.org/en/latest/installation.html)!**
@@ -38,6 +39,11 @@ ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/
 brew doctor
 ```
 
+* install python
+```
+brew install python
+```
+
 * install mysql
 ```
 brew install mysql
@@ -52,7 +58,11 @@ mysql.server start
 * create database
 
 ```
+mysql -uroot
+```
+```
 CREATE DATABASE greenday_v2;
+\q
 ```
 
 
@@ -72,18 +82,20 @@ source /usr/local/bin/virtualenvwrapper.sh
 ```
 
 * install requirements
-```
-mkvirtualenv GREENDAY if it doesn't exist
-or workon GREENDAY to use it
-pip install -r requirements.txt
-```
 
-* if mkvirtualenv doesn't work an alternative way is the following:
-```
-virtualenv GREENDAY (to create it)
-source /pathto/greenday/bin/activate
-pip install -r requirements.txt
-```
+    `mkvirtualenv GREENDAY` if it doesn't exist or `workon GREENDAY` to use it
+
+    ```
+    pip install -r requirements.txt
+    ```
+
+    If mkvirtualenv doesn't work an alternative way is the following:
+
+    ```
+    virtualenv GREENDAY # to create it
+    source ./GREENDAY/bin/activate
+    pip install -r requirements.txt
+    ```
 
 
 * install nodejs
@@ -102,6 +114,11 @@ buildout
 * install grunt
 ```
 sudo npm install -g grunt
+```
+
+* copy configuration file and update the settings (SECRET_KEY, OAUTH_SETTINGS, YOUTUBE_API_DEVELOPER_KEY…)
+```
+cp ./appengine/src/greenday_core/settings/local.py.sample ./appengine/src/greenday_core/settings/local.py
 ```
 
 
@@ -183,6 +200,11 @@ sudo npm install bower -g
 ```
 npm install
 bower install
+```
+
+* copy configuration file and update the settings (SECRET_KEY, OAUTH_SETTINGS, YOUTUBE_API_DEVELOPER_KEY…)
+```
+cp ./appengine/src/greenday_core/settings/local.py.sample ./appengine/src/greenday_core/settings/local.py
 ```
 
 
