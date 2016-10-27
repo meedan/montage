@@ -1,6 +1,9 @@
+
 $breakpoint-phone: 768px;
 $breakpoint-uhd: 1921px;
 $storyful-orange: #fa7200;
+$middle-grey: #7b7b7b;
+
 html {
     background-color: white;
 }
@@ -130,7 +133,7 @@ div.welcome-page {
             padding-top: 20px;
             padding-bottom: 20px;
             text-align: center;
-            color: #7b7b7b;
+            color: $middle-grey;
             font-family: Arial;
             font-weight: 700;
             order: 4;
@@ -156,6 +159,37 @@ div.welcome-page {
                 padding-bottom: 35px;
             }
         }
+        .opensource-message {
+            @extend .purpose;
+            @media(max-width: $breakpoint-phone) {
+                display: none;
+            }
+            .code-icon {
+                display: inline-block;
+                @media(max-width: $breakpoint-uhd) {
+                    width: 24.8px;
+                    height: 15px;
+                }
+                @media(min-width: $breakpoint-uhd) {
+                    width: 33px;
+                    height: 20px;
+                }
+            }
+            .people-outline-icon {
+                display: inline-block;
+                position: relative;
+                @media(max-width: $breakpoint-uhd) {
+                    width: 33px;
+                    height: 21px;
+                    top: 3px;
+                }
+                @media(min-width: $breakpoint-uhd) {
+                    width: 44px;
+                    height: 28px;
+                    top: 2px;
+                }
+            }
+        }
         .montage-icon {
             display: block;
             margin: auto;
@@ -175,17 +209,21 @@ div.welcome-page {
             }
         }
         .button-bar {
-            margin: auto;
             text-align: center;
+            display: flex;
+            justify-content: center;
             flex-shrink: 0;
+            height: 93px;
             @media( max-width: $breakpoint-phone) {
                 width: 100%;
                 order: 2;
+                height: auto;
             }
             @media( min-width: $breakpoint-phone ) {
                 order: 4;
             }
             button.btn-log-in {
+                flex: 0 0 252px;
                 @media( max-width: $breakpoint-phone) {
                     width: 100%;
                     max-width: 260px;
@@ -194,11 +232,9 @@ div.welcome-page {
                     margin-bottom: 70px;
                 }
                 @media( min-width: $breakpoint-phone) and ( max-width: $breakpoint-uhd) {
-                    width: 215px;
                     height: 64px;
                 }
                 @media( min-width: $breakpoint-uhd) {
-                    width: 334px;
                     height: 95px;
                 }
                 background-color: white;
@@ -226,6 +262,59 @@ div.welcome-page {
                     font-weight: 400;
                     @media( min-width: $breakpoint-uhd) {
                         font-size: 18px;
+                    }
+                }
+            }
+            .btn-sourcecode {
+                margin: 0 0 50px 10px;
+                font-weight: 700;
+                font-family: Arial;
+                position: relative;
+                svg {
+                    position: absolute;
+                    fill:#818383;
+                    @media(max-width: $breakpoint-uhd) {
+                        top: 10px;
+                        left: 10px;
+                        width: 36px;
+                        height: 36px;
+                    }
+                    @media(min-width: $breakpoint-uhd) {
+                        top: 21px;
+                        left: 17px;
+                        width: 49px;
+                        height: 48px;
+                    }
+                }
+
+                @media only screen and (max-width: $breakpoint-phone) {
+                    display: none;
+                }
+                @media(max-width: $breakpoint-uhd) {
+                    flex: 0 0 250px;
+                    height: 64px;
+                    line-height: 62px;
+                    font-size: 17.7px;
+                    text-indent: 40px;
+                }
+                @media(min-width: $breakpoint-uhd) {
+                    flex: 0 0 334px;
+                    height: 95px;
+                    line-height: 93px;
+                    font-size: 23.7px;
+                    text-indent: 60px;
+                }
+                display: inline-block;
+                background-color: white;
+                color: $middle-grey;
+                border: 3px solid $middle-grey;
+
+                &:focus,
+                &:hover {
+                    background-color: $middle-grey;
+                    color: white;
+                    svg {
+                        fill: white;
                     }
                 }
             }
