@@ -1,0 +1,29 @@
+$gd-video-timeline-border-radius: 2px;
+$gd-video-timeline-content-z: 1;
+$gd-video-timeline-outer-wrapper-offset: 120px;
+$gd-video-timeline-playhead-handle-size: 5px;
+$gd-video-timeline-playhead-z: 10;
+$gd-video-timeline-tag-instance-handle-border-radius: 3px;
+$gd-video-timeline-tag-instance-handle-color: map-get($primary-color-palette, '800');
+$gd-video-timeline-tag-instance-hover-color: map-get($primary-color-palette, '100');
+$gd-video-timeline-tag-instance-fine-tune-btn-size: 20px;
+$gd-video-timeline-tag-instance-fine-tune-padding: (
+	top: 5px,
+	left: 10px,
+	bottom: 10px,
+	right: 10px
+);
+$gd-video-timeline-tag-instance-fine-tune-btn-gap: 4px;
+$gd-video-timeline-tag-list-width: 175px;
+$gd-video-timeline-tag-list-width: 175px;
+$gd-video-timeline-tag-row-height: 32px;
+$gd-video-timeline-thumbnail-width: $gd-video-timeline-tag-row-height / 9 * 16;
+$gd-video-timeline-comment-button-size: 28px;
+
+$gd-video-timeline-offset: $gd-video-timeline-outer-wrapper-offset + $gd-video-timeline-tag-list-width;
+
+// Import subcomponents
+@import 'timeline';
+@import 'tag-instance';
+@import 'tag-label';
+@import 'tag-merge-dialog/components.gd-video-timeline.tag-merge';

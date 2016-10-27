@@ -1,0 +1,92 @@
+/////////////////////////////
+// Angular material imports
+/////////////////////////////
+@import 'color-palette';
+@import 'theme';
+
+// Angular material core
+@import '../libs/angular-material-src/src/core/style/variables';
+@import '../libs/angular-material-src/src/components/whiteframe/whiteframe';
+
+/////////////////////////////
+// Montage
+/////////////////////////////
+@import 'variables';
+@import 'functions';
+@import 'colours';
+@import 'mixins';
+@import 'fonts';
+@import 'normalize';
+@import 'sprite';
+
+@import 'overrides';
+@import 'animations';
+@import 'layers';
+@import 'layout';
+@import 'scrollbars';
+@import 'validation-messages';
+
+// FIXME: Should these be moved to the proper component folders too?
+@import 'components/app-sidebar';
+@import 'components/header';
+@import 'components/toast';
+@import 'components/toolbar';
+@import 'components/user-settings';
+@import 'components/hotkeys';
+
+@import '../js/components/gd-backdrop/gd-backdrop';
+@import '../js/components/holo-spinner/holo-spinner';
+@import '../js/components/dialog/dialog';
+@import '../js/components/buttons/gd-button/gd-button';
+@import '../js/components/buttons/gd-archive-video-button/gd-archive-video-button';
+@import '../js/components/buttons/gd-favourite-video-button/gd-favourite-video-button';
+@import '../js/components/buttons/gd-select-video-button/gd-select-video-button';
+@import '../js/components/buttons/gd-add-to-collection-button/gd-add-to-collection-button';
+@import '../js/components/gd-floating-element/gd-floating-element';
+@import '../js/components/gd-floating-menu/gd-floating-menu';
+@import '../js/components/gd-selected-videos-bottom-sheet/bottom-sheet';
+@import '../js/components/gd-multiline-field/gd-multiline-field';
+@import '../js/components/gd-tag-autocomplete/gd-tag-autocomplete';
+@import '../js/components/gd-timed-comment/gd-timed-comment';
+@import '../js/components/gd-video-timeline/gd-video-timeline';
+@import '../js/components/gd-video-popup/gd-video-popup';
+@import '../js/components/gd-youtube-thumbnail/gd-youtube-thumbnail';
+@import '../js/components/image-uploader/image-uploader';
+@import '../js/components/gd-inline-edit/gd-inline-edit';
+@import '../js/components/stats/stats';
+@import '../js/components/toggle-button/toggle-button';
+@import '../js/components/user-box/user-box';
+@import '../js/components/video-list/video-list';
+@import '../js/components/youtube-video/youtube-video';
+@import '../js/components/one-search/one-search';
+@import '../js/components/video-filters/gd-video-filter-set/gd-video-filter-set';
+@import '../js/components/video-filters/gd-video-filter/gd-video-filter';
+@import '../js/components/video-filters/gd-video-tag-filter/gd-video-tag-filter';
+@import '../js/components/video-map/video-map';
+@import '../js/components/gd-autocomplete/gd-autocomplete';
+@import '../js/components/gd-tag-sidebar/gd-tag-sidebar';
+@import '../js/components/gd-online-collaborators/gd-online-collaborators';
+@import '../js/components/gd-popup-datepicker/gd-popup-datepicker';
+@import '../js/components/gd-project-comments-sidebar/gd-project-comments-sidebar';
+@import '../js/components/video-tag-view/video-tag-view';
+@import '../js/components/gd-onboarding/gd-onboarding-popover';
+@import '../js/components/gd-popup/gd-popup';
+@import '../js/components/gd-datepicker/gd-datepicker';
+@import '../js/components/gd-progress/gd-progress';
+
+@import '../js/components/modals/dialog-collaborators';
+
+@import '../js/pages/accept-nda/accept-nda';
+@import '../js/pages/projects/projects';
+@import '../js/pages/project/project';
+@import '../js/pages/video/video-theatre';
+
+// Components specific to pages.
+// FIXME: Not sure where we should put these (both in this include and also
+// in the filesystem...). These entries may depend on variables defined in their
+// pages .scss file, which is why they need to be imported after the pages.
+@import '../js/components/gd-video-details-map/gd-video-details-map';
+
+// The CSS from storyful redisign
+@import 'storyful/welcome';
+@import 'storyful/overrides'

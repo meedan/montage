@@ -1,0 +1,13 @@
+<md-content class="video-filter__list md-whiteframe-z1">
+	<div class="video-filter__list__quick-filter" layout="row" layout-align="start center">
+		<icon class="ic-search"></icon>
+		<input flex class="video-filter__list__quick-filter__input" type="text" ng-model="tagFilterCtrl.nameFilter" placeholder="Quick filter tags">
+		<md-button aria-label="Clear" ng-show="tagFilterCtrl.markedTags.length" ng-click="tagFilterCtrl.deselectAll()">
+			Clear
+		</md-button>
+	</div>
+	<md-content class="video-filter__content-list">
+		<gd-tag-list ng-if="!tagFilterCtrl.nameFilter" ng-model="tagFilterCtrl.cleanTags" tag-template="{{ ::tagFilterCtrl.tagTemplateUrl }}"></gd-tag-list>
+		<gd-tag-list flat="true" name-filter="{{ tagFilterCtrl.nameFilter }}" ng-if="tagFilterCtrl.nameFilter" ng-model="tagFilterCtrl.allTags" tag-template="{{ ::tagFilterCtrl.tagTemplateUrl }}"></gd-tag-list>
+	</md-content>
+</md-content>

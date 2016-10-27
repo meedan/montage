@@ -1,0 +1,4 @@
+html:
+  src: '<%= paths.templates %>/index.html'
+  options:
+    dest: '<%= paths.staticDistRoot %>'

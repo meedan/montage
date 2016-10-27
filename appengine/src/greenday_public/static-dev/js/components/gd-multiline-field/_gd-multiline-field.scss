@@ -1,0 +1,6 @@
+.gd-multiline-field {
+	@extend %base-text-input;
+	border: none;
+	border-bottom: 2px solid $colour-gd-accent;
+	padding: 0;
+}

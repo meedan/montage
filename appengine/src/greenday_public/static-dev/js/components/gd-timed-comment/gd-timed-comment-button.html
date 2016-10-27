@@ -1,0 +1,7 @@
+<gd-button
+	ng-mouseenter="ctrl.showPreview($event)"
+	ng-mouseleave="ctrl.hidePreview($event)"
+	layout-fill>
+	<img ng-src="{{ ::thread.user.profile_img_url }}?sz=30" ng-if="::thread.user.profile_img_url">
+	<img ng-src="{{ ::defaultProfileImgUrl }}" ng-if="::!thread.user.profile_img_url">
+</gd-button>

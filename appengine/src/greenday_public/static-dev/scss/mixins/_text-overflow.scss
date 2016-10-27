@@ -1,0 +1,19 @@
+@mixin text-overflow($multiline: false, $lines-to-show: 1, $no-display: false) {
+	overflow: hidden;
+	text-overflow: ellipsis;
+
+	@if $multiline == false {
+		@if $no-display == false {
+			display: block;
+		}
+		white-space: nowrap;
+	}
+
+	@if $multiline == true {
+		-webkit-box-orient: vertical;
+		/* autoprefixer: off */
+		display: -webkit-box;
+		/* autoprefixer: on */
+		-webkit-line-clamp: $lines-to-show;
+	}
+}

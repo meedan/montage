@@ -1,0 +1,50 @@
+.dialog {
+	background-color: #fafafa;
+}
+
+.dialog-actions {
+	border-top: 1px solid $colour-border-default;
+}
+
+%dialog__action {
+	@include rem(font-size, 13px);
+	color: map-get($primary-color-palette, '100');
+	margin: 0 0 0 20px;
+	width: auto;
+
+	&:hover {
+		background-color: transparent;
+		color: map-get($primary-color-palette, '500');
+	}
+}
+
+.dialog__action--cancel,
+.dialog__action--ok {
+	@extend %dialog__action;
+}
+
+.dialog__action--ok {
+	color: $colour-gd-accent;
+
+	&:hover {
+		color: darken($colour-gd-accent, 20%);
+	}
+}
+
+.dialog__save-overlay {
+	background-color: rgba(255, 255, 255, .7);
+	height: 100%;
+	left: 0;
+	position: absolute;
+	top: 0;
+	width: 100%;
+	z-index: 10;
+
+	holo-spinner {
+		$margin: -($holo-spinner-size / 2);
+		left: 50%;
+		margin: $margin 0 0 $margin;
+		position: absolute;
+		top: 50%;
+	}
+}

@@ -1,0 +1,102 @@
+$gd-floating-menu-item-icon-margin: $baseline-component-grid;
+$gd-floating-menu-icon-width: 18px;
+$gd-floating-menu-group-arrow-width: 18px;
+
+@for $i from 1 through 7 {
+	.gd-menu-width-#{$i} {
+		@include menu-width($i);
+	}
+}
+
+.gd-floating-menu,
+.gd-floating-menu-group__content {
+	background-color: $colour-white-pure;
+	border-radius: 2px;
+	padding: $baseline-component-grid 0;
+}
+
+.gd-floating-menu {
+	@include menu-width(3);
+	@include type(menu);
+	color: $colour-body-text;
+	margin: 0;
+	position: absolute;
+	top: 0;
+	z-index: z($layers, floating-elements) + $z-index-tooltip; // hack: this puts the floating menu on top of any item that angular-material defines the z-index of
+
+	> div {
+		width: 100%;
+	}
+
+	input[type=text] {
+		@extend %base-text-input;
+	}
+}
+
+.gd-floating-menu-item,
+.gd-floating-menu-group {
+	cursor: pointer;
+	display: block;
+	padding: 10px 16px 10px 20px;
+	position: relative;
+
+	icon {
+		font-size: 18px;
+	}
+
+	&:hover {
+		background-color: $colour-white-medium;
+		z-index: 1002;
+	}
+}
+
+.gd-floating-menu-item__label,
+.gd-floating-menu-group__label {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.gd-floating-menu-item__label {
+	max-width: calc(100% - #{3 + $gd-floating-menu-item-icon-margin + $gd-floating-menu-icon-width});
+}
+
+.gd-floating-menu-group__label {
+	max-width: calc(100% - #{3 + ($gd-floating-menu-item-icon-margin + $gd-floating-menu-icon-width) + ($gd-floating-menu-group-arrow-width + $gd-floating-menu-icon-width)});
+}
+
+.gd-floating-menu-item__icon,
+.gd-floating-menu-group__icon {
+	margin-right: $gd-floating-menu-item-icon-margin;
+}
+
+.gd-floating-menu-item__icon,
+.gd-floating-menu-item__label,
+.gd-floating-menu-group__icon,
+.gd-floating-menu-group__label,
+.gd-floating-menu-group__arrow {
+	display: inline-block;
+}
+
+.gd-floating-menu-group__content {
+	$offset: 100%;
+	background-color: $colour-white-pure;
+	display: none;
+	position: absolute;
+	top: -$baseline-component-grid;
+
+	&.gd-floating-menu-group__content--left {
+		left: -$offset;
+	}
+
+	&.gd-floating-menu-group__content--right {
+		right: -$offset;
+	}
+}
+
+.gd-floating-menu-group__arrow {
+	margin-top: -10px;
+	position: absolute;
+	right: 16px;
+	top: 50%;
+}

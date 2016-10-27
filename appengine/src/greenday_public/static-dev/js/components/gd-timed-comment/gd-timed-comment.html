@@ -1,0 +1,35 @@
+<gd-floating-menu-button
+	align-to="right"
+	menu-template-url="components/gd-timed-comment/gd-timed-comment-menu.html"
+	menu-data="menuData"
+	menu-z-index="2001"
+	ng-if="user.id === comment.user.id && !editing && mode != 'READONLY'"
+>
+	<icon class="ic-more-vert"></icon>
+</gd-floating-menu-button>
+<div class="gd-timed-comment__user">
+	<div class="gd-timed-comment__user-name">{{ ::comment.user.first_name }} {{ ::comment.user.last_name }}</div>
+	<time class="gd-timed-comment__user-comment-time" datetime="{{ ::comment.created }}">{{ ::comment.c_pretty_created_date }}</time>
+	<img class="gd-timed-comment__user-avatar" ng-src="{{ ::comment.user.profile_img_url }}?sz=25" ng-if="::comment.user.profile_img_url">
+	<img class="gd-timed-comment__user-avatar" ng-src="{{ ::defaultProfileImgUrl }}" ng-if="::!comment.user.profile_img_url">
+</div>
+<div>
+	<div ng-if="!editing" class="gd-timed-comment__comment">
+		{{ comment.text }}
+	</div>
+	<div ng-if="editing">
+		<form ng-submit="timedCommentCtrl.save()">
+			<textarea ng-model="data.editingText" class="gd-multiline-field"></textarea>
+			<div class="gd-timed-comment__actions" layout="horizontal" layout-align="end center">
+				<md-button type="button" ng-click="timedCommentCtrl.cancelEditing()" ng-disabled="saving" aria-label="Cancel Editing">Cancel</md-button>
+				<md-button type="submit" md-primary ng-disabled="saving" aria-label="Save Changes">Save</md-button>
+			</div>
+		</form>
+	</div>
+</div>
+<div class="gd-timed-comment__overlay" ng-if="saving" layout="horizontal" layout-align="center center">
+	<holo-spinner></holo-spinner><span>Saving comment</span>
+</div>
+<div class="gd-timed-comment__overlay" ng-if="deleting" layout="horizontal" layout-align="center center">
+	<holo-spinner></holo-spinner><span>Deleting comment</span>
+</div>

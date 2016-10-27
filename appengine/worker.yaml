@@ -1,0 +1,35 @@
+application: greenday-project-v02-dev
+module: worker
+version: 3-0-20
+runtime: python27
+api_version: 1
+threadsafe: true
+
+instance_class: B2
+manual_scaling:
+  instances: 1
+
+builtins:
+- remote_api: on
+- appstats: on
+
+libraries:
+- name: endpoints
+  version: 1.0
+- name: MySQLdb
+  version: "1.2.4b4"
+- name: ssl
+  version: latest
+
+handlers:
+# Defer
+- url: /_ah/queue/deferred
+  script: handlers.deferred.application
+  login: admin
+  secure: always
+
+# Admin
+- url: /admin.*
+  script: handlers.wsgi.application
+  secure: always
+  login: admin

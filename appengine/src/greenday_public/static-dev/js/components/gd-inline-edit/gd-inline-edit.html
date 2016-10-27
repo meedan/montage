@@ -1,0 +1,9 @@
+<span class="inline-edit" layout="column">
+	<form ng-submit="save()" ng-show="editMode === true" flex layout="row" layout-align="start center">
+		<md-input ng-model="fakeModel" type="text" flex></md-input>
+	</form>
+	<span ng-click="editMode = true" ng-show="editMode === false" flex layout="row" layout-align="start center">
+		<span class="inline-edit__content" ng-transclude></span>
+		<icon class="ic-edit"></icon>
+	</span>
+</span>

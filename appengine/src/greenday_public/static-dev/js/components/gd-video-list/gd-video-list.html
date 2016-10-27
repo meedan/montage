@@ -1,0 +1,65 @@
+<md-content class="video-list" ng-class="{'isCollection': ctrl.isCollection && ctrl.enableManualOrdering}">
+	<gd-progress ng-if="ctrl.fetchingInBackground"></gd-progress>
+	<div class="video-list__container" layout="column" flex>
+		<div class="project__summary">
+			<div class="project__summary-title">This collection contains</div>
+			<div layout="row">
+				<div class="project__summary-count" layout="row" layout-align="start center">
+					<icon class="ic-movie"></icon>
+					<ng-pluralize count="ctrl.listInfo.videoCount" when="{'0': 'No videos', 'one': '1 video', 'other': '{} videos'}"></ng-pluralize>
+				</div>
+				<div class="project__summary-count" layout="row" layout-align="start center">
+					<icon class="ic-access-time"></icon>
+					<ng-pluralize ng-if="ctrl.listInfo.totalDuration.hours" count="ctrl.listInfo.totalDuration.hours" when="{'one': '1 hour', 'other': '{} hours'}"></ng-pluralize>
+					<span ng-if="ctrl.listInfo.totalDuration.hours && ctrl.listInfo.totalDuration.minutes">&nbsp;and&nbsp;</span>
+					<ng-pluralize count="ctrl.listInfo.totalDuration.minutes" when="{'one': '1 minute', 'other': '{} minutes'}"></ng-pluralize>
+					<span>&nbsp;of footage</span>
+				</div>
+				<div class="project__summary-count" layout="row" layout-align="start center">
+					<icon class="ic-label"></icon>
+					<ng-pluralize count="ctrl.listInfo.totalTagCount" when="{'0': 'No tag instances', 'one': '1 tag instance', 'other': '{} tag instances'}"></ng-pluralize>
+				</div>
+			</div>
+		</div>
+		<section class="video-list__wrapper">
+			<md-subheader class="md-primary md-sticky-no-effect">
+				<div class="video-list__thead" layout="row">
+					<div class="video-list__thead-cell video-list__thead-cell--reorder" layout="row" layout-align="center center"><icon class="ic-reorder"></icon></div>
+					<div class="video-list__thead-cell video-list__thead-cell--video-image"></div>
+					<div flex class="video-list__thead-cell video-list__thead-cell--sortable video-list__thead-cell--video-name" ng-click="ctrl.sort('name')" ng-class="{'active': ctrl.ordering.currentKey === 'name', reverse: ctrl.ordering.currentKey === 'name' && ctrl.ordering.reverse}">
+						Video title
+						<icon class="sort-icon ic-arrow-back ic-rotate-90 ic-small"></icon>
+					</div>
+					<div class="video-list__thead-cell video-list__thead-cell--sortable video-list__thead-cell--channel-name" ng-click="ctrl.sort('channel_name')" ng-class="{'active': ctrl.ordering.currentKey === 'channel_name', reverse: ctrl.ordering.currentKey === 'channel_name' && ctrl.ordering.reverse}">
+						Uploader
+						<icon class="sort-icon ic-arrow-back ic-rotate-90 ic-small"></icon>
+					</div>
+					<div class="video-list__thead-cell video-list__thead-cell--sortable video-list__thead-cell--video-watch-count" ng-click="ctrl.sort('watch_count')" ng-class="{'active': ctrl.ordering.currentKey === 'watch_count', reverse: ctrl.ordering.currentKey === 'watch_count' && ctrl.ordering.reverse}">
+						Views
+						<icon class="sort-icon ic-arrow-back ic-rotate-90 ic-small"></icon>
+					</div>
+					<div class="video-list__thead-cell video-list__thead-cell--sortable video-list__thead-cell--video-tag-count" ng-click="ctrl.sort('tag_count')" ng-class="{'active': ctrl.ordering.currentKey === 'tag_count', reverse: ctrl.ordering.currentKey === 'tag_count' && ctrl.ordering.reverse}">
+						Tags
+						<icon class="sort-icon ic-arrow-back ic-rotate-90 ic-small"></icon>
+					</div>
+					<div class="video-list__thead-cell video-list__thead-cell--sortable video-list__thead-cell--video-date" ng-click="ctrl.sort('publish_date')" ng-class="{'active': ctrl.ordering.currentKey === 'publish_date', reverse: ctrl.ordering.currentKey === 'publish_date' && ctrl.ordering.reverse}">
+						Published
+						<icon class="sort-icon ic-arrow-back ic-rotate-90 ic-small"></icon>
+					</div>
+					<div class="video-list__thead-cell video-list__thead-cell--sortable video-list__thead-cell--video-date" ng-click="ctrl.sort('created')" ng-class="{'active': ctrl.ordering.currentKey === 'created', reverse: ctrl.ordering.currentKey === 'created' && ctrl.ordering.reverse}">
+						Added
+						<icon class="sort-icon ic-arrow-back ic-rotate-90 ic-small"></icon>
+					</div>
+					<div class="video-list__thead-cell video-list__thead-cell--favourite" layout="row" layout-align="center center"><icon class="ic-star"></icon></div>
+					<div class="video-list__thead-cell video-list__thead-cell--favourite" layout="row" layout-align="center center" ng-click="ctrl.selectAllVideos(!ctrl.allSelected)"><icon ng-class="{'ic-check-box': ctrl.allSelected, 'ic-check-box-outline-blank': !ctrl.allSelected}"></icon></div>
+				</div>
+			</md-subheader>
+			<div class="video-list__tbody" layout="column">
+				<div class="video-list__item" ng-repeat="video in videos | filter:quickFilter | orderBy:ctrl.ordering.currentKey:ctrl.ordering.reverse track by video.id" draggable="{{ ::(ctrl.isCollection && ctrl.enableManualOrdering === true ? true : false) }}" draggable-data="{{ ::video.youtube_id }}" droppable droppable-data="{{ ::video.youtube_id }}" on-drop="ctrl.onDrop">
+					<gd-video-list-item flex video="::video"></gd-video-list-item>
+				</div>
+			</div>
+		</section>
+	</div>
+</md-content>
+<gd-selected-videos-bottom-sheet selected-project="ctrl.project" selected-tab="options.selectedTab" videos="ctrl.selectedVideos" actions="options.bottomSheetActions"></gd-selected-videos-bottom-sheet>

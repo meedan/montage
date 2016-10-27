@@ -1,0 +1,180 @@
+$pt-datepicker-day-width: 36px !default;
+$pt-datepicker-day-height: 36px !default;
+$pt-datepicker-months-visible: 1 !default;
+$pt-datepicker-num-items-per-row: 8 !default;
+$pt-datepicker-month-name-height: 41px !default;
+$pt-datepicker-default-text-colour: rgba(38, 50, 56, .87) !default;
+$pt-datepicker-default-font-size: 13px !default;
+$pt-datepicker-default-line-height: 20px !default;
+$pt-datepicker-month-name-text-colour: rgba(0, 0, 0, .54) !default;
+$pt-datepicker-month-name-font-size: 13px !default;
+$pt-datepicker-month-name-font-weight: 500 !default;
+$pt-datepicker-month-name-line-height: 24px !default;
+$pt-datepicker-month-name-border-colour: rgba(38, 50, 56, .12) !default;
+$pt-datepicker-week-number-colour: rgba(#ffa726, .54);
+
+
+.pt-datepicker {
+	background-color: #fff;
+	color: $pt-datepicker-default-text-colour;
+	font-size: $pt-datepicker-default-font-size;
+	font-style: normal;
+	font-weight: 400;
+	line-height: $pt-datepicker-default-line-height;
+	overflow: hidden;
+	position: relative;
+	width: $pt-datepicker-day-width * $pt-datepicker-num-items-per-row;
+
+	&.no-week-numbers {
+		width: $pt-datepicker-day-width * ($pt-datepicker-num-items-per-row - 1);
+
+		.pt-datepicker__week-number,
+		.pt-datepicker__week-day {
+			width: (100 / ($pt-datepicker-num-items-per-row - 1)) * 1%;
+		}
+	}
+}
+
+.pt-datepicker__content {
+	max-height: 5 * $pt-datepicker-day-height + $pt-datepicker-month-name-height;
+}
+
+.pt-datepicker__calendar {
+	overflow: hidden;
+	position: relative;
+}
+
+.pt-datepicker__week,
+.pt-datepicker__weeks,
+.pt-datepicker__week-days,
+.pt-datepicker__month,
+.pt-datepicker__months {
+	display: block;
+}
+
+.pt-datepicker__week-number,
+.pt-datepicker__week-day {
+	cursor: pointer;
+	display: inline-block;
+	height: $pt-datepicker-day-height;
+	line-height: $pt-datepicker-day-height;
+	position: relative;
+	text-align: center;
+	user-select: none;
+	vertical-align: top;
+	width: (100 / $pt-datepicker-num-items-per-row) * 1%;
+
+}
+
+.pt-datepicker__week-day {
+	margin: 1px 0;
+
+	&:hover {
+		.pt-datepicker__week-day__content {
+			background-color: #fafafa;
+		}
+	}
+
+	&.selected {
+		.pt-datepicker__week-day__content {
+			background-color: $colour-gd-accent;
+		}
+	}
+}
+
+.pt-datepicker__week-day__content {
+	background-color: transparent;
+	border-radius: 50%;
+	display: block;
+	height: 100%;
+	transition: $swift-ease-in-out;
+	width: 100%;
+}
+
+.pt-datepicker__weeks,
+.pt-datepicker__week-days {
+	padding: 0;
+}
+
+.pt-datepicker__days {
+	border-bottom: 1px solid $pt-datepicker-month-name-border-colour;
+}
+
+.pt-datepicker__month-name {
+	border-bottom: 1px solid $pt-datepicker-month-name-border-colour;
+	color: $pt-datepicker-month-name-text-colour;
+	font-size: $pt-datepicker-month-name-font-size;
+	font-weight: $pt-datepicker-month-name-font-weight;
+	line-height: $pt-datepicker-month-name-line-height;
+	padding-bottom: 8px;
+	padding-top: 8px;
+}
+
+.pt-datepicker__week-number {
+	color: $pt-datepicker-week-number-colour;
+}
+
+.pt-datepicker__week-day--faded {
+	opacity: .2;
+}
+
+.pt-datepicker__month--highlighted,
+.pt-datepicker__week--highlighted {
+	.pt-datepicker__week-day {
+		background-color: rgba($colour-gd-accent, .5);
+	}
+}
+
+.pt-datepicker__week-day--highlighted {
+	background-color: rgba($colour-gd-accent, .5);
+}
+
+.pt-datepicker--before,
+.pt-datepicker--after,
+.pt-datepicker--between,
+.pt-datepicker--notbetween {
+	.pt-datepicker__week-day--start-date,
+	.pt-datepicker__week-day--end-date {
+		&:before {
+			background-color: rgba($colour-gd-accent, .5);
+			content: '';
+			height: 100%;
+			position: absolute;
+			width: 50%;
+		}
+	}
+}
+
+.pt-datepicker--after,
+.pt-datepicker--between {
+	.pt-datepicker__week-day--start-date {
+		&:before {
+			left: 50%;
+		}
+	}
+}
+
+.pt-datepicker--between {
+	.pt-datepicker__week-day--end-date {
+		&:before {
+			left: 0;
+		}
+	}
+}
+
+.pt-datepicker--before,
+.pt-datepicker--notbetween {
+	.pt-datepicker__week-day--start-date {
+		&:before {
+			left: 0;
+		}
+	}
+}
+
+.pt-datepicker--notbetween {
+	.pt-datepicker__week-day--end-date {
+		&:before {
+			left: 50%;
+		}
+	}
+}

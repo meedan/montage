@@ -1,0 +1,17 @@
+gd-backdrop {
+	background-color: transparent;
+	height: 100%;
+	left: 0;
+	position: fixed;
+	top: 0;
+	width: 100%;
+	z-index: z($layers, backdrop) + $z-index-tooltip; // hack: this puts the backdrop menu on top of any item that angular-material defines the z-index of
+
+	div {
+		height: 100%;
+		left: 0;
+		position: absolute;
+		top: 0;
+		width: 100%;
+	}
+}

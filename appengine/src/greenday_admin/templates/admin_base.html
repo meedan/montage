@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html ng-app="app">
+	<head>
+		<title>Montage - Prototype</title>
+		<link rel="stylesheet" type="text/css" href="/static/css/greenday.css">
+		<link rel="icon" type="image/png" href="/static/img/favicon.png">
+	</head>
+
+	<body md-theme="default">
+		{% csrf_token %}
+
+		<section layout="row" layout-fill>
+			<md-content flex layout="column" layout-fill>
+				<header class="appbar">
+					<div class="appbar__content">
+						<md-toolbar class="md-default-theme">
+							<div layout="row" flex>
+								<div layout="row" layout-align="start center" flex>
+									<h1 class="appbar__page-title">{% block page_title %}<a href="{% url "user_management" %}">User management</a>{% endblock %}</h1>
+								</div>
+							</div>
+						</md-toolbar>
+					</div>
+
+				</header>
+
+				<section class="page" layout="column" flex>
+					{% block content %}{% endblock %}
+				</section>
+			</md-content>
+		</section>
+
+		<script>
+			(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+			})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+			{% if ENV == 0 %}
+			ga('create', '{{ ANALYTICS_ID }}', {'cookieDomain': 'none'});
+			{% endif %}
+			{% if ENV == 1 %}
+			ga('create', '{{ ANALYTICS_ID }}', 'greenday-project-v02-dev.appspot.com');
+			{% endif %}
+			{% if ENV == 2 %}
+			ga('create', '{{ ANALYTICS_ID }}', 'greenday-project-v02.appspot.com');
+			{% endif %}
+
+		</script>
+
+		<style>
+			md-toolbar.md-default-theme {
+				background-color: rgb(96,125,139);
+			}
+		</style>
+	</body>
+</html>

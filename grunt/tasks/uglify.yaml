@@ -1,0 +1,11 @@
+js:
+  options:
+      mangle: false
+      compress: false
+  files:
+    -
+      src: '<%= paths.tmp %>/concat/js/app.js'
+      dest: '<%= paths.staticDistRoot %>/js/app.js'
+    -
+      src: '<%= paths.tmp %>/concat/js/libs.js'
+      dest: '<%= paths.staticDistRoot %>/js/libs.js'

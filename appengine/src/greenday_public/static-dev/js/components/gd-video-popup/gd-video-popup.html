@@ -1,0 +1,9 @@
+<span class="video-popup md-whiteframe-z2" layout="column">
+	<span class="video-popup__link" ng-style="{'background-image': 'url(//i3.ytimg.com/vi/' + video.youtube_id + '/mqdefault.jpg)'}">
+		<span class="video-popup__duration">{{ ::video.duration | duration }}</span>
+	</span>
+	<span class="video-popup__content">
+		<span class="video-popup__title">{{ ::video.name }}</span>
+		<span class="video-popup__channel">by {{ ::video.channel_name }}</span>
+	</span>
+</span>

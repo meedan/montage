@@ -1,0 +1,31 @@
+<div class="pt-datepicker pt-datepicker--{{ datepicker.options.mode }} md-whiteframe-z1" ng-class="{'no-week-days': !datepicker.options.showWeekDays, 'no-week-numbers': !datepicker.options.showWeekNumbers}">
+	<div class="pt-datepicker__days" ng-if="datepicker.options.showWeekDays">
+		<md-content>
+			<md-item class="pt-datepicker__week">
+				<md-list class="pt-datepicker__week-days">
+					<md-item class="pt-datepicker__week-number" ng-if="datepicker.options.showWeekNumbers">W</md-item><!--
+				 --><md-item class="pt-datepicker__week-day" ng-repeat="day in datepicker.weekdays">{{ ::day }}</md-item>
+				</md-list>
+			</md-item>
+		</md-content>
+	</div>
+	<div class="pt-datepicker__calendar">
+		<md-content class="pt-datepicker__content">
+			<md-list class="pt-datepicker__months">
+				<md-item id="{{ ::month.id }}" class="pt-datepicker__month" ng-class="{'pt-datepicker__month--highlighted': month.isHighlighted}" ng-repeat="month in datepicker.months track by month.id">
+					<md-subheader class="md-primary pt-datepicker__month-name">{{ ::month.name }} {{ ::month.year }}</md-subheader>
+					<md-list class="pt-datepicker__weeks">
+						<md-item class="pt-datepicker__week" ng-class="{'pt-datepicker__week--highlighted': week.isHighlighted}" ng-repeat="week in month.weeks track by week.id">
+							<md-list class="pt-datepicker__week-days">
+								<md-item class="pt-datepicker__week-number" ng-if="datepicker.options.showWeekNumbers">{{ ::week.week }}</md-item><!--
+							 --><md-item data-date="{{ ::day.date }}" class="pt-datepicker__week-day" ng-repeat="day in week.days track by day.id" ng-class="{'pt-datepicker__week-day--faded': !day.isInCurrentMonth, 'selected': day.isSelected, 'pt-datepicker__week-day--highlighted': day.isHighlighted, 'pt-datepicker__week-day--start-date': day.isStartDate, 'pt-datepicker__week-day--end-date': day.isEndDate}">
+									<md-item-content class="pt-datepicker__week-day__content">{{ ::day.dayNumber }}</md-item-content>
+								</md-item>
+							</md-list>
+						</md-item>
+					</md-list>
+				</md-item>
+			</md-list>
+		</md-content>
+	</div>
+</div>

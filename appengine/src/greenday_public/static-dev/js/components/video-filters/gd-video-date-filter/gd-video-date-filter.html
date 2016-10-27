@@ -1,0 +1,47 @@
+<md-content class="md-whiteframe-z1">
+	<div class="video-filter__list__quick-filter" layout="row" layout-align="start center">
+		<div>
+			<md-select ng-model="data.selectedType">
+				<md-option ng-repeat="type in types track by $index" value="{{ type.type }}">{{ ::type.text }}</md-option>
+			</md-select>
+		</div>
+		<div ng-if="data.selectedType !== 'no_recorded_date'">
+			<md-select ng-model="data.selectedMode">
+				<md-option ng-repeat="mode in modes track by $index" value="{{ mode.mode }}">{{ ::mode.text }}</md-option>
+			</md-select>
+		</div>
+		<div flex layout="row" layout-align="end center">
+			<md-button type="button" aria-label="Clear" ng-click="dateFilterCtrl.reset()">
+				Clear
+			</md-button>
+		</div>
+	</div>
+	<div class="video-filter__date-filter-content" layout="column" layout-align="start start" ng-if="data.selectedType !== 'no_recorded_date'">
+		<gd-popup align-to="bottom left" align-edge="top left" position="outside" gap-y="0" layout-fill>
+			<gd-popup-button>
+				<md-input-container>
+					<label>
+						<span ng-if="data.selectedMode === 'between' || data.selectedMode === 'notbetween'">From:</span>
+						<span ng-if="data.selectedMode !== 'between' && data.selectedMode !== 'notbetween'">Pick a date</span>
+					</label>
+					<input type="text" ng-model="data.startDateString">
+				</md-input-container>
+			</gd-popup-button>
+			<gd-popup-content>
+				<gd-datepicker on-date-select="_popupInstance.close()" ng-model="data.selectedDate.start" highlight-max-date="!!data.selectedDate.end" max-date="data.selectedDate.end" ng-model-options="{ debounce: 0 }"></gd-datepicker>
+			</gd-popup-content>
+		</gd-popup>
+
+		<gd-popup align-to="bottom left" align-edge="top left" position="outside" gap-y="0" ng-if="data.selectedMode === 'between' || data.selectedMode === 'notbetween'" layout-fill>
+			<gd-popup-button>
+				<md-input-container>
+					<label>To:</label>
+					<input type="text" ng-model="data.endDateString">
+				</md-input-container>
+			</gd-popup-button>
+			<gd-popup-content>
+				<gd-datepicker on-date-select="_popupInstance.close()" ng-model="data.selectedDate.end" min-date="data.selectedDate.start" ng-model-options="{ debounce: 0 }"></gd-datepicker>
+			</gd-popup-content>
+		</gd-popup>
+	</div>
+</md-content>

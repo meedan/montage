@@ -1,0 +1,106 @@
+$sidebar-item-height: 6 * $baseline-component-grid;
+
+.app-sidebar {
+	md-list {
+		padding: 0;
+	}
+
+	md-content {
+		background-color: #fff;
+	}
+}
+
+.app-sidebar__item {
+	@include rem(font-size, 16px);
+	border-top: 1px solid $colour-border-default;
+	display: block;
+	padding: ($baseline-component-grid) ($baseline-component-grid * 3);
+
+	&:first-child {
+		border: 0;
+	}
+}
+
+.app-sidebar__item-label {
+	@include text-overflow();
+	line-height: $sidebar-item-height;
+	margin-left: $baseline-component-grid * 3;
+}
+
+.app-sidebar__item-header {
+	@include rem(font-size, 13px);
+	color: #999;
+	font-weight: 500;
+	margin-left: $baseline-component-grid * 6;
+	margin-top: 8px;
+}
+
+.app-sidebar__item-button {
+	@include type(body-2);
+	height: $sidebar-item-height;
+	margin: 0;
+	position: relative;
+	width: 100%;
+
+	icon {
+		opacity: .5;
+	}
+
+	&:hover {
+		color: $colour-gd-accent;
+		icon {
+			opacity: 1;
+		}
+	}
+
+	md-button-inner,
+	.md-button-inner {
+		padding: 0;
+		text-align: left;
+		text-transform: none;
+	}
+}
+
+.app-sidebar__item--collections {
+	padding-bottom: 8px;
+	padding-top: 8px;
+
+	>.app-sidebar__item-button {
+		@include rem(font-size, 13px);
+		margin-left: 54px;
+		padding: 0;
+	}
+
+	.app-sidebar__item-list {
+		padding-top: 8px;
+	}
+}
+
+.app-sidebar__item--active {
+
+	> .app-sidebar__item-button {
+		color: $colour-gd-accent;
+		font-weight: 600;
+	}
+}
+
+.app-sidebar__item-list {
+	padding-top: 16px;
+	width: 100%;
+
+	.app-sidebar__item {
+		border: 0;
+		padding: 0;
+	}
+}
+
+md-item.app-sidebar__item.logo{
+	padding-top: 0;
+	padding-bottom: 0;
+	.side-bar-logo{
+		background: url(../img/montage-logo_in_app_x2.png) no-repeat center center;
+		background-size: contain;
+		width: 304px;
+		height: 179px;
+	}
+}

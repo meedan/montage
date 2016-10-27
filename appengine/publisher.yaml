@@ -1,0 +1,23 @@
+application: greenday-project-v02-dev
+module: publisher
+version: 3-0-20
+runtime: python27
+api_version: 1
+threadsafe: true
+
+instance_class: F1
+automatic_scaling:
+  max_pending_latency: 1s
+
+libraries:
+- name: endpoints
+  version: 1.0
+- name: MySQLdb
+  version: "1.2.4b4"
+- name: ssl
+  version: latest
+
+handlers:
+- url: /channel/publish_event_task_handler/.*
+  script: handlers.wsgi.application
+  login: admin

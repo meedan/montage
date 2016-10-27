@@ -1,0 +1,47 @@
+{
+  "name": "Montage Chrome Extension",
+  "description": "Helping you use Montage inside of YouTube",
+  "version": "3.0.1",
+  "manifest_version": 2,
+  "background": {
+    "scripts": ["js/background.js"]
+  },
+  "content_scripts": [{
+    "all_frames": true,
+    "css": [ "css/main-bundle.css"],
+    "js": [
+      "js/content_script.js",
+      "js/tag_context-bundle.js"
+    ],
+    "matches": [ "https://www.youtube.com/*"]
+  }],
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://ssl.google-analytics.com https://www.googletagmanager.com https://apis.google.com https://www.youtube.com; object-src 'self'",
+  "browser_action": {
+    "default_icon": {
+      "19": "images/19.png",
+      "38": "images/38.png"
+    }
+  },
+  "incognito": "split",
+  "oauth2": {
+    "client_id": "583467124136-skj4h4i335dv20n8cjlp0kd2158q0ac3.apps.googleusercontent.com",
+    "scopes": [
+      "https://www.googleapis.com/auth/userinfo.email",
+      "https://www.googleapis.com/auth/userinfo.email",
+      "https://www.googleapis.com/auth/youtube"
+    ]
+  },
+  "permissions": [
+    "https://greenday-project.appspot.com/*",
+    "https://apis.google.com/*"
+  ],
+  "icons": {
+      "128": "images/128.png",
+      "16": "images/16.png",
+      "48": "images/48.png"
+   },
+  "web_accessible_resources": [
+    "css/main-bundle.css",
+    "images/miniIcon.png"
+  ]
+}

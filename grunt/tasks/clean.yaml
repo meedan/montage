@@ -1,0 +1,7 @@
+static:
+  src:
+    - '<%= paths.staticDistRoot %>'
+
+tmp:
+  src:
+    - '<%= paths.tmp %>'

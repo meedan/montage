@@ -1,0 +1,33 @@
+<md-dialog class="dialog user-settings">
+	<div class="user-settings__header">
+		<md-content>
+			Settings
+		</md-content>
+	</div>
+
+	<md-content>
+		<!-- <div class="user-settings__section">
+			<div class="user-settings__subheader">Google Account</div>
+			<div class="user-settings__content">You are currently signed in with:<br>{{ ctrl.user.email }}</div>
+			<md-button class="md-raised" ng-click="ctrl.switchAccounts(false)">Switch accounts</md-button>
+		</div> -->
+
+		<div class="user-settings__section">
+			<div class="user-settings__subheader">Close my account and leave Montage</div>
+			<div class="user-settings__content">
+				This will:
+				<ul>
+					<li>Delete all the projects you created</li>
+					<li>Delete all tags associations you created on other projects</li>
+					<li>Remove my account and details</li>
+				</ul>
+			</div>
+			<md-button class="md-raised md-warn" ng-click="ctrl.deleteAccount($event)">Delete everything</md-button>
+			<div class="user-settings__delete-warning">this action is undoable</div>
+		</div>
+
+		<div layout="row" layout-align="end">
+			<md-button aria-label="Cancel" class="dialog__action--ok" type="button" ng-click="ctrl.close()">Cancel</md-button>
+		</div>
+	</md-content>
+</md-dialog>

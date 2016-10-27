@@ -1,0 +1,64 @@
+gd-project-comment {
+	display: block;
+
+	gd-backdrop {
+		height: auto;
+		min-height: 100%;
+	}
+}
+
+.gd-project-comment__thread {
+	background-color: $colour-white-pure;
+	cursor: pointer;
+	margin: ($baseline-component-grid * 3);
+	transition: $swift-ease-in-out;
+	padding: 0;
+}
+
+.gd-project-comment__thread--expanded {
+	cursor: auto;
+	margin-left: $baseline-component-grid;
+	margin-right: $baseline-component-grid;
+	overflow: hidden;
+	position: relative;
+	transform: translateY(-$baseline-component-grid);
+	z-index: z($layers, floating-elements) + $z-index-tooltip
+}
+
+.gd-project-comment__form,
+.gd-project-comment__comment {
+	padding: ($baseline-component-grid * 2) ($baseline-component-grid * 3);
+}
+
+.gd-project-comment__form {
+	border-top: 1px solid shade-colour('dividers');
+}
+
+.gd-project-comment__user-avatar {
+	border-radius: 50%;
+	height: 40px;
+	width: 40px;
+}
+
+.gd-project-comment__thread-content {
+	padding: 0;
+	padding-left: ($baseline-component-grid * 2);
+}
+
+.gd-project-comment__time {
+	@include type(caption);
+	@include rem('font-size', 11px);
+}
+
+.gd-project-comment__thread-title {
+	@include type(subhead-1);
+}
+
+.gd-project-comment__thread-text {
+	@include type(body-1);
+	color: map-get($color-grey, '600');
+}
+
+.gd-project-comment__replies {
+	background-color: map-get($color-grey, '50');
+}

@@ -1,0 +1,81 @@
+<md-dialog class="dialog duplicates-dialog">
+	<div class="dialog__save-overlay fade" ng-show="saving || loading">
+		<holo-spinner></holo-spinner>
+	</div>
+	<form name="autocompleteForm" ng-submit="ctrl.save()" novalidate>
+		<md-content class="duplicates-dialog__content">
+			<h2>Duplicate videos</h2>
+
+			<p class="duplicates-dialog__hint">Enter the details of videos which have the same content as this one.</p>
+
+				<input
+					name="videoField"
+					class="duplicates-dialog__input duplicates-dialog__input--autofocus"
+					flex
+					type="text"
+					ng-pattern="ctrl.videoUrlPattern"
+					ng-model="data.query"
+					ng-keydown="ctrl.onInputKeyDown($event)"
+					placeholder="Video ID or URL">
+
+				<ul class="validation-messages">
+					<li class="validation-message validation-message--error" ng-show="autocompleteForm.videoField.$error.pattern" layout="row" layout-align="start center">
+						<span class="validation-message__message" flex>Invalid video ID. Copy and paste the whole Montage video URL.</span>
+						<icon class="validation-message__icon ic-warning"></icon>
+					</li>
+				</ul>
+
+			<div class="duplicates-dialog__video-list-title">This video</div>
+			<table class="duplicates-dialog__video-list">
+				<tr>
+					<td class="duplicates-dialog__item-cell--thumbnail">
+						<gd-youtube-thumbnail video-id="video.youtube_id" time="0"></gd-youtube-thumbnail>
+					</td>
+					<td class="duplicates-dialog__item-cell--title">
+						{{ video.name }}
+					</td>
+					<td class="duplicates-dialog__item-cell--channel">
+						{{ video.channel_name }}
+					</td>
+					<td class="duplicates-dialog__item-cell--duration">
+						{{ video.duration * 1000 | date:'m:ss' }}
+					</td>
+					<td class="duplicates-dialog__item-cell--remove"></td>
+				</tr>
+			</table>
+
+			<div class="duplicates-dialog__video-list-title">Other videos</div>
+
+			<table class="duplicates-dialog__video-list">
+				<tr ng-repeat="video in duplicates track by video.youtube_id">
+					<td class="duplicates-dialog__item-cell--thumbnail">
+						<gd-youtube-thumbnail video-id="video.youtube_id" time="0"></gd-youtube-thumbnail>
+					</td>
+					<td class="duplicates-dialog__item-cell--title">
+						<a href="/project/{{ ::video.project_id }}/video/{{ ::video.youtube_id }}" class="video-list-item__video-link">{{ video.name }}</a>
+					</td>
+					<td class="duplicates-dialog__item-cell--channel">
+						{{ video.channel_name }}
+					</td>
+					<td class="duplicates-dialog__item-cell--duration">
+						{{ video.duration * 1000 | date:'m:ss' }}
+					</td>
+					<td class="duplicates-dialog__item-cell--remove">
+						<gd-button ng-click="ctrl.removeDuplicate(video)">
+							<icon class="ic-cancel"></icon>
+						</gd-button>
+					</td>
+				</tr>
+			</table>
+
+			<div ng-if="!duplicates.length" class="duplicates-dialog__no-duplicates">
+				This video has no duplicates
+			</div>
+
+		</md-content>
+		<div class="md-actions">
+			<md-button class="md-primary" ng-click="ctrl.cancel()" aria-label="Cancel">Cancel</md-button>
+			<md-button class="md-accent" type="submit" aria-label="Save">Save</md-button>
+		</div>
+	</form>
+</md-dialog>

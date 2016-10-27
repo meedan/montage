@@ -1,0 +1,15 @@
+<div ng-show="enabled" class="gd-onboarding-popover fade" layout="row" layout-align="center center">
+	<div class="gd-onboarding-container md-whiteframe-z1">
+		<div class="gd-onboarding__title">{{ currentStep.title }}</div>
+		<div class="gd-onboarding__text">{{ currentStep.text }}</div>
+		<div class="gd-onboarding__actions" layout="row" layout-align="end center">
+			<div class="gd-onboarding__steps" layout="row" layout-align="start center" flex>
+				<div ng-repeat="step in ngModel.steps" class="gd-onboarding__step" ng-class="{'gd-onboarding__step--active': currentIndex === $index}" ng-click="onboardingCtrl.goto($index)"></div>
+			</div>
+			<md-button ng-show="!isAtStart" class="gd-onboarding__action-button" type="button" aria-label="Previous" ng-click="onboardingCtrl.previous()">Previous</md-button>
+			<md-button ng-show="!isAtEnd" class="gd-onboarding__action-button" type="button" aria-label="Next" ng-click="onboardingCtrl.next()">Next</md-button>
+			<md-button ng-show="isAtEnd" class="gd-onboarding__action-button" type="button" aria-label="Finish" ng-click="onboardingCtrl.close(true)">Finish</md-button>
+		</div>
+	</div>
+	<gd-backdrop callback="onboardingCtrl.close()"></gd-backdrop>
+</div>

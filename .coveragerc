@@ -1,0 +1,2 @@
+[run]
+omit = *settings*,*tests*,*migrations*,*utils*,*constants*,*api_exceptions.py,*greenday_core/admin.py

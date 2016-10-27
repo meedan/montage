@@ -1,0 +1,14 @@
+.nda__buttons {
+	flex-shrink: 0;
+}
+
+.nda__buttons button.nda_button.md-primary{
+	text-transform: none;
+	color: map-get($color-accent, '500');
+	background-color: white;
+	border: 2px solid map-get($color-accent, '500');
+	&:hover, &:focus{
+		color: white;
+		background-color: map-get($color-accent, '500');
+	}
+}

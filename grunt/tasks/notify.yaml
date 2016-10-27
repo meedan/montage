@@ -1,0 +1,9 @@
+sass:
+  options:
+    title: 'Task Complete'
+    message: 'SASS finished running'
+
+templates:
+  options:
+    title: 'Task Complete'
+    message: 'Templates generated'

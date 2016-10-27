@@ -1,0 +1,260 @@
+//////////////////////////////////////////
+// gd-video-timeline
+//////////////////////////////////////////
+.gd-video-timeline {
+	position: relative;
+
+	> md-content {
+		height: 100%;
+		left: 0;
+		position: absolute;
+		top: 0;
+		width: 100%;
+	}
+
+	&.is-playing {
+		.gd-video-timeline__playhead-container,
+		.gd-video-timeline__playhead-wrapper {
+			// transition: transform .5s linear;
+		}
+	}
+
+	gd-popup-button,
+	.js-placeholder-comment-btn {
+		position: absolute;
+		top: 0;
+	}
+
+	gd-timed-comment-button {
+		display: inline-block;
+		height: $gd-video-timeline-comment-button-size;
+	}
+}
+
+.gd-video-timeline__outer-wrapper {
+	align-items: stretch;
+	left: 120px;
+	min-height: 100%;
+	position: absolute;
+	right: 100px;
+	top: 0;
+}
+
+.gd-video-timeline__timeline {
+	bottom: 0;
+	display: inline-block;
+	left: $gd-video-timeline-tag-list-width;
+
+	// We need to maintain visible overflow so the fine tune controls show over
+	// the left hand pane (that contains the tag labels).
+	overflow: visible;
+	position: absolute;
+//	right: 0;
+right: 100px;
+	top: 0;
+	user-select: none;
+	    border-right: 1px solid #cfcfcf;
+}
+
+.gd-video-timeline__tag-list {
+	@extend %bare-list;
+	@include type(body-1);
+	border-right: 1px solid map-get($background-color-palette, 'A700');
+	padding: $baseline-component-grid $baseline-component-grid 0 0;
+	width: $gd-video-timeline-tag-list-width;
+}
+
+.gd-video-timeline__tag-row {
+	min-width: 100%;
+	position: relative;
+}
+
+.gd-video-timeline__tag-rows,
+.gd-video-timeline__tag-instances {
+	@extend %bare-list;
+}
+
+.gd-video-timeline__tag-instances {
+	height: 100%;
+	position: relative;
+
+	li {
+		height: 100%;
+		left: 0;
+		min-width: 100%;
+		position: absolute;
+		top: 0;
+	}
+}
+
+.gd-video-timeline__tag-rows {
+	left: 0;
+	padding: $baseline-component-grid 0 0;
+	position: absolute;
+	top: 0;
+	width: 100%;
+	z-index: $gd-video-timeline-content-z;
+}
+
+.gd-video-timeline__playhead-container {
+	height: $gd-video-timeline-playhead-handle-size;
+	left: $gd-video-timeline-offset;
+	position: absolute;
+//	right: 0;
+right: 200px;
+	top: -$gd-video-timeline-playhead-handle-size / 2;
+	z-index: 1;
+}
+
+.gd-video-timeline-tag-instance__wrap {
+	height: 100%;
+}
+
+.gd-video-timeline__content {
+	position: relative;
+	z-index: 0;
+}
+
+.gd-video-timeline-tag-empty {
+	min-height: 160px;
+	padding: ($gd-video-timeline-tag-row-height + $baseline-component-grid) 0;
+}
+
+.gd-video-timeline__playhead-wrapper-outer {
+	height: 100%;
+	left: 0;
+	overflow: hidden;
+	pointer-events: none;
+	position: absolute;
+	top: 0;
+	width: 100%;
+	z-index: $gd-video-timeline-playhead-z;
+}
+
+.gd-video-timeline__playhead-wrapper {
+	height: 100%;
+}
+
+.gd-video-timeline__playhead {
+	$grab-width: 10px;
+	cursor: col-resize;
+	display: block;
+	height: 100%;
+	left: 0;
+	margin-left: -$grab-width / 2;
+	pointer-events: all;
+	position: relative;
+	width: $grab-width;
+	z-index: 1;
+
+	&:after {
+		$playhead-line-width: 1px;
+		background-color: $colour-gd-accent;
+		content: '';
+		display: block;
+		height: 100%;
+		left: 50%;
+		position: absolute;
+		top: 0;
+		width: $playhead-line-width;
+	}
+}
+
+.gd-video-timeline__playhead-handle {
+	$size: $gd-video-timeline-playhead-handle-size;
+	background-color: $colour-gd-accent;
+	border-radius: 50%;
+	cursor: col-resize;
+	height: $size;
+	margin-left: -$size/2;
+	position: absolute;
+	top: 0;
+	width: $size;
+}
+
+.gd-video-timeline__playhead-bubble {
+	$size: 32px;
+	background-color: $colour-gd-accent;
+	border-radius: 50%;
+	color: #fff;
+	font-size: 10px;
+	font-weight: bold;
+	height: $size;
+	left: 50%;
+	margin-left: -$size/2;
+	padding: 11px 0 0;
+	position: absolute;
+	text-align: center;
+	top: -42px;
+	transform-origin: 50% 150%;
+	transform: translate3d(0, 0, 0) scale(0);
+	transition: transform $swift-ease-in-out-duration $swift-ease-in-out-timing-function;
+	width: $size;
+
+	&:after {
+		$size: 36px;
+		border-left: 18px solid transparent;
+		border-radius: 100%;
+		border-right: 18px solid transparent;
+		border-top: 20px solid $colour-gd-accent;
+		content: "";
+		display: block;
+		height: $size;
+		left: -2px;
+		position: absolute;
+		top: 20px;
+		width: $size;
+		z-index: -1;
+
+		// border-left: 14px solid transparent;
+		// border-right: 14px solid transparent;
+		// left: -3px;
+		// width: 34px;
+	}
+
+	&.is-dragging {
+		transform: translate3d(0, 0, 0) scale(1);
+	}
+}
+
+.gd-video-timeline__comments-list {
+	@extend %bare-list;
+	height: 100%;
+
+	> li {
+		display: inline-block;
+	}
+
+	> gd-timed-comment-button {
+		$offset: -$gd-video-timeline-comment-button-size / 2;
+		height: $gd-video-timeline-comment-button-size;
+		margin: $offset 0 0 $offset;
+		position: absolute;
+		top: 50%;
+	}
+}
+
+.gd-video-timeline__tag-row,
+.gd-video-timeline__comment-label,
+gd-video-timeline-tag-label {
+	height: $gd-video-timeline-tag-row-height;
+	line-height: 1;
+	margin-bottom: $baseline-component-grid;
+
+	icon {
+		@include rem(font-size, 16px);
+		color: map-get($primary-color-palette, '800');
+		margin-right: $baseline-component-grid;
+	}
+}
+
+.gd-video-timeline-tag-label__wrap--normal .gd-video-timeline-tag-label__content-wrap,
+.gd-video-timeline__comment-label {
+	background-color: map-get($background-color-palette, '500');
+	border-radius: $gd-video-timeline-border-radius;
+	cursor: pointer;
+	display: block;
+	min-height: min-content;
+	padding: $baseline-component-grid $baseline-component-grid * 2;
+	user-select: none;
+}

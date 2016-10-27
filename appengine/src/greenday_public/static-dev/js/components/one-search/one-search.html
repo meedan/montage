@@ -1,0 +1,30 @@
+<div class="one-search" ng-class="{'one-search--expanded': ctrl.isVisible}" layout="column" layout-fill>
+	<md-toolbar class="one-search__toolbar" layout="row">
+		<div class="one-search__input-wrapper" flex layout="row" layout-align="start center">
+			<gd-button class="one-search__close-button" ng-click="ctrl.closeSearch();">
+				<icon class="ic-arrow-back"></icon>
+			</gd-button>
+			<input flex type="text" ng-model="ctrl.filterSet.filters.q" class="one-search__input" placeholder="Search YouTube or enter a YouTube URL" ng-model-options="{ debounce: 1000 }">
+			<gd-button class="one-search__reset-button" ng-click="ctrl.reset();">
+				<icon class="ic-add-circle ic-rotate-45"></icon>
+			</gd-button>
+		</div>
+	</md-toolbar>
+	<div class="one-search__filters">
+		<gd-video-filter-set ng-model="ctrl.filterSet" auto-fetch="false" on-update="ctrl.onFilterSetUpdate(ctrl.filterSet)" config="ctrl.filterConfig"></gd-video-filter-set>
+	</div>
+	<div class="one-search__results" flex layout="row">
+		<one-search-results flex class="fade" ng-show="ctrl.searchResults.length" selected-project="ctrl.selectedProject" filtering="false" selected-collection="ctrl.selectedCollection" ng-show="ctrl.viewMode === 'list'" videos="ctrl.searchResults" track-by="youtube_id" layout="column" options="ctrl.videoListOptions" has-more-results="ctrl.hasMoreResults" on-load-more-click="ctrl.loadMore()"></one-search-results>
+		<div ng-show="!ctrl.loading && !ctrl.isFiltering && !ctrl.searchResults.length" layout="column" layout-align="center center" flex>
+			<h2 class="projects__create-prompt__title">Search for videos to get started</h2>
+			<p class="projects__create-prompt__content">Search YouTube or enter the URL for a YouTube video, channel or playlist to add videos to your project library</p>
+		</div>
+		<div ng-show="!ctrl.loading && ctrl.isFiltering && !ctrl.searchResults.length" layout="column" layout-align="center center" flex>
+			<h2 class="projects__create-prompt__title">No videos found</h2>
+			<p class="projects__create-prompt__content">Please try again with different search query</p>
+		</div>
+		<section ng-show="ctrl.loading" class="page-loader ng-hide fade" layout="column" layout-align="center center">
+			<holo-spinner></holo-spinner>
+		</section>
+	</div>
+</div>

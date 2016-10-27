@@ -1,0 +1,88 @@
+.gd-hotkeys-container {
+	background-color: rgba(255,255,255,0.9);
+	color: #333;
+	display: table !important;
+	height: 100%;
+	left: 0;
+	position: fixed;
+	top: 0;
+	width: 100%;
+}
+
+.gd-hotkeys-container.fade {
+	opacity: 0;
+	transition: opacity 0.15s linear;
+	visibility: hidden;
+	z-index: -1024;
+}
+
+.gd-hotkeys-container.fade.in {
+	opacity: 1;
+	visibility: visible;
+	z-index: 10002;
+}
+
+.gd-hotkeys-title {
+	font-weight: bold;
+	text-align: center;
+}
+
+.gd-hotkeys {
+	display: table-cell;
+	height: 100%;
+	vertical-align: middle;
+	width: 100%;
+}
+
+.gd-hotkeys table {
+	color: #333;
+	margin: auto;
+}
+
+.gd-hotkeys-keys {
+	padding: 5px;
+	text-align: right;
+}
+
+.gd-hotkeys-key {
+	background-color: #333;
+	border-radius: 5px;
+	border: 1px solid #333;
+	box-shadow: inset 0 1px 0 #666, 0 1px 0 #bbb;
+	color: #fff;
+	display: inline-block;
+	margin-right: 5px;
+	padding: 5px 9px;
+	text-align: center;
+}
+
+.gd-hotkeys-text {
+	font-size: 1em;
+	padding-left: 10px;
+}
+
+.gd-hotkeys-close {
+	min-height: 45px;
+	min-width: 45px;
+	padding: 5px 10px;
+	position: fixed;
+	right: 20px;
+	text-align: center;
+	top: 20px;
+}
+
+.gd-hotkeys-close:hover {
+	cursor: pointer;
+}
+
+@media all and (max-width: 500px) {
+	.gd-hotkeys {
+		font-size: 0.8em;
+	}
+}
+
+@media all and (min-width: 750px) {
+	.gd-hotkeys {
+		font-size: 1.0em;
+	}
+}

@@ -1,0 +1,30 @@
+body {
+	background-color: #cfd8dc;
+}
+
+body > .container {
+	background-color: #fff;
+	box-shadow: 0 2px 5px 0 rgba(0,0,0,.26);
+	margin-top: 50px;
+}
+
+.navbar {
+	background-color: rgb(96,125,139);
+}
+
+.navbar .navbar-brand {
+	color: #fafafa;
+}
+
+.navbar .navbar-nav > li > a {
+	color: #fafafa;
+}
+
+h1 {
+	font-size: 2em;
+}
+
+h2 {
+	 font-size: 1.5em;
+}
+

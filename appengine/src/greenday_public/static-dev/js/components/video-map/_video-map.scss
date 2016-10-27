@@ -1,0 +1,97 @@
+.video-map,
+.angular-google-map,
+.angular-google-map-container {
+	height: 100%;
+	position: absolute;
+	width: 100%;
+}
+
+.video-map__cluster {
+	img {
+		display: none;
+	}
+
+	.ic-location-on {
+		position: relative;
+		top: 4px;
+		color: #fff;
+	}
+
+	div {
+		display: inline-block;
+		line-height: 32px !important; // To override markerclusterer's styles
+		height: 32px;
+		width: 32px;
+		border-radius: 16px;
+		background-color: #ff9800;
+		color: #fff !important;
+	}
+}
+
+.video-map__videos {
+	width: 240px;
+}
+
+.video-map__wrapper {
+	max-height: 220px;
+}
+
+.video-map__infobox {
+	background-color: $content-background-color;
+}
+
+.video-map__video-box,
+.video-map__video-box__link {
+	display: block;
+	position: relative;
+}
+
+.video-map__video-list {
+	display: block;
+	padding: 0;
+}
+
+.video-map__video-box__link {
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	display: block;
+	height: 0;
+	overflow: hidden;
+	padding-bottom: 56.25%;
+	position: relative;
+}
+
+.video-map__video-box__content {
+	padding: $baseline-component-grid * 2;
+}
+
+.video-box__title {
+	@include type(body-1);
+	@include text-overflow(true, 2);
+	font-weight: 500;
+	line-height: normal;
+	margin-bottom: $baseline-component-grid;
+	max-height: 30px;
+}
+
+.video-map__quick-filter__icon {
+	@include type(caption);
+	@include rem('font-size', 20px);
+	padding: $baseline-component-grid / 2;
+}
+
+.video-map__quick-filter__input {
+	@extend %base-text-input;
+	@include rem('font-size', 12px);
+}
+
+.video-map__close-button {
+
+}
+
+.video-map__no-location-text {
+	@extend .md-whiteframe-z1;
+	border-radius: 2px;
+	padding: $baseline-component-grid * 3;
+}

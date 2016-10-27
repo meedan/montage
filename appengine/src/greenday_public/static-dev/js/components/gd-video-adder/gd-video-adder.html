@@ -1,0 +1,54 @@
+<md-content class="bottom-sheet__panel--add-to slide-bottom-sheet-panel ng-hide" ng-show="isVisible" layout="row" layout-align="start start" flex>
+	<div class="bottom-sheet__panel-section" flex="30">
+		<gd-project-selector ng-model="ctrl.selectedProject"></gd-project-selector>
+	</div>
+	<div class="bottom-sheet__panel-section" flex="30">
+		<gd-collection-selector ng-model="ctrl.selectedCollection" project="project"></gd-collection-selector>
+	</div>
+	<div class="bottom-sheet__panel-section" layout="row" flex="40">
+		<md-content class="bottom-sheet__panel__big-content" layout-fill layout-align="vertical" layout-align="center center">
+			<div class="bottom-sheet__panel-hero">
+				<ng-pluralize count="videos.length" when="{'one': '1 video selected', 'other': '{} videos selected'}"></ng-pluralize>
+			</div>
+			<div class="bottom-sheet__panel-info">
+				<div ng-show="!ctrl.selectedProject">Select a project to start</div>
+				<div ng-show="ctrl.selectedProject && !ctrl.selectedCollection">Now select a collection</div>
+				<div ng-show="ctrl.selectedProject && ctrl.selectedCollection">
+					This will add
+					<ng-pluralize count="videos.length" when="{'one': 'this 1 video', 'other': 'these {} videos'}"></ng-pluralize>
+					to the
+					<span ng-if="ctrl.selectedCollection === 'library'">project '{{ ctrl.selectedProject.name }}'</span>
+					<span ng-if="ctrl.selectedCollection !== 'library'">collection '{{ ctrl.selectedCollection.name }}'</span>
+				</div>
+			</div>
+			<div class="bottom-sheet__panel-actions fade ng-hide" ng-show="ctrl.selectedProject && ctrl.selectedCollection" layout="row" layout-align="start center">
+				<md-button ng-click="ctrl.addVideos(videos)" aria-label="OK" md-no-ink class="md-accent">OK</md-button>
+				<md-button ng-click="ctrl.reset()" aria-label="Cancel" md-no-ink class="md-primary">Cancel</md-button>
+			</div>
+		</md-content>
+	</div>
+	<md-content class="bottom-sheet__panel-results ng-hide slide" ng-show="ctrl.addingVideos || ctrl.results.length">
+		<section ng-show="ctrl.addingVideos" class="page-loader ng-hide fade" layout="column" layout-align="center center">
+			<holo-spinner></holo-spinner>
+		</section>
+		<div class="bottom-sheet__close-button">
+			<gd-button ng-click="ctrl.results = []">
+				<icon class="ic-close"></icon>
+			</gd-button>
+		</div>
+		<md-list>
+			<md-item ng-repeat="result in ctrl.results" ng-class="{'success': result.success}">
+				<md-item-content>
+					<div class="md-tile-left" layout="column" layout-align="center center">
+						<icon ng-class="{'ic-check': result.success, 'ic-clear': !results.success}"></icon>
+					</div>
+					<div class="md-tile-content">
+						<h3>{{ result.video.name }}</h3>
+						<p ng-if="result.video.channel_name">by {{ result.video.channel_name }}</p>
+						<h4 ng-if="!result.success">{{ result.msg }}</h4>
+					</div>
+				</md-item-content>
+			</md-item>
+		</md-list>
+	</md-content>
+</md-content>

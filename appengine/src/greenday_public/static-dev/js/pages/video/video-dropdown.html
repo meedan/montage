@@ -1,0 +1,38 @@
+<gd-floating-menu-group ng-if="!menuData.hasProject" icon="ic-folder" title="Add to">
+	<gd-floating-menu-group ng-mouseenter="menuData.getCollections(project.id)" icon="ic-folder" title="{{ project.name }}" ng-repeat="project in menuData.projects">
+		<gd-floating-menu-item icon="ic-movie" ng-click="menuData.addToProject(project)">Library</gd-floating-menu-item>
+		<gd-floating-menu-item ng-if="menuData.collections[project.id].length" ng-repeat="collection in menuData.collections[project.id]" ng-click="menuData.addToCollection(project, collection)">{{ collection.name }}</gd-floating-menu-item>
+		<gd-floating-menu-item hide-on-click="false" icon="ic-add" layout="row" layout-align="start center">
+			<form ng-submit="menuData.createCollection(project.id, menuData.newCollectionName)">
+				<span ng-hide="menuData.addingNewCollection" ng-click="menuData.showNewCollectionForm()">New collection</span>
+				<input flex type="text" placeholder="Collection name" ng-show="menuData.addingNewCollection" ng-model="menuData.newCollectionName">
+			</form>
+		</gd-floating-menu-item>
+	</gd-floating-menu-group>
+</gd-floating-menu-group>
+
+<gd-floating-menu-group ng-if="menuData.hasProject" icon="ic-folder" title="Add to" ng-mouseenter="menuData.getCollections(menuData.projects[0].id)" ng-hide="menuData.isVideoArchived()">
+	<gd-floating-menu-item hide-on-click="false" ng-if="menuData.collections[menuData.projects[0].id].length" ng-repeat="collection in menuData.collections[menuData.projects[0].id]" ng-click="menuData.addToCollection(menuData.projects[0], collection)" >
+		<span layout="row" layout-align="start center">
+			<span class="gd-floating-menu-group__icon">
+				<icon ng-class="{'ic-check-box-outline-blank': !menuData.isVideoInCollection(collection), 'ic-check-box ic-colour-accent': menuData.isVideoInCollection(collection)}"></icon>
+			</span>
+			<span>{{ collection.name }}</span>
+		</span>
+	</gd-floating-menu-item>
+	<gd-floating-menu-item class="video-dropdown__collection" hide-on-click="false" icon="ic-add" layout="row" layout-align="start center">
+		<form ng-submit="menuData.createCollection(menuData.projects[0].id, menuData.newCollectionName)">
+			<span ng-hide="menuData.addingNewCollection" ng-click="menuData.showNewCollectionForm()">New collection</span>
+			<span ng-show="menuData.addingNewCollection" layout="column">
+				<input flex type="text" placeholder="Collection name" ng-model="menuData.newCollectionName">
+				<span layout="row" layout-align="end center">
+					<md-button md-no-ink aria-label="Cancel" type="button" ng-click="menuData.resetCollectionForm()">Cancel</md-button>
+					<md-button md-no-ink class="md-primary" aria-label="Add" type="submit">Add</md-button>
+				</span>
+			</span>
+		</form>
+	</gd-floating-menu-item>
+</gd-floating-menu-group>
+
+<gd-floating-menu-item icon="ic-folder" ng-click="menuData.manageDuplicates($event)" ng-hide="menuData.isVideoArchived()">Manage duplicates</gd-floating-menu-item>
+<gd-floating-menu-item icon="ic-folder" ng-click="menuData.remove($event)">Remove</gd-floating-menu-item>

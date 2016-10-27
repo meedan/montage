@@ -1,0 +1,11 @@
+options:
+  config: '.scss-lint.yml'
+  colorizeOutput: true
+  force: true
+
+all:
+  src:
+    - '<%= paths.staticDevRoot %>/scss/**/*.scss'
+    - '!<%= paths.staticDevRoot %>/scss/_mixins.scss'
+    - '!<%= paths.staticDevRoot %>/scss/_normalize.scss'
+

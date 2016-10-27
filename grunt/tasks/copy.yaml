@@ -1,0 +1,15 @@
+images:
+  src: '<%= paths.staticDevRoot %>/img/*.{jpg,jpeg,gif,png}'
+  dest: '<%= paths.staticDistRoot %>/img/'
+  expand: true
+  flatten: true
+
+fonts:
+  src: '<%= paths.staticDevRoot %>/fonts/**/*.{woff,eot,ttf,svg}'
+  dest: '<%= paths.staticDistRoot %>/fonts/'
+  expand: true
+  flatten: true
+
+app:
+  src: '<%= paths.tmp %>/concat/js/app.js'
+  dest: '<%= paths.staticDistRoot %>/js/app.js'

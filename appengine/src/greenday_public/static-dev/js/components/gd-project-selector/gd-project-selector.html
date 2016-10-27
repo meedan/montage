@@ -1,0 +1,7 @@
+<md-content class="bottom-sheet__list-wrapper" layout-fill>
+	<md-list class="bottom-sheet__list" layout="column" layout-align="start start">
+		<md-item ng-class="{'bottom-sheet__list-item--active': ngModel.id === project.id}" ng-click="ctrl.setProject(project)" class="bottom-sheet__list-item" ng-repeat="project in ctrl.projects track by project.id">
+			<md-item-content>{{ project.name }}</md-item-content>
+		</md-item>
+	</md-list>
+</md-content>

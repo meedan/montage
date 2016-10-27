@@ -1,0 +1,54 @@
+.video-popup {
+	background-color: $content-background-color;
+	position: relative;
+	width: $baseline-component-grid * 30;
+}
+
+.video-popup,
+.video-popup__link,
+.video-popup__content,
+.video-popup__title,
+.video-popup__channel {
+	display: block;
+}
+
+.video-popup__link {
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	height: 0;
+	overflow: hidden;
+	padding-bottom: 56.25%;
+	position: relative;
+}
+
+.video-popup__content {
+	padding: $baseline-component-grid ($baseline-component-grid * 2);
+}
+
+.video-popup__title {
+	@include type(body-1);
+	@include text-overflow(true, 2);
+	font-weight: 500;
+	line-height: 15px;
+	margin-bottom: $baseline-component-grid;
+	max-height: 30px;
+}
+
+.video-popup__channel {
+	@include type(caption);
+	@include rem('font-size', 11px);
+	line-height: normal;
+}
+
+.video-popup__duration {
+	@include background-opacity($colour-black-pure, .7);
+	@include type(body-1);
+	border-radius: 2px;
+	bottom: 0;
+	color: $colour-white-pure;
+	font-weight: 500;
+	padding: 0 4px;
+	position: absolute;
+	right: 0;
+}

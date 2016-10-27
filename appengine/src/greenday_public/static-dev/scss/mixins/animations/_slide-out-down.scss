@@ -1,0 +1,29 @@
+@mixin slide-out-down($max-height: false, $height-prop: 'max-height', $opacity: true, $translate: true) {
+	from {
+		@if $max-height != false {
+			#{$height-prop}: $max-height;
+		}
+
+		@if $opacity == true {
+			opacity: 1;
+		}
+
+		@if $translate == true {
+			transform: translateY(0);
+		}
+	}
+
+	to {
+		@if $max-height != false {
+			#{$height-prop}: 0;
+		}
+
+		@if $opacity == true {
+			opacity: 0;
+		}
+
+		@if $translate == true {
+			transform: translateY(100%);
+		}
+	}
+}

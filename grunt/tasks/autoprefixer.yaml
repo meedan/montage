@@ -1,0 +1,13 @@
+dev:
+  options:
+    browsers:
+      - 'last 2 versions'
+  src: '<%= paths.staticDevRoot %>/css/greenday.css'
+  dest: '<%= paths.staticDevRoot %>/css/greenday.css'
+
+dist:
+  options:
+    browsers:
+      - 'last 2 versions'
+  src: '<%= paths.staticDevRoot %>/css/greenday.css'
+  dest: '<%= paths.staticDevRoot %>/css/greenday.css'

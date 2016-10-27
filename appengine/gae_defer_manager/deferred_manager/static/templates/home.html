@@ -1,0 +1,68 @@
+<div class="row controlbar">
+	<form class="form form-inline col-md-12">
+	<div class="form-group">
+		<button type="button" class="btn btn-default" ng-model="autorefresh" btn-checkbox btn-checkbox-true="1" btn-checkbox-false="0">Autorefresh</button>
+		<label for="refreshinterval">Refresh interval: </label>
+		<input id="refreshinterval" class="form-control" type="number" ng-model="refreshInterval" ng-disabled="!autorefresh" min="1" placeholder="Seconds"/>
+	</div>
+	</form>
+</div>
+
+<div class="row">
+	<div class="col-md-{{ 12/columns }}" ng-repeat="queueName in queueNames" ng-controller="QueueCtrl">
+		<accordion close-others="false">
+			<accordion-group>
+				<accordion-heading>
+					<div class="loading pull-right" ng-show="queue.loading"></div>
+					<span class="refresh pull-right" ng-hide="queue.loading" ng-click="getTasks(queueName);$event.stopPropagation()">refresh</span>
+					<div class="queue_heading">{{ queueName }}</div>
+				</accordion-heading>
+				<table class="table">
+					<tbody>
+						<tr><td>Tasks in queue</td><td>{{ queue.stats.tasks }}</td></tr>
+						<tr><td>Oldest task ETA</td><td>{{ queue.stats.oldest_eta|date:'HH:mm:ss.sss' }} <span ng-show="oldestEtaDelta">({{ oldestEtaDelta|date:'HH:mm:ss.sss' }} {{ oldestEtaSuffix }})</span></td></tr>
+						<tr><td>Tasks executed in last minute</td><td>{{ queue.stats.executed_last_minute }}</td></tr>
+						<tr><td>Bucket size</td><td>{{ queue.stats.in_flight }}</td></tr>
+						<tr><td>Maximum rate</td><td>{{ queue.stats.enforced_rate }}</td></tr>
+					</tbody>
+				</table>
+				<button class="btn btn-danger pull-right" ng-click="purgeQueue()">Purge Queue</button>
+			</accordion-group>
+
+			<accordion-group ng-repeat="task in queue.tasks" class="task__panel" is-open="$first">
+				<accordion-heading>
+					<div ng-class="{'list-group-item': 1, 'list-group-item-danger': task.is_permanently_failed, 'list-group-item-success': task.is_complete && !task.is_permanently_failed, 'list-group-item-warning': !task.is_complete && !task.is_permanently_failed && (task.retry_count || task.first_run)}" popover="{{ task.displayText }}" popover-popup-delay="500" popover-trigger="mouseenter">
+						<span class="badge" ng-hide="task.is_complete && !task.is_permanently_failed">{{ getTaskStatusMsg(task) }}</span>
+						<div class="task__display">{{ task.displayText }}</div>
+					</div>
+
+				</accordion-heading>
+				<div class="task__info">
+					<p>
+						Task ID: {{task.task_name}}
+					</p>
+					<p ng-show="task.task_reference">
+						Deferred at: {{task.task_reference}}
+					</p>
+					<p>
+						Deferred at: {{task.deferred_at|date:"yyyy-MM-dd HH:mm:ss Z"}}
+					</p>
+					<p ng-show="task.deferred_kwargs.length>2">
+						Kwargs: {{task.deferred_kwargs}}
+					</p>
+					<p ng-show="task.deferred_args.length>2">
+						Args: {{task.deferred_args}}
+					</p>
+					<p ng-show="task.retry_count.length>0">>
+						Retry count: {{task.retry_count + 1}}
+					</p>
+					<p>
+						<a ng-href="#/{{ queueName }}/{{ task.task_name }}">View logs</a>
+					</p>
+				</div>
+			</accordion-group>
+		</accordion>
+
+		<div class="load-more" ng-click="loadMoreTasks();$event.stopPropagation()" ng-show="loadMoreTasks">Load more</span>
+	</div>
+</div>

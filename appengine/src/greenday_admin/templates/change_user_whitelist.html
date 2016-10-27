@@ -1,0 +1,23 @@
+{% extends "admin_base.html" %}
+
+{% block content %}
+<section class="user-admin" layout="column" flex>
+	<p>
+	{% if whitelist_user.is_whitelisted %}
+		Are you sure you want to remove the whitelist ability from {{ whitelist_user.user}}? They will no longer be able to create projects.
+	{% else %}
+		Are you sure you want to grant the whitelist ability yo {{ whitelist_user.email }}? They will then be able to create projects.
+	{% endif %}
+	</p>
+	<form method="post">{% csrf_token %}
+		<button type="submit">{{ whitelist_user.is_whitelisted|yesno:"Unwhitelist,Whitelist" }}</button>
+	</form>
+</section>
+
+<style>
+.user-admin {
+	margin: 25px auto;
+	max-width: 1150px;
+}
+<style>
+{% endblock %}

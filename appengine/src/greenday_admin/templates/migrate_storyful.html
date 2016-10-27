@@ -1,0 +1,102 @@
+{% extends "admin_base.html" %}
+{% block page_title %}Migrate to Storyful{% endblock page_title %}
+{% block content %}
+<section class="user-admin" layout="column" flex>
+
+    {% if not errors and not success %}
+        <p>
+            From here you can migrate users to Storyful. This basically involves
+            removing all users who opted out of being migrated to Storyful and
+            ensuring opted in users remain.
+
+            This command can only be run once!
+        </p>
+
+        <form method="post" action="{% url 'migrate_storyful' %}" class="migrate-storyful-form">
+            {% csrf_token %}
+            <input type="hidden" name="action" value="migrate" />
+            <button type="submit">Migrate now!</button>
+        </form>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Opt Out Users - Will be removed</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for user in optout_users %}
+                <tr>
+                    <td>{{ user }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Opt In Users - Will NOT be removed</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for user in optin_users %}
+                <tr>
+                    <td>{{ user }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+
+    {% if errors and not success %}
+        <p>There where errors during the migration.</p>
+        <ul class="errorlist">
+            <li>{{ errors }}</li>
+        </ul>
+    {% endif %}
+
+    {% if not errors and success %}
+        <p>{{ success }}</p>
+    {% endif %}
+
+</section>
+
+<style>
+.user-admin {
+    flex-shrink: 0;
+    margin: 25px auto;
+    max-width: 1150px;
+}
+table {
+    width: 48%;
+    display: inline-block;
+    float: left;
+    background-color: #fafafa;
+    box-shadow: 0px 2px 5px 0 rgba(0, 0, 0, 0.26);
+}
+thead {
+    border-bottom: 1px solid #607d8b;
+}
+thead th {
+    padding: 10px 0;
+}
+td {
+    padding: 5px 20px;
+}
+.migrate-storyful-form {
+    padding-bottom: 25px;
+}
+.errorlist {
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-left: 0;
+    padding-bottom: 6px;
+    color: #b0120a;
+    font-weight: bold;
+}
+.errorlist li {
+    list-style: none;
+}
+</style>
+{% endblock %}

@@ -1,0 +1,5 @@
+html: '<%= paths.templates %>/index.html'
+options:
+  dest: '<%= paths.staticDevRoot %>/filelist.json'
+  type: 'js'
+  log: true

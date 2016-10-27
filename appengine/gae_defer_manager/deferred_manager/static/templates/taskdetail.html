@@ -1,0 +1,37 @@
+<div class="row" ng-show="task">
+	<div class="col-md-12 page-header">
+		<h2 class="breakword">{{ task.task_name }} - {{ task.deferred_function }}<span ng-show="task.task_reference"> {{ task.task_reference }}</span> <small>{{ task.deferred_args }}, {{ task.deferred_kwargs }}</small></h2>
+	</div>
+</div>
+<div class="row tasklogs">
+	<div class="col-md-12">
+		<accordion close-others="false" ng-show="logs.length">
+			<accordion-group ng-repeat="log in logs" ng-controller="LogCtrl" is-open="isOpen">
+				<accordion-heading>
+					[{{ log.start_time|date:'yyyy-MM-dd HH:mm:ss Z' }}] {{ log.status }}<span ng-hide="log.finished"> (running)</span><span ng-show="log.finished"> - {{ log.duration }} seconds</span>
+
+					<div class="btn-group pull-right tasklogs__level" dropdown ng-click="$event.stopPropagation()">
+						<button type="button" class="btn btn-default btn-sm dropdown-toggle" ng-disabled="disabled">
+						{{ logLevels[log.currentLevel] }} <span class="caret"></span>
+						</button>
+						<ul class="dropdown-menu dropdown-menu-right" role="menu">
+							<li><a ng-href="" ng-click="log.currentLevel=0">Debug</a></li>
+							<li><a ng-href="" ng-click="log.currentLevel=1">Info</a></li>
+							<li><a ng-href="" ng-click="log.currentLevel=2">Warning</a></li>
+							<li><a ng-href="" ng-click="log.currentLevel=3">Error</a></li>
+							<li><a ng-href="" ng-click="log.currentLevel=4">Critical</a></li>
+						</ul>
+					</div>
+				</accordion-heading>
+
+				<ul class="list-group">
+					<li ng-class="{'list-group-item': 1, 'list-group-item-warning': appLog.level==2, 'list-group-item-danger': appLog.level>=3}" ng-repeat="appLog in log.app_logs">
+						<span ng-class="{'label': 1, 'pull-right': 1, 'label-default': appLog.level==0, 'label-info': appLog.level==1, 'label-warning': appLog.level==2, 'label-danger': appLog.level>=3}">{{ appLog.levelText }}</span>
+						{{ appLog.time|date:'HH:mm:ss.sss' }}: <pre class="text-muted">{{ appLog.message }}</pre>
+					</li>
+					<li class="list-group-item" ng-hide="log.app_logs.length">No logs available</li>
+				</ul>
+			</accordion-group>
+		</accordion>
+	</div>
+</div>

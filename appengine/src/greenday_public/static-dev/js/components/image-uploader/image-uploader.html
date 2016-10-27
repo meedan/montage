@@ -1,0 +1,23 @@
+<div layout="column" layout-align="start center" layout-fill class="image-uploader" ng-class="{'uploading': ctrl.loading}">
+	<input class="image-uploader__input" type="file">
+	<div class="image-uploader__prompt">
+		<div ng-hide="ctrl.loading" class="fade" layout-fill layout="column" layout-align="center center">
+			<icon class="image-uploader__image-icon ic-image">
+				<icon class="image-uploader__add-icon ic-add"></icon>
+			</icon>
+			Drag an image here
+		</div>
+		<div class="image-uploader__drop-zone" layout-fill layout="column" layout-align="center center">
+			<span class="image-uploader__drop-zone__progress ng-hide fade" ng-show="ctrl.loading && ctrl.uploadProgress > 0">{{ ctrl.uploadProgress }}%</span>
+		</div>
+	</div>
+	<md-progress-linear class="image-uploader__progress" mode="determinate" ng-value="ctrl.uploadProgress"></md-progress-linear>
+	<md-button aria-label="Select a file to upload" layout="row" layout-align="center" class="image-uploader__trigger md-no-radius" ng-click="ctrl.showFileDialog()" ng-disabled="ctrl.loading">
+		<span ng-hide="ctrl.loading" class="image-uploader__trigger-text ng-hide fade" layout-fill layout="row" layout-align="center center">
+			<icon class="ic-file-upload"></icon> File upload
+		</span>
+		<span ng-show="ctrl.loading" class="image-uploader__trigger-text ng-hide fade" layout-fill layout="row" layout-align="center center">
+			Uploading...
+		</span>
+	</md-button>
+</div>

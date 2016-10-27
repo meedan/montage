@@ -1,0 +1,11 @@
+queue:
+- name: default
+  rate: 50/s
+  retry_parameters:
+    task_retry_limit: 7
+    task_age_limit: 2d
+
+- name: named-queue
+  rate: 50/s
+  retry_parameters:
+    task_retry_limit: 1

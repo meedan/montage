@@ -1,0 +1,11 @@
+<div class="gd-video-timeline__comment-label" ng-click="showPopup()" ng-if="!video.archived_at">
+	<div layout="row" layout-align="center center">
+		<icon class="ic-label"></icon>
+		<span flex>Add tag</span>
+	</div>
+</div>
+<div class="gd-tag-autocomplete__input-wrapper" ng-show="popup" layout="row" layout-align="start center">
+	<icon class="ic-label"></icon>
+	<input class="gd-tag-autocomplete__input" ng-model="query" flex>
+	<button class="gd-tag-autocomplete__close-btn" ng-click="hidePopup()"><icon class="ic-close"></icon></button>
+</div>

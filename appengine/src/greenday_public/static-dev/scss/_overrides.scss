@@ -1,0 +1,15 @@
+.ic-texture {
+	color: map-get( $color-accent, '500') !important;
+}
+
+/**
+ * A utility class intended for use when temporarily needing to show an element
+ * that might be hidden with ng-hide. For example, if you need to get the width
+ * of the ng-hidden element you can temporarily add this class so that the
+ * element remains invisible but has a width which can then be retrieved.
+ */
+.gd-hide-override,
+.ng-hide.gd-hide-override {
+	display: block!important;
+	visibility: hidden;
+}

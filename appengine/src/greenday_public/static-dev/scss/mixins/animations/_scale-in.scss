@@ -1,0 +1,23 @@
+@mixin scale-in($scale-from: .8, $scale-to: 1, $max-height: true, $height-prop: 'height', $opacity: true) {
+	from {
+		transform: scale($scale-from);
+		@if $max-height != false {
+			#{$height-prop}: 0;
+		}
+
+		@if $opacity == true {
+			opacity: 0;
+		}
+	}
+
+	to {
+		transform: scale($scale-to);
+		@if $max-height != false {
+			#{$height-prop}: $max-height;
+		}
+
+		@if $opacity == true {
+			opacity: 1;
+		}
+	}
+}

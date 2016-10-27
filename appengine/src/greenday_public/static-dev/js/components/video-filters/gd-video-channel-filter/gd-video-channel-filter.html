@@ -1,0 +1,23 @@
+<md-content class="video-filter__list md-whiteframe-z1">
+	<div class="video-filter__list__quick-filter" layout="row" layout-align="start center">
+		<icon class="ic-search"></icon>
+		<input flex class="video-filter__list__quick-filter__input" type="text" ng-model="nameFilter" ng-model-options="{debounce: 500}" placeholder="Quick filter channels">
+		<md-button aria-label="Clear" ng-show="channelFilterCtrl.selectedChannels.length" ng-click="channelFilterCtrl.deselectAll()">
+			Clear
+		</md-button>
+	</div>
+	<md-content class="video-filter__content-list">
+		<md-list>
+			<md-item ng-repeat="channel in channelFilterCtrl.channels | filter: {name: nameFilter} | orderBy:'name'">
+				<md-item-content class="video-filter__list-item" ng-class="{'selected': channel.selected}">
+					<gd-button class="video-filter__toggle-button" ng-click="channelFilterCtrl.toggleChannel(channel)">
+						<span layout="row" layout-align="start center">
+							<icon ng-class="{'ic-check-box-outline-blank': !channel.selected, 'ic-check-box': channel.selected}"></icon>
+							<span class="video-filter__channel-name">{{ ::channel.name }}</span>
+						</span>
+					</gd-button>
+				</md-item-content>
+			</md-item>
+		</md-list>
+	</md-content>
+</md-content>

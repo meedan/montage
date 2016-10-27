@@ -1,0 +1,67 @@
+/*
+ * Style for Greenday Chrome Extension
+ */
+.greenday-button {
+  margin-right: 26px;
+}
+
+#greenday-popup {
+  padding: 0px;
+  z-index: 200000000;
+}
+
+#greenday-menu {
+  height: 120px;
+  overflow-y: auto;
+  width: 200px;
+}
+
+#greenday-menu h3 {
+  padding: 0px 0px 10px 10px;
+}
+
+.addto-greenday-button.yt-uix-tooltip {
+  border-radius: 2px;
+  height: 22px;
+  padding: 0;
+  width: 22px;
+  background-color: #F29C48;
+}
+
+.add-to-widget .playlist-status.greenday-checkbox-loading {
+  background: url(//s.ytimg.com/yts/img/loader-vflff1Mjj.gif) no-repeat;
+}
+
+#watch8-action-buttons .yt-uix-button.greenday-video-button, #watch8-action-buttons .yt-uix-button.greenday-video-button:hover,
+#watch8-action-buttons .yt-uix-button.greenday-video-button:active, #watch8-action-buttons .yt-uix-button.greenday-video-button:focus {
+  border: 1px solid #ccc;
+  bottom: auto;
+  display: inline-block;
+  margin: 0;
+  position: relative;
+  background-color: #F0906E;
+  right: auto;
+}
+
+.greenday-video-button:hover {
+  margin-right: 60px;
+  margin-bottom: 30px;
+}
+
+.greenday-new-project {
+  bottom: 0;
+  left: 0;
+  position: absolute;
+}
+
+.greenday-popup-inner ul {
+  width: 200px;
+}
+
+.greenday-not-authorised {
+  padding: 20px;
+}
+
+.yt-lockup-thumbnail .video-actions {
+  right: -100px;
+}

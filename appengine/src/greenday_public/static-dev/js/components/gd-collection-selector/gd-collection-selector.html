@@ -1,0 +1,29 @@
+<section ng-show="ctrl.isBusy" class="page-loader ng-hide fade" layout="column" layout-align="center center">
+	<holo-spinner></holo-spinner>
+</section>
+<md-content class="bottom-sheet__list-wrapper" layout-fill>
+	<md-list class="bottom-sheet__list" layout="column" layout-align="start start" ng-show="project">
+		<md-item ng-click="ctrl.setCollection('library')" ng-class="{'bottom-sheet__list-item--active': ngModel === 'library'}" class="bottom-sheet__list-item">
+			<md-item-content layout="row" layout-align="start center">
+				<icon class="ic-movie"></icon> Library
+			</md-item-content>
+		</md-item>
+		<md-item ng-class="{'bottom-sheet__list-item--active': ngModel.id === collection.id}" class="bottom-sheet__list-item" ng-repeat="collection in ctrl.collections track by collection.id" ng-click="ctrl.setCollection(collection)">
+			<md-item-content>{{ collection.name }}</md-item-content>
+		</md-item>
+		<md-item class="bottom-sheet__list-item bottom-sheet__list-item--faded">
+			<md-item-content>
+				<gd-button ng-click="ctrl.showAddCollection()" ng-hide="ctrl.addingCollection" layout="row" layout-align="start center">
+					<span layout="row" layout-align="start center">
+						<icon class="ic-add"></icon>
+						<span>New collection</span>
+					</span>
+				</gd-button>
+				<md-input-container flex ng-show="ctrl.addingCollection">
+					<label>Collection name</label>
+					<input ng-model="ctrl.newCollection.name">
+				</md-input-container>
+			</md-item-content>
+		</md-item>
+	</md-list>
+</md-content>

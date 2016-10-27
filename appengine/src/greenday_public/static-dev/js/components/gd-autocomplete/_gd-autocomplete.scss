@@ -1,0 +1,26 @@
+.gd-autocomplete {
+	position: relative;
+
+	md-list,
+	md-item {
+		display: block;
+	}
+}
+
+.gd-autocomplete__dropdown {
+	@include type(body-1);
+	padding: 0;
+	position: absolute;
+	z-index: 2;
+}
+
+.gd-autocomplete__item {
+	button {
+		padding: $baseline-component-grid $baseline-component-grid * 2;
+	}
+
+	&.hover,
+	&:hover {
+		background-color: shade-colour(dividers);
+	}
+}

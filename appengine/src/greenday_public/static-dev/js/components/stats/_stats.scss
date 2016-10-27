@@ -1,0 +1,22 @@
+.stat {
+	margin-right: 40px;
+
+	&:last-child {
+		margin-right: 0;
+	}
+}
+
+.stat__icon {
+	margin-right: 10px;
+	opacity: .7;
+}
+
+.stat__text {
+	@include rem(font-size, 14px);
+	text-align: left;
+}
+
+.stat__text--big {
+	@include rem(font-size, 24px);
+	margin-right: 5px;
+}

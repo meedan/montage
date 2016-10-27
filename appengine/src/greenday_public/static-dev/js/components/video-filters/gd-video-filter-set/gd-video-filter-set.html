@@ -1,0 +1,21 @@
+<div layout="row" class="video-filter-set" layout-align="start center">
+	<gd-video-filter ng-if="::displayConfig.keyword" type="text" title="Filter by keyword" is-open="true" ng-model="ngModel.filters.q">
+		<input class="video-filter__input" type="text" placeholder="Filter by keyword" ng-model="ngModel.filters.q" ng-model-options="{ debounce: ctrl.debounce }">
+	</gd-video-filter>
+
+	<gd-video-filter ng-if="::displayConfig.tag" type="tag" title="Tag" ng-model="ngModel.filters.tag_ids">
+		<gd-video-tag-filter project="project" ng-model="ngModel.filters.tag_ids" ng-model-options="{ debounce: ctrl.debounce }"></gd-video-tag-filter>
+	</gd-video-filter>
+
+	<gd-video-filter ng-if="::displayConfig.date" type="date" title="Date" ng-model="ngModel.filters.date" is-open="filtersMeta.date.isOpen">
+		<gd-video-date-filter ng-model="ngModel.filters.date" filter-meta="filtersMeta.date"></gd-video-date-filter>
+	</gd-video-filter>
+
+	<gd-video-filter ng-if="::displayConfig.location" type="location" title="Location" ng-model="ngModel.filters.location">
+		<gd-video-location-filter ng-model="ngModel.filters.location"></gd-video-location-filter>
+	</gd-video-filter>
+
+	<gd-video-filter ng-if="::displayConfig.channel" type="channel" title="Uploader" ng-model="ngModel.filters.channel_ids">
+		<gd-video-channel-filter project="project" ng-model="ngModel.filters.channel_ids" ng-model-options="{ debounce: ctrl.debounce }"></gd-video-channel-filter>
+	</gd-video-filter>
+</div>

@@ -1,0 +1,13 @@
+gd-video-filter-set {
+	&:nth-child(1) {
+		.highlight {
+			color: #ff8964;
+		}
+	}
+
+	&:nth-child(2) {
+		.highlight {
+			color: #4ec2f6;
+		}
+	}
+}

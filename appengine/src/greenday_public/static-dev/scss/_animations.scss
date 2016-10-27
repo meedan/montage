@@ -1,0 +1,69 @@
+// LEAVING ANIMATIONS
+
+// fade out
+@keyframes fadeOut {
+	from {
+		opacity: 1;
+	}
+
+	to {
+		opacity: 0;
+	}
+}
+
+// slide out to the bottom
+@keyframes slideOutDown {
+	@include slide-out-down();
+}
+
+@keyframes slideOutDownVideo {
+	@include slide-out-down(85px);
+}
+
+@keyframes slideOutDownProject {
+	@include slide-out-down(210px);
+}
+
+@keyframes slideOutDownTag {
+	@include slide-out-down($max-height: 160px, $height-prop: 'height', $translate: false);
+}
+
+// Scale out
+@keyframes scaleOutTag {
+	@include scale-out($scale-from: 1, $scale-to: .9);
+}
+
+// ENTERING ANIMATIONS
+
+// fade in
+@keyframes fadeIn {
+	from {
+		opacity: 0;
+	}
+
+	to {
+		opacity: 1;
+	}
+}
+
+// slide in from the bottom
+@keyframes slideInUp {
+	@include slide-in-up();
+}
+
+@keyframes slideInUpVideo {
+	@include slide-in-up(85px);
+}
+
+@keyframes slideInUpProject {
+	@include slide-in-up(210px);
+}
+
+@keyframes slideInUpTag {
+	@include slide-in-up($max-height: 160px, $height-prop: 'height', $translate: false);
+}
+
+// Scale in
+@keyframes scaleInTag {
+	@include scale-in($scale-from: .9, $scale-to: 1);
+}

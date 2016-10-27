@@ -1,0 +1,23 @@
+linters:
+  Indentation:
+    enabled: true
+    character: tab
+    width: 1
+  SelectorDepth:
+    enabled: true
+    max_depth: 10
+  PlaceholderInExtend:
+    enabled: false
+  NameFormat:
+    enabled: true
+    convention: BEM
+  SelectorFormat:
+    enabled: true
+    convention: BEM
+  DuplicateProperty:
+    enabled: true
+    exclude:
+      - '<%= paths.staticDevRoot %>/scss/_mixins.scss'
+  PropertySpelling:
+    extra_properties:
+      - will-change

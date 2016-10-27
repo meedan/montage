@@ -1,0 +1,64 @@
+gd-video-timeline-tag-label {
+	position: relative;
+
+	&:hover .gd-video-timeline-tag-label__controls,
+	.gd-video-timeline-tag-label__controls.is-busy {
+		opacity: 1;
+		width: auto;
+	}
+}
+
+.gd-video-timeline-tag-label__wrap--normal,
+.gd-video-timeline-tag-label__wrap--editing {
+	@extend %gd-video-timeline-tag-label__wrap !optional;
+}
+
+.gd-video-timeline-tag-label__wrap--editing {
+	position: relative;
+}
+
+.gd-video-timeline-tag-label__edit-field {
+	@extend %base-text-input;
+}
+
+.gd-video-timeline-tag-label__cancel-editing {
+	margin: -6px -6px 0 0;
+
+	icon {
+		font-size: 18px;
+	}
+}
+
+.gd-video-timeline-tag-label__controls {
+	margin: -18px 0 0;
+	opacity: 0;
+	overflow: hidden;
+	padding: 4px;
+	position: absolute;
+	right: 100%;
+	top: 50%;
+	transition: opacity $swift-ease-in-out-duration $swift-ease-in-out-timing-function;
+	width: 0;
+
+	icon {
+		font-size: 18px;
+	}
+
+	&.is-busy {
+
+	}
+}
+
+.gd-video-timeline-tag-label__content {
+	display: block;
+	max-width: 100px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.gd-video-timeline-tag-label__cancel-editing {
+	position: absolute;
+	top: 0;
+	right: 0;
+}

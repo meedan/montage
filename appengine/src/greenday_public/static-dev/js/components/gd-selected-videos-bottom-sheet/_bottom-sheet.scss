@@ -1,0 +1,150 @@
+.gd-bottom-sheet {
+	bottom: 0;
+	left: 0;
+	position: fixed;
+	right: 0;
+
+	md-input-group {
+		margin: 0;
+
+		input {
+			width: 100%;
+		}
+	}
+}
+
+.gd-bottom-sheet__content {
+	@extend .md-whiteframe-z2;
+	margin: 0 auto;
+	max-width: 1100px;
+	overflow: hidden;
+}
+
+.gd-bottom-sheet__toolbar {
+	@include type(body-1);
+	min-height: 0;
+
+	gd-button {
+		transition: all .2s ease-in-out;
+
+		button {
+			padding: $baseline-component-grid * 2;
+		}
+
+		&:hover,
+		&.active {
+			background-color: map-get($primary-color-palette, '600');
+		}
+
+		icon {
+			color: map-get($primary-color-palette, '100');
+			margin-right: $baseline-component-grid;
+		}
+
+		&.bottom-sheet__close-tab-button {
+			icon {
+				margin: 0;
+			}
+		}
+	}
+}
+
+.gd-bottom-sheet__info {
+	padding: $baseline-component-grid * 2;
+}
+
+.bottom-sheet__list-item {
+	@include type(body-2);
+	cursor: default;
+	padding: $baseline-component-grid $baseline-component-grid * 2;
+	width: 100%;
+
+	&:hover,
+	&.bottom-sheet__list-item--active {
+		background-color: $colour-white-medium;
+	}
+
+	icon {
+		color: map-get($primary-color-palette, '600');
+		margin-right: $baseline-component-grid;
+	}
+}
+
+.bottom-sheet__list-item--faded {
+	.gd-button {
+		opacity: .57;
+	}
+}
+
+%bottom-sheet__panel {
+	height: 210px;
+	overflow: hidden;
+}
+
+.bottom-sheet__panel--add-to {
+	@extend %bottom-sheet__panel;
+}
+
+.bottom-sheet__panel--archive {
+	@extend %bottom-sheet__panel;
+}
+
+.bottom-sheet__panel--mark-as-duplicate {
+	@extend %bottom-sheet__panel;
+}
+
+.bottom-sheet__panel-section {
+	border-right: 1px solid shade-colour(dividers);
+	height: 100%;
+}
+
+.bottom-sheet__list-wrapper {
+}
+
+.bottom-sheet__panel-hero {
+	@include type(display-1);
+}
+
+.bottom-sheet__panel__big-content {
+	@include type(body-1);
+	padding: $baseline-component-grid * 5 $baseline-component-grid * 6;
+	padding-bottom: 0;
+}
+
+.bottom-sheet__panel-hero,
+.bottom-sheet__panel-info {
+	margin-bottom: $baseline-component-grid * 2;
+}
+
+.bottom-sheet__panel-results {
+	bottom: 0;
+	left: 0;
+	position: absolute;
+	right: 0;
+	top: 0;
+	z-index: 1;
+
+	md-item {
+		icon {
+			color: #f44336;
+			font-size: 32px;
+		}
+	}
+
+	.success {
+		icon {
+			color: #4caf50;
+		}
+	}
+
+	md-progress-linear .md-container {
+		top: 0;
+	}
+}
+
+.bottom-sheet__close-button {
+	position: absolute;
+	right: 0;
+	top: 0;
+	z-index: 2;
+}

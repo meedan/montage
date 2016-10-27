@@ -1,0 +1,3 @@
+recursive-include django-protorpc *.py
+include LICENSE
+include README.md

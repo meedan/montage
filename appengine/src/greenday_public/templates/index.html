@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app" ng-controller="AppCtrl as appctrl" >
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title ng-bind="appctrl.page.headerTitle ? (appctrl.page.headerTitle + ' - Montage') : 'Montage'">Montage</title>
+		{% if DEBUG %}
+		<!-- build:css(appengine/src/greenday_public) css/greenday.css -->
+		<link rel="stylesheet" type="text/css" href="/static-dev/libs/angular-material/angular-material.css">
+		<link rel="stylesheet" type="text/css" href="/static-dev/css/greenday.css">
+		<!-- endbuild -->
+		{% else %}
+		<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/greenday.css">
+		{% endif %}
+		<link rel="shortcut icon" type="image/png" href="//storage.googleapis.com/public_images/montage_favicon-32.png">
+		<link rel="icon" type="image/png" href="//storage.googleapis.com/public_images/montage_favicon-16.png" sizes="16x16">
+		<link rel="icon" type="image/png" href="//storage.googleapis.com/public_images/montage_favicon-32.png" sizes="32x32">
+		<link rel="icon" type="image/png" href="//storage.googleapis.com/public_images/montage_favicon-196.png" sizes="196x196">
+		<base href="/">
+	</head>
+
+	<body md-theme="default" ng-class="{ 'welcome-page' : appctrl.imOnWelcomePage===true}">
+		{% csrf_token %}
+
+		<section layout="row" layout-fill ng-cloak>
+			<md-sidenav class="app-sidebar md-sidenav-left md-whiteframe-z2" md-component-id="left" ng-include="'app/app.sidebar.html'"></md-sidenav>
+			<gd-tag-sidebar project-id="appctrl.page.projectId"></gd-tag-sidebar>
+			<gd-project-comments-sidebar project-id="appctrl.page.projectId"></gd-project-comments-sidebar>
+			<md-content flex layout="column" layout-fill>
+
+				{% if ENV == 1 %}
+				<section layout="row" layout-align="center center" class="staging-warning-banner">
+					<div>This is the staging version of Montage. Your data may be lost without notice.</div>
+				</section>
+				{% endif %}
+
+				<header class="appbar" ng-if='!appctrl.imOnWelcomePage' data-ng-include="'app/app.header.html'"></header>
+
+				<section class="page" layout="column" flex ng-view></section>
+
+				<section ng-show="appctrl.page.loading" class="page-loader ng-hide fade" layout="column" layout-align="center center">
+					<holo-spinner class="holo-spinner--layer"></holo-spinner>
+				</section>
+			</md-content>
+			<one-search lazy-show="appctrl.searchVisible" selected-project="appctrl.page.project" selected-collection="appctrl.page.collection" class="fade" searching="appctrl.searchVisible" layout-fill></one-search>
+		</section>
+		<gd-onboarding-popover ng-model="appctrl.page.onboarding"></gd-onboarding-popover>
+
+		<script>
+			window.DEBUG = {{ DEBUG | lower }};
+			window.OAUTH_SETTINGS = {
+				client_id: "{{ OAUTH_SETTINGS.client_id }}",
+				api_key: "{{ OAUTH_SETTINGS.api_key }}"
+			};
+			window.CHANNELS_API_BASE = "{{ CHANNELS_API_BASE }}";
+			window.API_BASE = "{{ API_BASE }}";
+		</script>
+		{% if DEBUG %}
+		<!-- build:js(appengine/src/greenday_public) js/libs.js -->
+		<script src="/static-dev/libs/jquery/dist/jquery.js"></script>
+		<script src="/static-dev/libs/angular/angular.js"></script>
+		<script src="/static-dev/libs/hammerjs/hammer.js"></script>
+		<script src="/static-dev/libs/angular-route/angular-route.js"></script>
+		<script src="/static-dev/libs/angular-aria/angular-aria.js"></script>
+		<script src="/static-dev/libs/angular-cookies/angular-cookies.js"></script>
+		<script src="/static-dev/libs/angular-local-storage/dist/angular-local-storage.min.js"></script>
+		<script src="/static-dev/libs/angular-sanitize/angular-sanitize.js"></script>
+		<script src="/static-dev/libs/angulartics/dist/angulartics.min.js"></script>
+		<script src="/static-dev/libs/angulartics/dist/angulartics-ga.min.js"></script>
+		<script src="/static-dev/libs/angular-animate/angular-animate.js"></script>
+		<script src="/static-dev/libs/angular-material/angular-material.js"></script>
+		<script src="/static-dev/libs/lodash/dist/lodash.js"></script>
+		<script src="/static-dev/libs/moment/moment.js"></script>
+		<script src="/static-dev/libs/moment-range/lib/moment-range.js"></script>
+		<script src="/static-dev/libs/angular-moment/angular-moment.js"></script>
+		<script src="/static-dev/libs/markerclusterer/index.js"></script>
+		<script src="/static-dev/libs/angular-google-maps/dist/angular-google-maps.js"></script>
+		<script src="/static-dev/libs/ng-stats/dist/ng-stats.js"></script>
+		<script src="/static-dev/libs/angular-hotkeys/build/hotkeys.js"></script>
+		<script src="/static-dev/libs/js-data/dist/js-data.js"></script>
+		<script src="/static-dev/libs/js-data-angular/dist/js-data-angular.js"></script>
+		<!-- endbuild -->
+		<!-- build:js(appengine/src/greenday_public) js/app.js -->
+		<script src="/static-dev/js/app/patch-utils.js"></script>
+		<script src="/static-dev/js/app/app.module.js"></script>
+		<script src="/static-dev/js/app/app.core.js"></script>
+
+		<script src="/static-dev/js/app/app.constants.js"></script>
+		<script src="/static-dev/js/app/app.config.js"></script>
+		<script src="/static-dev/js/app/app.routes.js"></script>
+		<script src="/static-dev/js/app/app.templates.js"></script>
+		<script src="/static-dev/js/app/app.controller.js"></script>
+
+		<script src="/static-dev/js/services/app.services.module.js"></script>
+		<script src="/static-dev/js/services/dialog.service.js"></script>
+		<script src="/static-dev/js/services/event.service.js"></script>
+		<script src="/static-dev/js/services/filter-utils.service.js"></script>
+		<script src="/static-dev/js/services/gapiloader.service.js"></script>
+		<script src="/static-dev/js/services/id-generator.service.js"></script>
+		<script src="/static-dev/js/services/image-preloader.service.js"></script>
+		<script src="/static-dev/js/services/static-file-url.service.js"></script>
+		<script src="/static-dev/js/services/toast.service.js"></script>
+		<script src="/static-dev/js/services/treefy.service.js"></script>
+		<script src="/static-dev/js/services/user.service.js"></script>
+		<script src="/static-dev/js/services/youtube/youtube-player-api.service.js"></script>
+		<script src="/static-dev/js/services/youtube/youtube-data-api.service.js"></script>
+		<script src="/static-dev/js/services/video-collection.service.js"></script>
+
+		<script src="/static-dev/js/components/components.module.js"></script>
+
+		<script src="/static-dev/js/components/gd-backdrop/gd-backdrop.module.js"></script>
+		<script src="/static-dev/js/components/gd-backdrop/gd-backdrop.constants.js"></script>
+		<script src="/static-dev/js/components/gd-backdrop/gd-backdrop.directive.js"></script>
+		<script src="/static-dev/js/components/gd-backdrop/gd-backdrop-root.directive.js"></script>
+		<script src="/static-dev/js/components/gd-backdrop/gd-backdrop.service.js"></script>
+
+		<script src="/static-dev/js/components/gd-floating-element/gd-floating-element.module.js"></script>
+		<script src="/static-dev/js/components/gd-floating-element/gd-floating-element.directive.js"></script>
+		<script src="/static-dev/js/components/gd-floating-element/gd-floating-element.service.js"></script>
+
+		<script src="/static-dev/js/components/gd-popup/gd-popup.module.js"></script>
+		<script src="/static-dev/js/components/gd-popup/gd-popup.constants.js"></script>
+		<script src="/static-dev/js/components/gd-popup/gd-popup.factory.js"></script>
+		<script src="/static-dev/js/components/gd-popup/gd-popup-manager.service.js"></script>
+		<script src="/static-dev/js/components/gd-popup/gd-popup.directive.js"></script>
+		<script src="/static-dev/js/components/gd-popup/gd-popup-button.directive.js"></script>
+		<script src="/static-dev/js/components/gd-popup/gd-popup-element.directive.js"></script>
+		<script src="/static-dev/js/components/gd-popup/gd-popup-content.directive.js"></script>
+
+		{# FIXMIE: This is just for testing to understand the directive's lifecycle. #}
+		<script src="/static-dev/js/components/gd-popup/gd-test.directive.js"></script>
+
+		<script src="/static-dev/js/components/gd-floating-menu/gd-floating-menu-manager.service.js"></script>
+		<script src="/static-dev/js/components/gd-floating-menu/gd-floating-menu.service.js"></script>
+		<script src="/static-dev/js/components/gd-floating-menu/gd-floating-menu-button.directive.js"></script>
+		<script src="/static-dev/js/components/gd-floating-menu/gd-floating-menu-group.directive.js"></script>
+		<script src="/static-dev/js/components/gd-floating-menu/gd-floating-menu-item.directive.js"></script>
+		<script src="/static-dev/js/components/gd-floating-menu/gd-floating-menu.directive.js"></script>
+
+		<script src="/static-dev/js/components/gd-autocomplete/gd-autocomplete.directive.js"></script>
+		<script src="/static-dev/js/components/gd-tag-autocomplete/gd-tag-autocomplete.directive.js"></script>
+		<script src="/static-dev/js/components/gd-tag-autocomplete/gd-tag-autocomplete-popup.directive.js"></script>
+
+		<script src="/static-dev/js/components/gd-video-details-panel/gd-video-details-panel.directive.js"></script>
+		<script src="/static-dev/js/components/gd-video-details-map/gd-video-details-map.directive.js"></script>
+
+		<script src="/static-dev/js/components/gd-video-back-button/gd-video-back-button.directive.js"></script>
+
+		<script src="/static-dev/js/components/gd-video-controls/gd-video-controls.directive.js"></script>
+
+		<script src="/static-dev/js/components/gd-video-timeline/videoTimeline.module.js"></script>
+		<script src="/static-dev/js/components/gd-video-timeline/gd-video-timeline.directive.js"></script>
+		<script src="/static-dev/js/components/gd-video-timeline/gd-video-timeline-tag-label.directive.js"></script>
+		<script src="/static-dev/js/components/gd-video-timeline/gd-video-timeline-tag-instance.directive.js"></script>
+		<script src="/static-dev/js/components/gd-video-timeline/tag-merge-dialog/components.gd-video-timeline.tag-merge.controller.js"></script>
+
+		<script src="/static-dev/js/components/gd-timed-comment/gd-timed-comment.module.js"></script>
+		<script src="/static-dev/js/components/gd-timed-comment/gd-timed-comment-button.directive.js"></script>
+		<script src="/static-dev/js/components/gd-timed-comment/gd-timed-comment-popup.directive.js"></script>
+		<script src="/static-dev/js/components/gd-timed-comment/gd-timed-comment.directive.js"></script>
+		<script src="/static-dev/js/components/gd-timed-comment/gd-timed-comment-create.directive.js"></script>
+
+		<script src="/static-dev/js/components/gd-youtube-thumbnail/gd-youtube-thumbnail.directive.js"></script>
+
+		<script src="/static-dev/js/components/gd-progress/gd-progress.directive.js"></script>
+
+		<script src="/static-dev/js/components/holo-spinner/holo-spinner.directive.js"></script>
+		<script src="/static-dev/js/components/image-uploader/image-uploader.directive.js"></script>
+		<script src="/static-dev/js/components/image-uploader/image-uploader.service.js"></script>
+		<script src="/static-dev/js/components/gd-inline-edit/gd-inline-edit.directive.js"></script>
+		<script src="/static-dev/js/components/gd-selected-videos-bottom-sheet/bottom-sheet.directive.js"></script>
+		<script src="/static-dev/js/components/gd-project-selector/gd-project-selector.directive.js"></script>
+		<script src="/static-dev/js/components/gd-collection-selector/gd-collection-selector.directive.js"></script>
+		<script src="/static-dev/js/components/gd-video-adder/gd-video-adder.directive.js"></script>
+		<script src="/static-dev/js/components/gd-video-exporter/gd-video-exporter.directive.js"></script>
+		<script src="/static-dev/js/components/project/project-list-item.directive.js"></script>
+		<script src="/static-dev/js/components/stats/stats.directive.js"></script>
+		<script src="/static-dev/js/components/toggle-button/toggle-button.directive.js"></script>
+		<script src="/static-dev/js/components/user-box/user-box.directive.js"></script>
+
+		<script src="/static-dev/js/components/gd-tag-list/gd-tag-list.directive.js"></script>
+		<script src="/static-dev/js/components/gd-tag-list/gd-tag-item.directive.js"></script>
+
+		<script src="/static-dev/js/components/video-filters/gd-video-filter-set/gd-video-filter-set.directive.js"></script>
+		<script src="/static-dev/js/components/video-filters/gd-video-filter/gd-video-filter.directive.js"></script>
+		<script src="/static-dev/js/components/video-filters/gd-video-filter/gd-video-filter-title.directive.js"></script>
+		<script src="/static-dev/js/components/video-filters/gd-video-tag-filter/gd-video-tag-filter.directive.js"></script>
+		<script src="/static-dev/js/components/video-filters/gd-video-channel-filter/gd-video-channel-filter.directive.js"></script>
+		<script src="/static-dev/js/components/video-filters/gd-video-location-filter/gd-video-location-filter.directive.js"></script>
+		<script src="/static-dev/js/components/video-filters/gd-video-date-filter/gd-video-date-filter.directive.js"></script>
+
+		<script src="/static-dev/js/components/gd-video-list/gd-video-list-item.directive.js"></script>
+		<script src="/static-dev/js/components/gd-video-list/gd-video-list.directive.js"></script>
+		<script src="/static-dev/js/components/video-map/video-map.directive.js"></script>
+		<script src="/static-dev/js/components/video-tag-view/video-tag-view.directive.js"></script>
+		<script src="/static-dev/js/components/youtube-video/youtube-video.directive.js"></script>
+		<script src="/static-dev/js/components/one-search/one-search.directive.js"></script>
+		<script src="/static-dev/js/components/one-search/one-search-results.directive.js"></script>
+		<script src="/static-dev/js/components/one-search/one-search-result-item.directive.js"></script>
+
+		<script src="/static-dev/js/components/buttons/buttons.module.js"></script>
+		<script src="/static-dev/js/components/buttons/gd-button/gd-button.directive.js"></script>
+		<script src="/static-dev/js/components/buttons/gd-favourite-video-button/gd-favourite-video-button.directive.js"></script>
+		<script src="/static-dev/js/components/buttons/gd-archive-video-button/gd-archive-video-button.directive.js"></script>
+		<script src="/static-dev/js/components/buttons/gd-select-video-button/gd-select-video-button.directive.js"></script>
+		<script src="/static-dev/js/components/buttons/gd-add-to-collection-button/gd-add-to-collection-button.directive.js"></script>
+
+		<script src="/static-dev/js/components/gd-tag-sidebar/gd-tag-sidebar.directive.js"></script>
+
+		<script src="/static-dev/js/components/gd-project-comments-sidebar/gd-project-comments-sidebar.directive.js"></script>
+		<script src="/static-dev/js/components/gd-project-comments-sidebar/gd-project-comment-thread.directive.js"></script>
+		<script src="/static-dev/js/components/gd-project-comments-sidebar/gd-project-comment.directive.js"></script>
+
+		<script src="/static-dev/js/components/gd-drag-drop/drag-drop.module.js"></script>
+		<script src="/static-dev/js/components/gd-drag-drop/draggable.directive.js"></script>
+		<script src="/static-dev/js/components/gd-drag-drop/droppable.directive.js"></script>
+
+		<script src="/static-dev/js/components/gd-datepicker/gd-datepicker.module.js"></script>
+		<script src="/static-dev/js/components/gd-datepicker/gd-datepicker.directive.js"></script>
+		<script src="/static-dev/js/components/gd-datepicker/gd-datepicker.service.js"></script>
+
+		<script src="/static-dev/js/components/potato-datepicker/potato-datepicker.module.js"></script>
+		<script src="/static-dev/js/components/potato-datepicker/potato-datepicker.service.js"></script>
+		<script src="/static-dev/js/components/potato-datepicker/potato-datepicker.directive.js"></script>
+
+		<script src="/static-dev/js/components/gd-video-popup/gd-video-popup.directive.js"></script>
+
+		<script src="/static-dev/js/components/gd-onboarding/gd-onboarding.module.js"></script>
+		<script src="/static-dev/js/components/gd-onboarding/gd-onboarding-popover.directive.js"></script>
+
+		<script src="/static-dev/js/components/gd-online-collaborators/gd-online-collaborators.directive.js"></script>
+
+		<script src="/static-dev/js/components/gd-lazy-show/lazy-show.module.js"></script>
+		<script src="/static-dev/js/components/gd-lazy-show/lazy-show.directive.js"></script>
+		<script src="/static-dev/js/filters/filters.module.js"></script>
+		<script src="/static-dev/js/filters/any.filter.js"></script>
+		<script src="/static-dev/js/filters/duration.filter.js"></script>
+		<script src="/static-dev/js/filters/round.filter.js"></script>
+
+		<script src="/static-dev/js/resources/resources.module.js"></script>
+		<script src="/static-dev/js/resources/user.resource.js"></script>
+		<script src="/static-dev/js/resources/collection.resource.js"></script>
+		<script src="/static-dev/js/resources/project.resource.js"></script>
+		<script src="/static-dev/js/resources/collaborator.resource.js"></script>
+		<script src="/static-dev/js/resources/online-collaborator.resource.js"></script>
+		<script src="/static-dev/js/resources/project-comment.resource.js"></script>
+		<script src="/static-dev/js/resources/project-comment-reply.resource.js"></script>
+		<script src="/static-dev/js/resources/onesearch.resource.js"></script>
+		<script src="/static-dev/js/resources/video-tag.resource.js"></script>
+		<script src="/static-dev/js/resources/video-tag-instance.resource.js"></script>
+		<script src="/static-dev/js/resources/video.resource.js"></script>
+		<script src="/static-dev/js/resources/video-comment.resource.js"></script>
+		<script src="/static-dev/js/resources/project-tag.resource.js"></script>
+		<script src="/static-dev/js/resources/global-tag.resource.js"></script>
+		<script src="/static-dev/js/resources/channel.resource.js"></script>
+
+		<script src="/static-dev/js/pages/pages.module.js"></script>
+		<script src="/static-dev/js/pages/pages.service.js"></script>
+		<script src="/static-dev/js/pages/home/pages.home.controller.js"></script>
+		<script src="/static-dev/js/pages/home/pages.home.routes.js"></script>
+		<script src="/static-dev/js/pages/project/pages.project.controller.js"></script>
+		<script src="/static-dev/js/pages/project/pages.project.routes.js"></script>
+		<script src="/static-dev/js/pages/projects/pages.projects.controller.js"></script>
+		<script src="/static-dev/js/pages/projects/pages.projects.routes.js"></script>
+
+		<script src="/static-dev/js/pages/video/pages.video.module.js"></script>
+		<script src="/static-dev/js/pages/video/pages.video.controller.js"></script>
+		<script src="/static-dev/js/pages/video/pages.video.routes.js"></script>
+		<script src="/static-dev/js/pages/video/pages.youtube-video.controller.js"></script>
+		<script src="/static-dev/js/pages/video/duplicate-videos-dialog/pages.video.duplicate-videos.controller.js"></script>
+		<script src="/static-dev/js/pages/video/remove-video-dialog/pages.video.remove-video.controller.js"></script>
+
+		<script src="/static-dev/js/pages/welcome/pages.welcome.controller.js"></script>
+		<script src="/static-dev/js/pages/welcome/pages.welcome.routes.js"></script>
+
+		<script src="/static-dev/js/pages/errors/pages.errors.controller.js"></script>
+		<script src="/static-dev/js/pages/errors/pages.errors.routes.js"></script>
+
+		<script src="/static-dev/js/pages/accept-nda/pages.accept-nda.controller.js"></script>
+		<script src="/static-dev/js/pages/accept-nda/pages.accept-nda.routes.js"></script>
+
+		<script src="/static-dev/js/pages/legal/pages.legal.controller.js"></script>
+		<script src="/static-dev/js/pages/legal/pages.legal.routes.js"></script>
+		<!-- endbuild -->
+		{% else %}
+		<script src="{{ STATIC_URL }}js/libs.js"></script>
+		<script src="{{ STATIC_URL }}js/app.js"></script>
+		{% endif %}
+
+		{% if DEBUG %}
+		<script>
+			$(document).ready(function () {
+				var ngStats = showAngularStats({logWatches: true, position: 'bottomright' });
+			});
+		</script>
+		{% endif %}
+
+		<script src="https://www.google.com/jsapi"></script>
+
+		<script>
+			(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+			})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+			{% if ENV == 0 %}
+			ga('create', '{{ ANALYTICS_ID }}', {'cookieDomain': 'none'});
+			{% endif %}
+			{% if ENV == 1 %}
+			ga('create', '{{ ANALYTICS_ID }}', 'greenday-project-v02-dev.appspot.com');
+			{% endif %}
+			{% if ENV == 2 %}
+			ga('create', '{{ ANALYTICS_ID }}', 'montage.storyful.com');
+			{% endif %}
+
+		</script>
+		<script>(function(){var w=window;var ic=w.Intercom;if(typeof ic==="function"){ic('reattach_activator');ic('update',intercomSettings);}else{var d=document;var i=function(){i.c(arguments)};i.q=[];i.c=function(args){i.q.push(args)};w.Intercom=i;function l(){var s=d.createElement('script');s.type='text/javascript';s.async=true;s.src='https://widget.intercom.io/widget/huj0f8rm';var x=d.getElementsByTagName('script')[0];x.parentNode.insertBefore(s,x);}if(w.attachEvent){w.attachEvent('onload',l);}else{w.addEventListener('load',l,false);}}})()</script>
+		{% if ENV == 2 %}
+			<script type="text/javascript">
+				window.heap=window.heap||[],heap.load=function(e,t){window.heap.appid=e,window.heap.config=t=t||{};var n=t.forceSSL||"https:"===document.location.protocol,a=document.createElement("script");a.type="text/javascript",a.async=!0,a.src=(n?"https:":"http:")+"//cdn.heapanalytics.com/js/heap-"+e+".js";var o=document.getElementsByTagName("script")[0];o.parentNode.insertBefore(a,o);for(var r=function(e){return function(){heap.push([e].concat(Array.prototype.slice.call(arguments,0)))}},p=["clearEventProperties","identify","setEventProperties","track","unsetEventProperty"],c=0;c<p.length;c++)heap[p[c]]=r(p[c])};
+				heap.load("1206186727");
+			</script>
+			<script>
+				window['_fs_debug'] = false;
+				window['_fs_host'] = 'www.fullstory.com';
+				window['_fs_org'] = '1vbs';
+				(function(m,n,e,t,l,o,g,y){
+				  g=m[e]=function(a,b){g.q?g.q.push([a,b]):g._api(a,b);};g.q=[];
+				  o=n.createElement(t);o.async=1;o.src='https://'+_fs_host+'/s/fs.js';
+				  y=n.getElementsByTagName(t)[0];y.parentNode.insertBefore(o,y);
+				  g.identify=function(i,v){g(l,{uid:i});if(v)g(l,v)};g.setUserVars=function(v){FS(l,v)};
+				  g.identifyAccount=function(i,v){o='account';v=v||{};v.acctId=i;FS(o,v)};
+				  g.clearUserCookie=function(d,i){d=n.domain;while(1){n.cookie='fs_uid=;domain='+d+
+				  ';path=/;expires='+new Date(0);i=d.indexOf('.');if(i<0)break;d=d.slice(i+1)}}
+				})(window,document,'FS','script','user');
+			</script>
+		{% endif %}
+	</body>
+</html>

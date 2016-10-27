@@ -1,0 +1,284 @@
+html {
+	font-size: $base-font-size;
+}
+
+html,
+body {
+	font-family: $normalized-font-family;
+	height: 100%;
+	width: 100%;
+}
+
+body {
+	@include rem(font-size, $base-font-size);
+	background-color: $colour-background;
+	// Better Font Rendering
+	-moz-osx-font-smoothing: grayscale;
+	font-smoothing: antialiased;
+	margin: 0;
+	min-width: 800px;
+	overflow: hidden;
+	padding: 0;
+	text-rendering: optimizeLegibility;
+}
+
+* {
+	box-sizing: border-box;
+}
+
+i {
+	display: inline-block;
+	margin-top: -1px;
+	vertical-align: middle;
+}
+
+button,
+html input[type="button"], // 1
+input[type="reset"],
+input[type="submit"] {
+	-moz-osx-font-smoothing: grayscale;
+	-webkit-font-smoothing: antialiased;
+	font-smoothing: antialiased;
+}
+
+[ng\:cloak],
+[ng-cloak],
+[data-ng-cloak],
+[x-ng-cloak],
+.ng-cloak,
+.x-ng-cloak {
+	display: none !important;
+}
+
+// Override layout-fill from angular material
+[layout-fill] {
+	height: 100%;
+	min-height: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	font-weight: 500;
+
+	&:first-child {
+		margin-top: 0;
+	}
+
+	+ p {
+		margin-top: 0;
+	}
+}
+
+a {
+	&,
+	&:visited {
+		color: $colour-body-text;
+		text-decoration: none;
+	}
+
+	&.text-link {
+		text-decoration: underline;
+	}
+
+
+	&:active,
+	&.active,
+	&:hover {
+		color: $colour-gd-accent;
+	}
+}
+
+p {
+	@include type(body-1);
+
+	&:first-child {
+		margin-top: 0;
+	}
+
+	&:last-child {
+		margin-bottom: 0;
+	}
+}
+
+.content-container {
+	margin: 0 auto;
+	max-width: $max-content-width;
+}
+
+.content-spacer {
+	min-width: 81px;
+}
+
+.page {
+	background-color: map-get($color-background, '500');
+	overflow: auto;
+	position: relative;
+	z-index: 2;
+
+	> md-content {
+		background-color: transparent;
+	}
+}
+
+.hero {
+	color: $colour-body-text-light;
+	min-height: 480px;
+	padding: $baseline-component-grid * 2;
+	width: 800px;
+
+	p {
+		@include type(body-1);
+	}
+}
+
+.hero__card {
+	background-color: $colour-white-pure;
+}
+
+.page-loader {
+	bottom: 0;
+	left: 0;
+	position: absolute;
+	right: 0;
+	top: 0;
+	z-index: 100;
+}
+
+.fade {
+	@include ng-animate($enter-animation: fadeIn, $leave-animation: fadeOut);
+}
+
+.slide {
+	@include ng-animate($enter-animation: slideInUp, $leave-animation: slideOutDown, $stagger: true);
+}
+
+.slide-video {
+	@include ng-animate($enter-animation: slideInUpVideo, $leave-animation: slideOutDownVideo, $stagger: true);
+}
+
+.slide-bottom-sheet-panel {
+	@include ng-animate($enter-animation: slideInUpProject, $leave-animation: slideOutDownProject);
+}
+
+.slide-project {
+	@include ng-animate($enter-animation: slideInUpProject, $leave-animation: slideOutDownProject, $stagger: true);
+}
+
+.slide-tag {
+	@include ng-animate($enter-animation: slideInUpTag, $leave-animation: slideOutDownTag);
+}
+
+.scale {
+	@include ng-animate($enter-animation: scaleIn, $leave-animation: scaleOut);
+}
+
+.scale-tag {
+	@include ng-animate($enter-animation: scaleInTag, $leave-animation: scaleOutTag);
+}
+
+form {
+	md-button {
+		@include type(button);
+		color: map-get($primary-color-palette, '100');
+		margin: 0 0 0 20px;
+		width: auto;
+
+		&:hover {
+			background-color: transparent;
+			color: map-get($primary-color-palette, '500');
+		}
+
+		&[type="submit"] {
+			color: $colour-gd-accent;
+
+			&:hover {
+				color: darken($colour-gd-accent, 20%);
+			}
+		}
+	}
+}
+
+md-dialog {
+	min-width: 500px;
+}
+
+md-tooltip {
+	.md-background {
+		left: 0%;
+		width: 100%;
+		margin-left: 0;
+	}
+	.md-content {
+		max-width: 100%;
+	}
+}
+
+md-input-container {
+	padding-bottom: 0;
+}
+
+%base-text-input {
+	background: transparent;
+	border: 0;
+	border-bottom: 1px solid shade-colour(dividers);
+	color: inherit;
+	font-family: inherit;
+	-webkit-font-smoothing: inherit;
+	font-weight: 400;
+
+	&::-webkit-input-placeholder {
+		color: shade-colour(secondary-text, map-get($primary-color-palette, '200'));
+	}
+
+	&.ng-invalid {
+		border-bottom: 2px solid $colour-validation-error;
+	}
+}
+
+%bare-list {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.nda__content {
+	margin: $baseline-component-grid * 2;
+}
+
+.staging-warning-banner {
+	background-color: #9e9e9e;
+	color: $colour-white-medium;
+	padding: 2px 0;
+}
+
+.pending-projects-banner {
+	background-color: map-get($color-orange, '700');
+	color: $colour-white-medium;
+	padding: $baseline-component-grid 0;
+}
+
+.page-content {
+	position: relative;
+	z-index: 3;
+}
+
+md-option {
+	@include rem(font-size, 13px);
+	height: 36px;
+
+	&:hover {
+		background-color: shade-colour(dividers);
+	}
+}
+
+md-backdrop.md-select-backdrop {
+	z-index: z($layers, select-box) + 1999;
+}
+
+.md-select-menu-container {
+	z-index: z($layers, select-box) + 2000;
+}

@@ -1,0 +1,6 @@
+watch:
+  tasks:
+    - 'watch'
+    - 'exec:devServer'
+  options:
+    logConcurrentOutput: true

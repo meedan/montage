@@ -1,0 +1,8 @@
+cron:
+- description: shared job to update all videos with YT data
+  url: /admin/yt_videos/update-all-videos/
+  schedule: every 24 hours
+
+- description: Keep alive
+  url: /admin/ka/
+  schedule: every 1 minutes

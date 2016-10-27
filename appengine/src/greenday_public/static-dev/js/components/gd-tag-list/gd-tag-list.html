@@ -1,0 +1,3 @@
+<md-list class="tag-list">
+	<gd-tag-item flat="{{ ::flat }}" tag-controller="::tagController" ng-model="::tag" ng-repeat="tag in ngModel | filter:{name: nameFilter} track by tag.id" tag-template="{{ ::tagTemplate }}"></gd-tag-item>
+</md-list>

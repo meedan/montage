@@ -1,0 +1,107 @@
+application: greenday-project-v02-dev
+version: 3-0-20
+runtime: python27
+api_version: 1
+threadsafe: true
+
+builtins:
+- remote_api: on
+- appstats: on
+
+libraries:
+- name: endpoints
+  version: 1.0
+- name: MySQLdb
+  version: "1.2.4b4"
+- name: ssl
+  version: latest
+
+instance_class: F4
+automatic_scaling:
+  min_idle_instances: 1
+  max_pending_latency: 20ms
+
+inbound_services:
+- warmup
+
+handlers:
+- url: /_ah/deferredconsole/static/
+  static_dir: lib/deferred_manager/static
+
+- url: /_ah/deferredconsole.*
+  script: deferred_manager.application
+  login: admin
+  secure: always
+
+# Django admin
+- url: /static/admin
+  static_dir: lib/django/contrib/admin/static/admin/
+
+- url: /static-dev/admin
+  static_dir: lib/django/contrib/admin/static/admin/
+
+# Production fonts
+- url: /static/fonts
+  static_dir: src/greenday_public/static/fonts
+  expiration: 1d
+
+# Production static media
+- url: /static
+  static_dir: src/greenday_public/static
+
+# Development static media
+- url: /static-dev
+  static_dir: src/greenday_public/static-dev
+
+# Locales
+- url: /locale
+  static_dir: src/greenday_public/locale
+
+# Favicon
+- url: /favicon.ico
+  static_files: src/greenday_public/root/favicon.png
+  upload: src/greenday_public/root/favicon\.ico
+
+# API
+- url: /_ah/spi/.*
+  script: handlers.endpoints.application
+  secure: always
+
+# Admin
+- url: /admin.*
+  script: handlers.wsgi.application
+  secure: always
+  login: admin
+
+# Docs. THESE MUST BE LOCKED DOWN TO ADMINS
+- url: /docs/
+  static_files: built_docs/index.html
+  upload: built_docs/index\.html
+  secure: always
+  login: admin
+
+- url: /docs/
+  static_dir: built_docs
+  secure: always
+  login: admin
+
+- url: /greenday-erd.png
+  static_files: greenday-erd.png
+  upload: greenday-erd.png
+  secure: always
+  login: admin
+
+# Main app
+- url: /.*
+  script: handlers.wsgi.application
+  secure: always
+
+skip_files:
+- ^(.*/)?app.yaml
+- ^(.*/)?app.yml
+- ^(.*/)?index.yaml
+- ^(.*/)?index.yml
+- ^(.*/)?.*\.py[co]
+- ^(.*/)?\..*
+- tmp
+- src/greenday_public/static-dev

@@ -1,0 +1,16 @@
+<span class="stat" layout="row">
+	<span class="stat__icon" layout="column" layout-align="center">
+		<icon class="{{ icon }}"></icon>
+	</span>
+	<span class="stat__text" flex layout="column" layout-align="center start">
+		<span ng-if="count" layout="row">
+			<span class="stat__text--big">{{ count }}</span>
+			<span flex layout="column" layout-align="center start">
+				<ng-pluralize count="count" when="{'other': itemsText, 'one': oneItemText || itemsText }"></ng-pluralize>
+			</span>
+		</span>
+		<span ng-if="!count">
+			{{ noItemsText }}
+		</span>
+	</span>
+</span>

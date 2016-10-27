@@ -1,0 +1,73 @@
+@import 'gd-project-comment';
+
+.gd-pc-sidebar {
+	background-color: map-get($primary-color-palette, '100');
+	max-width: $baseline-component-grid * 70;
+	width: $baseline-component-grid * 70;
+
+	md-list,
+	md-item {
+		display: block;
+	}
+}
+
+.gd-pc-sidebar__header {
+	@include type(body-1);
+	padding: ($baseline-component-grid * 2) ($baseline-component-grid * 3);
+}
+
+md-toolbar.gd-pc-sidebar__header--inner {
+	background-color: map-get($primary-color-palette, '600');
+	padding: ($baseline-component-grid * 2) ($baseline-component-grid * 3);
+}
+
+.gd-pc-sidebar__user-avatar {
+	border-radius: 50%;
+	height: 40px;
+	width: 40px;
+}
+
+.gd-pc-sidebar__add-update {
+	padding-left: $baseline-component-grid * 2;
+}
+
+.gd-pc-sidebar__add-reply-input,
+.gd-pc-sidebar__add-update-input {
+	@extend %base-text-input;
+	@include rem('font-size', 14px);
+	display: block;
+	line-height: $baseline-component-grid * 4;
+	margin: 0;
+	padding: 0;
+	width: 100%;
+}
+
+.gd-pc-sidebar__thread-list {
+	position: relative;
+}
+
+md-content.gd-pc-sidebar__threads {
+	background-color: map-get($background-color-palette, '500');
+}
+
+.gd-pc-sidebar__actions {
+	@include type(button);
+	transition: $swift-ease-in-out;
+	margin-top: -($baseline-component-grid * 4);
+	opacity: 0;
+	z-index: 1;
+}
+
+.gd-pc-sidebar__actions--visible {
+	margin-top: 0;
+	opacity: 1;
+}
+
+md-toolbar.md-default-theme .md-button.gd-pc-sidebar__action--cancel {
+	color: $colour-body-text-lighter;
+}
+
+.gd-pc-sidebar__user {
+	position: relative;
+	z-index: 2;
+}

@@ -1,0 +1,46 @@
+<div class="appbar__content">
+	<md-toolbar>
+		<div layout="row" flex>
+			<div layout="row" layout-align="start center" flex>
+				<md-button aria-label="Open sidebar" noink class="appbar__hamburger" ng-click="appctrl.openSideBar('left')" ng-show="appctrl.page.projectId && !appctrl.page.videoId">
+					<icon class="ic-menu"></icon>
+				</md-button>
+				<gd-video-back-button class="appbar__hamburger gd-button" ng-show="appctrl.page.videoId && appctrl.page.projectId" project-id="{{ appctrl.page.projectId }}"></gd-video-back-button>
+				<h1 class="appbar__page-title">
+					<span ng-if="appctrl.page.projectId && appctrl.page.collectionId">
+						<a ng-href="/project/{{ appctrl.page.projectId }}">{{ appctrl.page.title }}</a>
+					</span>
+					<span ng-if="!(appctrl.page.projectId && appctrl.page.collectionId)">{{ appctrl.page.title }}</span>
+				</h1>
+				<span class="appbar__page-title-info" ng-if="appctrl.page.titleInfo">{{ appctrl.page.titleInfo }}</span>
+			</div>
+			<div class="appbar__toolbar toolbar fade" layout="row" layout-align="start center" ng-show="appctrl.user">
+				<gd-button class="toolbar__item" ng-show="appctrl.page.projectId" ng-click="appctrl.showSearch()">
+					<icon class="ic-search"></icon>
+					<md-tooltip md-delay="100">Add videos</md-tooltip>
+				</gd-button>
+				<gd-online-collaborators class="toolbar__item" ng-show="appctrl.page.projectId" project-id="appctrl.page.projectId"></gd-online-collaborators>
+				<gd-button class="toolbar__item" ng-click="appctrl.showAddCollaboratorsDialog($event)" class="toolbar__item" ng-show="appctrl.page.projectId && appctrl.page.project.current_user_info.is_admin">
+					<icon class="ic-person-add"></icon>
+					<md-tooltip md-delay="100">Invite a collaborator</md-tooltip>
+				</gd-button>
+				<gd-button data-onboarding-target="project-comments-button" ng-click="appctrl.openSideBar('projectCommentsSidebar')" class="toolbar__item" ng-show="appctrl.page.projectId">
+					<icon class="ic-comment"></icon>
+					<md-tooltip md-delay="100">Project updates</md-tooltip>
+				</gd-button>
+				<gd-button ng-click="appctrl.openSideBar('tagSidebar')" class="toolbar__item" ng-show="appctrl.page.projectId">
+					<icon class="ic-label"></icon>
+					<md-tooltip md-delay="100">Organise tags</md-tooltip>
+				</gd-button>
+				<!-- <gd-button ng-if="!appctrl.page.projectId" ng-click="appctrl.user.showSettings($event)" class="toolbar__item">
+					<md-tooltip>Settings</md-tooltip>
+					<icon class="ic-settings"></icon>
+				</gd-button> -->
+				<gd-button ng-if="!appctrl.page.projectId" ng-click="appctrl.user.signOut()" class="toolbar__item">
+					<md-tooltip>Sign out</md-tooltip>
+					<icon class="ic-account-box"></icon>
+				</gd-button>
+			</div>
+		</div>
+	</md-toolbar>
+</div>

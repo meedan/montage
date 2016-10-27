@@ -1,0 +1,21 @@
+/*
+ * This file contains lists of groups of elements which need to have their
+ * z-index order maintained. Items need to appear in these lists in a specific
+ * order. Items which should have a higher z-index should be placed further
+ * towards the end (right hand side) of the list.
+ *
+ * Currently, there is only a single grouping called layers. The `layers` group
+ * represents main sections of the layout.
+ *
+ * Additional variables can be defined to maintain the z-order of a subgroup of
+ * items. Just add the extra variable list below and use the `z` function to
+ * include the correct z-index.
+ */
+$layers:
+	sidebars,
+	dialogs,
+	backdrop,
+	floating-elements,
+	select-box;
+
+

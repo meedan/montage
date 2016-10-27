@@ -1,0 +1,26 @@
+<md-content layout-fill>
+	<div class="gd-tag-autocomplete__suggestions-popup">
+		<md-progress-linear mode="indeterminate" ng-show="loading"></md-progress-linear>
+		<div class="gd-tag-autocomplete__suggestions--create" ng-show="query">
+			<div class="gd-tag-autocomplete-tag" ng-click="freeTextClicked(query)" ng-class="{ 'is-highlighted': highlightedSection == 'create' }">
+				<span>{{ query }}</span>
+			</div>
+		</div>
+		<div class="gd-tag-autocomplete__suggestions--project">
+			<div class="gd-tag-autocomplete__suggestions-project-title">
+				From this project
+			</div>
+			<div ng-hide="tags.length" class="gd-tag-autocomplete__no-tags">
+				No matching project tags
+			</div>
+			<ul ng-show="tags.length" class="gd-tag-autocomplete__tag-list">
+				<li
+					ng-repeat="tag in tags | filter:{ name: query } | orderBy:'name' track by tag.id"
+					class="gd-tag-autocomplete-tag"
+					ng-class="{ 'is-highlighted': highlightedSection == 'project' && highlightedIndex == $index }"
+					ng-click="tagClicked(tag)"
+				>{{ tag.name }}</li>
+			</ul>
+		</div>
+	</div>
+</md-content>

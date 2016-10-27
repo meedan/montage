@@ -1,0 +1,27 @@
+/////////////////////////////////////
+// Theme variable usage guidelines
+/////////////////////////////////////
+// $theme-name:								name of the theme, matching what will be used in the md-theme attribute
+// $foreground-color-palette:				the color palette used for foreground colors (such as text, hints, and dividers)
+// $background-color-palette:				the color palette used to determine the background color
+// $primary-color-palette:					the primary color used for things like buttons, spinners, etc.
+// $warn-color-palette:						the color palette used for warnings within the app
+// $primary-color-palette-contrast-color:	the color used for text with a primary-color as a background
+
+$color-blue-grey: map-merge($color-blue-grey, ('1000': #000,'A100': #fff));
+
+$primary-color-palette: $color-topfrontbar; //$color-blue-grey;
+$primary-color-palette-contrast-color: #fafafa;
+$background-color-palette: $color-background;
+$background-color-base: map-get($background-color-palette, 'A100') !default;
+
+// Buttons
+$button-primary-color-palette: $color-orange;
+$button-primary-raised-color: map-get($primary-color-palette, '500');
+
+// Checkboxes
+$checkbox-color-palette: $color-orange;
+
+// Radio buttons
+$radio-color-palette: $color-orange;
+$color-accent: $color-storyful-orange;

@@ -1,0 +1,33 @@
+<div class="appbar__bg"></div>
+<md-content class="video-page" layout-align="start center" layout="column" layout-fill flex>
+	<div class="video-theater" layout="column" flex>
+		<div class="video-theater__wrap">
+			<div class="video-theater__overview" layout="row">
+				<div class="video-theater__video" layout="row">
+					<youtube-video video-id="ctrl.gdVideoData.youtube_id" player="ctrl.player" start-time="ctrl.videoStartTime" flex></youtube-video>
+				</div>
+				<div class="video-theater__info" layout="column">
+					<gd-video-details-panel project="ctrl.project" gd-video-data="ctrl.gdVideoData" yt-video-data="ctrl.ytVideoData" layout="column" flex></gd-video-details-panel>
+				</div>
+				<div class="video-theater__nav-arrow video-theater__nav-arrow--left" layout="column" layout-align="center center">
+					<a href="{{ ctrl.prevUrl }}" ng-if="ctrl.prevUrl && !ctrl.gdVideoData.archived_at" class="video-theater__nav-link fade">
+						<icon class="ic-chevron-left"></icon>
+						<gd-video-popup video="ctrl.prevVideo"></gd-video-popup>
+					</a>
+				</div>
+				<div class="video-theater__nav-arrow video-theater__nav-arrow--right" layout="column" layout-align="center center">
+					<a href="{{ ctrl.nextUrl }}" ng-if="ctrl.nextUrl && !ctrl.gdVideoData.archived_at" class="video-theater__nav-link fade">
+						<icon class="ic-chevron-right"></icon>
+						<gd-video-popup video="ctrl.nextVideo"></gd-video-popup>
+					</a>
+				</div>
+			</div>
+		</div>
+		<div class="video-theater__player-controls" layout="row" layout-align="center">
+			<gd-video-controls player="ctrl.player" layout="row" layout-align="center"></gd-video-controls>
+		</div>
+		<div class="video-theater__timeline" layout="row" flex>
+			<gd-video-timeline video="ctrl.gdVideoData" player="ctrl.player" layout="row" flex></gd-video-timeline>
+		</div>
+	</div>
+</md-content>

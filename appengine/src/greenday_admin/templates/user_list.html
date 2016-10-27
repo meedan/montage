@@ -1,0 +1,107 @@
+{% extends "admin_base.html" %}
+
+{% block content %}
+<section class="user-admin" layout="column" flex>
+	<p>
+		Invite a user to join work on Montage
+	</p>
+	<form method="post" action="{% url 'user_management' %}" class="add-user-form">{% csrf_token %}
+		{{ form.non_field_errors }}
+		{{ form.email.errors }}
+		{{ form.email }}
+	<button type="submit">Invite user</button>
+	</form>
+
+	<table>
+		<thead>
+			<tr>
+				<th></th>
+				<th>Users</th>
+				<th>Account created</th>
+				<th>Is pending</th>
+				<th>Is super admin</th>
+				<th>Is whitelisted</th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for user in users %}
+			<tr>
+				<td class="user-admin-cell__image">{% if user.profile_img_url %}<img src="{{ user.profile_img_url }}?sz=40" />{% else %}<icon class="ic-person"></icon>{% endif %}</td>
+				<td>{{ user.get_full_name }} <em>{{ user.email }}</em></td>
+				<td>{% if user.username %}{{ user.date_joined }}{% else %}{{ user.created }}{% endif %}</td>
+				<td class="user-admin-cell__pending">{{ user.username|yesno:"no,yes" }}</td>
+				<td class="user-admin-cell__super">{{ user.is_superuser|yesno }}</td>
+				<td class="user-admin-cell__whitelisted">
+					{% if user.username %}
+					<form method="post" action="{% url "change_user_whitelist" user.pk %}">{% csrf_token %}
+					<button title="{% if user.is_whitelisted %}Remove from whitelist{% else %}Add to whitelist{% endif %}"><icon class="{{ user.is_whitelisted|yesno:"ic-star,ic-star-outline" }}"></icon></button>
+					</form>
+					{% else %}
+						<icon title="Pending user is whitelisted" class="{{ user.is_whitelisted|yesno:"ic-star,ic-star-outline" }}"></icon>
+					{% endif %}
+				</td>
+				<td><a href="{% if not user.username %}{% url "delete_pending_user" user.pk %}{% else %}{% url "delete_user" user.pk %}{% endif %}"><icon class="ic-delete"></icon></a></td>
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+
+</section>
+
+<style>
+.user-admin {
+	flex-shrink: 0;
+	margin: 25px auto;
+	max-width: 1150px;
+}
+table {
+	background-color: #fafafa;
+	box-shadow: 0px 2px 5px 0 rgba(0, 0, 0, 0.26);
+}
+thead {
+	border-bottom: 1px solid #607d8b;
+}
+thead th {
+	padding: 10px 0;
+}
+td {
+	padding: 5px 20px;
+}
+.user-admin-cell__image img {
+	border-radius: 50%;
+}
+.user-admin-cell__image icon {
+	padding: 8px;
+}
+.user-admin-cell__pending,
+.user-admin-cell__super,
+.user-admin-cell__whitelisted {
+	min-width: 100px;
+	text-align: right;
+}
+.add-user-form {
+	padding-bottom: 25px;
+}
+.user-admin-cell__whitelisted button {
+	background: none;
+	border: none;
+	outline: none;
+	padding: 0;
+}
+.user-admin-cell__whitelisted button:hover {
+	color: #ffa726;
+}
+.errorlist {
+	margin-top: 0;
+	margin-bottom: 0;
+	padding-left: 0;
+	padding-bottom: 6px;
+	color: #b0120a;
+	font-weight: bold;
+}
+.errorlist li {
+	list-style: none;
+}
+</style>
+{% endblock %}

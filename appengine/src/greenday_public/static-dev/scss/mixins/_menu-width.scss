@@ -1,0 +1,3 @@
+@mixin menu-width($multipler) {
+	width: $menu-x-width-desktop * $multipler;
+}

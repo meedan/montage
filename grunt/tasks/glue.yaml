@@ -1,0 +1,22 @@
+options:
+  crop: false
+  debug: null
+  namespace: ''
+  retina: true
+  scss: true
+  'scss-template': '<%= rootPath %>/grunt/templates/glue-scss.jinja'
+  'sprite-namespace': ''
+
+dev:
+  src: '<%= paths.staticDevRoot %>/img/sprite/'
+  dest: '<%= paths.staticDevRoot %>/img/'
+  options:
+    scss: '<%= paths.staticDevRoot %>/scss/'
+    bundleName: 'sprite'
+
+dist:
+  src: '<%= paths.staticDevRoot %>/img/sprite/'
+  dest: '<%= paths.staticDevRoot %>/img/'
+  options:
+    scss: '<%= paths.staticDevRoot %>/scss/'
+    bundleName: 'sprite'

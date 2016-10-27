@@ -1,0 +1,25 @@
+// Container which acts as a list for validation messages for a control.
+.validation-messages {
+	@extend %bare-list;
+}
+
+// A single validation message. There may be multiple levels of validation
+// message, so we create this as a base module and style the level using
+// modifier classes as in .validation-message--error below.
+.validation-message {
+	margin: 0;
+	padding: 0;
+}
+
+.validation-message--error {
+	@include rem(font-size, 14px);
+	color: $colour-validation-error;
+}
+
+.validation-message__message {
+
+}
+
+.validation-message__icon {
+
+}

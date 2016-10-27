@@ -1,0 +1,40 @@
+<gd-button ng-click="ctrl.skipTime(-5)" ng-disabled="!player.$ytPlayerApi" ng-show="player.state.isPlaying">
+	<md-tooltip>
+		Jump backward 5 seconds
+	</md-tooltip>
+	<icon class="ic-fast-rewind"></icon>
+</gd-button>
+<gd-button ng-click="ctrl.skipTime(-1)" ng-disabled="!player.$ytPlayerApi" ng-show="player.state.isPlaying">
+	<md-tooltip>
+		Jump backward 1 second
+	</md-tooltip>
+	<icon class="ic-skip-previous"></icon>
+</gd-button>
+<gd-button ng-click="ctrl.skipFrames(-1)" ng-disabled="!player.$ytPlayerApi" ng-hide="player.state.isPlaying">
+	<md-tooltip>
+		Jump backward 1 frame
+	</md-tooltip>
+	<icon class="ic-skip-previous"></icon>
+</gd-button>
+<gd-button ng-click="ctrl.togglePlay()">
+	<icon class="ic-play-arrow" ng-hide="player.state.isPlaying"></icon>
+	<icon class="ic-pause" ng-show="player.state.isPlaying"></icon>
+</gd-button>
+<gd-button ng-click="ctrl.skipFrames(1)" ng-disabled="!player.$ytPlayerApi" ng-hide="player.state.isPlaying">
+	<md-tooltip>
+		Jump forward 1 frame
+	</md-tooltip>
+	<icon class="ic-skip-next"></icon>
+</gd-button>
+<gd-button ng-click="ctrl.skipTime(1)" ng-disabled="!player.$ytPlayerApi" ng-show="player.state.isPlaying">
+	<md-tooltip>
+		Jump forward 1 second
+	</md-tooltip>
+	<icon class="ic-skip-next"></icon>
+</gd-button>
+<gd-button ng-click="ctrl.skipTime(5)" ng-disabled="!player.$ytPlayerApi" ng-show="player.state.isPlaying">
+	<md-tooltip>
+		Jump forward 5 seconds
+	</md-tooltip>
+	<icon class="ic-fast-forward"></icon>
+</gd-button>

@@ -1,0 +1,17 @@
+<div class="gd-hotkeys-container fade" ng-class="{in: helpVisible}" style="display: none;">
+	<div class="gd-hotkeys">
+		<h4 class="gd-hotkeys-title">{{ title }}</h4>
+		<div layout="row" layout-wrap>
+			<div flex="50" layout="row" layout-align="center center" ng-repeat="hotkey in hotkeys | filter:{ description: '!$$undefined$$' } track by $index">
+				<div class="gd-hotkeys-keys" flex>
+					<span class="gd-hotkeys-key" ng-if="hotkey.combo.length <= 2">{{ hotkey.combo.join(" or ") }}</span>
+					<span class="gd-hotkeys-key" ng-if="hotkey.combo.length > 2">{{ hotkey.combo[0] }}&hellip;{{ hotkey.combo[hotkey.combo.length-1]}}</span>
+				</div>
+				<div class="gd-hotkeys-text" flex>{{ hotkey.description }}</div>
+			</div>
+		</div>
+		<gd-button class="gd-hotkeys-close" ng-click="toggleCheatSheet()">
+			<icon class="ic-close"></icon>
+		</gd-button>
+	</div>
+</div>

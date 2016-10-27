@@ -1,0 +1,16 @@
+language: python
+python:
+  - "2.7"
+# command to install dependencies
+install:
+  - "pip install webapp2==2.5.2"
+  - "pip install webob==1.2.3"
+  - "pip install PyYAML==3.10"
+  - "pip install mock==1.0.1"
+# command to run tests
+script:
+  - python runtests.py
+before_script:
+- wget https://commondatastorage.googleapis.com/appengine-sdks/featured/google_appengine_1.9.14.zip -nv
+- unzip -q google_appengine_1.9.14.zip
+- export PYTHONPATH=$PYTHONPATH:$PWD/google_appengine/

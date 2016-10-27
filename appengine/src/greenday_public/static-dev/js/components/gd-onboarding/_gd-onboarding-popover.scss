@@ -1,0 +1,136 @@
+$gd-onboarding-popover-arrow-size: 10px;
+
+.gd-onboarding-popover {
+	bottom: 0;
+	left: 0;
+	position: fixed;
+	right: 0;
+	top: 0;
+	z-index: 999;
+
+	gd-backdrop {
+		background-color: shade-colour('icons');
+	}
+}
+
+.gd-onboarding-container {
+	background-color: shade-colour('text');
+	border-radius: 2px;
+	color: shade-colour('text', $colour-white-pure);
+	max-width: $baseline-component-grid * 40;
+	padding: $baseline-component-grid * 3;
+	position: absolute;
+	transition: $swift-ease-in-out;
+	z-index: 104;
+
+	&:before {
+		border: $gd-onboarding-popover-arrow-size solid transparent;
+		content: ' ';
+		height: 0;
+		position: absolute;
+		width: 0;
+	}
+
+	&.top {
+		&:before {
+			top: -$gd-onboarding-popover-arrow-size;
+		}
+
+		&.center-x {
+			&:before {
+				border-bottom-color: shade-colour('text');
+				border-top: 0;
+				left: 50%;
+				margin-left: -$gd-onboarding-popover-arrow-size;
+			}
+		}
+
+		&.left {
+			&:before {
+				border-left: 0;
+				border-right-color: shade-colour('text');
+				left: -$gd-onboarding-popover-arrow-size;
+				top: $gd-onboarding-popover-arrow-size;
+			}
+		}
+
+		&.right {
+			&:before {
+				border-left-color: shade-colour('text');
+				border-right: 0;
+				right: -$gd-onboarding-popover-arrow-size;
+				top: $gd-onboarding-popover-arrow-size;
+			}
+		}
+	}
+
+	&.bottom {
+		&:before {
+			bottom: $gd-onboarding-popover-arrow-size;
+		}
+
+		&.center-x {
+			&:before {
+				border-bottom: 0;
+				border-top-color: shade-colour('text');
+				left: 50%;
+				margin-left: -$gd-onboarding-popover-arrow-size;
+			}
+		}
+
+		&.left {
+			&:before {
+				bottom: $gd-onboarding-popover-arrow-size;
+				border-left: 0;
+				border-right-color: shade-colour('text');
+				left: -$gd-onboarding-popover-arrow-size;
+			}
+		}
+
+		&.right {
+			&:before {
+				bottom: $gd-onboarding-popover-arrow-size;
+				border-left-color: shade-colour('text');
+				border-right: 0;
+				right: -$gd-onboarding-popover-arrow-size;
+			}
+		}
+	}
+}
+
+.gd-onboarding__title {
+	@include type(subhead-1);
+	color: inherit;
+	margin-bottom: $baseline-component-grid;
+}
+
+.gd-onboarding__text {
+	@include type(body-1);
+	color: inherit;
+	margin-bottom: $baseline-component-grid * 4;
+}
+
+.gd-onboarding__action-button {
+	@include type(button);
+	color: inherit;
+}
+
+.gd-onboarding__step {
+	background-color: $colour-white-pure;
+	border-radius: 50%;
+	cursor: pointer;
+	height: $baseline-component-grid / 2;
+	margin-right: $baseline-component-grid;
+	opacity: .4;
+	padding: $baseline-component-grid / 2;
+	transition: $swift-ease-in-out;
+	width: $baseline-component-grid / 2;
+
+	&:hover {
+		opacity: 1;
+	}
+}
+
+.gd-onboarding__step--active {
+	opacity: 1;
+}

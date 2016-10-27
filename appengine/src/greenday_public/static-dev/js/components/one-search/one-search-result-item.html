@@ -1,0 +1,30 @@
+<div class="video-list-item" layout="row">
+	<div layout="column" layout-align="center" class="video-list-item__cell video-list-item__select">
+		<gd-select-video-button selected="video.selected"></gd-select-video-button>
+	</div>
+	<div class="video-list-item__cell video-list-item__image">
+		<div class="video-list-item__video-link">
+			<img ng-src="//i3.ytimg.com/vi/{{ ::video.youtube_id }}/default.jpg">
+			<span class="video-list-item__duration">{{ ::video.pretty_duration }}</span>
+		</div>
+	</div>
+	<div flex layout="column" layout-align="center" class="video-list-item__cell video-list-item__video-title" >
+		<a class="video-list-item__name video-list-item__toggle-expanded" ng-click="toggleExpanded()">{{ ::video.name }}</a>
+		<div class="video-list-item__description">
+			<div class="video-list-item__description__text" ng-bind-html="::video.notes"></div>
+			<div class="video-list-item__description__controls">
+				<a class="video-list-item__description__more" ng-click="toggleDescription()">Read more</a>
+				<a class="video-list-item__description__less" ng-click="toggleDescription()">Show less</a>
+			</div>
+		</div>
+	</div>
+	<div layout="column" layout-align="center" class="video-list-item__cell video-list-item__channel-name">
+		<span>{{ ::video.channel_name }}</span>
+	</div>
+	<div layout="column" layout-align="center" class="video-list-item__cell video-list-item__added">
+		{{ ::video.pretty_publish_date }}
+	</div>
+	<div ng-if="project" layout="column" layout-align="center" class="video-list-item__cell video-list-item__favourite">
+		<gd-add-to-collection-button video="video" project="project" collection="collection"></gd-add-to-collection-button>
+	</div>
+</div>

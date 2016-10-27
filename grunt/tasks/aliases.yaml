@@ -1,0 +1,59 @@
+default:
+  - 'dev'
+  - 'watch'
+
+server:
+  - 'dev'
+  - 'concurrent:watch'
+
+dev:
+  - 'useminlist:html'
+  - 'glue:dev'
+  - 'sass:dev'
+  - 'autoprefixer:dev'
+  - 'jshint:dev'
+  - 'ngtemplates'
+  # - 'karma:unit:start'
+
+build:
+  - 'clean:tmp'
+  - 'jshint:dist'
+  - 'ngtemplates'
+  - 'glue:dist'
+  - 'sass:dist'
+  - 'autoprefixer:dist'
+  - 'useminPrepare'
+  - 'concat:generated'
+  - 'cssmin:generated'
+  - 'ngAnnotate:dist'
+  - 'uglify:js'
+  - 'copy:images'
+  - 'copy:fonts'
+  - 'clean:tmp'
+
+deploy:
+  - 'clean:static'
+  - 'build'
+  - 'exec:deploy'
+  - 'clean:static'
+
+deployProd:
+  - 'clean:static'
+  - 'build'
+  - 'exec:deployProd'
+  - 'clean:static'
+
+deployPotatoDev:
+  - 'clean:static'
+  - 'build'
+  - 'exec:deployPotatoDev'
+  - 'clean:static'
+
+migrateDev:
+  - 'exec:migrateDev'
+
+migrate:
+  - 'exec:migrate'
+
+migratePotatoDev:
+  - 'exec:migratePotatoDev'

@@ -1,0 +1,54 @@
+.toggle-button {
+	outline: none;
+	position: relative;
+}
+
+.toggle-button__button {
+	height: 20px;
+	min-width: 40px;
+	position: relative;
+}
+
+.toggle-button__track,
+.toggle-button__handle {
+	opacity: .4;
+	transition: all .2s ease-in-out;
+}
+
+.toggle-button__track {
+	background-color: #fcd1a0;
+	border-radius: 8px;
+	height: 14px;
+	left: 0;
+	position: absolute;
+	top: 3px;
+	width: 100%;
+	z-index: 1;
+}
+
+.toggle-button__handle {
+	background-color: $colour-gd-accent;
+	border-radius: 50%;
+	height: 20px;
+	position: absolute;
+	top: 0;
+	width: 20px;
+	z-index: 2;
+}
+
+.toggle-button--toggled {
+	.toggle-button__handle {
+		transform: translateX(100%);
+	}
+
+	.toggle-button__track,
+	.toggle-button__handle {
+		opacity: 1;
+	}
+}
+
+.toggle-button__label {
+	@include rem(font-size, 14px);
+	cursor: default;
+	padding-left: 20px;
+}

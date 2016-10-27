@@ -1,0 +1,44 @@
+<md-content class="video-list" flex>
+	<div class="video-list__container" layout="column" flex>
+		<section class="video-list__wrapper">
+			<md-subheader class="md-primary md-sticky-no-effect">
+				<div class="video-list__thead" layout="row" ng-class="{'video-list__thead--selected': ctrl.selectedVideos.length }">
+					<div class="video-list__thead-cell video-list__thead-cell--favourite" layout="row" layout-align="center center" ng-click="ctrl.selectAllVideos(!ctrl.selectedVideos.length)"><icon ng-class="{'ic-remove': ctrl.selectedVideos.length, 'ic-check-box-outline-blank': !ctrl.selectedVideos.length}"></icon></div>
+					<div class="video-list__thead-cell video-list__thead-cell--sortable video-list__thead-cell--video-image" ng-click="ctrl.sort('name')" ng-class="{'active': ctrl.ordering.currentKey === 'name', reverse: ctrl.ordering.currentKey === 'name' && ctrl.ordering.reverse}">
+						<span ng-hide="ctrl.selectedVideos.length">Video</span>
+						<span ng-show="ctrl.selectedVideos.length">{{ ctrl.selectedVideos.length }} videos selected</span>
+						<icon class="sort-icon ic-arrow-back ic-rotate-90 ic-small"></icon>
+					</div>
+					<div flex class="video-list__thead-cell video-list__thead-cell--sortable video-list__thead-cell--video-name" >
+					</div>
+					<div class="video-list__thead-cell video-list__thead-cell--sortable video-list__thead-cell--channel-name" ng-click="ctrl.sort('channel_name')" ng-class="{'active': ctrl.ordering.currentKey === 'channel_name', reverse: ctrl.ordering.currentKey === 'channel_name' && ctrl.ordering.reverse}" ng-hide="ctrl.selectedVideos.length">
+						<span>Uploader</span>
+						<icon class="sort-icon ic-arrow-back ic-rotate-90 ic-small"></icon>
+					</div>
+					<div class="video-list__thead-cell video-list__thead-cell--sortable video-list__thead-cell--video-date" ng-click="ctrl.sort('publish_date')" ng-class="{'active': ctrl.ordering.currentKey === 'publish_date', reverse: ctrl.ordering.currentKey === 'publish_date' && ctrl.ordering.reverse}" ng-hide="ctrl.selectedVideos.length">
+						<span>Published</span>
+						<icon class="sort-icon ic-arrow-back ic-rotate-90 ic-small"></icon>
+					</div>
+					<div class="video-list__thead-cell video-list__thead-cell--favourite" ng-hide="ctrl.selectedVideos.length"></div>
+					<div class="video-list__thead--add-all" ng-if="ctrl.selectedProject" ng-show="ctrl.selectedVideos.length" layout="row" layout-align="center center">
+						<md-button ng-click="ctrl.addAll()">ADD TO PROJECT</md-button>
+					</div>
+				</div>
+			</md-subheader>
+			<md-list class="video-list__tbody" layout="column">
+				<md-item class="video-list__item" ng-repeat="video in videos | orderBy:ctrl.ordering.currentKey:ctrl.ordering.reverse track by video.youtube_id">
+					<md-item-content>
+						<one-search-result-item flex video="video" project="ctrl.selectedProject" collection="ctrl.selectedCollection" columns="options.columns"></one-search-result-item>
+					</md-item-content>
+				</md-item>
+			</md-list>
+			<md-list class="video-list__tbody" layout="column">
+				<md-item class="video-list__item" ng-if="hasMoreResults">
+					<md-item-content layout="row" layout-align="center center">
+						<md-button class="md-primary" aria-label="Load more" ng-click="ctrl.onloadMoreClick()">Load more</md-button>
+					</md-item-content>
+				</md-item>
+			</md-list>
+		</section>
+	</div>
+</md-content>

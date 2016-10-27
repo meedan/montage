@@ -1,0 +1,33 @@
+.user-settings {
+	md-button {
+		@include type(button);
+	}
+}
+
+.user-settings__header {
+	@include type(headline);
+	border-bottom: 1px solid shade-colour(dividers);
+}
+
+.user-settings__subheader {
+	@include type(subhead-1);
+	font-weight: 500;
+	margin-bottom: $baseline-component-grid;
+}
+
+.user-settings__section {
+	margin-bottom: $baseline-component-grid * 4;
+}
+
+.user-settings__content {
+	@include type(body-1);
+	margin-bottom: $baseline-component-grid * 2;
+}
+
+.user-settings__delete-warning {
+	font-weight: 300;
+	width: 167px;
+	font-size: smaller;
+	text-align: center;
+	margin-top: 5px;
+}

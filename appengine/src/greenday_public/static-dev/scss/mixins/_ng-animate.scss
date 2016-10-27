@@ -1,0 +1,35 @@
+@mixin ng-animate(
+	$enter-animation,
+	$leave-animation,
+	$enter-duration: .4s,
+	$enter-direction: both,
+	$enter-easing: ease-in-out,
+	$leave-duration: .4s,
+	$leave-direction: both,
+	$leave-easing: ease-in-out,
+	$property: all,
+	$stagger: false,
+	$stagger-delay: .01s) {
+
+	&.ng-hide-remove,
+	&.ng-enter {
+		animation: $enter-animation $enter-duration $enter-direction $enter-easing;
+	}
+
+	&.ng-hide-add,
+	&.ng-leave {
+		animation: $leave-animation $leave-duration $leave-direction $leave-easing;
+	}
+
+	@if $stagger == true {
+		&.ng-enter-stagger,
+		&.ng-leave-stagger {
+			animation-delay: $stagger-delay;
+		}
+	} @else {
+		&.ng-enter-stagger,
+		&.ng-leave-stagger {
+			animation-delay: 0s;
+		}
+	}
+}

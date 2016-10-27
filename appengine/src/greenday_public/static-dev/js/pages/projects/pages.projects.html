@@ -1,0 +1,37 @@
+
+<section ng-if="ctrl.projects | any:{current_user_info: {is_pending: true}}" layout="row" layout-align="center center" class="pending-projects-banner">
+	<div>When you accept a project your presence will be visible to collaborators on that project</div>
+</section>
+<md-content flex>
+	<md-toolbar class="appbar__bg"></md-toolbar>
+
+	<div class="page-content" layout="row">
+		<div class="user-sidebar" flex="20">
+			<user-box user="appctrl.user" user-stats="ctrl.userStats" thumb-size="92" thumb-layout="column" name-layout="row" name-layout-align="center" icon-colour="grey"></user-box>
+		</div>
+
+		<div class="projects__list" layout="column" flex>
+			<div class="projects__list-wrapper" layout-fill>
+				<project-list-item class="slide-project" ng-if="ctrl.newProject" project="ctrl.newProject" user-id="{{ appctrl.user.id }}" is-visible="true" on-save="ctrl.onProjectSave($index, project)" on-cancel="ctrl.onProjectAddCancel()"></project-list-item>
+				<project-list-item class="slide-project" ng-if="ctrl.projects.length > 0" ng-repeat="project in ctrl.projects | orderBy:'-created' track by project.id" project="project" index="{{ $index }}" user-id="{{ appctrl.user.id }}" is-visible="true" on-save="ctrl.onProjectSave($index, project)" on-cancel="ctrl.onProjectAddCancel()"></project-list-item>
+			</div>
+			<div ng-show="ctrl.projects.length === 0 && !ctrl.newProject && ctrl.user.is_whitelisted" class="projects__create-prompt" layout="column" layout-align="center center" flex>
+				<h2 class="projects__create-prompt__title">Get started by creating a project</h2>
+				<p class="projects__create-prompt__content">Your own projects, and any invitations to other user’s projects, will appear here</p>
+				<md-button aria-label="Add new project" class="md-fab md-accent" ng-click="ctrl.addBlankProject()">
+					<icon class="ic-add"></icon>
+				</md-button>
+			</div>
+			<div ng-if="ctrl.projects.length === 0 && !ctrl.newProject && !ctrl.user.is_whitelisted" class="projects__no-create-prompt" layout="column" layout-align="center center" flex>
+				<h2 class="projects__no-create-prompt__title">You are not authorized to create new projects.</h2>
+				<p class="projects__no-create-prompt__content">Collaborate with others on a Montage project by being invited by a project owner.</p>
+			</div>
+		</div>
+
+		<div class="projects__create-button" layout="row" layout-align="center" flex="10">
+			<md-button aria-label="Add new project" ng-if="ctrl.projects.length > 0 && ctrl.user.is_whitelisted" class="md-fab md-accent" ng-click="ctrl.addBlankProject()">
+				<icon class="ic-add"></icon>
+			</md-button>
+		</div>
+	</div>
+</md-content>

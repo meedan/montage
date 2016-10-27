@@ -1,0 +1,10 @@
+dev:
+  src:
+    - '<%= paths.staticDevRoot %>/js/**/*.js'
+    - '!<%= paths.staticDevRoot %>/js/app/app.templates.js'
+  options:
+    force: true
+
+dist:
+  - '<%= paths.staticDevRoot %>/js/**/*.js'
+  - '!<%= paths.staticDevRoot %>/js/app/app.templates.js'

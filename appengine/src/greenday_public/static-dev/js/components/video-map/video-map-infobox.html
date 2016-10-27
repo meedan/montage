@@ -1,0 +1,36 @@
+<md-content class="video-map__videos md-whiteframe-z1">
+	<div class="video-map__quick-filter" layout="row" layout-align="end center">
+		<div class="video-map__quick-filter__icon" layout="row" layout-align="center center" ng-show="parameter.totalVideos > 1">
+			<icon class="ic-search"></icon>
+		</div>
+		<div layout="row" flex ng-show="parameter.totalVideos > 1">
+			<input flex class="video-map__quick-filter__input" type="text" ng-model="parameter.nameFilter" placeholder="Search videos in this location" autofocus>
+		</div>
+		<div layout="row">
+			<gd-button class="video-map__close-button" aria-label="Clear" ng-click="parameter.close()">
+				<icon class="ic-close"></icon>
+			</gd-button>
+		</div>
+	</div>
+	<md-content class="video-map__wrapper">
+		<md-list class="video-map__video-list">
+			<md-item class="video-map__video-box" ng-repeat="video in parameter.videos | filter:{ name: parameter.nameFilter } | orderBy:'name' track by video.id" layout="column">
+				<div class="video-map__video-box__content" ng-if="parameter.videos.length === 1 && video.location_overridden === true && video.precise_location === true" layout="row" layout-align="start center">
+					<icon class="ic-info"></icon>
+					<span flex>This video's location is edited by a Montage user.</span>
+				</div>
+				<div class="video-map__video-box__content" ng-if="parameter.videos.length === 1 && video.location_overridden === true && video.precise_location === false" layout="row" layout-align="start center">
+					<icon class="ic-info"></icon>
+					<span flex>Imprecise location added in Montage.</span>
+				</div>
+				<a class="video-map__video-box__link" href="/project/{{ ::video.project_id }}/video/{{ ::video.youtube_id }}" style="background-image: url('//i3.ytimg.com/vi/{{ ::video.youtube_id }}/mqdefault.jpg')">
+					<span class="video-list-item__duration">{{ ::video.duration | duration }}</span>
+				</a>
+				<div class="video-map__video-box__content">
+					<div class="video-box__title">{{ ::video.name }}</div>
+					<div class="video-box__channel">by {{ ::video.channel_name }}</div>
+				</div>
+			</md-item>
+		</md-list>
+	</md-content>
+</md-content>

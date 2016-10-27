@@ -1,0 +1,11 @@
+<div class="video-map">
+	<ui-gmap-google-map ng-if="ctrl.markers.length > 0" options="ctrl.mapOptions" refresh="refreshWhen" control="ctrl.map.controller" center="ctrl.map.options.center" zoom="ctrl.map.options.zoom" bounds="ctrl.map.options.bounds" flex>
+		<ui-gmap-markers control="ctrl.markerClusterer.controller" models="ctrl.markers" doCluster="true" options="'options'" fit="true" idKey="'id'" coords="'self'" clusterOptions="ctrl.markerClusterer.options" clusterEvents="ctrl.markerClusterer.events"></ui-gmap-markers>
+
+		<ui-gmap-window coords="ctrl.infoBox.options.coords" show="ctrl.infoBox.options.isVisible" templateUrl="ctrl.infoBox.options.templateUrl" templateParameter="ctrl.infoBox.options.templateParams" closeClick="ctrl.infoBox.options.isVisible = false;" options="ctrl.infoBox.options" control="ctrl.infoBox.controller"></ui-gmap-window>
+	</ui-gmap-google-map>
+
+	<div layout-fill layout="row" layout-align="center center" class="video-map__no-location" ng-if="ctrl.initialised && ctrl.markers.length === 0">
+		<md-content class="video-map__no-location-text">No location data available</md-content>
+	</div>
+</div>

@@ -1,0 +1,35 @@
+<md-sidenav class="app-sidebar md-sidenav-right gd-pc-sidebar md-whiteframe-z2" md-is-open="pcSidebarCtrl.isOpen" md-component-id="projectCommentsSidebar">
+	<div layout="column" layout-fill lazy-show="pcSidebarCtrl.openedOnce">
+		<md-toolbar class="gd-pc-sidebar__header">
+			<md-toolbar class="gd-pc-sidebar__header--inner">
+				<form ng-submit="pcSidebarCtrl.addComment()">
+					<div class="gd-pc-sidebar__user" layout="row" layout-align="start center">
+						<img class="gd-pc-sidebar__user-avatar" ng-src="{{ ::user.profile_img_url }}?sz=40" ng-if="user.profile_img_url">
+						<img class="gd-pc-sidebar__user-avatar" ng-src="{{ ::defaultProfileImgUrl }}" ng-if="!user.profile_img_url">
+						<div class="gd-pc-sidebar__add-update" flex>
+							<input ng-model="pcSidebarCtrl.newComment.text" type="text" class="gd-pc-sidebar__add-update-input" placeholder="Share what's new">
+						</div>
+					</div>
+					<div ng-class="{'gd-pc-sidebar__actions--visible': pcSidebarCtrl.newComment.text !== ''}" class="gd-pc-sidebar__actions" layout="row" layout-align="end start">
+						<md-button ng-click="pcSidebarCtrl.resetComment()" class="gd-pc-sidebar__action--cancel" type="button">Cancel</md-button>
+						<md-button class="md-accent gd-pc-sidebar__actions--submit" type="submit">Submit</md-button>
+					</div>
+				</form>
+			</md-toolbar>
+		</md-toolbar>
+		<md-content flex class="gd-pc-sidebar__threads" layout="column">
+			<md-list class="gd-pc-sidebar__thread-list">
+				<md-item ng-repeat="thread in pcSidebarCtrl.threads | orderBy:'-created' track by thread.id">
+					<gd-project-comment-thread thread="thread" project-id="projectId"></gd-project-comment-thread>
+				</md-item>
+			</md-list>
+			<div ng-if="!pcSidebarCtrl.threads.length" layout="column" layout-align="center center" flex>
+				<h2 class="projects__create-prompt__title">No comments added yet</h2>
+				<p class="projects__create-prompt__content">You can use the box above to add your first comment!</p>
+			</div>
+		</md-content>
+		<section ng-show="pcSidebarCtrl.isBusy" class="page-loader ng-hide fade" layout="column" layout-align="center center">
+			<holo-spinner class="holo-spinner--layer"></holo-spinner>
+		</section>
+	</div>
+</md-sidenav>

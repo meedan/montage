@@ -1,0 +1,56 @@
+$md-hamburger-edge-to-icon-gap: 24px;
+$md-hamburger-icon-padding: 12px;
+$md-hamburger-icon-size: 24px;
+$md-appbar-title-edge-gap: 80px;
+
+.appbar {
+	position: relative;
+	z-index: 3;
+
+	md-toolbar {
+		box-shadow: none;
+	}
+
+	a,
+	a:visited {
+		color: inherit;
+	}
+}
+
+.appbar__toolbar {
+	padding-left: $layout-gutter-width;
+}
+
+.appbar__page-title {
+	@include type(title);
+	color: $primary-color-palette-contrast-color;
+	margin: 0 0 0 30px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.appbar__page-title-info {
+	@include rem(font-size, 18px);
+	color: $colour-body-text-lighter;
+	margin-left: $layout-gutter-width;
+	white-space: nowrap;
+}
+
+.appbar__hamburger {
+	// As per Material Design specification
+
+	$hamburger-gap-adjust: 3px;
+
+	line-height: 0;
+	margin: 0 0 0 ($md-hamburger-edge-to-icon-gap - $md-hamburger-icon-padding) + $hamburger-gap-adjust;
+	width: auto;
+
+	&:hover {
+		background-color: transparent;
+	}
+
+	i {
+		margin-top: 2px;
+	}
+}

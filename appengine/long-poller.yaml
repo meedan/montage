@@ -1,0 +1,24 @@
+application: greenday-project-v02-dev
+module: long-poller
+version: 3-0-20
+runtime: python27
+api_version: 1
+threadsafe: true
+
+instance_class: F1
+automatic_scaling:
+  min_idle_instances: 1
+  max_pending_latency: 800ms
+
+libraries:
+- name: endpoints
+  version: 1.0
+- name: MySQLdb
+  version: "1.2.4b4"
+- name: ssl
+  version: latest
+
+handlers:
+- url: /_ah/spi/.*
+  script: handlers.endpoints.application
+  secure: always

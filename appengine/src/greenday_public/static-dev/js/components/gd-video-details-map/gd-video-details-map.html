@@ -1,0 +1,153 @@
+<div class="gd-video-details-map__wrapper" ng-if="video.project_id || hasLocation()">
+	<ui-gmap-google-map
+		center="ctrl.map.center"
+		control="ctrl.map"
+		draggable="true"
+		options="ctrl.mapOptions"
+		zoom="ctrl.map.zoom">
+
+		<ui-gmap-search-box
+			ng-if="!video.archived_at && video.project_id"
+			template='ctrl.searchbox.template'
+			parentdiv="'gd-video-details-map-searchbox'"
+			options='ctrl.searchbox.options'
+			events='ctrl.searchbox.events'>
+		</ui-gmap-search-box>
+
+		<!--<ui-gmap-marker
+			idKey="video-location-marker"
+			options="ctrl.marker.options"
+			coords="ctrl.marker.coords">
+		</ui-gmap-marker>-->
+
+		<ui-gmap-markers
+			models="ctrl.markers"
+			doCluster="true"
+			idKey="'id'"
+			coords="'coords'"
+			clusterOptions="ctrl.markerClusterer.options"
+			doRebuildAll="true"
+		></ui-gmap-markers>
+
+	</ui-gmap-google-map>
+
+	<div class="gd-video-details-map__top-controls" layout="row">
+		<div
+			ng-if="!video.archived_at && video.project_id"
+			class="gd-video-details-map__search"
+			id="gd-video-details-map-searchbox"
+			flex
+			layout="row"
+			layout-align="start center">
+
+			<icon class="ic-search"></icon>
+
+		</div>
+		<div flex ng-if="!!video.archived_at || !video.project_id"></div>
+		<gd-button ng-click="ctrl.collapseMap($event)">
+			<icon class="ic-unfold-less"></icon>
+		</gd-button>
+	</div>
+
+	<div ng-if="!video.archived_at && video.project_id" class="gd-video-details-map__location-picker-indicator">
+		<icon class="ic-location-searching" ng-show="ctrl.editMode" class="ic-texture"></icon>
+	</div>
+	<div
+		class="gd-video-details-map__bottom-left-controls"
+		layout="row"
+		ng-if="!video.archived_at && video.project_id">
+		<div class="gd-video-details-map__hover-wrapper"
+			ng-mouseenter="ctrl.showImpreciseLocationButton = true"
+			ng-mouseleave="ctrl.showImpreciseLocationButton = false">
+			<md-button
+				aria-label="Imprecise location"
+				ng-show="ctrl.editMode && ctrl.showImpreciseLocationButton"
+				ng-click="ctrl.setImpreciseLocation()"
+				class="gd-map-button md-fab gd-video-details-map__set-imprecise-location"
+				layout="row" layout-align="center center">
+
+				<icon class="ic-gps-not-fixed"></icon>
+				<md-tooltip>Imprecise Location</md-tooltip>
+
+			</md-button>
+			<md-button
+				aria-label="Precise location"
+				ng-show="ctrl.editMode"
+				ng-click="ctrl.setLocation()"
+				class="md-primary gd-map-button md-fab gd-video-details-map__set-location"
+				layout="row" layout-align="center center">
+
+				<icon class="ic-gps-fixed"></icon>
+				<md-tooltip>Precise Location</md-tooltip>
+			</md-button>
+		</div>
+		<md-button
+			aria-label="Restore YouTube Location Data"
+			ng-show="ctrl.editMode && video.location_overridden && ytVideoData.recordingDetails.location.latitude"
+			ng-click="ctrl.revertLocation()"
+			class="gd-map-button md-fab gd-video-details-map__revert"
+			layout="row" layout-align="center center">
+
+			<icon class="ic-settings-backup-restore"></icon>
+			<md-tooltip>Restore YouTube Location Data</md-tooltip>
+
+		</md-button>
+		<md-button
+			ng-if="video.latitude"
+			aria-label="Remove location data"
+			ng-show="ctrl.editMode && video.latitude"
+			ng-click="ctrl.removeLocation()"
+			class="gd-map-button md-fab gd-video-details-map__undo"
+			layout="row" layout-align="center center">
+			<icon class="ic-delete"></icon>
+			<md-tooltip>Remove location data</md-tooltip>
+		</md-button>
+	</div>
+	<span flex></span>
+	<div class="gd-video-details-map__bottom-right-controls" layout="row">
+		<md-button aria-label="{{ ctrl.currentMapType.title }}" class="gd-map-button gd-video-details-map__map-type" ng-click="ctrl.onMapTypeClicked()">{{ ctrl.currentMapType.title }}</md-button>
+		<div class="gd-video-details-map__map-zoom-controls" layout="row">
+			<md-button
+				aria-label="Zoom out"
+				class="gd-map-button gd-video-details-map__map-zoom gd-video-details-map__map-zoom--out"
+				ng-click="ctrl.onZoomOutClicked()"
+				layout="row" layout-align="center center">
+
+				<icon class="ic-remove"></icon>
+
+			</md-button>
+			<md-button
+				aria-label="Zoom in"
+				ng-click="ctrl.onZoomInClicked()"
+				class="gd-map-button gd-video-details-map__map-zoom gd-video-details-map__map-zoom--in"
+				layout="row" layout-align="center center">
+
+				<icon class="ic-add"></icon>
+
+			</md-button>
+		</div>
+	</div>
+</div>
+<div
+	class="gd-video-details-map__expand-trigger"
+	ng-click="ctrl.expandMap($event)"
+	ng-hide="expanded">
+
+	<button
+		ng-hide="ctrl.editMode"
+		ng-if="!video.archived_at && video.project_id && !hasLocation()"
+		class="video-theater__location-prompt"
+		layout="row" layout-align="center center"
+		ng-click="ctrl.expandMap($event)">
+		<icon class="ic-location-on"></icon><span>Set Location</span>
+	</button>
+	<div
+		class="video-theater__location-prompt"
+		ng-if="!!video.archived_at && !hasLocation()"
+		layout="row" layout-align="center center">
+		No location is set
+	</div>
+</div>
+<div class="gd-video-details-map__marker_anchor" ng-hide="expanded">
+	<md-tooltip md-direction="bottom" ng-if="video.location_overridden">Edited by a Montage user</md-tooltip>
+</div>

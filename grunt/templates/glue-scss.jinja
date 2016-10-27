@@ -1,0 +1,20 @@
+{% for image in images %}.{{ image.label }}{{ image.pseudo }}{%- if not image.last %},{{"\n"}}{%- endif %}{%- endfor %} {
+	background-image: url('{{ sprite_path }}');
+	background-repeat: no-repeat;
+}
+{% for image in images %}
+.{{ image.label }}{{ image.pseudo }} {
+	background-position: {{ image.x ~ ('px' if image.x) }} {{ image.y ~ ('px' if image.y) }};
+	height: {{ image.height }}px;
+	width: {{ image.width }}px;
+}
+{% endfor %}{% for r, ratio in ratios.items() %}
+@media screen and (-webkit-min-device-pixel-ratio: {{ ratio.ratio }}), screen and (min--moz-device-pixel-ratio: {{ ratio.ratio }}), screen and (-o-min-device-pixel-ratio: {{ ratio.fraction }}), screen and (min-device-pixel-ratio: {{ ratio.ratio }}), screen and (min-resolution: {{ ratio.ratio }}dppx) {
+{% for image in images %}	.{{ image.label }}{{ image.pseudo }}{% if not image.last %},{{"\n"}}{% endif %}{% endfor %} {
+		background-image: url('{{ ratio.sprite_path }}');
+		-moz-background-size: {{ width }}px {{ height }}px;
+		-webkit-background-size: {{ width }}px {{ height }}px;
+		background-size: {{ width }}px {{ height }}px;
+	}
+}
+{% endfor %}

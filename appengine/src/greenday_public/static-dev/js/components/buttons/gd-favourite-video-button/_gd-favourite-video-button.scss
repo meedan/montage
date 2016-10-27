@@ -1,0 +1,24 @@
+gd-favourite-video-button {
+
+	.gd-favourite-video-button {
+		opacity: 0;
+		transition: all .2s ease-in-out;
+		vertical-align: top;
+
+		&.is-toggled-on {
+			opacity: 1;
+
+			icon {
+				@extend .ic-star;
+			}
+		}
+
+		&.is-busy {
+			opacity: 1;
+		}
+	}
+
+	icon {
+		@extend .ic-star-outline;
+	}
+}

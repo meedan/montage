@@ -1,0 +1,7 @@
+<div class="gd-online-collaborators__wrapper" layout="row" layout-align="start center">
+	<div class="gd-online-collaborators__user" ng-repeat="collaborator in collaborators track by collaborator.id">
+		<img ng-src="{{ ::collaborator.profile_img_url }}?sz=30" class="gd-online-collaborators__avatar" alt="{{ ::collaborator.first_name }} {{ ::collaborator.last_name }}" ng-if="collaborator.profile_img_url">
+		<img ng-src="{{ ::defaultProfileImgUrl }}" class="gd-online-collaborators__avatar" alt="{{ ::collaborator.first_name }} {{ ::collaborator.last_name }}" ng-if="!collaborator.profile_img_url">
+		<md-tooltip md-delay="100">{{ ::collaborator.first_name }} {{ ::collaborator.last_name }}</md-tooltip>
+	</div>
+</div>

@@ -1,0 +1,78 @@
+<div class="gd-video-timeline__playhead-container" style="transform: {{ 'translateX(' + ctrl.getTimeOffset(player.state.currentTime) + '%)' }}">
+	<div class="gd-video-timeline__playhead-handle">
+		<div
+			class="gd-video-timeline__playhead-bubble"
+			ng-class="{ 'is-dragging': draggingPlayhead }"
+		>{{ player.state.currentTime | duration }}</div>
+	</div>
+</div>
+<md-content class="gd-video-timeline__content" flex>
+	<div class="gd-video-timeline__outer-wrapper" layout="row" layout-align="start start">
+		<ul class="gd-video-timeline__tag-list" layout="column" layout-align="start end">
+
+			<li ng-if="!video.archived_at" ng-click="ctrl.createThread()" class="gd-video-timeline__comment-label">
+				<div layout="row" layout-align="center center">
+					<icon class="ic-comment"></icon>
+					<span flex>Comment</span>
+				</div>
+			</li>
+			<li ng-if="video.archived_at" class="gd-video-timeline__comment-label">
+				<div layout="row" layout-align="center center">
+					<icon class="ic-comment"></icon>
+					<span flex>Comment</span>
+				</div>
+			</li>
+			<li layout="column" layout-align="center">
+				<gd-tag-autocomplete ng-model="tagName" player="player" video="video"></gd-tag-autocomplete>
+			</li>
+
+			<li ng-repeat="tag in ctrl.videoTags track by tag.id" layout="column" layout-align="center">
+				<gd-video-timeline-tag-label tag="tag" player="player" video="video"></gd-video-timeline-tag-label>
+			</li>
+		</ul>
+		<div class="gd-video-timeline__timeline" flex ng-click="jumpToTime($event)">
+			<div class="gd-video-timeline__playhead-wrapper-outer">
+				<div class="gd-video-timeline__playhead-wrapper" style="transform: {{ 'translateX(' + ctrl.getTimeOffset(player.state.currentTime) + '%)' }}">
+					<span class="gd-video-timeline__playhead"></span>
+				</div>
+			</div>
+			<ul class="gd-video-timeline__tag-rows" layout="column" layout-align="start start">
+				<li class="gd-video-timeline__tag-row gd-video-timeline__tag-row--comments">
+					<ol class="gd-video-timeline__comments-list">
+						<li ng-repeat="thread in ctrl.commentThreads track by thread.id">
+							<gd-popup align-to="top center" align-edge="bottom center" position="outside" gap-y="10">
+								<gd-popup-button style="left: {{ thread.c_timeline_offset }}%">
+									<gd-timed-comment-button thread="thread"></gd-timed-comment-button>
+								</gd-popup-button>
+								<gd-popup-content>
+									<gd-timed-comment-popup ng-if="!video.archived_at" mode="REPLY" thread="thread"></gd-timed-comment-popup>
+									<gd-timed-comment-popup ng-if="video.archived_at" mode="READONLY" thread="thread"></gd-timed-comment-popup>
+								</gd-popup-content>
+							</gd-popup>
+						</li>
+						<li ng-if="newThread">
+							<gd-timed-comment-button style="left: {{ newThread.c_timeline_offset }}%" class="js-placeholder-comment-btn" thread="newThread"></gd-timed-comment-button>
+						</li>
+					</ol>
+				</li>
+				<li class="gd-video-timeline__tag-row"></li>
+				<li class="gd-video-timeline__tag-row" ng-repeat="tag in ctrl.videoTags | orderBy:'project_tag.name' track by tag.id">
+					<div class="gd-video-timeline__tag-instances js-tag-instances">
+						<gd-video-timeline-tag-instance
+							data-start-seconds="{{ tagInstance.start_seconds }}"
+							data-end-seconds="{{ tagInstance.end_seconds }}"
+							ng-repeat="tagInstance in tag.instances"
+							instance="tagInstance"
+							player="player"
+							video="video"
+						></gd-video-timeline-tag-instance>
+					</div>
+				</li>
+			</ul>
+			<div ng-if="!ctrl.videoTags.length" class="gd-video-timeline-tag-empty" layout="column" layout-align="center center" flex layout-fill>
+				<h2 class="projects__create-prompt__title">No tags added to the video</h2>
+				<p class="projects__create-prompt__content">Click the "add tag" button and start tagging.</p>
+			</div>
+		</div>
+	</div>
+</md-content>

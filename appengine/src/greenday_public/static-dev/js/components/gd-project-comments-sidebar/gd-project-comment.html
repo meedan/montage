@@ -1,0 +1,23 @@
+<div class="gd-project-comment__comment" layout="row" layout-align="start start">
+	<img ng-src="{{ ::comment.user.profile_img_url }}?sz=40" class="gd-project-comment__user-avatar" alt="{{ ::comment.user.first_name }} {{ ::comment.user.last_name }}" ng-if="comment.user.profile_img_url">
+	<img ng-src="{{ ::defaultProfileImgUrl }}" class="gd-project-comment__user-avatar" alt="{{ ::comment.user.first_name }} {{ ::comment.user.last_name }}" ng-if="!comment.user.profile_img_url">
+	<div class="md-tile-content gd-project-comment__thread-content" flex>
+		<div class="gd-project-comment__thread-header" layout="row" layout-align="start center">
+			<div class="gd-project-comment__thread-title" flex>{{ ::comment.user.first_name }} {{ ::comment.user.last_name }}</div>
+			<span class="gd-project-comment__time">{{ ::comment.created | amCalendar}}</span>
+		</div>
+		<div ng-if="!ctrl.editing" class="gd-project-comment__thread-text">{{ ::comment.text }}</div>
+		<div ng-if="ctrl.editing" class="gd-project-comment__thread-text">
+			<form ng-submit="ctrl.save()">
+				<input ng-model="ctrl.newComment.text" type="text" class="gd-pc-sidebar__add-reply-input" placeholder="Update your comment" flex>
+				<div class="gd-pc-sidebar__actions gd-pc-sidebar__actions--visible" layout="row" layout-align="end start">
+					<md-button ng-click="ctrl.cancelEdit()" class="md-primary gd-pc-sidebar__action--cancel" type="button">Cancel</md-button>
+					<md-button class="md-accent gd-pc-sidebar__actions--submit" type="submit">Submit</md-button>
+				</div>
+			</form>
+		</div>
+	</div>
+	<gd-floating-menu-button align-to="right" menu-template-url="components/gd-project-comments-sidebar/gd-project-comment-menu.html" menu-data="menuData" menu-z-index="2001" ng-if="user.id === comment.user.id">
+		<icon class="ic-more-vert"></icon>
+	</gd-floating-menu-button>
+</div>

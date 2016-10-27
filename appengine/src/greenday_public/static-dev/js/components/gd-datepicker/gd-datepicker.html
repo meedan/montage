@@ -1,0 +1,48 @@
+<div class="gd-datepicker md-whiteframe-z1">
+	<div class="gd-datepicker__days">
+		<div class="md-primary gd-datepicker__month-name" layout="row" layout-align="center center">
+			<md-button ng-click="datepickerCtrl.gotoMonth(-1)" aria-label="Previous month" layout="row" layout-align="center center">
+				<icon class="ic-keyboard-arrow-left"></icon>
+			</md-button>
+			<div flex layout="row" layout-align="center">
+				<md-select ng-model="datepicker.selectedMonth">
+					<md-option ng-repeat="month in datepicker.months track by $index" value="{{ $index }}">{{ month }}</md-option>
+				</md-select>
+			</div>
+			<div flex layout="row" layout-align="center">
+				<md-select ng-model="datepicker.selectedYear">
+					<md-option ng-repeat="year in datepicker.years track by $index" value="{{ year }}">{{ year }}</md-option>
+				</md-select>
+			</div>
+			<md-button ng-click="datepickerCtrl.gotoMonth(1)" aria-label="Next month" layout="row" layout-align="center center">
+				<icon class="ic-keyboard-arrow-right"></icon>
+			</md-button>
+		</div>
+		<md-content>
+			<md-item class="gd-datepicker__week">
+				<md-list class="gd-datepicker__week-days">
+					<md-item class="gd-datepicker__week-number">W</md-item><!--
+				 --><md-item class="gd-datepicker__week-day" ng-repeat="day in datepicker.weekdays track by $index">{{ ::day }}</md-item>
+				</md-list>
+			</md-item>
+		</md-content>
+	</div>
+	<div class="gd-datepicker__calendar">
+		<div class="gd-datepicker__content">
+			<md-list class="gd-datepicker__months">
+				<md-item class="gd-datepicker__month">
+					<md-list class="gd-datepicker__weeks">
+						<md-item class="gd-datepicker__week" ng-repeat="week in datepicker.currentMonth.weeks track by $index">
+							<md-list class="gd-datepicker__week-days">
+								<md-item class="gd-datepicker__week-number">{{ week.week }}</md-item><!--
+							 --><md-item data-date="{{ day.date }}" class="gd-datepicker__week-day" ng-repeat="day in week.days track by $index" ng-class="{'gd-datepicker__week-day--faded': day.isFaded, 'selected': day.isSelected, 'gd-datepicker__week-day--highlighted': day.isHighlighted, 'gd-datepicker__week-day--disabled': day.isDisabled}">
+									<md-item-content class="gd-datepicker__week-day__content">{{ day.dayNumber }}</md-item-content>
+								</md-item>
+							</md-list>
+						</md-item>
+					</md-list>
+				</md-item>
+			</md-list>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,109 @@
+<md-content layout="column" layout-fill>
+	<md-list class="ic-ul" layout-fill>
+		<md-item class="app-sidebar__item logo">
+			<md-item-content layout="column">
+				<span class="side-bar-logo"></span>
+			</md-item-content>
+		</md-item>
+		<md-item class="app-sidebar__item">
+			<md-item-content layout="column">
+				<a class="app-sidebar__item-button" href="/my-projects" layout="row" layout-align="start center">
+					<icon class="ic-home"></icon>
+					<span class="app-sidebar__item-label">My projects</span>
+				</a>
+			</md-item-content>
+		</md-item>
+		<md-item class="app-sidebar__item">
+			<md-list class="ic-ul" layout-fill>
+				<md-item>
+					<md-item-content layout="column">
+						<a href="/project/{{ appctrl.page.projectId }}" class="app-sidebar__item-button" ng-class="{'app-sidebar__item--active': appctrl.page.section === 'library'}" layout="row" layout-align="start center">
+							<icon class="ic-movie"></icon>
+							<span class="app-sidebar__item-label">All videos</span>
+						</a>
+					</md-item-content>
+				</md-item>
+				<md-item>
+					<md-item-content layout="column">
+						<a href="/project/{{ appctrl.page.projectId }}?section=favorites" class="app-sidebar__item-button" ng-class="{'app-sidebar__item--active': appctrl.page.section === 'favorites'}" layout="row" layout-align="start center">
+							<icon class="ic-star"></icon>
+							<span class="app-sidebar__item-label">Favorites</span>
+						</a>
+					</md-item-content>
+				</md-item>
+				<md-item>
+					<md-item-content layout="column">
+						<a href="/project/{{ appctrl.page.projectId }}?section=unwatched" class="app-sidebar__item-button" ng-class="{'app-sidebar__item--active': appctrl.page.section === 'unwatched'}" layout="row" layout-align="start center">
+							<icon class="ic-visibility"></icon>
+							<span class="app-sidebar__item-label">Unwatched</span>
+						</a>
+					</md-item-content>
+				</md-item>
+			</md-list>
+		</md-item>
+		<md-item class="app-sidebar__item app-sidebar__item--collections">
+			<md-item-content layout="column" layout-align="start start">
+				<div class="app-sidebar__item-header">
+					Collections
+				</div>
+				<md-list class="ic-ul app-sidebar__item-list">
+					<md-item class="app-sidebar__item" layout="row" layout-align="start center" ng-repeat="collection in appctrl.collections track by collection.id">
+						<md-item-content class="app-sidebar__item-button" layout="row" layout-align="start center">
+							<a href="/project/{{ appctrl.page.projectId }}/collection/{{ collection.id }}" class="app-sidebar__item-button" layout="row" layout-align="start center">
+								<icon class="ic-folder"></icon>
+								<span class="app-sidebar__item-label">{{ collection.name }}</span>
+							</a>
+						</md-item-content>
+					</md-item>
+					<md-item class="app-sidebar__item">
+						<gd-button class="app-sidebar__item-button" layout="row" layout-align="start center" ng-click="appctrl.showAddCollectionDialog($event)">
+							<div layout="row" layout-align="start center">
+								<icon class="ic-add"></icon>
+								<span class="app-sidebar__item-label">New Collection</span>
+							</div>
+						</gd-button>
+					</md-item>
+				</md-list>
+			</md-item-content>
+		</md-item>
+		<md-item class="app-sidebar__item" ng-class="{'app-sidebar__item--active': appctrl.page.section === 'archived'}">
+			<md-item-content layout="column">
+				<a href="/project/{{ appctrl.page.projectId }}?section=archived" class="app-sidebar__item-button" ng-class="{'app-sidebar__item--active': appctrl.page.section === 'archived'}" layout="row" layout-align="start center">
+					<icon class="ic-archive"></icon>
+					<span class="app-sidebar__item-label">Archived</span>
+				</a>
+			</md-item-content>
+		</md-item>
+		<md-item class="app-sidebar__item" ng-class="{'app-sidebar__item--active': appctrl.page.section === 'archived'}">
+			<md-item-content layout="column" layout-align="start start">
+				<div class="app-sidebar__item-header">
+					Get Help
+				</div>
+				<a href="mailto:support@storyful.com?subject=Montage Support" class="app-sidebar__item-button" ng-class="{'app-sidebar__item--active': appctrl.page.section === 'library'}" layout="row" layout-align="start center">
+					<icon class="ic-mail"></icon>
+					<span class="app-sidebar__item-label">support@storyful.com</span>
+				</a>
+			</md-item-content>
+		</md-item>
+		<md-item class="app-sidebar__item">
+			<md-item-content layout="column">
+				<gd-button aria-label="Sign out" class="app-sidebar__item-button" ng-click="appctrl.user.showSettings($event)" ng-class="{'app-sidebar__item--active': appctrl.page.section === 'unwatched'}" layout="row" layout-align="start center">
+					<div layout="row" layout-align="start center">
+						<icon class="ic-settings"></icon>
+						<span class="app-sidebar__item-label">Settings</span>
+					</div>
+				</gd-button>
+			</md-item-content>
+		</md-item>
+		<md-item class="app-sidebar__item">
+			<md-item-content layout="column">
+				<a class="app-sidebar__item-button" href="/terms" target="_blank" layout="row" layout-align="start center">
+					<span class="app-sidebar__item-label">Terms of Service</span>
+				</a>
+				<a class="app-sidebar__item-button" href="http://storyful.com/privacy-policy/" target="_blank" layout="row" layout-align="start center">
+					<span class="app-sidebar__item-label">Privacy Policy</span>
+				</a>
+			</md-item-content>
+		</md-item>
+	</md-list>
+</md-content>

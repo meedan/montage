@@ -1,0 +1,23 @@
+The majority of the extension can be edited easily, however the Content Script
+is written in Google Closure and thus needs to be built.
+
+To build, run the following lines to compile the code:
+sudo closure-library/closure/bin/build/closurebuilder.py --root=closure-library/ --root=js/ --namespace="greenday.extension.App" --output_mode=compiled --compiler_jar=compiler.jar > js/content_script.js
+
+You should then deploy it to the Chrome Webstore.
+
+When making changes to the Chrome Webstore make sure you increase the version
+number inside of the manifest.json.
+
+If you change the URL of the web app you will need to update it inside of both
+the app.js, background.js and manifest.json file.
+
+If there are major changes to the YouTube UI you will also need to change the
+extension.
+
+If for some reason the closure-library does not exist. Then make sure you
+download it using the line:
+git clone https://github.com/google/closure-library
+
+
+Enjoy the extension!

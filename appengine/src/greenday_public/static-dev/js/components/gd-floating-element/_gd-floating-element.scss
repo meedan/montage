@@ -1,0 +1,5 @@
+gd-floating-element {
+	display: block;
+	position: absolute;
+	z-index: z($layers, floating-elements) + $z-index-tooltip; // hack: this puts the floating menu on top of any item that angular-material defines the z-index of
+}

@@ -1,0 +1,9 @@
+@mixin respond-to($media) {
+	@if $media == smallscr {
+		@media only screen and (max-width: 768px) { @content; }
+	} @else if $media == portable {
+		@media only screen and (max-width: 1024px) { @content; }
+	} @else if $media == mediumdesk {
+		@media only screen and (max-width: 1200px) { @content; }
+	}
+}

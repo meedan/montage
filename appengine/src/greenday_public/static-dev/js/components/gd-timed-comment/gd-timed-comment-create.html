@@ -1,0 +1,12 @@
+<div class="gd-timed-comment__user">
+	<img class="gd-timed-comment__user-avatar" ng-src="{{ ::thread.user.profile_img_url }}?sz=25" ng-if="::thread.user.profile_img_url">
+	<img class="gd-timed-comment__user-avatar" ng-src="{{ ::defaultProfileImgUrl }}" ng-if="::!thread.user.profile_img_url">
+</div>
+<form ng-submit="save()">
+	<holo-spinner ng-show="saving"></holo-spinner>
+	<input ng-model="thread.text" placeholder="Enter your comment" ng-readonly="saving" class="gd-timed-comment__input">
+	<div class="gd-timed-comment-popup__actions" layout="horizontal" layout-align="end center">
+		<md-button type="button" ng-click="cancel()" ng-disabled="saving" aria-label="Cancel">Cancel</md-button>
+		<md-button type="submit" md-primary ng-disabled="saving" aria-label="Post Comment">Comment</md-button>
+	</div>
+</form>

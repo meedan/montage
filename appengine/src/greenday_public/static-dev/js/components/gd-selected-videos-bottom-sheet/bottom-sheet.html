@@ -1,0 +1,111 @@
+<div class="gd-bottom-sheet slide ng-hide" ng-show="ctrl.videos.length">
+	<md-content class="gd-bottom-sheet__content">
+		<md-toolbar class="gd-bottom-sheet__toolbar">
+			<div class="gd-bottom-sheet__toolbar-content" layout="row" layout-align="start center">
+				<gd-button ng-if="ctrl.actions.addTo" ng-click="ctrl.selectedTab = 'video-adder'" ng-class="{active: ctrl.selectedTab === 'video-adder'}">
+					<span layout="row" layout-align="start center">
+						<icon class="ic-add-box"></icon>
+						<span flex>Add to</span>
+					</span>
+				</gd-button>
+				<gd-button ng-if="ctrl.actions.batchTag">
+					<span layout="row" layout-align="start center">
+						<icon class="ic-label"></icon>
+						<span flex>Batch tag</span>
+					</span>
+				</gd-button>
+				<gd-button ng-if="ctrl.actions.markAsDuplicate" ng-click="ctrl.selectedTab = 'markAsDuplicate'" ng-class="{active: ctrl.selectedTab === 'markAsDuplicate'}">
+					<span layout="row" layout-align="start center">
+						<icon class="ic-control-point-duplicate"></icon>
+						<span flex>Mark as duplicate</span>
+					</span>
+				</gd-button>
+				<gd-button ng-if="ctrl.actions.archive" ng-click="ctrl.selectedTab = 'archive'" ng-class="{active: ctrl.selectedTab === 'archive'}">
+					<span layout="row" layout-align="start center">
+						<icon class="ic-archive"></icon>
+						<span flex>Archive</span>
+					</span>
+				</gd-button>
+				<gd-button ng-if="ctrl.actions.removeFromCollection" ng-click="ctrl.selectedTab = 'removeFromCollection'" ng-class="{active: ctrl.selectedTab === 'removeFromCollection'}">
+					<span layout="row" layout-align="start center">
+						<icon class="ic-delete"></icon>
+						<span flex>Remove from collection</span>
+					</span>
+				</gd-button>
+				<gd-button ng-if="ctrl.actions.exportTo" ng-click="ctrl.selectedTab = 'video-exporter'" ng-class="{active: ctrl.selectedTab === 'video-exporter'}">
+					<span layout="row" layout-align="start center">
+						<icon class="ic-save"></icon>
+						<span flex>Export to</span>
+					</span>
+				</gd-button>
+				<span flex></span>
+				<span class="gd-bottom-sheet__info">
+					<ng-pluralize count="ctrl.videos.length" when="{'one': '1 video selected', 'other': '{} videos selected'}"></ng-pluralize>
+				</span>
+				<gd-button class="bottom-sheet__close-tab-button" ng-show="ctrl.selectedTab !== null" ng-click="ctrl.selectedTab = null">
+					<icon class="ic-close"></icon>
+				</gd-button>
+			</div>
+		</md-toolbar>
+
+		<gd-video-adder ng-if="ctrl.actions.addTo" reset-when="ctrl.videos.length === 0" is-visible="ctrl.selectedTab === 'video-adder'" selected-project="ctrl.selectedProject" selected-collection="ctrl.selectedCollection" videos="ctrl.videos"></gd-video-adder>
+
+		<gd-video-exporter ng-if="ctrl.actions.exportTo" reset-when="ctrl.videos.length === 0" is-visible="ctrl.selectedTab === 'video-exporter'" videos="ctrl.videos"></gd-video-exporter>
+
+		<div ng-if="ctrl.actions.archive" class="bottom-sheet__panel--archive slide-bottom-sheet-panel ng-hide" ng-show="ctrl.selectedTab === 'archive'" layout="row" layout-align="start start">
+			<div class="bottom-sheet__panel-section" layout="row" flex="40">
+				<div class="bottom-sheet__panel__big-content" layout-fill layout-align="vertical" layout-align="center center">
+					<div class="bottom-sheet__panel-hero">
+						Are you sure?
+					</div>
+					<div class="bottom-sheet__panel-info">
+						This will archive the
+						<ng-pluralize count="ctrl.videos.length" when="{'one': '1 selected video', 'other': '{} selected videos'}"></ng-pluralize>.
+					</div>
+					<div class="bottom-sheet__panel-actions" layout="row" layout-align="start center">
+						<md-button ng-click="ctrl.archiveVideos(ctrl.videos)" aria-label="OK" md-no-ink class="md-accent">OK</md-button>
+						<md-button ng-click="ctrl.selectedTab = null" aria-label="Cancel" md-no-ink class="md-primary">Cancel</md-button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div ng-if="ctrl.actions.markAsDuplicate" class="bottom-sheet__panel--mark-as-duplicate slide-bottom-sheet-panel ng-hide" ng-show="ctrl.selectedTab === 'markAsDuplicate'" layout="row" layout-align="start start">
+			<div class="bottom-sheet__panel-section" layout="row" flex="40">
+				<div class="bottom-sheet__panel__big-content" layout-fill layout-align="vertical" layout-align="center center">
+					<div class="bottom-sheet__panel-hero">
+						Are you sure?
+					</div>
+					<div class="bottom-sheet__panel-info">
+						This will mark
+						<ng-pluralize count="ctrl.videos.length" when="{'one': '1 selected video', 'other': '{} selected videos'}"></ng-pluralize>
+						as duplicates.
+					</div>
+					<div class="bottom-sheet__panel-actions" layout="row" layout-align="start center">
+						<md-button ng-click="ctrl.markVideosAsDuplicate(ctrl.videos)" aria-label="OK" md-no-ink class="md-accent">OK</md-button>
+						<md-button ng-click="ctrl.selectedTab = null" aria-label="Cancel" md-no-ink class="md-primary">Cancel</md-button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div ng-if="ctrl.actions.removeFromCollection" class="bottom-sheet__panel--remove-from-collection slide-bottom-sheet-panel ng-hide" ng-show="ctrl.selectedTab === 'removeFromCollection'" layout="row" layout-align="start start">
+			<div class="bottom-sheet__panel-section" layout="row" flex="40">
+				<div class="bottom-sheet__panel__big-content" layout-fill layout-align="vertical" layout-align="center center">
+					<div class="bottom-sheet__panel-hero">
+						Are you sure?
+					</div>
+					<div class="bottom-sheet__panel-info">
+						This will remove
+						<ng-pluralize count="ctrl.videos.length" when="{'one': '1 selected video', 'other': '{} selected videos'}"></ng-pluralize>
+						from the collection.
+					</div>
+					<div class="bottom-sheet__panel-actions" layout="row" layout-align="start center">
+						<md-button ng-click="ctrl.removeFromCollection(ctrl.videos)" aria-label="OK" md-no-ink class="md-accent">OK</md-button>
+						<md-button ng-click="ctrl.selectedTab = null" aria-label="Cancel" md-no-ink class="md-primary">Cancel</md-button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</md-content>
+</div>

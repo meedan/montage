@@ -1,0 +1,51 @@
+"""
+    Django settings for local dev environment
+"""
+from .base import *
+
+ENVIRONMENT = ENVS['LOCAL']
+
+# Running in development, so use a local MySQL database.
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'USER': 'root',
+        'PASSWORD': '',
+        'HOST': 'localhost',
+        'NAME': 'greenday_v2',
+    }
+}
+
+EMAIL_SENDING = False
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.dummy.DummyCache',
+        'TIMEOUT': 0,
+    }
+}
+
+MIDDLEWARE_CLASSES = (
+    'greenday_core.middleware.DebugMiddleware',
+) + MIDDLEWARE_CLASSES
+
+INSTALLED_APPS = (
+    'django_protorpc',
+    'django_extensions',
+) + INSTALLED_APPS
+
+LOG_SQL_TO_CONSOLE = False
+USERS_API_AUTH = False
+
+ANALYTICS_ID = 'local_ID'
+
+CHANNELS_API_BASE = "//localhost:8082/_ah/api/greenday/v1/channels"
+
+
+SECRET_KEY = "DJANGO_SECRET" #http://www.miniwebtool.com/django-secret-key-generator/
+OAUTH_SETTINGS = {
+    "client_id": "CLIENT_ID",
+    "api_key": "API_KEY"
+}
+
+YOUTUBE_API_DEVELOPER_KEY = "YOUTUBE_DEV_KEY"

@@ -1,0 +1,98 @@
+// Loading indicator
+$holo-spinner-offset: 125;  // Here is where the magic happens
+$holo-spinner-duration: 3s;
+$holo-spinner-duration2: $holo-spinner-duration*2;
+$holo-spinner-size: 66px;
+
+holo-spinner {
+	height: $holo-spinner-size;
+	width: $holo-spinner-size;
+
+
+	.spinner {
+		animation: rotator $holo-spinner-duration linear infinite;
+		height: 100%;
+		width: 100%;
+	}
+
+	.path {
+		animation: dash $holo-spinner-duration2 ease-in-out infinite;
+		stroke: #4285f4;
+		stroke-dasharray: $holo-spinner-offset;
+		stroke-dashoffset: 0;
+		transform-origin: center;
+
+		&.colors {
+			animation: dash $holo-spinner-duration2 ease-in-out infinite, colors $holo-spinner-duration2 ease-in infinite;
+		}
+	}
+}
+
+.holo-spinner--layer {
+	@extend .md-whiteframe-z1;
+	background-color: #fff;
+	border-radius: 50%;
+}
+
+@keyframes rotator {
+	0% { transform: rotate(0deg); }
+	100% { transform: rotate(360deg); }
+}
+
+@keyframes colors {
+	0% { stroke: #4285f4; }
+	20% { stroke: #4285f4; }
+	25% { stroke: #de3e35; }
+	45% { stroke: #de3e35; }
+	50% { stroke: #f7c223; }
+	70% { stroke: #f7c223; }
+	75% { stroke: #1b9a59; }
+	95% { stroke: #1b9a59; }
+	100% { stroke: #4285f4; }
+}
+
+@keyframes dash {
+	0% {
+		stroke-dashoffset: $holo-spinner-offset;
+	}
+
+	12.5% {
+		stroke-dashoffset: $holo-spinner-offset/4;
+		transform: rotate(0deg);
+	}
+
+	25% {
+		stroke-dashoffset: $holo-spinner-offset;
+		transform: rotate(270deg);
+	}
+
+	37.5% {
+		stroke-dashoffset: $holo-spinner-offset/4;
+		transform: rotate(270deg);
+	}
+
+	50% {
+		stroke-dashoffset: $holo-spinner-offset;
+		transform: rotate(540deg);
+	}
+
+	62.5% {
+		stroke-dashoffset: $holo-spinner-offset/4;
+		transform: rotate(540deg);
+	}
+
+	75% {
+		stroke-dashoffset: $holo-spinner-offset;
+		transform: rotate(810deg);
+	}
+
+	87.5% {
+		stroke-dashoffset: $holo-spinner-offset/4;
+		transform: rotate(810deg);
+	}
+
+	100% {
+		stroke-dashoffset: $holo-spinner-offset;
+		transform: rotate(1080deg);
+	}
+}

@@ -1,0 +1,23 @@
+# http://editorconfig.org
+root = true
+
+[*]
+charset = utf-8
+end_of_line = lf
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+[src/**]
+indent_size = 4
+indent_style = tab
+
+[src/**.py]
+indent_style = space
+
+[{package.json,bower.json}]
+indent_size = 2
+indent_style = space
+
+[grunt/tasks/**.yaml]
+indent_size = 2
+indent_style = space

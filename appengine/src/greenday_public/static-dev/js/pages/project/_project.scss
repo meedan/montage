@@ -1,0 +1,138 @@
+.project__toolbar {
+	background-color: map-get($primary-color-palette, '500');
+	flex-shrink: 0;
+	min-height: 48px;
+
+	.project__description {
+		margin: 0 80px;
+
+		gd-button {
+			margin-top: -6px;
+		}
+
+		md-content {
+			@include type(body-1);
+			background-color: map-get($primary-color-palette, '500');
+			color: $colour-white-pure;
+			max-height: 20px;
+			overflow: hidden;
+			transition: $swift-ease-out;
+			margin: 0;
+		}
+
+		icon {
+			color: $colour-white-pure;
+		}
+
+		&.expanded {
+			md-content {
+				max-height: 100px;
+				overflow: auto;
+				padding-bottom: 16px;
+			}
+
+			icon {
+				@extend .ic-expand-less;
+			}
+		}
+	}
+
+	gd-button {
+		color: map-get($primary-color-palette, '200');
+
+		&.gd-button--icon {
+			border-bottom: 3px solid transparent;
+		}
+
+		&:hover,
+		&.is-active {
+			color: $colour-gd-accent;
+		}
+
+		&.is-active {
+			border-bottom-color: $colour-gd-accent;
+		}
+	}
+}
+
+.project__toolbar-export-button {
+	left: -72px;
+	margin-top: -32px;
+	position: absolute;
+	top: 100%;
+}
+
+.project__toolbar__buttons {
+	gd-button {
+		width: $baseline-component-grid * 9;
+	}
+}
+
+.project__toolbar__row {
+	height: $baseline-component-grid * 6;
+}
+
+.project__toolbar__wrapper {
+	@extend .content-container;
+	position: relative;
+	width: 100%;
+}
+
+.project__toolbar-header {
+	@include type(subhead-1);
+	color: $colour-gd-accent;
+}
+
+.project__toolbar__delete-collection {
+	margin-left: $baseline-component-grid;
+}
+
+.project__summary {
+	color: shade-colour(secondary-text);
+	padding: 0 $baseline-component-grid;
+	margin: $baseline-component-grid * 3 auto;
+	max-width: 100%;
+	width: $max-content-width;
+}
+
+.project__summary-title {
+	@include rem(font-size, 13px);
+	border-bottom: 1px solid shade-colour(dividers);
+	margin: 0 0 $baseline-component-grid;
+	padding: $baseline-component-grid 0;
+	text-transform: uppercase;
+}
+
+.project__summary-count {
+	margin-right: $baseline-component-grid * 3;
+
+	icon {
+		margin-right: $baseline-component-grid;
+	}
+}
+
+.project-filter-toolbar {
+	background-color: map-get($primary-color-palette, '200');
+	min-height: $baseline-component-grid * 5;
+	position: relative;
+	z-index: 2;
+}
+
+.project-filter-toolbar__content {
+	@include rem(font-size, 14px);
+	color: rgba(255, 255, 255, .87);
+	margin: 0 auto;
+	max-width: 100%;
+	width: $max-content-width;
+}
+
+.project-filter-toolbar__filter-dropdown {
+	// color:
+	margin-right: $baseline-component-grid * 2;
+}
+
+md-content.project__main-content {
+	background-color: $colour-background;
+	position: relative;
+	z-index: 1;
+}

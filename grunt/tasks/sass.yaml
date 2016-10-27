@@ -1,0 +1,14 @@
+dev:
+  options:
+    outputStyle: 'nested'
+  files:
+    -
+      '<%= paths.staticDevRoot %>/css/greenday.css': '<%= paths.staticDevRoot %>/scss/greenday.scss'
+
+dist:
+  options:
+    outputStyle: 'nested'
+  files:
+    -
+      '<%= paths.staticDevRoot %>/css/greenday.css': '<%= paths.staticDevRoot %>/scss/greenday.scss'
+

@@ -1,0 +1,17 @@
+{% extends "admin_base.html" %}
+
+{% block content %}
+<section class="user-admin" layout="column" flex>
+	<p>Are you sure you want to delete {{ deletion_user.email }}? All Montage data associated with them will be deleted.</p>
+	<form method="post">{% csrf_token %}
+		<button type="submit">Delete user</button>
+	</form>
+</section>
+
+<style>
+.user-admin {
+	margin: 25px auto;
+	max-width: 1150px;
+}
+<style>
+{% endblock %}

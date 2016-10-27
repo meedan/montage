@@ -1,0 +1,71 @@
+<div class="video-theater__channel-details" layout="row" layout-align="start center">
+	<span class="video-theater__channel-name" flex>{{ ::gdVideoData.channel_name }}</span>
+	<div ng-if="::gdVideoData.project_id" class="video-theater__quick-actions" layout="row">
+		<gd-favourite-video-button ng-if="!gdVideoData.archived_at" video="gdVideoData"></gd-favourite-video-button>
+		<gd-archive-video-button video="gdVideoData"></gd-archive-video-button>
+	</div>
+	<gd-floating-menu-button ng-if="::gdVideoData.project_id" menu-template-url="pages/video/video-dropdown.html" menu-data="videoDetailsPanelCtrl.menuData" align-to="right">
+		<icon class="ic-more-vert"></icon>
+	</gd-floating-menu-button>
+</div>
+<div class="video-theater__video-meta">
+	<div class="video-theater__view-count">
+		<icon class="ic-remove-red-eye"></icon>
+		<span class="video-theater__metric">{{ ::ytVideoData.statistics.viewCount | number }}</span> views
+	</div>
+	<div class="video-theater__uploaded-date">
+		<icon class="ic-file-upload"></icon>
+		Published <span class="video-theater__metric">{{ ::gdVideoData.publish_date | date:'dd MMMM yyyy':'UTC' }}</span>
+	</div>
+	<div class="video-theater__recorded-date">
+		<icon class="ic-camera-alt"></icon>
+
+		<span ng-if="displayDate && gdVideoData.archived_at" class="video-theater__metric">
+			<span>Recorded {{ displayDate | date:'dd MMMM yyyy':'UTC' }}
+			<md-tooltip ng-if="gdVideoData.recorded_date_overridden">Overridden by a Montage user</md-tooltip></span>
+		</span>
+
+		<span ng-if="displayDate && !gdVideoData.archived_at" class="video-theater__metric">
+			<span>Recorded {{ displayDate | date:'dd MMMM yyyy':'UTC' }}
+			<md-tooltip ng-if="gdVideoData.recorded_date_overridden">Overridden by a Montage user</md-tooltip></span>
+
+			<gd-popup align-to="top center" align-edge="top center" position="outside" gap-y="10">
+				<gd-popup-button>
+					<md-button class="md-primary video-theater__recorded-date__change">Change</md-button>
+				</gd-popup-button>
+				<gd-popup-content>
+					<gd-datepicker on-date-select="_popupInstance.close()" ng-model="data.datepickerDate"></gd-datepicker>
+				</gd-popup-content>
+			</gd-popup>
+			<md-button class="video-theater__recorded-date__revert" ng-if="gdVideoData.recorded_date_overridden" ng-click="videoDetailsPanelCtrl.revertDate()">Revert</md-button>
+		</span>
+		<span ng-if="!displayDate && !gdVideoData.archived_at" class="video-theater__metric video-theater__metric--overrideable">
+			<gd-popup align-to="top center" align-edge="top center" position="outside" gap-y="10">
+				<gd-popup-button>
+					<gd-button>Set a recorded Date</gd-button>
+				</gd-popup-button>
+				<gd-popup-content>
+					<gd-datepicker on-date-select="_popupInstance.close()" ng-model="data.datepickerDate"></gd-datepicker>
+				</gd-popup-content>
+			</gd-popup>
+		</span>
+		<span ng-if="!displayDate && gdVideoData.archived_at" class="video-theater__metric">
+			No recorded date set
+		</span>
+	</div>
+	<div class="video-theater__has-duplicates" ng-if="gdVideoData.duplicate_count > 0">
+		<icon class="ic-texture"></icon>
+		<span class="video-theater__highlighted-metric" ng-class="{'video-theater__link': !gdVideoData.archived_at}" ng-click="!gdVideoData.archived_at ? videoDetailsPanelCtrl.manageDuplicates($event) : angular.noop()">
+			Video has duplicates
+		</span>
+	</div>
+</div>
+<md-content flex class="video-theater__notes">{{ ::ytVideoData.snippet.description }}</md-content>
+<div class="video-theater__spacer"></div>
+<div class="video-theater__map">
+	<gd-video-details-map
+		expanded="videoDetailsPanelCtrl.mapExpanded"
+		video="gdVideoData"
+		yt-video-data="ytVideoData"
+	></gd-video-details-map>
+</div>

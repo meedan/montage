@@ -1,0 +1,29 @@
+gd-favourite-video-button {
+	gd-button {
+		vertical-align: top;
+	}
+}
+
+gd-add-to-collection-button {
+	height: 40px;
+
+	.gd-add-to-collection-button {
+		height: 100%;
+		position: relative;
+		width: 100%;
+	}
+
+	gd-button {
+		border-radius: 50%;
+		height: 100%;
+		left: 0;
+		position: absolute;
+		top: 0;
+		transition: $swift-ease-in-out;
+		width: 100%;
+
+		&:hover {
+			background-color: rgba(#999, .2);
+		}
+	}
+}

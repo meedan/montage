@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="deferredApp">
+<head>
+	<meta charset="utf-8">
+	<title>GAE Deferred Task Manager Console</title>
+	<meta name="viewport" content="width=device-width">
+
+	<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+	<link href="style.css" rel="stylesheet">
+</head>
+<body>
+	<header>
+		<ul class="nav nav-pills pull-right">
+			<li class="active"><a ng-href="#">Home</a></li>
+  		</ul>
+	  <h2 class="text-muted">GAE Deferred Task Manager Console</h2>
+	</header>
+
+	<section class="container-fluid">
+		<div ng-view></div>
+	</section>
+
+	<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.22/angular.min.js"></script>
+	<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.22/angular-route.min.js"></script>
+
+	<script src="ui-bootstrap-0.11.0.min.js"></script>
+	<script src="ui-bootstrap-tpls-0.11.0.min.js"></script>
+	<script src="deferred.js"></script>
+	</script>
+</body>
+</html>

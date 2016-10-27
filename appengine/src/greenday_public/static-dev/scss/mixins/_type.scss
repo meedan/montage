@@ -1,0 +1,15 @@
+@mixin type($type-name) {
+	$type-config: map-get($typography-styles, $type-name);
+
+	@each $prop in map-keys($type-config) {
+		@if $prop == 'font-size' {
+			// FIXME: Include the appropriate media query and font-size
+			// declaration for mobile,
+			@include rem(font-size, map-get($type-config, 'font-size'));
+		} @else if $prop == 'font-size-desktop' {
+			@include rem(font-size, map-get($type-config, 'font-size-desktop'));
+		} @else {
+			#{$prop}: map-get($type-config, $prop);
+		}
+	}
+}

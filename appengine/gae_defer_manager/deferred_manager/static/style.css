@@ -1,0 +1,90 @@
+body {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+header,
+footer {
+  margin-bottom: 15px;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+header {
+  border-bottom: 1px solid #e5e5e5;
+}
+
+header h2 {
+  margin-top: 0;
+  margin-bottom: 0;
+  line-height: 40px;
+  padding-bottom: 19px;
+}
+
+/* fix for angular-ui */
+.nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
+
+.popover {
+  max-width: 400px;
+}
+
+.popover-content,
+.breakword {
+  overflow-wrap: break-word;
+}
+
+.loading {
+  background: url('spinner.gif');
+  display: inline-block;
+  height: 16px;
+  width: 16px;
+}
+
+.refresh {
+  color: #31708f;
+  cursor: pointer;
+}
+
+.load-more {
+  color: #31708f;
+  cursor: pointer;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.task__display,
+.task__display__ref {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.task__panel .panel-heading {
+  padding: 0;
+}
+
+.task__panel .panel-title {
+  font-size: 14px;
+  font-weight: normal;
+}
+
+.task_info p {
+  margin: 0;
+}
+
+.controlbar {
+  margin-bottom: 15px;
+}
+
+.tasklogs__level {
+  margin: -6px 0;
+}
+
+.tasklogs__level .dropdown-toggle {
+  text-transform: capitalize;
+}
+
+.tasklogs li {
+  overflow-wrap: break-word;
+}

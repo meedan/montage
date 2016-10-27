@@ -1,0 +1,39 @@
+<div class="gd-timed-comment-popup__header" layout="horizontal" layout-align="start center">
+	<span flex>{{ ::thread.start_seconds | duration }}</span>
+	<gd-button
+		ng-if="user.id === thread.user.id && state.mode != 'CREATE' && state.mode != 'READONLY' && state.mode != 'PREVIEW'"
+		async="deleteThread()">
+		<icon class="ic-delete"></icon>
+	</gd-button>
+</div>
+<md-content ng-if="state.mode != 'CREATE'">
+	<gd-timed-comment comment="thread" mode="state.mode" thread="thread"></gd-timed-comment>
+	<div>
+		<ol class="gd-timed-comment-popup__replies">
+			<li ng-repeat="reply in thread.replies track by reply.id">
+				<gd-timed-comment mode="state.mode" comment="reply" thread="thread"></gd-timed-comment>
+			</li>
+		</ol>
+	</div>
+</md-content>
+
+<div class="gd-timed-comment-popup__add-comment" ng-if="state.mode == 'REPLY'">
+	<div class="gd-timed-comment__user">
+	<div class="gd-timed-comment__user-name">{{ ::comment.user.first_name }} {{ ::comment.user.last_name }}</div>
+		<time class="gd-timed-comment__user-comment-time" datetime="FIXME">{{ ::comment.created }}</time>
+	</div>
+	<img class="gd-timed-comment__user-avatar" ng-src="{{ ::user.profile_img_url }}?sz=25" ng-if="::user.profile_img_url">
+	<img class="gd-timed-comment__user-avatar" ng-src="{{ ::defaultProfileImgUrl }}" ng-if="::!user.profile_img_url">
+	<form ng-submit="addComment(state.newComment)">
+		<holo-spinner ng-show="submitting"></holo-spinner>
+		<input ng-model="state.newComment" placeholder="Reply" ng-readonly="submitting" class="gd-timed-comment__input">
+		<div class="gd-timed-comment-popup__actions" layout="horizontal" layout-align="end center">
+			<md-button type="button" ng-click="cancel()" ng-disabled="submitting || deleting" aria-label="Cancel">Cancel</md-button>
+			<md-button type="submit" md-primary ng-disabled="submitting || deleting" aria-label="Add Reply">Reply</md-button>
+		</div>
+	</form>
+</div>
+
+<div ng-if="state.mode == 'CREATE'">
+	<gd-timed-comment-create thread="thread" state="state"></gd-timed-comment-create>
+</div>

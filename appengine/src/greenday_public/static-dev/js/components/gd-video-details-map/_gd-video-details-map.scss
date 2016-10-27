@@ -1,0 +1,15 @@
+gd-video-details-map {
+	display: block;
+
+	&.is-expanded {
+		.gd-video-details-map__wrapper {
+			transform: translateY(0);
+		}
+	}
+}
+
+.gd-video-details-map__wrapper {
+	height: 100%;
+	transform: translateY(-38%);
+	transition: all $gd-video-theatre-map-transition-duration $gd-video-theatre-map-transition-timing-function;
+}

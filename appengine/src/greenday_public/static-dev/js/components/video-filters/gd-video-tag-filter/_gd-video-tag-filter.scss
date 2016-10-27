@@ -1,0 +1,4 @@
+.video-tag-filter__tag-instance-count {
+	@include type(caption);
+	margin-left: $baseline-component-grid;
+}

@@ -1,0 +1,13 @@
+<div class="video-filter video-filter--{{ type }}">
+	<gd-button ng-if="type !== 'text'" class="video-filter__button" ng-click="filterCtrl.onClick()" ng-class="{'active': nonDefault, 'open': isOpen}">
+		<span layout="row" layout-align="start center">
+			<span class="video-filter__filter-title">
+				<gd-video-filter-title ng-model="filterCtrl.titleObj"></gd-video-filter-title>
+				{{ filterCtrl.filterTitle }}
+			</span>
+			<icon class="ic-arrow-drop-down"></icon>
+		</span>
+	</gd-button>
+	<div class="video-filter__filter fade" ng-show="!!isOpen" ng-transclude></div>
+	<gd-backdrop ng-if="type !== 'text'" ng-show="isOpen" callback="filterCtrl.onClick()"></gd-backdrop>
+</div>

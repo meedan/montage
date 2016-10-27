@@ -1,0 +1,34 @@
+<div layout="row" layout-align="center center" layout-fill>
+	<div ng-if="!editing" class="gd-video-timeline-tag-label__wrap--normal">
+		<div
+			class="gd-video-timeline-tag-label__controls"
+			layout="row" layout-align="center"
+			ng-class="{ 'is-busy': busy }"
+			ng-hide="!!video.archived_at">
+			<gd-button class="gd-button--small"  async="ctrl.removeTagRow()"><icon class="ic-delete"></icon></gd-button>
+			<gd-button
+				class="gd-button--small"
+				ng-click="ctrl.enableEditing()"
+				ng-disabled="busy">
+				<icon class="ic-mode-edit"></icon>
+			</gd-button>
+		</div>
+		<div class="gd-video-timeline-tag-label__content-wrap" ng-click="ctrl.addTagInstance()">
+			<span class="gd-video-timeline-tag-label__content">{{ tag.project_tag.name }}</span>
+		</div>
+	</div>
+	<div ng-if="editing" class="gd-video-timeline-tag-label__wrap--editing">
+		<form ng-submit="ctrl.finishEditing()">
+			<input
+				ng-model="tag.newName"
+				ng-keyup="ctrl.checkKey($event)"
+				class="gd-video-timeline-tag-label__edit-field">
+			<gd-button
+				aria-label="Cancel editing"
+				ng-click="ctrl.cancelEditing()"
+				class="gd-button--small gd-video-timeline-tag-label__cancel-editing">
+				<icon class="ic-close"></icon>
+			</gd-button>
+		</form>
+	</div>
+</div>

@@ -1,0 +1,17 @@
+<div class="user-box" layout="column">
+	<div class="user-box__userinfo" layout="{{ thumbLayout }}" layout-align="center">
+		<div layout="row" layout-align="center">
+			<img class="user-box__thumbnail" ng-src="{{ ::user.profile_img_url }}?sz={{ ::thumbSize }}" ng-if="user.profile_img_url" />
+			<img class="user-box__thumbnail" ng-src="{{ ::defaultProfileImgUrl }}" ng-if="!user.profile_img_url" />
+		</div>
+		<div flex>
+			<div class="user-box__firstname" layout="{{ nameLayout }}" layout-align="{{ nameLayoutAlign }}">{{ user.first_name }}</div>
+			<div class="user-box__lastname" layout="{{ nameLayout }}" layout-align="{{ nameLayoutAlign }}">{{ user.last_name }}</div>
+		</div>
+	</div>
+
+	<div class="user-box__stats" layout="column" layout-align="center center">
+		<stats icon="ic-movie" items-text="videos watched" one-item-text="video watched" count="userStats.videos_watched" no-items-text="No videos watched yet"></stats>
+		<stats icon="ic-label" items-text="tags added" one-item-text="tag added" count="userStats.tags_added" no-items-text="No tags added yet"></stats>
+	</div>
+</div>

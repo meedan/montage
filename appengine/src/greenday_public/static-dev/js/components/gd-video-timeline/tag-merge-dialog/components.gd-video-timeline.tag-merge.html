@@ -1,0 +1,15 @@
+<md-dialog class="dialog tag-merge-dialog">
+	<div class="dialog__save-overlay fade" ng-show="saving">
+		<holo-spinner></holo-spinner>
+	</div>
+	<form name="tagMergeForm" ng-submit="ctrl.mergeTags()" novalidate>
+		<md-content class="duplicates-dialog__content">
+			<h2>Tag merge</h2>
+			<p class="duplicates-dialog__hint">This tag already exists. Would you like to merge the two tags?</p>
+		</md-content>
+		<div class="md-actions">
+			<md-button type="button" ng-click="ctrl.cancel()">Cancel</md-button>
+			<md-button type="submit">Merge</md-button>
+		</div>
+	</form>
+</md-dialog>

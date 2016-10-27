@@ -1,0 +1,29 @@
+<md-card class="gd-project-comment__thread" layout="column" ng-click="threadCtrl.expand()" ng-class="{'gd-project-comment__thread--expanded': threadCtrl.expanded}">
+	<gd-project-comment comment="thread"></gd-project-comment>
+	<div class="gd-project-comment__replies" ng-if="thread.replies.length">
+		<div class="gd-project-comment__comment">
+			<ng-pluralize count="thread.replies.length" when="{'one': '1 comment', 'other': '{} comments'}"></ng-pluralize>
+		</div>
+		<md-list>
+			<md-item ng-repeat="reply in thread.replies | limitTo:maxRepliesToShow track by reply.id">
+				<gd-project-comment comment="reply"></gd-project-comment>
+			</md-item>
+		</md-list>
+	</div>
+	<md-content ng-show="threadCtrl.expanded" class="gd-project-comment__form" layout="column">
+		<form ng-submit="threadCtrl.addComment()">
+			<div class="gd-pc-sidebar__user" layout="row" layout-align="start center">
+				<img ng-src="{{ ::user.profile_img_url }}?sz=40" class="gd-project-comment__user-avatar" alt="{{ ::user.first_name }} {{ ::user.last_name }}" ng-if="user.profile_img_url">
+				<img ng-src="{{ ::user.defaultProfileImgUrl }}" class="gd-project-comment__user-avatar" alt="{{ ::user.first_name }} {{ ::user.last_name }}" ng-if="!user.profile_img_url">
+				<div class="gd-pc-sidebar__add-update" flex>
+					<input ng-model="threadCtrl.newComment.text" type="text" class="gd-pc-sidebar__add-reply-input" placeholder="Reply">
+				</div>
+			</div>
+			<div ng-class="{'gd-pc-sidebar__actions--visible': threadCtrl.newComment.text !== ''}" class="gd-pc-sidebar__actions" layout="row" layout-align="end start">
+				<md-button ng-click="threadCtrl.resetComment()" class="md-primary gd-pc-sidebar__action--cancel" type="button">Cancel</md-button>
+				<md-button class="md-accent gd-pc-sidebar__actions--submit" type="submit">Submit</md-button>
+			</div>
+		</form>
+	</md-content>
+</md-card>
+<gd-backdrop ng-if="threadCtrl.expanded === true" callback="threadCtrl.collapse()"></gd-backdrop>

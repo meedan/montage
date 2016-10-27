@@ -1,0 +1,6 @@
+<div class="gd-add-to-collection-button" layout="row" layout-align="center center">
+	<icon ng-if="project.id === video.project_id" class="fade ic-check-circle" title="In your project '{{ ::project.name }}'"></icon>
+	<gd-button ng-if="project.id !== video.project_id" class="gd-button--icon gd-button--toggle fade" async="ctrl.addToCollection()">
+		<icon class="ic-add"></icon>
+	</gd-button>
+</div>

@@ -1,0 +1,48 @@
+<md-dialog class="dialog collaborators-dialog">
+	<md-content class="collaborators-dialog__content">
+		<form layout-fill layout="column" ng-submit="ctrl.addCollaborator()">
+			<h2>Collaborators</h2>
+
+			<md-content class="collaborators-dialog__list-wrapper">
+				<md-list class="collaborators__list" layout="row" layout-wrap>
+					<md-item class="collaborators__item" ng-class="{'is-user': !user.is_owner}" flex="33" ng-repeat="user in ctrl.collaborators | orderBy:'created' track by user.id" layout="row" layout-align="start center">
+						<md-item-content>
+							<div class="collaborators__user-image" layout="column" layout-align="center center">
+								<icon ng-if="!user.profile_img_url" class="ic-person"></icon>
+								<img ng-if="user.profile_img_url" flex ng-src="{{ user.profile_img_url }}?sz=40">
+								<gd-button ng-if="!user.is_owner" type="button" ng-click="ctrl.removeCollaborator(user)" class="collaborators__remove-user-button" layout-fill>
+									<icon class="ic-delete"></icon>
+								</gd-button>
+							</div>
+							<div flex>
+								<div class="collaborators__user-name" ng-if="user.first_name">{{ user.first_name }} {{ user.last_name }}</div>
+								<div class="collaborators__user-email" ng-if="!user.first_name">{{ user.email }}</div>
+								<div class="collaborators__user-type" ng-if="user.is_pending">Awaiting response</div>
+							</div>
+						</md-item-content>
+					</md-item>
+				</md-list>
+			</md-content>
+
+			<md-content class="collaborators-dialog__input-wrapper">
+				<gd-autocomplete results="ctrl.possibleUsers" ng-model="ctrl.newCollaborator" display-property="email">
+					<div layout="row" class="collaborators__autocomplete">
+						<div class="collaborators__autocomplete-icon" layout="row" layout-align="center center">
+							<icon class="ic-person-add"></icon>
+						</div>
+						<input class="collaborators__autocomplete-input" flex type="text" ng-model="ctrl.newCollaborator.email" ng-model-options="{ debounce: 500 }" placeholder="Add by name or email address">
+					</div>
+				</gd-autocomplete>
+
+				<div class="collaborators-dialog__actions" layout="row" layout-align="end">
+					<md-button class="dialog__action--cancel" type="button" aria-label="Close" ng-click="ctrl.close()">Close</md-button>
+					<md-button class="dialog__action--ok" type="submit" aria-label="Add" ng-disabled="!ctrl.newCollaborator.email">Add</md-button>
+				</div>
+
+			</md-content>
+		</form>
+		<section ng-show="ctrl.isBusy" class="page-loader ng-hide fade" layout="column" layout-align="center center">
+			<holo-spinner class="holo-spinner--layer"></holo-spinner>
+		</section>
+	</md-content>
+</md-dialog>

@@ -1,0 +1,15 @@
+<md-dialog class="dialog">
+	<md-content>
+		<form layout-fill layout="column" ng-submit="ctrl.addCollection()">
+			<h2>Create new collection</h2>
+			<md-input-group class="md-input-group-theme-greenday" layout="column">
+				<label for="collectionName">Title</label>
+				<md-input id="collectionName" type="text" ng-model="ctrl.collection.name" required></md-input>
+			</md-input-group>
+			<div layout="row" layout-align="end">
+				<md-button class="dialog__action--cancel" type="button" ng-click="ctrl.close()">Cancel</md-button>
+				<md-button class="dialog__action--ok" type="submit">Save</md-button>
+			</div>
+		</form>
+	</md-content>
+</md-dialog>

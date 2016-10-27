@@ -1,0 +1,14 @@
+<div class="gd-autocomplete">
+	<div class="gd-autocomplete__input" ng-transclude></div>
+	<md-content class="gd-autocomplete__dropdown md-whiteframe-z1" ng-show="showDropdown">
+		<md-list>
+			<md-item ng-repeat="result in results">
+				<md-item-content>
+					<gd-button class="gd-autocomplete__item" ng-click="select(result)" ng-class="{'hover': $index==currentIndex}">
+						<span flex layout="row" layout-align="start center">{{ result[displayProperty] }}</span>
+					</gd-button>
+				</md-item-content>
+			</md-item>
+		</md-list>
+	</md-content>
+</div>

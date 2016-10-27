@@ -1,0 +1,14 @@
+<div layout="row" layout-align="start center">
+	<span ng-if="ngModel.prefix">{{ ngModel.prefix }}&nbsp;</span>
+	<span ng-repeat="item in titleItems">
+		<span ng-if="!$first && totalItems > 1">
+			<span ng-if="$last && totalItems <= ngModel.offset">&nbsp;{{ ngModel.conjunctive }}</span>
+			<span ng-if="!$last || totalItems > ngModel.offset">{{ ngModel.separator }}</span>
+		</span>
+		<span class="highlight">
+			<strong>{{ item[ngModel.titleKey] }}</strong>
+		</span>
+	</span>
+	<span ng-if="ngModel.offset && totalItems > ngModel.offset">&nbsp;and {{ totalItems - ngModel.offset }} more</span>
+	<span ng-if="ngModel.suffix">&nbsp;{{ ngModel.suffix }}</span>
+</div>

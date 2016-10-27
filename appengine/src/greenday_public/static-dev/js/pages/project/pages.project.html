@@ -1,0 +1,74 @@
+<div class="project__toolbar" layout="column">
+	<div class="project__description" ng-if="ctrl.project.description" ng-class="{'expanded': ctrl.descriptionExpanded}" layout="row" layout-align="center start">
+		<md-content flex>{{ ctrl.project.description }}</md-content>
+		<gd-button ng-click="ctrl.descriptionExpanded = !ctrl.descriptionExpanded">
+			<icon class="ic-expand-more"></icon>
+		</gd-button>
+	</div>
+	<div class="project__toolbar__row" layout="row" layout-align="center" flex>
+		<div class="content-spacer" flex></div>
+		<div class="project__toolbar__wrapper" layout="row" layout-align="center">
+			<md-button ng-if="ctrl.collection" aria-label="Export collection" class="md-fab md-accent project__toolbar-export-button" ng-click="ctrl.exportCollection()">
+				<icon class="ic-save"></icon>
+			</md-button>
+			<div class="project__toolbar-header" flex="33" layout="row" layout-align="start center">
+				<span ng-show="ctrl.collection" flex layout="row" layout-align="start center">
+					<gd-inline-edit ng-model="ctrl.collection.name" on-save="ctrl.updateCollection()" layout="column">
+						{{ ctrl.collection.name }}
+					</gd-inline-edit>
+					<gd-button ng-click="ctrl.removeCollection($event)" layout="row" layout-align="center center" class="project__toolbar__delete-collection">
+						<icon class="ic-delete"></icon>
+					</gd-button>
+				</span>
+				<span ng-show="!ctrl.collection" flex>
+					<span ng-show="ctrl.section === 'library'">All videos</span>
+					<span ng-show="ctrl.section === 'favorites'">Favourite videos</span>
+					<span ng-show="ctrl.section === 'unwatched'">Unwatched videos</span>
+				</span>
+			</div>
+			<div flex class="project__toolbar__buttons" layout="row" layout-align="center">
+				<gd-button layout="row" layout-align="center center" class="gd-button--icon" ng-class="{ 'is-active': ctrl.viewMode === 'list' }" ng-click="ctrl.switchView('list')">
+					<icon class="ic-view-list"></icon>
+					<md-tooltip md-delay="100">Videos</md-tooltip>
+				</gd-button>
+				<gd-button layout="row" layout-align="center center" class="gd-button--icon" ng-class="{ 'is-active': ctrl.viewMode === 'map' }" ng-click="ctrl.switchView('map')">
+					<icon class="ic-place"></icon>
+					<md-tooltip md-delay="100">Locations</md-tooltip>
+				</gd-button>
+				<gd-button layout="row" layout-align="center center" class="gd-button--icon" ng-class="{ 'is-active': ctrl.viewMode === 'tag' }" ng-click="ctrl.switchView('tag')">
+					<icon class="ic-label"></icon>
+					<md-tooltip md-delay="100">Tags</md-tooltip>
+				</gd-button>
+			</div>
+			<div flex="33" layout="row" layout-align="end"></div>
+		</div>
+		<div class="content-spacer" flex></div>
+	</div>
+</div>
+
+<div class="project-filter-toolbar md-whiteframe-z1" layout="row" layout-align="start center">
+	<div class="content-spacer" flex></div>
+	<div class="project-filter-toolbar__content">
+		<gd-video-filter-set project="ctrl.project" collection="ctrl.collection" auto-fetch="false" show-text-filter="true" ng-model="ctrl.filterSet" on-update="ctrl.onFilterSetUpdate(ctrl.filterSet)"></gd-video-filter-set>
+	</div>
+	<div class="content-spacer" flex></div>
+</div>
+
+<md-content class="project__main-content" flex layout="column">
+	<div ng-if="!ctrl.isFiltering && !ctrl.projectVideos.length && ctrl.viewMode === 'list'" layout="column" layout-align="center center" flex>
+		<h2 class="projects__create-prompt__title">Search for videos to get started</h2>
+		<p class="projects__create-prompt__content">To add videos to your project library use the search box</p>
+		<md-button aria-label="Add new project" class="md-fab md-accent" ng-click="appctrl.showSearch()">
+			<icon class="ic-search"></icon>
+		</md-button>
+	</div>
+	<div ng-if="ctrl.isFiltering || ctrl.viewMode !== 'list' || ctrl.projectVideos.length > 0">
+		<gd-video-list lazy-show="ctrl.viewMode === 'list'" videos="ctrl.filterSet.videos" layout="column" is-filtering="ctrl.isFiltering" options="ctrl.videoListOptions" ordering="ctrl.ordering" quick-filter="ctrl.quickFilter"></gd-video-list>
+		<video-map lazy-show="ctrl.viewMode === 'map'" refresh-when="ctrl.viewMode === 'map'" videos="ctrl.filterSet.videos" layout="row" flex></video-map>
+		<video-tag-view lazy-show="ctrl.viewMode === 'tag'" tags="ctrl.filterSet.tags" layout="column" flex></video-tag-view>
+	</div>
+</md-content>
+
+<section ng-show="ctrl.loaders.project" class="page-loader ng-hide fade" layout="column" layout-align="center center">
+	<holo-spinner class="holo-spinner--layer"></holo-spinner>
+</section>

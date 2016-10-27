@@ -1,0 +1,49 @@
+<div class="gd-video-timeline-tag-instance__wrap"
+	ng-mouseenter="onTagMouseenter()"
+	ng-mouseleave="onTagMouseleave()">
+	<div
+		ng-if="!video.archived_at"
+		class="gd-video-timeline-tag-instance__handle gd-video-timeline-tag-instance__handle--left"
+		ng-mouseenter="onResizeHandleMouseEnter('start', $event)"
+		ng-mouseleave="onResizeHandleMouseLeave()"
+		ng-mousedown="onResizeHandleMouseDown($event)">
+	</div>
+
+	<div
+		class="gd-video-timeline-tag-instance__fine-tune gd-video-timeline-tag-instance__fine-tune--{{fineTuneSide}} fade"
+		ng-show="fineTuneVisible">
+		<button
+			class="gd-video-timeline-tag-instance__fine-tune-btn gd-video-timeline-tag-instance__fine-tune-btn--backwards"
+			ng-click="ctrl.fineTune('backwards')">
+				<icon class="ic-arrow-drop-up"></icon>
+			</button>
+		<button
+			class="gd-video-timeline-tag-instance__fine-tune-btn gd-video-timeline-tag-instance__fine-tune-btn--forwards"
+			ng-click="ctrl.fineTune('forwards')">
+				<icon class="ic-arrow-drop-up"></icon>
+			</button>
+	</div>
+
+	<div class="gd-video-timeline-tag-instance__content" ng-click="ctrl.playFromTag($event)">
+		<gd-youtube-thumbnail time="instance.start_seconds" video-id="video.youtube_id" class="gd-video-timeline-tag-instance__thumb"></gd-youtube-thumbnail>
+	</div>
+
+	<div ng-if="!video.archived_at" class="gd-video-timeline-tag-instance__controls-wrap" ng-show="controlsVisible">
+		<div class="gd-video-timeline-tag-instance__controls" layout="row">
+			<gd-button ng-click="ctrl.expandToDuration($event)">
+				<icon class="ic-texture"></icon>
+			</gd-button>
+			<gd-button async="ctrl.deleteInstance($event)">
+				<icon class="ic-delete"></icon>
+			</gd-button>
+		</div>
+	</div>
+
+	<div
+		ng-if="!video.archived_at"
+		class="gd-video-timeline-tag-instance__handle gd-video-timeline-tag-instance__handle--right"
+		ng-mouseenter="onResizeHandleMouseEnter('end', $event)"
+		ng-mouseleave="onResizeHandleMouseLeave()"
+		ng-mousedown="onResizeHandleMouseDown($event)">
+	</div>
+</div>

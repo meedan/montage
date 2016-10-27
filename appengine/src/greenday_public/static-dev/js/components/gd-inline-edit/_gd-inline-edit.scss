@@ -1,0 +1,27 @@
+.inline-edit {
+	cursor: default;
+	display: block;
+
+	input[type="text"] {
+		background: transparent;
+		border: 0;
+		color: inherit;
+		margin: 0;
+		padding: 0;
+	}
+
+	icon {
+		color: map-get($color-accent, '900');
+	}
+
+	&:hover {
+		icon {
+			color: inherit;
+		}
+	}
+}
+
+.inline-edit__content {
+	@include text-overflow();
+	padding-right: $baseline-type-grid * 5;
+}

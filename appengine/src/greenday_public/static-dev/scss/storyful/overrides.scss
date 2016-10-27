@@ -1,0 +1,26 @@
+.video-filter__filter-title {
+  color: $colour-white-pure;
+}
+.video-filter__input {
+  color: $colour-white-pure;
+  border-color: $colour-white-pure;
+
+  &::placeholder
+  {
+    color: map-get($primary-color-palette, 'A100');
+  }
+}
+
+.md-button.md-default-theme:not([disabled]):hover,
+.md-button.md-default-theme:not([disabled]):focus {
+    @include background-opacity(map-get($primary-color-palette, '50'), 0.3);
+}
+
+
+md-tooltip{
+  background-color: map-get($primary-color-palette, '100');
+}
+
+.gd-pc-sidebar__add-update-input::placeholder{
+  color: map-get($background-color-palette, 'A700');
+}

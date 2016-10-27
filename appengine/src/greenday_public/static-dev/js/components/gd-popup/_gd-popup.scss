@@ -1,0 +1,18 @@
+gd-popup {
+	display: inline-block;
+}
+
+gd-popup-button {
+	display: inline-block;
+
+	> span {
+		display: inline-block;
+	}
+}
+
+gd-popup-element {
+	left: 0;
+	position: absolute;
+	top: 0;
+	z-index: 2000;
+}

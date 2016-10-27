@@ -1,0 +1,54 @@
+options:
+  livereload: true
+
+scss:
+  options:
+    cwd: '<%= paths.staticDevRoot %>'
+    livereload: false
+  files:
+    - '**/*.scss'
+  tasks:
+    - 'sass:dev'
+    - 'autoprefixer:dev'
+    - 'notify:sass'
+
+css:
+  options:
+    cwd: '<%= paths.staticDevRoot %>/css'
+  files:
+    - '**/*.css'
+
+js:
+  options:
+    cwd: '<%= paths.staticDevRoot %>/js'
+  files:
+    - '**/*.js'
+    - '!app/app.templates.js'
+  tasks:
+    - 'jshint:dev'
+    # - 'karma:unit:run'
+
+templates:
+  options:
+    cwd: '<%= paths.staticDevRoot %>/js'
+  files:
+    - '**/*.html'
+  tasks:
+    - 'ngtemplates'
+    - 'notify:templates'
+
+sprites:
+  options:
+    cwd: '<%= paths.staticDevRoot %>/img/sprite'
+  files:
+    - '**/*.{jpg,jpeg,gif,png}'
+  tasks:
+    - 'glue:dev'
+
+index:
+  options:
+    cwd: '<%= paths.templates %>'
+  files:
+    - 'index.html'
+  tasks:
+    - 'useminlist:html'

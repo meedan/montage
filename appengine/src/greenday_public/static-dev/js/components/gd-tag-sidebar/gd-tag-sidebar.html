@@ -1,0 +1,36 @@
+<md-sidenav class="app-sidebar md-sidenav-right tag-sidebar md-whiteframe-z2" md-is-open="tagSidebarCtrl.isOpen" md-component-id="tagSidebar">
+	<md-content layout="column" layout-fill lazy-show="tagSidebarCtrl.isOpen">
+		<div class="tag-sidebar__autocomplete">
+			<form ng-submit="tagSidebarCtrl.addTag(newTag)">
+				<gd-autocomplete results="autoCompleteTags" ng-model="newTag" display-property="name" on-select="tagSidebarCtrl.addTag(newTag)">
+					<div layout="row">
+						<div class="tag-sidebar__autocomplete-icon" layout="row" layout-align="center center">
+							<icon class="ic-label"></icon>
+						</div>
+						<input class="tag-sidebar__autocomplete-input" flex type="text" ng-model="newTag.name" ng-model-options="{ debounce: 500 }">
+						<div class="tag-sidebar__close-icon" layout="row" layout-align="center center">
+							<md-button md-no-ink class="fade" ng-show="newTag.name !== ''" ng-click="tagSidebarCtrl.reset()" type="button">
+								<icon class="ic-close"></icon>
+							</md-button>
+						</div>
+					</div>
+				</gd-autocomplete>
+			</form>
+		</div>
+		<md-content class="tag-sidebar__tag-list" droppable droppable-data="0" on-drop="tagSidebarCtrl.moveTag" flex layout="column">
+			<gd-tag-list tag-controller="tagController" ng-model="tags" tag-template="{{ tagTemplateUrl }}"></gd-tag-list>
+			<div ng-if="!tags.length" layout="column" layout-align="center center" flex>
+				<div class="tag-sidebar__tag-placeholder" layout="column">
+					<div class="tag-sidebar__tag-placeholder-tag"></div>
+					<div class="tag-sidebar__tag-placeholder-tag--short"></div>
+					<div class="tag-sidebar__tag-placeholder-tag--dragging"></div>
+				</div>
+				<h2 class="projects__create-prompt__title">Manage your tags here</h2>
+				<p class="projects__create-prompt__content">Add tags here or dive into a video and start tagging. Come back any time to organise your tags.</p>
+			</div>
+		</md-content>
+		<section ng-show="tagSidebarCtrl.isBusy" class="page-loader ng-hide fade" layout="column" layout-align="center center">
+			<holo-spinner class="holo-spinner--layer"></holo-spinner>
+		</section>
+	</md-content>
+</md-sidenav>

@@ -1,0 +1,35 @@
+<md-content class="video-filter__list md-whiteframe-z1">
+	<md-content class="video-filter__content-list" layout="row" layout-align="start start">
+		<md-radio-group ng-model="mode" flex>
+			<md-radio-button value="0" aria-label="Has no location">Has no location</md-radio-button>
+			<md-radio-button value="1" aria-label="Has location">Has location</md-radio-button>
+			<md-radio-button value="2" aria-label="Has location">Specific location</md-radio-button>
+		</md-radio-group>
+		<div class="location-filter__clear-button">
+			<md-button type="button" aria-label="Clear" ng-click="locationFilterCtrl.clear()">
+				Clear
+			</md-button>
+		</div>
+	</md-content>
+	<md-content class="video-filter__content" ng-show="mode === '2'">
+		<form ng-submit="locationFilterCtrl.onLocationUpdate()">
+			<div class="location-filter__row" layout="row" layout-align="start center">
+				<div class="location-filter__part">Within</div>
+				<div class="location-filter__part">
+					<input class="location-filter__input--radius" type="text" ng-model="location.radius">
+				</div>
+				<div class="location-filter__part" flex>
+					<ng-pluralize count="location.radius" when="{'one': 'mile of', 'other': 'miles of'}"></ng-pluralize>
+				</div>
+			</div>
+			<div class="location-filter__row" layout="row" layout-align="start center">
+				<div flex class="location-filter__part" layout="row" layout-align="start center">
+					<input flex class="location-filter__input--autocomplete" type="text" ng-model="location.name">
+				</div>
+				<div class="location-filter__part" layout="row" layout-align="start center">
+					<md-button type="submit" aria-label="Apply" ng-disabled="!location.radius || !location.lat || !location.lng" flex class="md-primary">Apply</md-button>
+				</div>
+			</div>
+		</form>
+	</md-content>
+</md-content>

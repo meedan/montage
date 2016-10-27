@@ -1,0 +1,50 @@
+<md-content class="video-list">
+	<div class="video-list__tag-container" layout="column" flex ng-if="tagList.length > 0">
+		<div class="video-list__tag-wrapper">
+			<md-content class="video-list__tag" ng-class="{'expanded': tag.expanded}" ng-repeat="tag in tagList track by tag.global_tag_id">
+				<div layout="row">
+					<div layout="column" flex>
+						<div class="video-list__tag-name">{{ ::tag.name }}</div>
+						<div class="video-list__tag-stats">
+							<ng-pluralize count="tag.instanceCount" when="{'one': '1 instance across', 'other': '{} instances across'}"></ng-pluralize>
+							<ng-pluralize count="tag.videoCount" when="{'one': '1 video', 'other': '{} videos'}"></ng-pluralize>
+						</div>
+					</div>
+					<div class="video-list__tag-toggle-button" ng-if="tag.hiddenInstanceCount > 0">
+						<gd-button ng-click="ctrl.toggleTag(tag)">
+							<span layout="row" layout=align="start center">
+								<span class="video-list__tag__more-text" flex layout="row" layout-align="center center">
+									<span ng-if="!tag.expanded">{{ ::tag.hiddenInstanceCount }} more</span>
+									<span ng-if="tag.expanded">Showing all {{ ::tag.instanceCount }} instances</span>
+								</span>
+								<icon ng-class="{'ic-unfold-more': !tag.expanded, 'ic-unfold-less': tag.expanded}"></icon>
+							</span>
+						</gd-button>
+					</div>
+				</div>
+				<div class="video-list__tag-instances" layout="row" layout-align="start start">
+					<div class="video-list__tag-instance" ng-repeat="instance in tag.instances | limitTo:tag.limit">
+						<div class="video-list__tag-instance-image-wrapper">
+							<div class="video-list__tag-instance-image" style="background-image: url(//img.youtube.com/vi/{{ ::instance.youtube_id }}/default.jpg)"></div>
+							<!-- <div class="video-list__tag-instance-image" style="background-image: url(/yt-thumbnail/?id={{ ::instance.youtube_id }}&amp;ats={{ ::instance.start_seconds * 1000 | round }})"></div> -->
+						</div>
+						<div class="video-list__tag-instance-overlay">
+							<a href="/project/{{ ::ctrl.projectId }}/video/{{ ::instance.youtube_id }}?t={{ ::instance.start_seconds }}" class="video-list__tag-instance-overlay-link" layout-fill layout="column" layout-align="start center">
+								<span flex>
+									<span class="video-list__tag-instance-overlay__video-name">{{ ::instance.video_name }}</span>
+								</span>
+								<span class="video-list__tag-instance-overlay-info" layout="row" layout-align="start center">
+									<span><icon class="ic-play-circle-fill"></icon></span>
+									<span flex>{{ ::instance.start_seconds | round }}s</span>
+								</span>
+							</a>
+						</div>
+					</div>
+				</div>
+			</md-content>
+		</div>
+	</div>
+</md-content>
+<div layout-fill flex layout="row" layout-align="center center" class="video-tag-view__no-tag" ng-if="ctrl.initialised && tagList.length === 0">
+	<md-content class="video-tag-view__no-tag-text">No tag data available</md-content>
+</div>

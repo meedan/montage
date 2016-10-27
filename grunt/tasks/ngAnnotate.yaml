@@ -1,0 +1,7 @@
+options:
+  singleQuotes: true
+  separator: ','
+dist:
+  src:
+    - '<%= paths.tmp %>/concat/js/app.js'
+ 	

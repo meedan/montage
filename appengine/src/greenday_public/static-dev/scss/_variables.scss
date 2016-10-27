@@ -1,0 +1,147 @@
+
+$gutter: 20px;
+
+$bp-large: 1200px;
+$bp-medium: 960px;
+$bp-small: 600px;
+
+$max-content-width: 1150px;
+
+// Baseline Grid
+// ------------------------------
+$baseline-component-grid: 8px;
+$baseline-type-grid: 4px;
+
+// Typography
+// ------------------------------
+$base-font-size: 16px;
+$base-line-height: 19px;
+$normalized-font-family: 'RobotoDraft', 'Helvetica Neue', Helvetica, Arial;
+
+$typography-styles: (
+	'display-4': (
+		'color': rgba(38, 50, 56, .54),
+		'font-size': 112px,
+		'font-style': normal,
+		'font-weight': 300,
+		'white-space': nowrap),
+	'display-3': (
+		'color': rgba(38, 50, 56, .54),
+		'font-size': 56px,
+		'font-style': normal,
+		'font-weight': 400,
+		'white-space': nowrap),
+	'display-2': (
+		'color': rgba(38, 50, 56, .54),
+		'font-size': 45px,
+		'font-style': normal,
+		'font-weight': 400,
+		'line-height': 48px),
+	'display-1': (
+		'color': rgba(38, 50, 56, .54),
+		'font-size': 34px,
+		'font-style': normal,
+		'font-weight': 400,
+		'line-height': 40px),
+	'headline': (
+		'color': rgba(38, 50, 56, .87),
+		'font-size': 24px,
+		'font-style': normal,
+		'font-weight': 400,
+		'line-height': 32px),
+	'title': (
+		'color': rgba(38, 50, 56, .87),
+		'font-size': 20px,
+		'font-style': normal,
+		'font-weight': 500,
+		'white-space': nowrap),
+	'subhead-2': (
+		'color': rgba(38, 50, 56, .87),
+		'font-size': 16px,
+		'font-style-desktop': 15px,
+		'font-style': normal,
+		'font-weight': 400,
+		'line-height': 28px),
+	'subhead-1': (
+		'color': rgba(38, 50, 56, .87),
+		'font-size': 16px,
+		'font-style-desktop': 15px,
+		'font-style': normal,
+		'font-weight': 400,
+		'line-height': 24px),
+	'body-2': (
+		'color': rgba(38, 50, 56, .87),
+		'font-size': 14px,
+		'font-size-desktop': 13px,
+		'font-style': normal,
+		'font-weight': 500,
+		'line-height': 24px),
+	'body-1': (
+		'color': rgba(38, 50, 56, .87),
+		'font-size': 14px,
+		'font-size-desktop': 13px,
+		'font-style': normal,
+		'font-weight': 400,
+		'line-height': 20px),
+	'caption': (
+		'color': rgba(38, 50, 56, .54),
+		'font-size': 12px,
+		'font-style': normal,
+		'font-weight': 400,
+		'white-space': nowrap),
+	'menu': (
+		'color': rgba(38, 50, 56, .87),
+		'font-size': 14px,
+		'font-size-desktop': 13px,
+		'font-style': normal,
+		'font-weight': 400,
+		'white-space': nowrap),
+	'button': (
+		'color': rgba(38, 50, 56, .87),
+		'font-size': 14px,
+		'font-style': normal,
+		'font-weight': 500,
+		'text-transform': uppercase,
+		'white-space': nowrap
+	)
+);
+
+$h1-font-size: rem(font-size, 24px);
+$h2-font-size: rem(font-size, 18px);
+$h3-font-size: rem(font-size, 16px);
+$h4-font-size: rem(font-size, 14px);
+$h5-font-size: rem(font-size, 12px);
+$h6-font-size: rem(font-size, 11px);
+
+$h1-margin: .67em 0;
+$h2-margin: .83em 0;
+$h3-margin: 1em 0;
+$h4-margin: 1.33em 0;
+$h5-margin: 1.67em 0;
+$h6-margin: 2.33em 0;
+
+// Menus
+// ------------------------------
+$menu-x-width-desktop: 64px;
+$menu-x-width-mobile: 56px;
+
+// Icons
+// ------------------------------
+$base-icon-size: 24px;
+
+
+// Easing Curves
+// FIXME: These are copy-pasted from a pre-release version of angular-material.
+// We should remove these once the new release is available.
+//--------------------------------------------
+$swift-ease-out-duration: .4s !default;
+$swift-ease-out-timing-function: cubic-bezier(.25, .8, .25, 1) !default;
+$swift-ease-out: all $swift-ease-out-duration $swift-ease-out-timing-function !default;
+
+$swift-ease-in-duration: .3s !default;
+$swift-ease-in-timing-function: cubic-bezier(.55, 0, .55, .2) !default;
+$swift-ease-in: all $swift-ease-in-duration $swift-ease-in-timing-function !default;
+
+$swift-ease-in-out-duration: .5s !default;
+$swift-ease-in-out-timing-function: cubic-bezier(.35, 0, .25, 1) !default;
+$swift-ease-in-out: all $swift-ease-in-out-duration $swift-ease-in-out-timing-function !default;

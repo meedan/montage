@@ -1,0 +1,37 @@
+<div class="video-list-item" layout="row">
+	<div layout="column" layout-align="center" class="video-list-item__cell video-list-item__reorder">
+		<icon class="ic-reorder"></icon>
+	</div>
+	<div class="video-list-item__cell video-list-item__image">
+		<a href="{{ video.theatre_url }}" class="video-list-item__video-link" ng-if="::(!video.missing_from_youtube)">
+			<img ng-src="{{ ::video.c_thumbnail_url }}">
+			<span class="video-list-item__duration">{{ ::video.pretty_duration }}</span>
+		</a>
+	</div>
+	<div flex layout="column" layout-align="center" class="video-list-item__cell video-list-item__video-title">
+		<a href="{{ video.theatre_url }}" class="video-list-item__name video-list-item__video-link">{{ ::video.name }}</a>
+	</div>
+	<div layout="column" layout-align="center" class="video-list-item__cell video-list-item__channel-name">
+		<span>{{ ::video.channel_name }}</span>
+	</div>
+	<div layout="row" layout-align="start center" class="video-list-item__cell video-list-item__watch-count">
+		<icon class="ic-visibility"></icon>
+		{{ ::video.watch_count }}
+	</div>
+	<div layout="row" layout-align="start center" class="video-list-item__cell video-list-item__tag-count">
+		<icon class="ic-label"></icon>
+		{{ video.tag_count }}
+	</div>
+	<div layout="column" layout-align="center" class="video-list-item__cell video-list-item__added">
+		{{ ::video.pretty_publish_date }}
+	</div>
+	<div layout="column" layout-align="center" class="video-list-item__cell video-list-item__added">
+		{{ ::video.pretty_created }}
+	</div>
+	<div layout="column" layout-align="center" class="video-list-item__cell video-list-item__favourite">
+		<gd-favourite-video-button video="video" ng-if="::(!video.missing_from_youtube)"></gd-favourite-video-button>
+	</div>
+	<div layout="column" layout-align="center" class="video-list-item__cell video-list-item__select">
+		<gd-select-video-button ng-if="::(!video.missing_from_youtube)" selected="video.selected"></gd-select-video-button>
+	</div>
+</div>

@@ -1,0 +1,96 @@
+<div class="project-list-item md-whiteframe-z1" layout="column" ng-hide="!isVisible" ng-class="{'project-list-item--expanded': ctrl.showInfo}">
+	<div class="project__edit" layout="row" ng-show="ctrl.modes.edit">
+		<span class="project__image" layout="column">
+			<image-uploader image="ctrl.project.image_url" is-busy="ctrl.imageUploaderBusy" ng-model="ctrl.project.image_url" type="project" layout-fill></image-uploader>
+		</span>
+		<div class="project" flex>
+			<form layout-fill class="project__form" layout="column" ng-submit="ctrl.saveProject()">
+				<md-input-container class="md-input-group-theme-greenday" layout="column">
+					<label for="projectName">Title</label>
+					<input id="projectName" type="text" ng-model="ctrl.project.name" required>
+				</md-input-container>
+				<md-input-container class="md-input-group-theme-greenday" layout="column">
+					<label for="projectDescription">Description</label>
+					<input id="projectDescription" multiline type="text" ng-model="ctrl.project.description">
+				</md-input-container>
+				<div layout="column" flex></div>
+				<div layout="row" layout-align="end center">
+					<md-button class="md-primary" aria-label="Cancel" ng-disabled="ctrl.imageUploaderBusy == true" type="button" ng-click="ctrl.cancel()">Cancel</md-button>
+					<md-button class="md-accent" aria-label="Save" ng-disabled="ctrl.imageUploaderBusy == true" type="submit">Save</md-button>
+				</div>
+			</form>
+		</div>
+	</div>
+
+	<div class="project__wrapper" layout="row" ng-hide="ctrl.modes.edit">
+		<span class="project__image" layout="column">
+			<span class="project__thumb" ng-style="{'background-image': 'url(' + ctrl.project.image_url + '=h210)'}" layout-fill layout="row">
+				<span class="project__accept-decline" ng-if="ctrl.project.current_user_info.is_pending" layout="column" layout-align="center center" flex>
+					<md-button type="button" class="md-raised md-primary" ng-click="ctrl.inviteAccept(ctrl.project)">Accept</md-button>
+					<md-button type="button" class="md-raised md-warn" ng-click="ctrl.inviteReject($event, ctrl.project)">Decline</md-button>
+				</span>
+			</span>
+			<!-- we only want this link to show if the user is not pending. If they are pending then they need to be able
+			to click the relevant accept/reject CTAs provided by the directive above. This link basically fills all the
+			space available effectively blocking the CTA when pending. -->
+			<a class="project__link" ng-if="!ctrl.project.current_user_info.is_pending" href="/project/{{ ctrl.project.id }}"></a>
+
+		</span>
+		<div class="project" flex>
+			<span class="project__details" layout="column" layout-fill>
+				<span class="project__bg" layout-fill layout="column" ng-if="ctrl.project.image_url">
+					<span class="project__bg-img" ng-style="{'background-image': 'url(' + ctrl.project.image_url + '=w590-h210-p-fSoften=1,120,0)'}" layout-fill></span>
+				</span>
+				<span class="project__bg-overlay" layout-fill></span>
+				<div class="project__info" layout="column" layout-fill>
+					<a ng-if="!ctrl.project.current_user_info.is_pending" class="project__link" href="/project/{{ ctrl.project.id }}"></a>
+					<span layout="row">
+						<span class="project__name" href="/project/{{ ctrl.project.id }}">{{ ctrl.project.name }}</span>
+						<span flex></span>
+						<gd-floating-menu-button ng-if="!ctrl.project.current_user_info.is_pending && ctrl.project.current_user_info.is_admin" menu-template-url="components/project/project-list-item-dropdown.html" align-to="right" menu-data="menuData" menu-width="2x">
+							<icon class="ic-more-vert"></icon>
+						</gd-floating-menu-button>
+					</span>
+					<span class="project__stats" layout="row" ng-if="!ctrl.project.current_user_info.is_pending">
+						<stats icon="ic-movie-white" one-item-text="video" items-text="videos" count="ctrl.project.video_count" no-items-text="No videos yet"></stats>
+						<stats icon="ic-label-white" one-item-text="tag" items-text="tags" count="ctrl.project.video_tag_instance_count" no-items-text="No tags yet"></stats>
+					</span>
+					<div flex>
+						<div class="project__description" ng-if="ctrl.project.current_user_info.is_pending">{{ ctrl.project.description }}</div>
+					</div>
+					<span ng-if="!ctrl.project.current_user_info.is_pending" layout="row" layout-align="end">
+						<gd-button class="project__show-info" ng-click="ctrl.showInfo=!ctrl.showInfo">
+							<icon ng-if="!ctrl.showInfo" class="ic-unfold-more"></icon>
+							<icon ng-if="ctrl.showInfo" class="ic-unfold-less"></icon>
+						</gd-button>
+					</span>
+				</div>
+			</span>
+		</div>
+	</div>
+	<div ng-hide="ctrl.modes.edit" class="project__overview" ng-class="{'project__overview--visible': ctrl.showInfo}">
+		<div class="project__overview__info" layout="row">
+			<strong class="project__overview__title">Created</strong>
+			<span class="project__overview__text" flex>
+				{{ ctrl.project.created | amCalendar | lowercase }} by
+				<span ng-if="ctrl.project.owner.id === userId">you</span>
+				<span ng-if="ctrl.project.owner.id !== userId">{{ ctrl.project.owner.first_name }} {{ ctrl.project.owner.last_name }}</span>
+			</span>
+		</div>
+		<div class="project__overview__info" layout="row">
+			<strong class="project__overview__title">Tags</strong>
+			<span class="project__overview__text" flex>
+				<ul class="project__overview__tagname">
+					<li ng-repeat="projecttag in ctrl.project.projecttags|limitTo:5"><strong>{{ projecttag.name }}</strong></li>
+				</ul>
+				<span ng-if="ctrl.project.projecttags.length > 5">and <strong>{{ ctrl.project.projecttags.length - 5 }} more</strong></span>
+			</span>
+		</div>
+		<md-content class="project__description">
+			{{ ctrl.project.description }}
+		</md-content>
+	</div>
+	<section ng-show="ctrl.loading" class="page-loader ng-hide fade" layout="column" layout-align="center center">
+		<holo-spinner></holo-spinner>
+	</section>
+</div>

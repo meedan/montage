@@ -1,0 +1,7 @@
+app.templates:
+  options:
+    standalone: true
+
+  cwd: '<%= paths.staticDevRoot %>/js'
+  src: '**/*.html'
+  dest: '<%= paths.staticDevRoot %>/js/app/app.templates.js'

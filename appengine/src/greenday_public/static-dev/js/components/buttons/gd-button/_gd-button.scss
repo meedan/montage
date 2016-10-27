@@ -1,0 +1,74 @@
+gd-button {
+	display: flex;
+	min-height: 32px;
+	min-width: 32px;
+	position: relative;
+
+	button {
+		background-color: transparent;
+		border: 0;
+		color: inherit;
+		display: block;
+		margin: 0;
+		padding: 0;
+		position: relative;
+	}
+
+	holo-spinner {
+		display: none;
+		height: 100%;
+		left: 0;
+		opacity: 0;
+		position: absolute;
+		top: 0;
+		width: 100%;
+	}
+
+	.gd-button {
+		height: 100%;
+		min-height: 32px;
+		min-width: 32px;
+		width: 100%;
+	}
+}
+
+.gd-button--small {
+	min-height: 28px;
+	min-width: 28px;
+}
+
+.gd-button--toggle {
+	&.is-toggled-on {
+		color: $colour-gd-accent;
+	}
+}
+
+.gd-button--async {
+	.gd-button__content {
+		transition: opacity $swift-ease-in-out-duration $swift-ease-in-out-timing-function;
+	}
+
+	.is-in-progress {
+		.gd-button__content {
+			opacity: 0;
+			pointer-events: none;
+		}
+
+		holo-spinner {
+			display: inline-block;
+			opacity: 1;
+		}
+	}
+}
+
+.gd-button--icon {
+	button {
+		align-items: center;
+		justify-content: center;
+	}
+}
+
+.gd-button__content {
+	display: inline-block;
+	height: 100%;
+}

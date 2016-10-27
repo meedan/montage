@@ -1,0 +1,24 @@
+$colour-gd-accent: map-get($color-storyful-orange, '500');
+
+$colour-black-pure: #000;
+$colour-white-pure: #fff;
+$colour-white-light: #fafafa;
+$colour-white-medium: #eee;
+
+$content-background-color: $colour-white-pure;
+
+$colour-body-text: shade-colour(text);
+$colour-body-text-medium: #848484;
+$colour-body-text-light: #929292;
+$colour-body-text-lighter: #c7c7c7;
+
+$colour-border-default: map-get($primary-color-palette, '100');
+$colour-background: #eeeeee;
+$colour-content-background: #fafafa;
+
+$colour-validation-error: #e53935;
+
+$background: $colour-white-medium;
+
+// Override for Normalize
+$color: $colour-body-text;

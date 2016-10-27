@@ -1,0 +1,293 @@
+.appbar__bg {
+	background-color: map-get($primary-color-palette, '500');
+	height: 64px;
+	left: 0;
+	position: absolute;
+	right: 0;
+	top: 0;
+}
+
+.user-sidebar {
+	padding: $layout-gutter-width 0;
+
+	.user-box__firstname,
+	.user-box__lastname {
+		margin-left: 0;
+	}
+
+	.user-box__firstname {
+		@include rem(font-size, 26px);
+		margin-top: 4px;
+	}
+
+	.user-box__lastname {
+		@include rem(font-size, 20px);
+	}
+
+	.user-box__stat {
+		margin-bottom: 10px;
+
+		&:last-child {
+			margin-bottom: 0;
+		}
+	}
+
+	.user-box__stat-icon {
+		opacity: 1;
+		width: 42px;
+	}
+
+	.user-box__stats {
+		padding-left: 0;
+	}
+
+	.user-box__userinfo {
+		margin-bottom: 23px;
+	}
+
+	.user-box__stat-text,
+	.user-box__stat-text--big {
+		@include rem(font-size, 16px);
+		color: $colour-body-text-medium;
+	}
+
+	.user-box__stat-text--big {
+		margin: 0;
+	}
+}
+
+.projects__list,
+.projects__list-wrapper {
+	position: relative;
+}
+
+.projects__list-wrapper {
+	margin: 0 auto;
+	max-width: $max-content-width;
+}
+
+.projects__create-prompt,
+.projects__no-create-prompt {
+	margin-top: 64px;
+}
+
+.projects__create-prompt__title,
+.projects__no-create-prompt__title {
+	@include type(display-1);
+	margin-bottom: 16px;
+	text-align: center;
+}
+
+.projects__create-prompt__content,
+.projects__no-create-prompt__content {
+	@include type(subhead-2);
+	max-width: 300px;
+	text-align: center;
+}
+
+.projects__create-button {
+	margin-top: 34px;
+}
+
+.project__image {
+	background-color: $colour-white-light;
+	height: 210px;
+	position: relative;
+	width: 210px;
+
+	.image-uploader {
+		left: 0;
+		position: absolute;
+		top: 0;
+
+	}
+}
+
+.project__thumb {
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+
+.project-list-item {
+	background-color: $colour-white-light;
+	border-radius: 2px;
+	margin-bottom: 15px;
+	max-height: 210px;
+	overflow: hidden;
+	position: relative;
+	transition: all .4s ease-in-out;
+	z-index: 1;
+
+	&:last-child {
+		padding-bottom: 0;
+	}
+}
+
+.project-list-item--expanded {
+	max-height: 500px;
+}
+
+.project__accept-decline {
+	.md-button {
+		margin-bottom: $baseline-component-grid * 2;
+		width: 50%;
+
+		&:last-child {
+			margin-bottom: 0;
+		}
+	}
+}
+
+.project {
+	height: 210px;
+	overflow: visible;
+}
+
+.project__edit {
+	background-color: $colour-white-light;
+}
+
+.project__form {
+	padding: 10px 40px;
+
+	md-input-group {
+		margin-top: 0;
+	}
+}
+
+.project__details {
+	background-color: map-get($background-color-palette, '800');
+	position: relative;
+
+	.gd-floating-menu-button,
+	.gd-button {
+		position: relative;
+		z-index: 2;
+	}
+}
+
+.project__bg {
+	overflow: hidden;
+	position: absolute;
+	z-index: 1;
+}
+
+.project__bg-img {
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+
+.project__bg-overlay {
+	position: absolute;
+	z-index: 2;
+}
+
+.project__info {
+	color: $colour-white-pure;
+	overflow: visible;
+	padding: 36px;
+	position: relative;
+	z-index: 3;
+
+	.project__name {
+		@include rem(font-size, 24px);
+		@include text-overflow();
+		color: inherit;
+		line-height: normal;
+		text-decoration: none;
+	}
+
+	.project__description {
+		display: -webkit-box;
+		height: 76px;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		-webkit-line-clamp: 4;
+		-webkit-box-orient: vertical;
+	}
+}
+
+.project__menu .gd-floating-menu__content {
+	@include menu-width(2);
+}
+
+.project__stats {
+	margin-top: 20px;
+}
+
+.project__stat {
+	margin-right: 40px;
+
+	&:last-child {
+		margin-right: 0;
+	}
+}
+
+.project__stat-icon {
+	margin-right: 10px;
+	opacity: .7;
+}
+
+.project__stat-text {
+	@include rem(font-size, 14px);
+}
+
+.project__stat-text--big {
+	@include rem(font-size, 24px);
+	margin-right: 5px;
+}
+
+.project__overview {
+	@include rem(font-size, 13px);
+	background-color: $colour-white-pure;
+	color: map-get($primary-color-palette, '800');
+	padding: 36px;
+
+	&.ng-hide-add {
+		display: none;
+	}
+}
+
+.project__overview__info {
+	margin-bottom: 3px;
+}
+
+.project__overview__title {
+	width: 72px;
+}
+
+.project__overview__tagname {
+	display: inline;
+	margin: 0;
+	padding: 0;
+
+	li {
+		display: inline;
+
+		& + li:before {
+			content: ', ';
+		}
+	}
+}
+
+.project__description {
+	margin-top: 18px;
+	max-height: 174px;
+}
+
+.project__link {
+	bottom: 0;
+	left: 0;
+	position: absolute;
+	right: 0;
+	top: 0;
+	z-index: 1;
+}
+
+.project__wrapper {
+	background-color: $colour-white-pure;
+	position: relative;
+	z-index: 2;
+}

@@ -1,0 +1,11 @@
+.toast-button {
+	margin: 0;
+	width: auto;
+
+	&:not([disabled]) {
+		&:hover,
+		&.focus {
+			background-color: #484848;
+		}
+	}
+}

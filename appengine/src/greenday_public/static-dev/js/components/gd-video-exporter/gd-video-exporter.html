@@ -1,0 +1,88 @@
+<md-content class="bottom-sheet__panel--add-to slide-bottom-sheet-panel ng-hide" ng-show="isVisible" layout="row" layout-align="start start">
+	<div class="bottom-sheet__panel-section" flex="30">
+		<md-content class="bottom-sheet__list-wrapper" layout-fill>
+			<md-list class="bottom-sheet__list" layout="column" layout-align="start start">
+				<md-item ng-class="{'bottom-sheet__list-item--active': ctrl.exportType.key === type.key}" ng-click="ctrl.exportType = type" class="bottom-sheet__list-item" ng-repeat="type in ctrl.exportTypes track by type.key">
+					<md-item-content>{{ type.label }}</md-item-content>
+				</md-item>
+			</md-list>
+		</md-content>
+	</div>
+	<div class="bottom-sheet__panel-section" flex="30">
+
+		<md-content class="bottom-sheet__list-wrapper" layout-fill ng-show="ctrl.exportType">
+			<md-list class="bottom-sheet__list" layout="column" layout-align="start start">
+				<md-item class="bottom-sheet__list-item bottom-sheet__list-item--faded">
+					<span layout="row" layout-align="start center">
+						<icon class="ic-info"></icon>
+						<span>Enter a name for your export</span>
+					</span>
+					<md-item-content>
+						<md-input-container flex>
+							<label>Export name</label>
+							<input ng-model="ctrl.exportName">
+						</md-input-container>
+					</md-item-content>
+				</md-item>
+			</md-list>
+		</md-content>
+
+	</div>
+	<div class="bottom-sheet__panel-section" layout="row" flex="40">
+		<md-content class="bottom-sheet__panel__big-content" layout-fill layout-align="vertical" layout-align="center center">
+			<div class="bottom-sheet__panel-hero">
+				<ng-pluralize count="videos.length" when="{'one': '1 video selected', 'other': '{} videos selected'}"></ng-pluralize>
+			</div>
+			<div class="bottom-sheet__panel-info">
+				<div ng-show="!ctrl.exportType">Select a an export type to start</div>
+				<div ng-show="ctrl.exportType && !ctrl.exportName">Now add a name for your export. <span ng-if="ctrl.exportType.key == 'csv'">This will be used as the filename for your CSV export</span> <span ng-if="ctrl.exportType.key == 'kml'">This will be used as the title for your Google Earth document. <br />Note: videos without location data will be omitted</span><span ng-if="ctrl.exportType.key == 'yt'">This will be used as the title of your YouTube playlist</span></div>
+				<div ng-show="ctrl.exportType && ctrl.exportName">
+					Export
+					<ng-pluralize count="videos.length" when="{'one': 'this 1 video', 'other': 'these {} videos'}"></ng-pluralize>
+					to {{ ctrl.exportType.label }} format.
+				</div>
+			</div>
+			<div class="bottom-sheet__panel-actions fade ng-hide" ng-show="ctrl.exportType && ctrl.exportName" layout="row" layout-align="start center">
+				<md-button ng-show="ctrl.exportType.key == 'yt'" ng-click="ctrl.exportToYouTube(videos)" aria-label="OK" md-no-ink class="md-accent">Export</md-button>
+				<form id="export-form" name="export-form">
+					<input type="hidden" name="format" ng-value="ctrl.exportType.key">
+					<input type="hidden" name="name" ng-value="ctrl.exportName">
+					<input type="hidden" name="clean_name" ng-value="ctrl.exportName">
+					<input type="hidden" name="vids" ng-value="ctrl.exportVideoIds">
+					<md-button ng-hide="ctrl.exportType.key == 'yt'" aria-label="Export" md-no-ink class="md-accent md-button md-default-theme" ng-click="ctrl.requestExport()">Export</md-button>
+				</form>
+				<md-button ng-click="ctrl.reset()" aria-label="Cancel" md-no-ink class="md-primary">Cancel</md-button>
+			</div>
+		</md-content>
+	</div>
+	<md-content class="bottom-sheet__panel-results ng-hide slide" ng-show="ctrl.ytExportProg || ctrl.ytPlaylistUrl" layout="column">
+		<div class="bottom-sheet__close-button">
+			<gd-button>
+				<icon class="ic-close" ng-click="ctrl.reset()"></icon>
+			</gd-button>
+		</div>
+		<md-list class="md-padding">
+			<md-item ng-show="ctrl.ytPlaylistUrl">
+				<md-item-content>
+					<div class="md-tile-content">
+						<h3>YouTube playlist created</h3>
+						<p><a href="{{ ctrl.ytPlaylistUrl }}" target="_blank">{{ ctrl.ytPlaylistUrl }}</a></p>
+					</div>
+				</md-item-content>
+			</md-item>
+			<md-divider ng-show="ctrl.ytPlaylistUrl"></md-divider>
+			<md-progress-linear md-mode="determinate" ng-value="ctrl.ytExportProg" ng-show="ctrl.ytPlaylistUrl && ctrl.ytExportProg"></md-progress-linear>
+			<md-item ng-repeat="result in ctrl.ytVideoResults" ng-class="{'success': result.status == 1}">
+				<md-item-content>
+					<div class="md-tile-left" layout="column" layout-align="center center">
+						<icon ng-class="{'ic-check': result.status == 1, 'ic-clear': result.status == 2}"></icon>
+					</div>
+					<div class="md-tile-content">
+					<h3>{{ result.video.name }}</h3>
+					<h4 ng-if="result.status == 2">{{ result.msg }}</h4>
+					</div>
+				</md-item-content>
+			</md-item>
+		</md-list>
+	</md-content>
+</md-content>

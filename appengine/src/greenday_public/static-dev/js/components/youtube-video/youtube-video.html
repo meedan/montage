@@ -1,0 +1,19 @@
+<div class="youtube-video__thumb" ng-if="videoId" style="background-image: url('//i3.ytimg.com/vi/{{ videoId }}/hqdefault.jpg');"></div>
+<div class="youtube-video__iframe"></div>
+<!--
+<div class="youtube-video__controls" layout="row" layout-align="center end">
+	<div class="youtube-video__progress">
+		<span class="youtube-video__current-time">{{ ctrl.videoData.state.currentTime | duration }}</span>/{{ ctrl.videoData.info.duration | duration }}
+	</div>
+	<div class="youtube-video__playback-rate" layout="row" layout-align="start end">
+		<span>Speed</span>
+		<md-slider discrete ng-model="ctrl.videoData.state.playbackRate" step="0.5" min="0.25" max="2" aria-label="Playback rate"></md-slider>
+	</div>
+	<span flex></span>
+	<icon class="ic-volume-up" ng-click=""></icon>
+	<icon class="ic-link"></icon>
+	<icon class="ic-closed-caption"></icon>
+	<icon class="ic-fullscreen"></icon>
+</div>
+-->
+<div ng-transclude></div>

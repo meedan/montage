@@ -1,0 +1,51 @@
+<md-item>
+	<md-item-content class="tag-sidebar__tag" layout="column" layout-align="start center" ng-class="{selected: ngModel.selected}">
+		<div class="tag-sidebar__tag-info" layout="row" layout-align="start center" ng-click="tagClicked($event, ngModel)">
+			<div class="tag-sidebar__tag-expand-button">
+				<gd-button ng-if="ngModel.subTags.length">
+					<icon class="ic-arrow-drop-down"></icon>
+				</gd-button>
+			</div>
+			<div flex class="tag-sidebar__tag-name">{{ ngModel.name }}</div>
+			<div class="tag-sidebar__tag-usage-count">{{ ::ngModel.video_tag_instance_count }}</div>
+		</div>
+		<md-content flex class="tag-sidebar__tag-content scale-tag md-whiteframe-z2" ng-show="ngModel.selected">
+			<div class="ng-hide" layout="row" ng-show="editMode === true">
+				<span class="tag-sidebar__tag-image" layout="column">
+					<image-uploader image="ngModel.image_url" is-busy="ctrl.imageUploaderBusy" ng-model="ngModel.image_url" type="tag" layout-fill></image-uploader>
+				</span>
+				<form flex class="tag-sidebar__tag-form" layout="column" ng-submit="saveTag(ngModel)">
+					<md-input-container layout="column">
+						<label for="tagName">Name</label>
+						<input id="tagName" type="text" ng-model="ngModel.name" required>
+					</md-input-container>
+					<md-input-container layout="column">
+						<label for="tagDescription">Description</label>
+						<input id="tagDescription" multiline type="text" ng-model="ngModel.description">
+					</md-input-container>
+					<div layout="column" flex></div>
+					<div layout="row" layout-align="end center">
+						<md-button class="md-primary" aria-label="Cancel" ng-disabled="ctrl.imageUploaderBusy == true" type="button" ng-click="cancelEdit()">Cancel</md-button>
+						<md-button class="md-accent" aria-label="Save" ng-disabled="ctrl.imageUploaderBusy == true" type="submit">Save</md-button>
+					</div>
+				</form>
+			</div>
+			<div layout="row" layout-align="start start" ng-show="!editMode">
+				<div class="tag-sidebar__tag-image" layout="row" layout-align="center center" style="background-image: url('{{ ngModel.image_url }}=h176');">
+					<span ng-if="!ngModel.image_url">No image</span>
+				</div>
+				<div class="tag-sidebar__tag-details" flex layout="column" layout-fill>
+					<div class="tag-sidebar__tag-name" layout="row">
+						<span flex>{{ ngModel.name }}</span>
+						<gd-floating-menu-button menu-template-url="components/gd-tag-sidebar/tag-dropdown.html" menu-data="menuData" align-to="right">
+							<icon class="ic-more-vert"></icon>
+						</gd-floating-menu-button>
+					</div>
+					<div class="tag-sidebar__tag-usage-count">{{ ::ngModel.video_tag_instance_count }} in this project</div>
+					<div class="tag-sidebar__tag-description" flex>{{ ngModel.description }}</div>
+				</div>
+			</div>
+		</md-content>
+		<gd-backdrop ng-if="ngModel.selected === true" callback="ngModel.selected=false"></gd-backdrop>
+	</md-item-content>
+</md-item>

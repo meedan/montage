@@ -1,0 +1,11 @@
+<md-item>
+	<md-item-content class="video-filter__list-item" ng-class="{'selected': ngModel.state === 1, 'excluded': ngModel.state === -1}">
+		<gd-button class="video-filter__toggle-button" ng-click="tagClicked($event, ngModel)">
+			<span layout="row" layout-align="start center">
+				<icon class="ic-check-box-outline-blank"></icon>
+				<span class="video-filter__tag-name">{{ ngModel.name }}</span>
+				<span class="video-tag-filter__tag-instance-count">({{ ngModel.video_tag_instance_count || 0 }})</span>
+			</span>
+		</gd-button>
+	</md-item-content>
+</md-item>

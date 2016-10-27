@@ -1,0 +1,13 @@
+@function shade-colour($variant, $base-colour: map-get($primary-color-palette, '900')) {
+	@if $variant == 'dividers' {
+		@return rgba($base-colour, .12);
+	} @else if $variant == 'hint-text' {
+		@return rgba($base-colour, .26);
+	} @else if $variant == 'secondary-text' {
+		@return rgba($base-colour, .54);
+	} @else if $variant == 'icons' {
+		@return rgba($base-colour, .54);
+	} @else if $variant == 'text' {
+		@return rgba($base-colour, .87);
+	}
+}

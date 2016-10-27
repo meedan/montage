@@ -1,0 +1,16 @@
+<md-dialog>
+	<md-content>
+		<h2>Remove video</h2>
+		<p ng-if="collectionId">Are sure you wish to remove this video from the collection?</p>
+		<p ng-if="!collectionId">Are sure you wish to remove this video from the Library?</p>
+	</md-content>
+	<div class="md-actions">
+		<md-button ng-click="cancel()">Cancel</md-button>
+		<md-button class="md-warn" ng-click="remove()" ng-if="collectionId">
+			Remove video from collection
+		</md-button>
+		<md-button class="md-warn" ng-click="remove()" ng-if="!collectionId">
+			Remove video from Library
+		</md-button>
+	</div>
+</md-dialog>

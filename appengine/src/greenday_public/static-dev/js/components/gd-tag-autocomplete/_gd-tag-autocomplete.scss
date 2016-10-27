@@ -1,0 +1,131 @@
+$gd-tag-autocomplete-widget-width: $baseline-component-grid * 28;
+$gd-tag-autocomplete-input-width: 88px;
+$gd-tag-autocomplete-popup-padding-left: $baseline-component-grid * 3;
+$gd-tag-autocomplete-popup-bg-color: map-get($background-color-palette, '500');
+$gd-tag-autocomplete-input-bg-color: $gd-tag-autocomplete-popup-bg-color;
+$gd-tag-autocomplete-input-width: 200px;
+$gd-tag-autocomplete-border-radius: 3px;
+$gd-tag-autocomplete-close-btn-size: 32px;
+
+
+.gd-tag-autocomplete {
+	@include type(body-1);
+	display: block;
+	left: 0px;
+	position: relative;
+	top: 0px;
+	width: auto;
+	z-index: 100;
+
+	.md-fab {
+		icon {
+			color: map-get($primary-color-palette, '800');
+		}
+	}
+}
+
+.gd-tag-autocomplete-popup {
+	@extend .md-whiteframe-z1;
+	@include menu-width(3);
+	@include type(menu);
+	border-radius: $gd-tag-autocomplete-border-radius;
+}
+
+.gd-tag-autocomplete-popup,
+.gd-tag-autocomplete-popup md-content {
+	background-color: $gd-tag-autocomplete-popup-bg-color;
+}
+
+.gd-tag-autocomplete__suggestions-popup {
+	max-height: 330px;
+	padding: $baseline-component-grid 0;
+
+	md-progress-linear {
+		position: absolute;
+		left: 0;
+		top: -5px;
+		width: 100%;
+	}
+}
+
+.gd-tag-autocomplete__tag-list {
+	@extend %bare-list;
+}
+
+.gd-tag-autocomplete-tag {
+	cursor: pointer;
+	padding: $baseline-component-grid $gd-tag-autocomplete-popup-padding-left;
+
+	&:hover,
+	&.is-highlighted {
+		background-color: map-get($background-color-palette, '800');
+	}
+}
+
+.gd-tag-autocomplete__no-tags {
+	color: shade-colour(hint-text);
+	padding: $baseline-component-grid $gd-tag-autocomplete-popup-padding-left;
+}
+
+.gd-tag-autocomplete__suggestions-project-title {
+	@include rem(font-size, 11px);
+	color: shade-colour(secondary-text);
+	padding: 0 $baseline-component-grid * 3;
+}
+
+.gd-tag-autocomplete__suggestions--create {
+	margin-bottom: $baseline-component-grid;
+}
+
+.gd-tag-autocomplete__suggestions--project {
+	border-bottom: 1px solid shade-colour(dividers);
+	position: relative;
+
+	.gd-tag-autocomplete__tag-list {
+		// margin-bottom: $baseline-component-grid;
+	}
+
+	&:after {
+		background-color: $gd-tag-autocomplete-popup-bg-color;
+		bottom: -1px;
+		content: '';
+		display: block;
+		height: 1px;
+		left: 0;
+		position: absolute;
+		width: $gd-tag-autocomplete-popup-padding-left;
+	}
+}
+
+.gd-tag-autocomplete__input-wrapper {
+	background-color: $gd-tag-autocomplete-input-bg-color;
+	border-radius: $gd-tag-autocomplete-border-radius;
+	height: $gd-tag-autocomplete-close-btn-size;
+	padding-left: $baseline-component-grid;
+	position: absolute;
+	right: 0;
+	top: 0;
+}
+
+.gd-tag-autocomplete__input {
+	background-color: transparent;
+	border-style: none;
+	margin: $baseline-component-grid;
+	width: 160px;
+}
+
+.gd-tag-autocomplete__close-btn {
+	$icon-size: 24px;
+	background-color: transparent;
+	border-style: none;
+	box-sizing: border-box;
+	color: transparent;
+	height: 100%;
+	overflow: hidden;
+	width: $gd-tag-autocomplete-close-btn-size;
+
+	icon {
+		@include rem(font-size, 20px);
+		color: map-get($primary-color-palette, '300');
+	}
+}

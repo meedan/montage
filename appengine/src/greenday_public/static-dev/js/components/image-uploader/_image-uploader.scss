@@ -1,0 +1,89 @@
+.image-uploader {
+	position: relative;
+	transition: .2s ease-in-out opacity;
+
+	&:hover,
+	&.uploading {
+		opacity: 1;
+	}
+
+	&.uploading {
+		.image-uploader__progress {
+			.container {
+				background-color: map-get($primary-color-palette, '50');
+			}
+		}
+	}
+}
+
+.image-uploader--big {
+	.image-uploader__prompt {
+		transform: scale(1.1);
+	}
+}
+
+.image-uploader__input {
+	left: -100000px;
+	position: absolute;
+}
+
+.image-uploader__image-icon {
+	position: relative;
+}
+
+.image-uploader__add-icon {
+	position: absolute;
+	right: -11px;
+	top: -11px;
+}
+
+.image-uploader__prompt {
+	height: 150px;
+	position: relative;
+	transition: .1s ease-in all;
+	width: 100%;
+}
+
+.image-uploader__drop-zone {
+	left: 0;
+	position: absolute;
+	top: 0;
+}
+
+.image-uploader__drop-zone__progress {
+	@include rem(font-size, 32px);
+}
+
+.image-uploader__trigger {
+	@include rem(font-size, 13px);
+	border-top: 1px solid map-get($primary-color-palette, '500');
+	height: 54px;
+	margin: 0;
+	text-transform: none;
+	width: 100%;
+
+	i {
+		margin-right: 20px;
+	}
+}
+
+.image-uploader__trigger-text {
+	left: 0;
+	position: absolute;
+	top: 0;
+}
+
+.image-uploader__progress {
+
+	.container {
+		background-color: map-get($primary-color-palette, '100');
+
+		&.ready {
+			top: 0;
+		}
+	}
+
+	.bar2 {
+		background-color: $colour-gd-accent;
+	}
+}
