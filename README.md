@@ -1,5 +1,5 @@
-Montage v1.0
-============
+Montage
+=======
 
 ## Development notes and must have things
 
