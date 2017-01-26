@@ -1,5 +1,5 @@
 application: greenday-project-v02-dev
-version: 3-0-21
+version: 3-0-22
 runtime: python27
 api_version: 1
 threadsafe: true
