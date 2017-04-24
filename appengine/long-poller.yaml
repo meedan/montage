@@ -1,6 +1,6 @@
 application: greenday-project-v02-dev
 module: long-poller
-version: 3-0-22
+version: 3-0-23
 runtime: python27
 api_version: 1
 threadsafe: true
