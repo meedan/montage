@@ -57,6 +57,14 @@
     brew install mysql
     ```
 
+*   Pillow 3.3.2 dependencies
+
+    ```bash
+    brew tap homebrew/dupes
+    brew install zlib
+    brew link zlib --force
+    ```
+
     Start MySQL.
 
     ```
@@ -187,6 +195,11 @@
     sudo pip install virtualenv virtualenvwrapper
     source /usr/local/bin/virtualenvwrapper.sh
     source ~/.bashrc
+    ```
+
+*   Pillow 3.3.2 dependencies
+    ```
+    sudo apt-get install zlib1g-dev
     ```
 
 *   Install requirements.
