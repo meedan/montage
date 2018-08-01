@@ -11,10 +11,10 @@ migratePotatoDev:
   command: './bin/manage.py migrate --noinput --settings=greenday_core.settings.potato'
 
 deploy:
-  command: './bin/appcfg update appengine/app.yaml appengine/long-poller.yaml appengine/worker.yaml appengine/publisher.yaml --oauth2 --application=greenday-project'
+  command: './bin/appcfg update appengine/app.yaml appengine/long-poller.yaml appengine/worker.yaml appengine/publisher.yaml --application=greenday-project'
 
 deployProd:
-  command: './bin/appcfg update appengine/app.yaml appengine/long-poller.yaml appengine/worker.yaml appengine/publisher.yaml --oauth2 --application=greenday-project'
+  command: './bin/appcfg update appengine/app.yaml appengine/long-poller.yaml appengine/worker.yaml appengine/publisher.yaml --application=greenday-project'
 
 deployPotatoDev:
-  command: './bin/appcfg update appengine/app.yaml appengine/long-poller.yaml appengine/worker.yaml appengine/publisher.yaml --oauth2 --application=greenday-project-v02-potato'
+  command: './bin/appcfg update appengine/app.yaml appengine/long-poller.yaml appengine/worker.yaml appengine/publisher.yaml --application=greenday-project-v02-potato'
