@@ -1,0 +1,32 @@
+version: '2'
+services:
+  mysql:
+    image: mysql:5.5
+    environment:
+      - "MYSQL_ALLOW_EMPTY_PASSWORD=yes"
+      - "MYSQL_DATABASE=greenday_v2"
+      - "MYSQL_USER=greenday"
+      - "MYSQL_PASSWORD=greenday"
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./mysql/data:/var/lib/mysql
+  montage:
+    build: .
+    volumes:
+      - .:/app
+      - /app/parts
+      - /app/bin
+      - /app/GREENDAY
+      - /app/appengine/src/greenday_public/static-dev/libs
+      - /app/appengine/src/greenday_public/static-dev/css
+      - /app/appengine/src/greenday_public/static-dev/js/app
+      - /app/reports
+      - /app/target
+      - /app/eggs
+      - /app/develop-eggs
+    depends_on:
+      - "mysql"
+    ports:
+      - "8080:8080"
+      - "8000:8000"

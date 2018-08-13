@@ -1,0 +1,13 @@
+appengine/lib
+bin
+develop-eggs
+downloads
+eggs
+appengine/src/greenday_public/static-dev/libs
+parts
+reports
+target
+GREENDAY
+.git
+Dockerfile
+.dockerignore

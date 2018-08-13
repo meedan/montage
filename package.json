@@ -2,6 +2,9 @@
   "name": "montage-v0.2",
   "description": "Project Montage v0.2",
   "repository": "TODO",
+  "scripts": {
+    "grunt-deploy-prod": "grunt deployProd"
+  },
   "devDependencies": {
     "grunt": "^0.4.5",
     "grunt-angular-templates": "^0.5.7",
@@ -34,7 +37,9 @@
     "karma-ng-scenario": "^0.1.0",
     "karma-phantomjs-launcher": "^0.1.4",
     "load-grunt-config": "^0.13.0",
+    "node-sass": "^4.9.3",
     "npm": "^1.4.26",
-    "process": "^0.7.0"
+    "process": "^0.7.0",
+    "request": "2.81.0"
   }
 }

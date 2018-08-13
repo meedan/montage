@@ -1,5 +1,15 @@
 # Montage
 
+This is a Meedan fork to run Montage in a Docker environment. WORK IN PROGRESS.
+
+- Create a new API key and a new OAuth 2.0 client ID in the Credentials section of the Google Cloud APIs & Services. Make sure both credentials are restricted to `http://localhost:8080`.
+- Enable APIs for YouTube, Google+, Maps.
+- Create a settings file `appengine/src/greenday_core/settings/local.py` based on `appengine/src/greenday_core/settings/local.py.sample` and fill the API keys as per above.
+- `docker-compose build`
+- `docker-compose up`
+- `docker-compose exec montage bash`
+- `./docker-entrypoint.sh` (from within the container)
+
 ## Development notes and must have things
 
 -   [EditorConfig](http://editorconfig.org) plugin for your editor. Find one [here](http://editorconfig.org/#download).
@@ -319,14 +329,14 @@ Staging should mirror the master branch
 
 Prod should mirror the stable branch
 
-1.  Build the docs (`cd docs && make html`)
+1.  OPTIONAL: Build the docs (`cd docs && make html`)
 2.  OPTIONAL: update ERM diagram (see separate section)
 3.  If the version needs changing then complete steps 2-4 of the staging process.
 4.  Merge master into stable and push
-5.  Run `grunt deployProd`
+5.  Run `npm run grunt-deploy-prod` (be aware if running this in a remote server or Docker container, because you need an X server - the deployment task opens the browser for authentication on Google)
 6.  If there are migrations to run then run `grunt migrate`
 7.  Change the default version on all modules
-8.  Spudgun it
+8.  On Google Cloud side, migrate all traffic to the deployed version: https://console.cloud.google.com/appengine/versions?project=greenday-project&serviceId=default&versionssize=50
 9.  OPTIONAL: run data tasks at /admin/denormalisers/, /admin/search/ and /admin/yt_videos/. Run these on https://worker-dot-greenday-project.appspot.com
 
 ### Generating ERD diagram

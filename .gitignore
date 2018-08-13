@@ -50,6 +50,7 @@ reports/
 # Sphinx documentation
 docs/build/
 docs/_build/
+!docs/_build/html/.gitkeep
 
 # Editors
 .idea
@@ -89,6 +90,12 @@ appengine/src/greenday_public/static-dev/img/sprite.png
 appengine/src/greenday_public/static-dev/img/sprite@2x.png
 appengine/src/greenday_public/static-dev/scss/sprite.scss
 
-
 # Local settings files
 appengine/src/greenday_core/settings/local.py
+
+# MySQL and AppEngine data
+mysql/data/*
+!mysql/data/.gitkeep
+mysql/appengine/*
+!mysql/appengine/.gitkeep
+*.sql

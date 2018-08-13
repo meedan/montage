@@ -60,6 +60,7 @@ except AttributeError:
 
 ALLOWED_HOSTS = [  # Django 1.5 requirement when DEBUG = False
     "localhost",
+    "0.0.0.0",
     "montage.storyful.com",
     "montage.meedan.com",
     app_identity.get_default_version_hostname(),
