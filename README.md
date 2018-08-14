@@ -1,14 +1,12 @@
 # Montage
 
-This is a Meedan fork to run Montage in a Docker environment. WORK IN PROGRESS.
+## Quick start using Docker Compose
 
-- Create a new API key and a new OAuth 2.0 client ID in the Credentials section of the Google Cloud APIs & Services. Make sure both credentials are restricted to `http://localhost:8080`.
+- Create a new API key and a new OAuth 2.0 client ID in the Credentials section of the Google Cloud APIs & Services. Make sure the client ID is restricted to `http://localhost:8080`.
 - Enable APIs for YouTube, Google+, Maps.
 - Create a settings file `appengine/src/greenday_core/settings/local.py` based on `appengine/src/greenday_core/settings/local.py.sample` and fill the API keys as per above.
 - `docker-compose build`
 - `docker-compose up`
-- `docker-compose exec montage bash`
-- `./docker-entrypoint.sh` (from within the container)
 
 ## Development notes and must have things
 
@@ -168,7 +166,7 @@ This is a Meedan fork to run Montage in a Docker environment. WORK IN PROGRESS.
 *   Clone the project.
 
     ```
-    git clone git@github.com:storyful/montage.git
+    git clone git@github.com:meedan/montage.git
     ```
 
 *   Install MySQL.
@@ -314,23 +312,22 @@ All connections to the Cloud SQL instances are made over SSL. You will need to s
 
 Staging should mirror the master branch
 
-1.  Build the docs (./run_docs.sh)
-2.  OPTIONAL: update ERM diagram (see separate section)
+1.  OPTIONAL: Build the docs (./run_docs.sh)
+2.  OPTIONAL: Update ERM diagram (see separate section)
 3.  Increment version in app.yaml, long-poller.yaml, worker.yaml, publisher.yaml and commit
 4.  Tag the commit with the version number
 5.  Merge develop into master and push
 6.  If there are migrations run `grunt migrateDev`
 7.  Run `grunt deploy`
 8.  Change the default version on all modules
-9.  Spudgun it
-10. OPTIONAL: run data tasks at /admin/denormalisers/, /admin/search/ and /admin/yt_videos/. Run these on https://worker-dot-greenday-project-v02-dev.appspot.com
+9.  OPTIONAL: run data tasks at /admin/denormalisers/, /admin/search/ and /admin/yt_videos/. Run these on https://worker-dot-greenday-project-v02-dev.appspot.com
 
 #### To production
 
 Prod should mirror the stable branch
 
 1.  OPTIONAL: Build the docs (`cd docs && make html`)
-2.  OPTIONAL: update ERM diagram (see separate section)
+2.  OPTIONAL: Update ERM diagram (see separate section)
 3.  If the version needs changing then complete steps 2-4 of the staging process.
 4.  Merge master into stable and push
 5.  Run `npm run grunt-deploy-prod` (be aware if running this in a remote server or Docker container, because you need an X server - the deployment task opens the browser for authentication on Google)
