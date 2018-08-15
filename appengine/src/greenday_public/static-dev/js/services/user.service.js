@@ -8,7 +8,7 @@
 		.factory('UserService', UserService);
 
 	/** @ngInject */
-	function UserService ($timeout, $q, $http, $rootScope, moment, GapiLoader, oAuthParams, oAuthRefreshDelay, UserModel, DialogService, PageService, ToastService) {
+	function UserService ($timeout, $q, $http, $rootScope, $location, moment, GapiLoader, oAuthParams, oAuthRefreshDelay, UserModel, DialogService, PageService, ToastService) {
 		var service = {
 				auth: auth,
 				getUser: getUser,
@@ -218,6 +218,9 @@
 				}, function (reason) {
 					userFetchInProgress = false;
 					userDeferred.reject(reason);
+				  if ($location.path() !== '/welcome') {
+				  	$location.path('/welcome');
+				  }
 				});
 			}
 
