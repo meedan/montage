@@ -41,7 +41,7 @@ NOSE_ARGS = [
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'HOST': 'localhost',
+        'HOST': 'mysql',
         'NAME': 'greenday',
         'USER': 'root',
         'OPTIONS': {
