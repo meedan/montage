@@ -86,7 +86,7 @@
 		function parseRouteChangeError(error) {
 			var qs = {};
 
-			if (error.reason === 'immediate_failed') {
+			if (error.reason === 'immediate_failed' || error.reason === 'popup_blocked_by_browser') {
 				if ($location.path() !== '/welcome') {
 					qs.next = $location.search().next || $location.url();
 					$location.path('/welcome').search(qs);
