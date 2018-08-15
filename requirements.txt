@@ -52,3 +52,4 @@ django-csp
 mr.developer
 GoogleAppEngineCloudStorageClient
 https://github.com/potatolondon/search/archive/master.zip#egg=search-0.0.0
+pygraphviz

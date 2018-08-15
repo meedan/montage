@@ -65,13 +65,8 @@ docs/_build/
 # virtualenv
 /GREENDAY
 
-
 # Montage stuff
-
-# PyPi dependencies
 appengine/lib
-
-
 appengine/src/greenday_public/static-dev/libs
 target
 node_modules

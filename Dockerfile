@@ -13,6 +13,8 @@ RUN apt-get update && \
   graphviz \
   git \
   libncurses5-dev \
+  pkg-config \
+  libgraphviz-dev \
   && rm -rf /var/lib/apt/lists/*
 
 RUN mkdir /app
