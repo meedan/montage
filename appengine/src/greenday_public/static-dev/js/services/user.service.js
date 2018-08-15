@@ -27,6 +27,7 @@
 			userPromise = null,
 			userStatsDeferred = null,
 			gapi = null,
+			googleAuth = null,
 			user,
 			userStats,
 			authResult;
@@ -46,6 +47,14 @@
 			return defer.promise;
 		}
 
+		function getToken() {
+			var user = getCurrentUser();
+			return user.getAuthResponse(true).access_token;
+		}
+
+		function getCurrentUser() {
+			return googleAuth.currentUser.get();
+		}
 
 		function auth(immediate) {
 			authDeferred = $q.defer();
@@ -54,7 +63,8 @@
 			GapiLoader.load().then(function (windowGapi) {
 				gapi = windowGapi;
 				gapi.client.setApiKey(oAuthParams.api_key);
-				gapi.auth.init(function () {
+				gapi.auth2.init(oAuthParams).then(function(result) {
+					googleAuth = result;
 					authorizeUser(immediate);
 				});
 
@@ -68,7 +78,7 @@
 		function queryUserContacts(query) {
 			var usersQueryDeferred = $q.defer();
 			$http
-				.jsonp('https://www.google.com/m8/feeds/contacts/default/thin?v=3&callback=JSON_CALLBACK&alt=json&q=' + query + '&access_token=' + gapi.auth.getToken().access_token)
+				.jsonp('https://www.google.com/m8/feeds/contacts/default/thin?v=3&callback=JSON_CALLBACK&alt=json&q=' + query + '&access_token=' + getToken())
 				.then(function(response) {
 					if (response.status === 200) {
 						usersQueryDeferred.resolve(response.data.feed.entry);
@@ -82,25 +92,39 @@
 
 		function authorizeUser(immediate) {
 			var params = angular.copy(oAuthParams);
-            var nowInSeconds = Math.round(new Date().getTime() / 1000);
-			params.immediate = angular.isUndefined(immediate) ? true : false;
+			var nowInSeconds = Math.round(new Date().getTime() / 1000);
+			params.prompt = angular.isUndefined(immediate) ? 'none' : (immediate ? 'none' : 'consent');
 
-            //we want to refresh the token 15mins (900 seconds) before the expiration time
+			var done = function(result) {
+				if (!result || result.error) {
+					fail(result);
+					return;
+				}
+				$http.defaults.headers.common.Authorization = 'Bearer ' + result.access_token;
+				authResult = result;
+				$timeout(authorizeUser, oAuthRefreshDelay);
+				authDeferred.resolve(result);
+			};
+
+			var fail = function(result) {
+				authDeferred.reject({
+					reason: result.error
+				});
+			};
+
+			//we want to refresh the token 15mins (900 seconds) before the expiration time
 			if (authResult && nowInSeconds < parseInt(authResult.expires_at, 10) - 900) {
 				authDeferred.resolve(authResult);
 			} else {
-				gapi.auth.authorize(params, function (result) {
-					if (result && !result.error) {
-						$http.defaults.headers.common.Authorization = 'Bearer ' + result.access_token;
-						authResult = result;
-						$timeout(authorizeUser, oAuthRefreshDelay);
-						authDeferred.resolve(result);
-					} else {
-						authDeferred.reject({
-							reason: result.error
-						});
-					}
-				});
+				var user = getCurrentUser();
+				
+				if (googleAuth.isSignedIn.get()) {
+					user.reloadAuthResponse().then(done).catch(fail);
+				}
+
+				else {
+					googleAuth.signIn().then(done).catch(fail);
+				}
 			}
 		}
 
@@ -117,7 +141,7 @@
 					var allUserData;
 
 					$rootScope.$broadcast('user:signIn:start', user);
-					$http.defaults.headers.common.Authorization = 'Bearer ' + gapi.auth.getToken().access_token;
+					$http.defaults.headers.common.Authorization = 'Bearer ' + getToken();
 
 					// Fetch Montage User
 					UserModel
@@ -155,7 +179,6 @@
 						// if the google plus profile is not set on the user object.
 						// This is to cater for when new users are invited to a project.
 						// An account gets created and activated for them, but because
-						// the last login time is now, the initial fetch of the G+
 						// data is not carried out.
 						if (now.diff(lastLogin, 'hours') > 4 || !google_plus_profile) {
 							gapi.client.load('plus', 'v1', function() {
@@ -235,27 +258,23 @@
 			var revokeDeferred = $q.defer(),
 				revokePromise = revokeDeferred.promise;
 
+			var done = function(response) {
+				PageService.clearDataCache();
+				revokeDeferred.resolve(response);
+				$rootScope.$broadcast('user:signOut:complete', user);
+				user = null;
+				authResult = null;
+			};
+
+			var fail = function(response) {
+				revokeDeferred.reject(response);
+				$rootScope.$broadcast('user:signOut:fail', user);
+			};
+
 			GapiLoader.load().then(function (gapi) {
-				var token = gapi.auth.getToken(),
-					revokeUrl = 'https://accounts.google.com/o/oauth2/revoke?token=' + token.access_token;
-
 				$rootScope.$broadcast('user:signOut:start', user);
-
-				$http
-					.jsonp(revokeUrl + '&callback=JSON_CALLBACK')
-					.success(function (response) {
-						PageService.clearDataCache();
-						revokeDeferred.resolve(response);
-						$rootScope.$broadcast('user:signOut:complete', user);
-						user = null;
-						authResult = null;
-					})
-					.error(function (response) {
-						revokeDeferred.reject(response);
-						$rootScope.$broadcast('user:signOut:fail', user);
-					});
+				googleAuth.signOut().then(done).catch(fail);
 			});
-
 
 			return revokePromise;
 		}
@@ -308,13 +327,17 @@
         function engage() {
             $rootScope.$on('user:signIn:complete', function() {
                 UserService.getUser().then(function(user) {
-                    heap.identify({
-                        handle: user.email
-                    });
-                    FS.identify(user.id, {
-                        displayName: user.first_name + ' ' + user.last_name,
-                        email: user.email
-                    });
+                    if (window.heap) {
+                        heap.identify({
+                            handle: user.email
+                        });
+                    }
+                    if (window.FS) {
+                        FS.identify(user.id, {
+                            displayName: user.first_name + ' ' + user.last_name,
+                            email: user.email
+                        });
+                    }
                     window.Intercom('boot', {
                         app_id: 'huj0f8rm',
                         name: user.first_name + ' ' + user.last_name,

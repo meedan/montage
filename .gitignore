@@ -54,6 +54,7 @@ docs/_build/
 
 # Editors
 .idea
+*.sw*
 
 # OSX
 .DS_Store
