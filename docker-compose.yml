@@ -25,6 +25,7 @@ services:
       - /app/target
       - /app/eggs
       - /app/develop-eggs
+      - /app/node_modules
     depends_on:
       - "mysql"
     ports:

@@ -28,6 +28,12 @@ RUN pip install virtualenv \
   && pip install zc.recipe.egg==2.0.3 \
   && buildout
 
+RUN export PATH="$PATH":/app/bin \
+  && npm install \
+  && bower --allow-root install \
+  && npm rebuild node-sass \
+  && grunt build
+
 ENV PATH $PATH:/usr/local/gcloud/google-cloud-sdk/bin:/app/bin
 
 EXPOSE 8000 8080 8081 8082 8083 8084

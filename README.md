@@ -9,25 +9,22 @@
 - `docker-compose up`
 - Navigate to [http://localhost:8080](http://localhost:8080) for the app
 - Navigate to [http://localhost:8000](http://localhost:8000) for the admin UI
-- `docker-compose exec montage bash` to get inside the running container
-- `. ./GREENDAY/bin/activate` inside the running container to activate the Python environment
-- `python bin/manage.py shell` inside the running container to enter the Python shell
-- Editing the Python code from your code editor will automatically reflect in the app backend
-- Editing the JavaScript code from your code editor and refreshing the browser page will reflect on the frontend
 
-## Running tests
+## Development using Docker Compose
 
-### BE tests
+`docker-compose exec montage bash` to get inside the running container
 
-Tests can be run using the run tests shell script
+### Backend
 
-    ./run_tests.sh
+- `. ./GREENDAY/bin/activate`
+- `python bin/manage.py shell` and other Python / Django commands are available
+- Editing the Python code from your code editor will automatically reflect in the running service
+- `./run_tests.sh` to run backend tests
 
-### FE tests
+### Frontend
 
-Tests are automatically run when you save/add/delete a javascript source/test file. But if you want to run the FE tests in a single run, then:
-
-    grunt karma:unitSingle
+- `grunt watch` to watch code changes in JavaScript / HTML and rebuild the package
+- `grunt karma:unitSingle` to run all unit tests
 
 ## Deployment
 
