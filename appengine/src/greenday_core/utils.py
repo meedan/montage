@@ -67,7 +67,7 @@ def send_email(subject, message, to):
         "Sending email with subject {subject} to {to}: {message}"
         .format(subject=subject, to=to, message=message))
     if settings.EMAIL_SENDING:
-        from_addr = "montage@storyful.com".format(
+        from_addr = "montage@meedan.com".format(
             appid=settings.APP_ID)
 
         mail.send_mail(

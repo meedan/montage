@@ -117,7 +117,7 @@
 				authDeferred.resolve(authResult);
 			} else {
 				var user = getCurrentUser();
-				
+
 				if (googleAuth.isSignedIn.get()) {
 					user.reloadAuthResponse().then(done).catch(fail);
 				}
@@ -341,15 +341,6 @@
                             email: user.email
                         });
                     }
-                    window.Intercom('boot', {
-                        app_id: 'huj0f8rm',
-                        name: user.first_name + ' ' + user.last_name,
-                        email: user.email,
-                        created_at: Math.floor(new Date(user.date_joined).getTime() / 1000)
-                    });
-                });
-                $rootScope.$on('$locationChangeStart', function() {
-                    window.Intercom('update');
                 });
             });
         }

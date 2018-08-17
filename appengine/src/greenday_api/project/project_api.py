@@ -361,7 +361,7 @@ class ProjectAPI(BaseAPI, ProjectAPIMixin):
                     "You've been invited to collaborate on a Montage project",
                     EXISTING_USER_INVITED.format(
                         project_name=project.name,
-                        home_link='https://montage.storyful.com'),
+                        home_link='https://montage.meedan.com'),
                     email
                 )
 
@@ -409,7 +409,7 @@ class ProjectAPI(BaseAPI, ProjectAPIMixin):
                         "You've been invited to join Montage",
                         NEW_USER_INVITED.format(
                             project_name=project.name,
-                            home_link='https://montage.storyful.com'),
+                            home_link='https://montage.meedan.com'),
                         pending_user.email
                     )
                 else:

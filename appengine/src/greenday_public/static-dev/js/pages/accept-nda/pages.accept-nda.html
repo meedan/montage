@@ -2,9 +2,9 @@
 	<md-content class="nda__content md-whiteframe-z1" flex layout="column" ng-if="ctrl.step === 1">
 		<md-content class="nda__card md-padding" flex>
 			<h3>
-				Montage is a free and public tool to help journalists and researchers work to analyze and tag public Youtube videos together. Please bear in mind that submission of information over the internet is never entirely secure. Please read our Privacy and Cookies Policy carefully to understand how we protect your data.
+				Montage is a free and public tool to help journalists and researchers work to analyze and tag public YouTube videos together. Please bear in mind that submission of information over the internet is never entirely secure. Please read our Terms of Service and Privacy Policy carefully to understand how we protect your data.
 			</h3>
-			<div ng-include="'pages/partials/pages.terms.html'"></div>
+			<div ng-include="'pages/partials/pages.terms.html'" style="height:85%"></div>
 		</md-content>
 		<md-content class="nda__buttons md-padding" layout="row" layout-align="center">
 			<md-button class="md-primary nda_button" ng-click="ctrl.gotoStep(2)">I agree</md-button>
@@ -13,7 +13,10 @@
 
 	<md-content class="nda__content md-whiteframe-z1" flex layout="column" ng-if="ctrl.step === 2">
 		<md-content class="nda__card md-padding" flex>
-			<div ng-include="'pages/partials/pages.community-guidelines.html'"></div>
+			<h3>
+				Montage is a free and public tool to help journalists and researchers work to analyze and tag public YouTube videos together. Please bear in mind that submission of information over the internet is never entirely secure. Please read our Terms of Service and Privacy Policy carefully to understand how we protect your data.
+			</h3>
+			<div ng-include="'pages/partials/pages.community-guidelines.html'" style="height:85%"></div>
 		</md-content>
 		<md-content class="nda__buttons md-padding" layout="row" layout-align="center">
 			<md-button class="md-primary nda_button" ng-click="ctrl.acceptNDA()">I agree</md-button>

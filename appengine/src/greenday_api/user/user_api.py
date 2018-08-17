@@ -160,7 +160,7 @@ class UserAPI(BaseAPI):
 
         subject = "Montage Invitation"
         message = """You've been invited to join Montage
- https://montage.storyful.com"""
+ https://montage.meedan.com"""
         from greenday_core.utils import send_email
         send_email(subject, message, [request.email])
 

@@ -56,7 +56,7 @@ class UserListView(TemplateView):
             send_email(
                 "You've been invited to join Montage",
                 NEW_USER_INVITED_NO_PROJECT.format(
-                    home_link='http://montage.storyful.com'),
+                    home_link='http://montage.meedan.com'),
                 pu.email
             )
             return redirect('user_management')

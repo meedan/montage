@@ -1,6 +1,6 @@
 {
     "libs": [
-        "appengine/src/greenday_public/static-dev/libs/jquery-dist/jquery.min.js",
+        "appengine/src/greenday_public/static-dev/libs/jquery/dist/jquery.js",
         "appengine/src/greenday_public/static-dev/libs/angular/angular.js",
         "appengine/src/greenday_public/static-dev/libs/hammerjs/hammer.js",
         "appengine/src/greenday_public/static-dev/libs/angular-route/angular-route.js",
