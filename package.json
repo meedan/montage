@@ -7,7 +7,9 @@
     "migrate-qa": "grunt migrateQa",
     "migrate-live": "grunt migrateLive",
     "deploy-qa": "grunt deployQa",
-    "deploy-live": "grunt deployLive"
+    "deploy-live": "grunt deployLive",
+    "full-deploy-qa": "npm run authenticate && npm run deploy-qa && npm run migrate-qa",
+    "full-deploy-live": "npm run authenticate && npm run deploy-live && npm run migrate-live"
   },
   "devDependencies": {
     "grunt": "^1.0.3",

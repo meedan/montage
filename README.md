@@ -44,9 +44,7 @@ All connections to the Cloud SQL instances are made over SSL. You will need to s
 QA should mirror the `develop` branch. QA has a fixed version, called "qa".
 
 1.  Copy `appengine/auth.json.example` to `appengine/auth.json`
-2.  Run `npm run authenticate`
-3.  Run `npm run deploy-qa`
-4.  Run `npm run migrate-qa`
+2.  Run `npm run full-deploy-qa`
 
 ### To Live
 
@@ -55,9 +53,7 @@ Live should mirror the `master` branch.
 1.  If the version needs changing then update file `VERSION`
 2.  Merge develop into master and push
 3.  Copy `appengine/auth.json.example` to `appengine/auth.json`
-4.  Run `npm run authenticate`
-5.  Run `npm run deploy-live`
-6.  Run `npm run migrate-live`
+4.  Run `npm run full-deploy-live`
 
 ## Documentation
 
