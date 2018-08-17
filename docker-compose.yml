@@ -26,6 +26,8 @@ services:
       - /app/develop-eggs
       - /app/node_modules
       - /app/appengine/lib
+    environment:
+      CURRENT_VERSION_ID: local
     depends_on:
       - "mysql"
     ports:
