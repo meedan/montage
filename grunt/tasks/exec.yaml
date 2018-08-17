@@ -1,20 +1,17 @@
 devServer:
   command: './bin/dev_appserver appengine 2>&1'
 
-migrateDev:
-  command: './bin/manage.py migrate --noinput --settings=greenday_core.settings.staging'
+authenticate:
+  command: 'gcloud auth activate-service-account --key-file=appengine/auth.json'
 
-migrate:
-  command: './bin/manage.py migrate --noinput --settings=greenday_core.settings.prod'
+migrateQa:
+  command: 'CURRENT_VERSION_ID=qa ./bin/manage.py migrate --noinput --settings=greenday_core.settings.qa'
 
-migratePotatoDev:
-  command: './bin/manage.py migrate --noinput --settings=greenday_core.settings.potato'
+migrateLive:
+  command: 'CURRENT_VERSION_ID=live ./bin/manage.py migrate --noinput --settings=greenday_core.settings.live'
 
-deploy:
-  command: './bin/appcfg update appengine/app.yaml appengine/long-poller.yaml appengine/worker.yaml appengine/publisher.yaml --application=greenday-project'
+deployQa:
+  command: 'yes | gcloud app deploy appengine/app.yaml appengine/long-poller.yaml appengine/worker.yaml appengine/publisher.yaml --project=greenday-project --no-promote --version=qa'
 
-deployProd:
-  command: './bin/appcfg update appengine/app.yaml appengine/long-poller.yaml appengine/worker.yaml appengine/publisher.yaml --application=greenday-project'
-
-deployPotatoDev:
-  command: './bin/appcfg update appengine/app.yaml appengine/long-poller.yaml appengine/worker.yaml appengine/publisher.yaml --application=greenday-project-v02-potato'
+deployLive:
+  command: 'yes | gcloud app deploy appengine/app.yaml appengine/long-poller.yaml appengine/worker.yaml appengine/publisher.yaml --project=greenday-project --promote --version=$(cat VERSION)'

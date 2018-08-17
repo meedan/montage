@@ -28,46 +28,36 @@
 
 ## Deployment
 
-### Setting up DB access to staging and prod databases
+### Setting up DB access to QA and live databases
 
 All connections to the Cloud SQL instances are made over SSL. You will need to set yourself up with a private key to access this.
 
-1.  Go to the [project console](https://console.developers.google.com/project/greenday-project-v02-dev/sql/instances/greenday/access-control)
-2.  Under "SSL Certificates" click "Add new"
-3.  Enter a name you can be identified by as the cert name (your LDAP would be appropriate)
-4.  Download client-key.pem, client-cert.pem and ca-cert.pem (this is named server-ca when you download it from the console. You will need to rename it to ca-cert.pm when you store it locally) and save them in {project root}/keys/staging/ *DO NOT STAGE THESE FILES - THEY ARE GIT IGNORED FOR A REASON*
-6.  Click "Restart and Close". This RESTARTS the SQL instance but is necessary for the certificate to be usable.
-7.  Repeat for the [prod project](https://console.developers.google.com/project/greenday-project/sql/instances/greenday/access-control) and save keys to {project root}/keys/prod/
-8.  Test connection using ./bin/manage.py dbshell --settings=greenday_core.settings.(staging|prod)
-9.  If you use any other type of UI to connect to Cloud SQL (Sequel Pro) you will have to add these key files to the connection details for each connection.
+1.  Go to the [project console](https://console.cloud.google.com/sql/instances?project=greenday-project) and choose a database
+2.  Under "SSL" click "Create a client certificate"
+3.  Enter a name you can be identified by as the cert name
+4.  Download client-key.pem, client-cert.pem and ca-cert.pem (this is named server-ca when you download it from the console. You will need to rename it to ca-cert.pm when you store it locally) and save them in {project root}/keys/(qa|live)/
+5.  Click "Restart and Close". This RESTARTS the SQL instance but is necessary for the certificate to be usable.
+6.  Test connection using ./bin/manage.py dbshell --settings=greenday_core.settings.(qa|live)
 
-### To staging
+### To QA
 
-Staging should mirror the master branch
+QA should mirror the `develop` branch. QA has a fixed version, called "qa".
 
-1.  OPTIONAL: Build the docs (`cd docs && make html`)
-2.  OPTIONAL: Update ERM diagram (see separate section)
-3.  Increment version in app.yaml, long-poller.yaml, worker.yaml, publisher.yaml and commit
-4.  Tag the commit with the version number
-5.  Merge develop into master and push
-6.  If there are migrations run `grunt migrateDev`
-7.  Run `grunt deploy`
-8.  Change the default version on all modules
-9.  OPTIONAL: run data tasks at /admin/denormalisers/, /admin/search/ and /admin/yt_videos/. Run these on https://worker-dot-greenday-project-v02-dev.appspot.com
+1.  Copy `appengine/auth.json.example` to `appengine/auth.json`
+2.  Run `npm run authenticate`
+3.  Run `npm run deploy-qa`
+4.  Run `npm run migrate-qa`
 
-### To production
+### To Live
 
-Prod should mirror the stable branch
+Live should mirror the `master` branch.
 
-1.  OPTIONAL: Build the docs (`cd docs && make html`)
-2.  OPTIONAL: Update ERM diagram (see separate section)
-3.  If the version needs changing then complete steps 2-4 of the staging process.
-4.  Merge master into stable and push
-5.  Run `npm run grunt-deploy-prod` (be aware if running this in a remote server or Docker container, because you need an X server - the deployment task opens the browser for authentication on Google)
-6.  If there are migrations to run then run `grunt migrate`
-7.  Change the default version on all modules
-8.  On Google Cloud side, migrate all traffic to the deployed version: https://console.cloud.google.com/appengine/versions?project=greenday-project&serviceId=default&versionssize=50
-9.  OPTIONAL: run data tasks at /admin/denormalisers/, /admin/search/ and /admin/yt_videos/. Run these on https://worker-dot-greenday-project.appspot.com
+1.  If the version needs changing then update file `VERSION`
+2.  Merge develop into master and push
+3.  Copy `appengine/auth.json.example` to `appengine/auth.json`
+4.  Run `npm run authenticate`
+5.  Run `npm run deploy-live`
+6.  Run `npm run migrate-live`
 
 ## Documentation
 

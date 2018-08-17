@@ -1,0 +1,1 @@
+Create a "Services Account" at https://console.cloud.google.com/iam-admin/serviceaccounts?project=greenday-project&folder&organizationId=923341443555&supportedpurview, create a key for it and then rename the downloaded JSON to file to auth.json.

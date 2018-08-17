@@ -26,6 +26,7 @@ services:
       - /app/eggs
       - /app/develop-eggs
       - /app/node_modules
+      - /app/appengine/lib
     depends_on:
       - "mysql"
     ports:

@@ -89,8 +89,7 @@ OAUTH_SETTINGS = {}
 ENVS = {
     'LOCAL': 0,
     'STAGING': 1,
-    'PROD': 2,
-    'POTATO': 3
+    'PROD': 2
 }
 
 TIME_ZONE = 'Europe/London'

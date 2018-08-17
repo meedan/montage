@@ -1,12 +1,12 @@
 dispatch:
   - url: "*/channel/pull*"
-    module: long-poller
+    service: long-poller
 
   - url: "*/channel/publish_event_task_handler*"
-    module: publisher
+    service: publisher
 
   - url: "*/admin/search/*"
-    module: worker
+    service: worker
 
   - url: "*/admin/denormalisers/*"
-    module: worker
+    service: worker

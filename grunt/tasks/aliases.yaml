@@ -31,29 +31,23 @@ build:
   - 'copy:fonts'
   - 'clean:tmp'
 
-deploy:
+deployQa:
   - 'clean:static'
   - 'build'
-  - 'exec:deploy'
+  - 'exec:deployQa'
   - 'clean:static'
 
-deployProd:
-  - 'clean:static'
-  - 'build'
-  - 'exec:deployProd'
-  - 'clean:static'
-
-deployPotatoDev:
+deployLive:
   - 'clean:static'
   - 'build'
-  - 'exec:deployPotatoDev'
+  - 'exec:deployLive'
   - 'clean:static'
 
-migrateDev:
-  - 'exec:migrateDev'
+migrateQa:
+  - 'exec:migrateQa'
 
-migrate:
-  - 'exec:migrate'
+migrateLive:
+  - 'exec:migrateLive'
 
-migratePotatoDev:
-  - 'exec:migratePotatoDev'
+authenticate:
+  - 'exec:authenticate'

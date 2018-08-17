@@ -86,8 +86,10 @@ appengine/src/greenday_public/static-dev/img/sprite.png
 appengine/src/greenday_public/static-dev/img/sprite@2x.png
 appengine/src/greenday_public/static-dev/scss/sprite.scss
 
-# Local settings files
+# Settings files
 appengine/src/greenday_core/settings/local.py
+appengine/src/greenday_core/settings/qa.py
+appengine/src/greenday_core/settings/live.py
 
 # MySQL and AppEngine data
 mysql/data/*
@@ -95,3 +97,6 @@ mysql/data/*
 mysql/appengine/*
 !mysql/appengine/.gitkeep
 *.sql
+
+# Deployment configuration
+appengine/auth.json

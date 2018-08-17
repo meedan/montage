@@ -13,6 +13,7 @@ from time import time
 
 # import appengine deps
 from google.appengine.api.app_identity import get_application_id
+from google.appengine.api.modules import get_current_version_name
 from google.appengine.ext import blobstore
 from google.appengine.ext.appstats import datamodel_pb, recording
 from google.appengine.api import images, mail
@@ -40,20 +41,16 @@ def get_settings_name():
         Gets the correct module to define Django's settings
     """
     # application_id -> settings file
-    APPENGINE_PRODUCTION = os.getenv('SERVER_SOFTWARE', '').startswith(
-        'Google App Engine')
-    settings_map = {
-        'greenday-project-v02-dev': 'greenday_core.settings.staging',
-        'greenday-project-v02-potato': 'greenday_core.settings.potato',
-        'greenday-project': 'greenday_core.settings.prod',
-    }
-    try:
-        app_id = get_application_id().lower()
-    except AttributeError:
-        app_id = ''
-
-    settings_module = settings_map.get(app_id) \
-        if APPENGINE_PRODUCTION else 'greenday_core.settings.local'
+    version = get_current_version_name()
+    logging.info("Using version: {0}".format(version))
+    
+    settings_module = 'greenday_core.settings.local'
+    if version is not None:
+        if version == 'qa':
+            settings_module = 'greenday_core.settings.qa'
+        else:
+            settings_module = 'greenday_core.settings.live'
+    
     logging.info("Using settings: {0}".format(settings_module))
 
     return settings_module

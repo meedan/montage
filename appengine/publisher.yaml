@@ -1,6 +1,4 @@
-application: greenday-project-v02-dev
-module: publisher
-version: 3-0-24
+service: publisher
 runtime: python27
 api_version: 1
 threadsafe: true

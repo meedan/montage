@@ -1,9 +1,13 @@
 {
   "name": "montage-v0.2",
   "description": "Project Montage v0.2",
-  "repository": "TODO",
+  "repository": "https://github.com/meedan/montage",
   "scripts": {
-    "grunt-deploy-prod": "grunt deployProd"
+    "authenticate": "grunt authenticate",
+    "migrate-qa": "grunt migrateQa",
+    "migrate-live": "grunt migrateLive",
+    "deploy-qa": "grunt deployQa",
+    "deploy-live": "grunt deployLive"
   },
   "devDependencies": {
     "grunt": "^0.4.5",
