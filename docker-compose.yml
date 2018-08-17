@@ -20,6 +20,7 @@ services:
       - /app/GREENDAY
       - /app/appengine/src/greenday_public/static-dev/libs
       - /app/appengine/src/greenday_public/static-dev/css
+      - /app/appengine/src/greenday_public/static/img
       - /app/reports
       - /app/target
       - /app/eggs

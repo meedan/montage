@@ -2,6 +2,7 @@
 module.exports = function (grunt) {
 	'use strict';
 	var path = require('path'),
+		sass = require('node-sass'),
 		process = require('process'),
 		buildoutBin = path.join(path.dirname(__filename), 'bin'),
 		rootPath = process.cwd(),
@@ -16,7 +17,13 @@ module.exports = function (grunt) {
 			pkg: grunt.file.readJSON('package.json'),
 			rootPath: rootPath,
 			publicRootPath: publicRootPath,
-			paths: paths
+			paths: paths,
+			sass: {
+				options: {
+					implementation: sass,
+					sourceMap: true
+				}
+			}
 		};
 
 	// Ensure buildout-installed executables are used over globally-installed versions
