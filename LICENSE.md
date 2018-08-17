@@ -4,7 +4,7 @@ Montage is free software, licensed under the Apache License, Version 2.0 (the
 "License"). Commercial and non-commercial use are permitted in compliance with
 the License.
 
-Copyright (c) 2016 Storyful.
+Copyright (c) 2018 Meedan.
 All rights reserved.
 
 You may obtain a copy of the License at:

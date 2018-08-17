@@ -195,7 +195,6 @@
 						  invitee_email: ctrl.newCollaborator.email,
 						  invite_code: 'ADDACOLLABORATOR'
 						};
-						Intercom('trackEvent', 'invited-collaborator', metadata);
 						ctrl.resetCollaborator();
 						ctrl.isBusy = false;
 				});

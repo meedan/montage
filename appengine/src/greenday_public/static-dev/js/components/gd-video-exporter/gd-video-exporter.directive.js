@@ -60,7 +60,6 @@
 					clean_name: this.exportName,
 					vids: this.exportVideoIds
 				};
-				Intercom('trackEvent', 'exported-videos');
 				var saveData = (function () {
 			    var a = document.createElement("a");
 			    document.body.appendChild(a);
