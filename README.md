@@ -46,6 +46,8 @@ QA should mirror the `develop` branch. QA has a fixed version, called "qa".
 1.  Copy `appengine/auth.json.example` to `appengine/auth.json`
 2.  Run `npm run full-deploy-qa`
 
+PS: At Meedan, a deployment to QA happens automatically when a push happens to `develop`. You can also call it using Hubot: `@hu deploy-montage-qa`.
+
 ### To Live
 
 Live should mirror the `master` branch.
