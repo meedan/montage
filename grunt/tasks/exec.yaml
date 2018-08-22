@@ -8,7 +8,7 @@ migrateQa:
   command: 'CURRENT_VERSION_ID=qa ./bin/manage.py migrate --noinput --settings=greenday_core.settings.qa'
 
 migrateLive:
-  command: 'CURRENT_VERSION_ID=live ./bin/manage.py migrate --noinput --settings=greenday_core.settings.live'
+  command: 'CURRENT_VERSION_ID=$(cat VERSION) ./bin/manage.py migrate --noinput --settings=greenday_core.settings.live'
 
 deployQa:
   command: 'yes | gcloud app deploy appengine/app.yaml appengine/long-poller.yaml appengine/worker.yaml appengine/publisher.yaml --project=greenday-project --no-promote --version=qa'
