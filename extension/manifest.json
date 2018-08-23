@@ -8,7 +8,7 @@
   },
   "content_scripts": [{
     "all_frames": true,
-    "css": [ "css/main-bundle.css"],
+    "css": [ "css/main.css"],
     "js": [
       "js/content_script.js",
       "js/tag_context-bundle.js"

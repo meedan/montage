@@ -2,7 +2,7 @@ The majority of the extension can be edited easily, however the Content Script
 is written in Google Closure and thus needs to be built.
 
 To build, run the following lines to compile the code:
-sudo closure-library/closure/bin/build/closurebuilder.py --root=closure-library/ --root=js/ --namespace="greenday.extension.App" --output_mode=compiled --compiler_jar=compiler.jar > js/content_script.js
+`closure-library/closure/bin/build/closurebuilder.py --root=closure-library/ --root=js/ --namespace="greenday.extension.App" --output_mode=compiled --compiler_jar=compiler.jar > js/content_script.js`
 
 You should then deploy it to the Chrome Webstore.
 
@@ -17,7 +17,6 @@ extension.
 
 If for some reason the closure-library does not exist. Then make sure you
 download it using the line:
-git clone https://github.com/google/closure-library
-
+`git clone https://github.com/google/closure-library`
 
 Enjoy the extension!
