@@ -90,6 +90,10 @@ handlers:
   secure: always
   login: admin
 
+- url: /google9c66feefb1c8310e.html
+  static_files: google9c66feefb1c8310e.html
+  upload: google9c66feefb1c8310e.html
+
 # Main app
 - url: /.*
   script: handlers.wsgi.application
