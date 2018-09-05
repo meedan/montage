@@ -159,35 +159,15 @@ div.welcome-page {
                 padding-bottom: 35px;
             }
         }
-        .opensource-message {
+        .meedan-message {
             @extend .purpose;
             @media(max-width: $breakpoint-phone) {
                 display: none;
             }
-            .code-icon {
-                display: inline-block;
-                @media(max-width: $breakpoint-uhd) {
-                    width: 24.8px;
-                    height: 15px;
-                }
-                @media(min-width: $breakpoint-uhd) {
-                    width: 33px;
-                    height: 20px;
-                }
-            }
-            .people-outline-icon {
-                display: inline-block;
-                position: relative;
-                @media(max-width: $breakpoint-uhd) {
-                    width: 33px;
-                    height: 21px;
-                    top: 3px;
-                }
-                @media(min-width: $breakpoint-uhd) {
-                    width: 44px;
-                    height: 28px;
-                    top: 2px;
-                }
+            img {
+                width: 141px;
+                vertical-align: middle;
+                padding-left: 8px;
             }
         }
         .montage-icon {
@@ -214,6 +194,7 @@ div.welcome-page {
             justify-content: center;
             flex-shrink: 0;
             height: 93px;
+            margin-top: 50px;
             @media( max-width: $breakpoint-phone) {
                 width: 100%;
                 order: 2;
@@ -222,107 +203,16 @@ div.welcome-page {
             @media( min-width: $breakpoint-phone ) {
                 order: 4;
             }
-            button.btn-log-in {
-                flex: 0 0 252px;
-                @media( max-width: $breakpoint-phone) {
-                    width: 100%;
-                    max-width: 260px;
-                    height: 64px;
-                    margin-top: 20px;
-                    margin-bottom: 70px;
-                }
-                @media( min-width: $breakpoint-phone) and ( max-width: $breakpoint-uhd) {
-                    height: 64px;
-                }
-                @media( min-width: $breakpoint-uhd) {
-                    height: 95px;
-                }
-                background-color: white;
-                color: $storyful-orange;
-                border: 3px solid $storyful-orange;
-                &:focus,
-                &:hover {
-                    background-color: $storyful-orange;
-                    color: white;
-                }
-                .btn-text-big-caption {
-                    font-weight: 700;
-                    font-family: Arial;
-                    @media( max-width: $breakpoint-uhd) {
-                        font-family: Arial;
-                        font-size: 28px;
-                    }
-                    @media( min-width: $breakpoint-uhd) {
-                        font-size: 38px;
-                    }
-                }
-                .btn-text-small-caption {
-                    font-family: Arial;
-                    font-size: 12px;
-                    font-weight: 400;
-                    @media( min-width: $breakpoint-uhd) {
-                        font-size: 18px;
-                    }
-                }
-            }
-            .btn-sourcecode {
-                margin: 0 0 50px 10px;
-                font-weight: 700;
-                font-family: Arial;
-                position: relative;
-                svg {
-                    position: absolute;
-                    fill:#818383;
-                    @media(max-width: $breakpoint-uhd) {
-                        top: 10px;
-                        left: 10px;
-                        width: 36px;
-                        height: 36px;
-                    }
-                    @media(min-width: $breakpoint-uhd) {
-                        top: 21px;
-                        left: 17px;
-                        width: 49px;
-                        height: 48px;
-                    }
-                }
-
-                @media only screen and (max-width: $breakpoint-phone) {
-                    display: none;
-                }
-                @media(max-width: $breakpoint-uhd) {
-                    flex: 0 0 250px;
-                    height: 64px;
-                    line-height: 62px;
-                    font-size: 17.7px;
-                    text-indent: 40px;
-                }
-                @media(min-width: $breakpoint-uhd) {
-                    flex: 0 0 334px;
-                    height: 95px;
-                    line-height: 93px;
-                    font-size: 23.7px;
-                    text-indent: 60px;
-                }
-                display: inline-block;
-                background-color: white;
-                color: $middle-grey;
-                border: 3px solid $middle-grey;
-
-                &:focus,
-                &:hover {
-                    background-color: $middle-grey;
-                    color: white;
-                    svg {
-                        fill: white;
-                    }
+            .btn-log-in {
+                img {
+                    width: 215px;
+                    cursor: pointer;
                 }
             }
         }
         .jigsaw-icon {
             width: 100%;
             order: 5;
-            margin-top: 30px;
             a {
                 flex-grow: 0;
                 flex-shrink: 0;
@@ -348,11 +238,29 @@ div.welcome-page {
                     height: 46px;
                 }
             }
+            img {
+                width: 200px;
+                display: block;
+                margin: auto;
+            }
+        }
+        .opensource-message {
+            order: 6;
+            text-align: center;
+            color: $middle-grey;
+            font-family: Arial;
+            font-size: 12px;
+            font-weight: 400;
+            flex-shrink: 0;
+            margin-top: 50px;
+            @media( max-width: $breakpoint-phone) {
+                display: none;
+            }
         }
         .links-bar {
             width: 100%;
             text-align: center;
-            order: 6;
+            order: 7;
             flex-shrink: 0;
             @media( min-width: $breakpoint-uhd) {
                 margin-bottom: 30px;
@@ -361,7 +269,7 @@ div.welcome-page {
                 margin: auto;
                 width: 144px;
                 height: 11px;
-                color: #bababa;
+                color: $middle-grey;
                 font-family: Arial;
                 font-size: 12px;
                 font-weight: 400;
