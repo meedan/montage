@@ -1,5 +1,5 @@
 images:
-  src: '<%= paths.staticDevRoot %>/img/*.{jpg,jpeg,gif,png}'
+  src: '<%= paths.staticDevRoot %>/img/*.{jpg,jpeg,gif,png,svg}'
   dest: '<%= paths.staticDistRoot %>/img/'
   expand: true
   flatten: true
