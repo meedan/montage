@@ -9,7 +9,7 @@
     .controller('WelcomePageCtrl', WelcomePageCtrl);
 
   /** @ngInject */
-  function WelcomePageCtrl($scope, $location, PageService, UserService) {
+  function WelcomePageCtrl($scope, $location, PageService, UserService, staticFileUrlService) {
     var ctrl = this;
 
     PageService.updatePageData({
@@ -24,6 +24,7 @@
     ctrl.logIn = logIn;
     ctrl.isBusy = false;
 		ctrl.imOnWelcomePage = true;
+    ctrl.static = staticFileUrlService;
 
     function logIn() {
       UserService
