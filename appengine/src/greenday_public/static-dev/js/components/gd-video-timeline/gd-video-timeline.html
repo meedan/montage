@@ -13,7 +13,9 @@
 			<li ng-if="!video.archived_at" ng-click="ctrl.createThread()" class="gd-video-timeline__comment-label">
 				<div layout="row" layout-align="center center">
 					<icon class="ic-comment"></icon>
-					<span flex>Comment</span>
+					<span flex>Comment
+						[ <foobar foo="'bar'"></foobar> ]
+					</span>
 				</div>
 			</li>
 			<li ng-if="video.archived_at" class="gd-video-timeline__comment-label">
