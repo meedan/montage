@@ -29,6 +29,7 @@ services:
       - /app/appengine/lib
     environment:
       CURRENT_VERSION_ID: local
+      DJANGO_SETTINGS_MODULE: greenday_core.settings.local
     depends_on:
       - "mysql"
     ports:

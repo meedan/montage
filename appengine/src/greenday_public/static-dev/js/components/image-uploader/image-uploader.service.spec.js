@@ -3,21 +3,117 @@ describe('Unit: Testing services', function () {
 		GapiLoader,
 		$q,
 		$timeout,
+		$httpBackend,
 		gapiLoaderDeferred,
 		uploadDeferred,
 		fileData,
 		eventListener,
-		gapi = {
-			client: {
-				request: function () {
-					return { execute: function (callback) { callback({}); } };
-				}
+    fakeProject = {
+      'is_list': true,
+    },
+		fakeUser = {
+			'accepted_nda': true,
+			'email': 'someone@somewhere.com',
+			'first_name': '',
+			'gaia_id': '1234567890',
+			'id': '1',
+			'is_active': true,
+			'is_googler': false,
+			'is_staff': false,
+			'is_superuser': false,
+			'language': 'en',
+			'last_login': '2014-09-17T10:53:42+00:00',
+			'last_name': '',
+			'username': '1234567890'
+		},
+		fakeProfile = {
+			'kind': 'plus#person',
+			'etag': '\"KJHSFVCB8273ryfghHJGSLF/KJHSFVCB8273ryfghHJGSLF\"',
+			'gender': 'male',
+			'emails': [{
+				'value': 'someone@somewhere.com',
+				'type': 'account'
+			}],
+			'objectType': 'person',
+			'id': '1234567890',
+			'displayName': 'Someone Awesome',
+			'name': {
+				'familyName': 'Awesome',
+				'givenName': 'Someone'
 			},
-			auth: {
-				getToken: function () {
-					return {
-						access_token: '123456'
-					};
+			'url': 'https://plus.google.com/1234567890',
+			'image': {
+				'url': 'https://lh5.googleusercontent.com/-mV0aK-lwZHoW7ukXRMSdCAtOAWpKPgsHl0rYP7giTs?sz=50',
+				'isDefault': false
+			},
+			'isPlusUser': true,
+			'language': 'en_GB',
+			'circledByCount': 0,
+			'verified': false,
+			'domain': 'somewhere.com'
+		},
+		fakeUserWithProfile = {
+			'accepted_nda': true,
+			'email': 'someone@somewhere.com',
+			'first_name': 'Someone',
+			'gaia_id': '1234567890',
+			'id': '1',
+			'is_active': true,
+			'is_googler': false,
+			'is_staff': false,
+			'is_superuser': false,
+			'language': 'en_GB',
+			'last_login': '2014-09-17T10:53:42+00:00',
+			'last_name': 'Awesome',
+			'username': '1234567890',
+			'profile_img_url': 'https://lh5.googleusercontent.com/-mV0aK-lwZHoW7ukXRMSdCAtOAWpKPgsHl0rYP7giTs',
+			'google_plus_profile': 'https://plus.google.com/1234567890'
+		},
+    googleAuth = {
+      isSignedIn: {
+        get: function () {
+          return true;
+        }
+      },
+      currentUser: {
+        get: function () {
+          return {
+            getAuthResponse: function (bool) {
+              return { access_token: '123456' };
+            },
+            reloadAuthResponse: function() {
+              return {
+                then: function (callback) {
+                  callback({});
+                  return {
+                    catch: function (callback) { callback({}); }
+                  };
+                }
+              };
+            }
+          };
+        }
+      }
+    },
+		gapi = {
+			auth2: {
+				init: function (params) {
+          return {
+            then: function (callback) {
+              callback(googleAuth);
+            }
+          };
+        }
+			},
+			client: {
+				load: function (apiName, apiVersion, callback) { callback(); },
+				setApiKey: function (apiKey) {},
+				plus: {
+					people: {
+						get: function (params) {
+							return { execute: function (callback) { callback(fakeProfile); } };
+						}
+					}
 				}
 			}
 		},
@@ -65,15 +161,13 @@ describe('Unit: Testing services', function () {
 	};
 
 
-	beforeEach(function () {
-		module('components');
-		module('app.services');
-	});
+	beforeEach(module('app'));
 
-	beforeEach(inject(function (_ImageUploader_, _$q_, _$timeout_, _GapiLoader_) {
+	beforeEach(inject(function (_ImageUploader_, _$q_, _$timeout_, _$httpBackend_, _GapiLoader_) {
 		ImageUploader = _ImageUploader_;
 		$q = _$q_;
 		$timeout = _$timeout_;
+		$httpBackend = _$httpBackend_;
 		GapiLoader = _GapiLoader_;
 
 		gapiLoaderDeferred = $q.defer();
@@ -106,9 +200,14 @@ describe('Unit: Testing services', function () {
 				done();
 			});
 
+			$httpBackend.expectGET('users/me').respond(fakeUser);
+			$httpBackend.expectGET('project').respond(fakeProject);
+			$httpBackend.expectPUT('users/me').respond(fakeUserWithProfile);
+
 			gapiLoaderDeferred.resolve(gapi);
 
 			$timeout.flush();
+			$httpBackend.flush();
 		});
 
 		it('should fail to upload an image', function (done) {
@@ -119,9 +218,14 @@ describe('Unit: Testing services', function () {
 				done();
 			});
 
+			$httpBackend.expectGET('users/me').respond(fakeUser);
+			$httpBackend.expectGET('project').respond(fakeProject);
+			$httpBackend.expectPUT('users/me').respond(fakeUserWithProfile);
+
 			gapiLoaderDeferred.resolve(gapi);
 
 			$timeout.flush();
+			$httpBackend.flush();
 		});
 	});
 });

@@ -43,14 +43,14 @@ def get_settings_name():
     # application_id -> settings file
     version = get_current_version_name()
     logging.info("Using version: {0}".format(version))
-    
+
     settings_module = 'greenday_core.settings.local'
     if version is not None:
         if version == 'qa':
             settings_module = 'greenday_core.settings.qa'
         else:
             settings_module = 'greenday_core.settings.live'
-    
+
     logging.info("Using settings: {0}".format(settings_module))
 
     return settings_module
@@ -196,7 +196,7 @@ class UnicodeWriter:  # pragma: no cover
     def __init__(self, f, encoding="utf-16", **kwds):
         # Redirect output to a queue
         self.queue = cStringIO.StringIO()
-        self.queue.write(u'\ufeff'.encode('utf8'))
+        #self.queue.write(u'\ufeff'.encode('utf8'))
         self.writer = csv.writer(self.queue, **kwds)
         self.stream = f
         self.encoder = codecs.getincrementalencoder(encoding)()

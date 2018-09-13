@@ -4,7 +4,7 @@ describe('Unit: Testing services', function () {
 		$timeout,
 		$mdDialog;
 
-	beforeEach(module('app.services'));
+	beforeEach(module('app'));
 
 	beforeEach(inject(function (_DialogService_, _$q_, _$mdDialog_, _$timeout_) {
 		DialogService = _DialogService_;

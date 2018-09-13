@@ -31,7 +31,7 @@ from dev_appserver import fix_sys_path
 fix_sys_path()
 import fix_paths
 
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", 'greenday_core.settings.test_settings')
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", 'greenday_core.settings.test')
 import django
 django.setup()
 

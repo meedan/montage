@@ -19,7 +19,8 @@ import os
 from protorpc import remote
 from protorpc import messages, message_types
 from endpoints.api_config import (
-    CacheControl, _CheckListType, _MethodInfo, _CheckEnum)
+    _MethodInfo, _CheckEnum, _CheckType)
+import endpoints.util as endpoints_util
 from django.conf import settings
 
 from greenday_core.api_exceptions import (
@@ -132,10 +133,9 @@ class GreendayMethodDecorator(object):
         self.post_middlewares = post_middlewares or []
         self.error_middlewares = error_middlewares or []
 
-        self.check_type(cache_control, CacheControl, 'cache_control')
-        _CheckListType(scopes, basestring, 'scopes')
-        _CheckListType(audiences, basestring, 'audiences')
-        _CheckListType(allowed_client_ids, basestring, 'allowed_client_ids')
+        endpoints_util.check_list_type(scopes, basestring, 'scopes')
+        endpoints_util.check_list_type(audiences, basestring, 'audiences')
+        endpoints_util.check_list_type(allowed_client_ids, basestring, 'allowed_client_ids')
         _CheckEnum(auth_level, endpoints.AUTH_LEVEL, 'auth_level')
 
     def check_type(self, setting, allowed_type, name, allow_none=True):
@@ -197,7 +197,6 @@ class GreendayMethodDecorator(object):
             name=self.name or api_method.__name__,
             path=self.path or api_method.__name__,
             http_method=self.http_method or "POST",
-            cache_control=self.cache_control,
             scopes=self.scopes, audiences=self.audiences,
             allowed_client_ids=self.allowed_client_ids,
             auth_level=self.auth_level)

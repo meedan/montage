@@ -1,7 +1,7 @@
 describe('Unit: Event service', function () {
 	var EventService;
 
-	beforeEach(module('app.services'));
+	beforeEach(module('app'));
 
 	beforeEach(inject(function (_EventService_) {
 		EventService = _EventService_;

@@ -18,7 +18,8 @@
 				queryUserContacts: queryUserContacts,
 				getUserStats: getUserStats,
 				acceptNDA: acceptNDA,
-				authorizationToken: authorizationToken
+				authorizationToken: authorizationToken,
+        setGoogleAuth: setGoogleAuth
 			},
 			userFetchInProgress = false,
 			authDeferred = null,
@@ -33,6 +34,10 @@
 			authResult;
 
 		return service;
+
+    function setGoogleAuth(ga) {
+      googleAuth = ga;
+    }
 
 		function authorizationToken(){
 			var defer = $q.defer();

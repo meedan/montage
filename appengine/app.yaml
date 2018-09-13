@@ -7,10 +7,10 @@ builtins:
 - appstats: on
 
 libraries:
-- name: endpoints
-  version: 1.0
 - name: MySQLdb
-  version: "1.2.4b4"
+  version: "1.2.5"
+- name: pycrypto
+  version: 2.6
 - name: ssl
   version: "2.7.11"
 
@@ -62,7 +62,7 @@ handlers:
   upload: src/greenday_public/root/favicon\.ico
 
 # API
-- url: /_ah/spi/.*
+- url: /_ah/api/.*
   script: handlers.endpoints.application
   secure: always
 

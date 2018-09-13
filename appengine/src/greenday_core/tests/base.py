@@ -2,12 +2,16 @@
     Defines generic test behaviour
 """
 import mock
+import functools
+import os
 from milkman.dairy import milkman
+
 # import django deps
 from django.db import connection
 from django.db.backends import utils
 from django.contrib.contenttypes.models import ContentType
 from django.test import TestCase
+from django.contrib.auth import get_user_model
 
 # import lib deps
 from google.appengine.ext import testbed
@@ -48,6 +52,7 @@ class AppengineTestBed(TestCase):
         self.tb.init_blobstore_stub()
         self.tb.init_taskqueue_stub(root_path='appengine')
         defer_patcher.start()
+        auth_user_patcher.start()
 
     def tearDown(self):
         """
@@ -57,6 +62,7 @@ class AppengineTestBed(TestCase):
 
             Clear Django content types cache to maintain consistent query counts
         """
+        auth_user_patcher.stop()
         defer_patcher.stop()
         self.tb.deactivate()
         ContentType.objects.clear_cache()
@@ -240,4 +246,13 @@ def defer_replacement(kallable, *args, **kwargs):
         # make_debug_cursor has already been removed
         pass
 
+def auth_user_replacement(fn):
+    @functools.wraps(fn)
+    def _wrapped(request, *args, **kwargs):
+        User = get_user_model()
+        request.user = User.objects.get(email=os.environ['USER_EMAIL']) if os.environ.get('USER_EMAIL') else milkman.deliver(User)
+        return fn(request, *args, **kwargs)
+    return _wrapped
+
 defer_patcher = mock.patch('deferred_manager.defer', new=defer_replacement)
+auth_user_patcher = mock.patch('greenday_public.auth_utils.auth_user', new=auth_user_replacement)

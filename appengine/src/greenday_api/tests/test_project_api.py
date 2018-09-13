@@ -16,7 +16,8 @@ from greenday_core.api_exceptions import ForbiddenException, NotFoundException
 from greenday_core.models import (
     Project,
     UserVideoDetail,
-    PendingUser
+    PendingUser,
+    User
 )
 from greenday_core.tests.base import TestCaseTagHelpers
 from greenday_core.constants import EventKind
@@ -599,7 +600,7 @@ class ProjectAPIUserTests(TestEventBusMixin, ApiTestCase, ProjectAPITestsMixin):
                 object_id=self.user2.pk), self.assertNumQueries(9):
             response = self.api.project_add_user(request)
 
-        self.assertIsInstance(response, ProjectCollaboratorsResponseMessage)
+        self.assertIsInstance(response.items[0], ProjectCollaboratorsResponseMessage)
 
         # check that the user is pending
         projectuser = self.project.get_user_relation(self.user2)
@@ -616,7 +617,7 @@ class ProjectAPIUserTests(TestEventBusMixin, ApiTestCase, ProjectAPITestsMixin):
             "You've been invited to collaborate on a Montage project",
             EXISTING_USER_INVITED.format(
                 project_name=self.project.name,
-                home_link=settings.HOME_LINK),
+                home_link="https://montage.meedan.com"),
             self.user2.email
         )
 
@@ -638,9 +639,9 @@ class ProjectAPIUserTests(TestEventBusMixin, ApiTestCase, ProjectAPITestsMixin):
                 meta=request.email), self.assertNumQueries(13):
             response = self.api.project_add_user(request)
 
-        self.assertIsInstance(response, ProjectCollaboratorsResponseMessage)
+        self.assertIsInstance(response.items[0], ProjectCollaboratorsResponseMessage)
 
-        new_user = PendingUser.objects.get(email=request.email)
+        new_user = User.objects.get(email=request.email)
 
         # check that the user is pending
         projectuser = self.project.get_user_relation(new_user)
@@ -657,7 +658,7 @@ class ProjectAPIUserTests(TestEventBusMixin, ApiTestCase, ProjectAPITestsMixin):
             "You've been invited to join Montage",
             NEW_USER_INVITED.format(
                 project_name=self.project.name,
-                home_link=settings.HOME_LINK),
+                home_link="https://montage.meedan.com"),
             new_user.email
         )
 
@@ -705,7 +706,7 @@ class ProjectAPIUserTests(TestEventBusMixin, ApiTestCase, ProjectAPITestsMixin):
                 object_id=self.user2.pk), self.assertNumQueries(9):
             response = self.api.project_add_user(request)
 
-        self.assertIsInstance(response, ProjectCollaboratorsResponseMessage)
+        self.assertIsInstance(response.items[0], ProjectCollaboratorsResponseMessage)
 
         # check that the user is pending
         projectuser = self.project.get_user_relation(self.user2)

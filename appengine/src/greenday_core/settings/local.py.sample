@@ -47,5 +47,3 @@ OAUTH_SETTINGS = {
     "client_id": "CLIENT_ID",
     "api_key": "API_KEY"
 }
-
-YOUTUBE_API_DEVELOPER_KEY = "YOUTUBE_DEV_KEY"

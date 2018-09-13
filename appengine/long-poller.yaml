@@ -9,14 +9,14 @@ automatic_scaling:
   max_pending_latency: 800ms
 
 libraries:
-- name: endpoints
-  version: 1.0
 - name: MySQLdb
-  version: "1.2.4b4"
+  version: "1.2.5"
+- name: pycrypto
+  version: 2.6
 - name: ssl
   version: latest
 
 handlers:
-- url: /_ah/spi/.*
+- url: /_ah/api/.*
   script: handlers.endpoints.application
   secure: always

@@ -1,14 +1,24 @@
 describe('Unit: Testing services', function () {
 	var UserService,
+		$window,
+    UserModel,
 		GapiLoader,
 		token = 'usertoken123',
 		$q,
 		$timeout,
 		$httpBackend,
+    fakeProject = {
+      'is_list': true,
+    },
+		fakeUserStats = {
+			'id': 99,
+			'videos_watched': 42,
+			'tags_added': 12
+		},
 		fakeUser = {
 			'accepted_nda': true,
 			'email': 'someone@somewhere.com',
-			'first_name': '',
+			'first_name': 'Someone',
 			'gaia_id': '1234567890',
 			'id': '1',
 			'is_active': true,
@@ -18,7 +28,15 @@ describe('Unit: Testing services', function () {
 			'language': 'en',
 			'last_login': '2014-09-17T10:53:42+00:00',
 			'last_name': '',
-			'username': '1234567890'
+			'username': '1234567890',
+      'DSSave': function() { },
+      'getStats': function() {
+        return {
+          then: function(callback) {
+            callback(fakeUserStats);
+          }
+        };
+      },
 		},
 		fakeProfile = {
 			'kind': 'plus#person',
@@ -63,16 +81,61 @@ describe('Unit: Testing services', function () {
 			'profile_img_url': 'https://lh5.googleusercontent.com/-mV0aK-lwZHoW7ukXRMSdCAtOAWpKPgsHl0rYP7giTs',
 			'google_plus_profile': 'https://plus.google.com/1234567890'
 		},
-		fakeUserStats = {
-			'id': 99,
-			'videos_watched': 42,
-			'tags_added': 12
-		},
+    googleAuth = {
+      isSignedIn: {
+        get: function () {
+          return false;
+        }
+      },
+      signIn: function() {
+        return {
+          then: function (callback) {
+            callback({});
+            return {
+              catch: function (callback) { callback({ access_token: '123456' }); }
+            };
+          }
+        };
+      },
+      signOut: function() {
+        return {
+          then: function (callback) {
+            callback({});
+            return {
+              catch: function (callback) { callback({}); }
+            };
+          }
+        };
+      },
+      currentUser: {
+        get: function () {
+          return {
+            getAuthResponse: function (bool) {
+              return { access_token: '123456' };
+            },
+            reloadAuthResponse: function() {
+              return {
+                then: function (callback) {
+                  callback({});
+                  return {
+                    catch: function (callback) { callback({ access_token: '123456' }); }
+                  };
+                }
+              };
+            }
+          };
+        }
+      }
+    },
 		gapi = {
-			auth: {
-				init: function (callback) { callback(); },
-				authorize: function (params, callback) { callback(true); },
-				getToken: function () { return {access_token: '123456'}; }
+			auth2: {
+				init: function (params) {
+          return {
+            then: function (callback) {
+              callback(googleAuth);
+            }
+          };
+        }
 			},
 			client: {
 				load: function (apiName, apiVersion, callback) { callback(); },
@@ -90,10 +153,13 @@ describe('Unit: Testing services', function () {
 		authDeferred,
 		getUserDeferred;
 
-	beforeEach(module('app.services'));
+	beforeEach(module('app'));
 
-	beforeEach(inject(function (_UserService_, _$q_, _$timeout_, _$httpBackend_, _GapiLoader_) {
+	beforeEach(inject(function (_UserService_, _$window_, _$q_, _$timeout_, _$httpBackend_, _GapiLoader_, _UserModel_) {
 		UserService = _UserService_;
+		$window = _$window_;
+    $window.googleAuth = googleAuth;
+    UserModel = _UserModel_;
 		$q = _$q_;
 		$timeout = _$timeout_;
 		$httpBackend = _$httpBackend_;
@@ -123,20 +189,22 @@ describe('Unit: Testing services', function () {
 				spyOn(UserService, 'auth').and.returnValue(authDeferred.promise);
 				spyOn(UserService, 'getUser').and.callThrough();
 				spyOn(UserService, 'signOut').and.callThrough();
+				spyOn(UserService, 'setGoogleAuth').and.callThrough();
+        UserService.setGoogleAuth(googleAuth);
 			});
 
 			it('should authorize the user', function (done) {
-				UserService.getUser().then(function () {
+				spyOn(UserModel, 'find').withArgs('me').and.returnValue({
+          then: function(callback) {
+            callback(fakeUser);
+          }
+        });
+				$httpBackend.expectGET('project').respond(fakeProject);
+
+				UserService.getUser().then(function (user) {
+          expect(user.first_name).toBe('Someone');
 					done();
 				});
-
-				$httpBackend
-					.expectGET('/users/me')
-					.respond(fakeUser);
-
-				$httpBackend
-					.expectPUT('/users/me')
-					.respond(fakeUserWithProfile);
 
 				gapiLoaderDeferred.resolve(gapi);
 
@@ -145,7 +213,15 @@ describe('Unit: Testing services', function () {
 			});
 
 			it('should authorize the user without a profile_url', function (done) {
-				UserService.getUser().then(function () {
+				spyOn(UserModel, 'find').withArgs('me').and.returnValue({
+          then: function(callback) {
+            callback(fakeUser);
+          }
+        });
+				$httpBackend.expectGET('project').respond(fakeProject);
+				
+        UserService.getUser().then(function (user) {
+          expect(user.first_name).toBe('Someone');
 					done();
 				});
 
@@ -157,15 +233,6 @@ describe('Unit: Testing services', function () {
 					return { execute: function (callback) { callback(profile); } };
 				};
 
-
-				$httpBackend
-					.expectGET('/users/me')
-					.respond(fakeUser);
-
-				$httpBackend
-					.expectPUT('/users/me')
-					.respond(fakeUserWithProfile);
-
 				gapiLoaderDeferred.resolve(fakeGapi);
 
 				$timeout.flush();
@@ -173,13 +240,11 @@ describe('Unit: Testing services', function () {
 			});
 
 			it('should reject the promise if the user didn\'t allow the permissions', function (done) {
-				var rejectGapi = angular.copy(gapi);
-
-				rejectGapi.auth.authorize = function (params, callback) {
-					callback({
-						error: 'I just do not like you.'
-					});
-				};
+				spyOn(UserModel, 'find').withArgs('me').and.returnValue({
+          then: function(callback, reject) {
+            reject({ data: { error: 'I just do not like you' } });
+          }
+        });
 
 				UserService.getUser(true).then(function () {
 					// we shouldn't be here
@@ -187,36 +252,22 @@ describe('Unit: Testing services', function () {
 					done();
 				});
 
-				gapiLoaderDeferred.resolve(rejectGapi);
+				gapiLoaderDeferred.resolve(gapi);
 
 				$timeout.flush();
 			});
 
 			it('should signout', function (done) {
-				UserService.signOut().then(function () {
+				spyOn(UserModel, 'find').withArgs('me').and.returnValue({
+          then: function(callback) {
+            callback(fakeUser);
+          }
+        });
+				$httpBackend.expectGET('project').respond(fakeProject);
+				
+        UserService.signOut().then(function () {
 					done();
 				});
-
-				$httpBackend
-					.expectJSONP('https://accounts.google.com/o/oauth2/revoke?token=123456&callback=JSON_CALLBACK')
-					.respond(fakeUser);
-
-				gapiLoaderDeferred.resolve(gapi);
-
-				$timeout.flush();
-				$httpBackend.flush();
-			});
-
-			it('should fail signing out', function (done) {
-				UserService.signOut().then(function () {
-					// we shouldn't be here
-				}, function () {
-					done();
-				});
-
-				$httpBackend
-					.expectJSONP('https://accounts.google.com/o/oauth2/revoke?token=123456&callback=JSON_CALLBACK')
-					.respond(403);
 
 				gapiLoaderDeferred.resolve(gapi);
 
@@ -225,23 +276,18 @@ describe('Unit: Testing services', function () {
 			});
 
 			it('should get the user stats', function (done) {
-				UserService.getUser().then(function () {
+				spyOn(UserModel, 'find').withArgs('me').and.returnValue({
+          then: function(callback) {
+            callback(fakeUser);
+          }
+        });
+				$httpBackend.expectGET('project').respond(fakeProject);
+				
+        UserService.getUser().then(function () {
 					UserService.getUserStats().then(function () {
 						done();
 					});
 				});
-
-				$httpBackend
-					.expectGET('/users/me')
-					.respond(fakeUser);
-
-				$httpBackend
-					.expectGET('/users/me/stats')
-					.respond(fakeUserStats);
-
-				$httpBackend
-					.expectPUT('/users/me')
-					.respond(fakeUserWithProfile);
 
 				gapiLoaderDeferred.resolve(gapi);
 
@@ -250,25 +296,20 @@ describe('Unit: Testing services', function () {
 			});
 
 			it('should cache the user stats', function (done) {
-				UserService.getUser().then(function () {
+				spyOn(UserModel, 'find').withArgs('me').and.returnValue({
+          then: function(callback) {
+            callback(fakeUser);
+          }
+        });
+				$httpBackend.expectGET('project').respond(fakeProject);
+				
+        UserService.getUser().then(function () {
 					UserService.getUserStats().then(function () {
 						UserService.getUserStats().then(function () {
 							done();
 						});
 					});
 				});
-
-				$httpBackend
-					.expectGET('/users/me')
-					.respond(fakeUser);
-
-				$httpBackend
-					.expectGET('/users/me/stats')
-					.respond(fakeUserStats);
-
-				$httpBackend
-					.expectPUT('/users/me')
-					.respond(fakeUserWithProfile);
 
 				gapiLoaderDeferred.resolve(gapi);
 
@@ -277,27 +318,18 @@ describe('Unit: Testing services', function () {
 			});
 
 			it('should force the user stats to be retrieved', function (done) {
-				UserService.getUserStats().then(function () {
+				spyOn(UserModel, 'find').withArgs('me').and.returnValue({
+          then: function(callback) {
+            callback(fakeUser);
+          }
+        });
+				$httpBackend.expectGET('project').respond(fakeProject);
+        
+        UserService.getUserStats().then(function () {
 					UserService.getUserStats(true).then(function () {
 						done();
 					});
 				});
-
-				$httpBackend
-					.expectGET('/users/me')
-					.respond(fakeUser);
-
-				$httpBackend
-					.expectGET('/users/me/stats')
-					.respond(fakeUserStats);
-
-				$httpBackend
-					.expectPUT('/users/me')
-					.respond(fakeUserWithProfile);
-
-				$httpBackend
-					.expectGET('/users/me/stats')
-					.respond(fakeUserStats);
 
 				gapiLoaderDeferred.resolve(gapi);
 
