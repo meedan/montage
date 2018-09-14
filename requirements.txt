@@ -49,8 +49,8 @@ gp.recipe.node==0.12.7.1
 argparse==1.1
 gocept.recipe.env==1.0
 cns.recipe.symlink==0.2.3
-django-secure
-django-csp
+django-csp==2.0.3
+django-secure==1.0.1
 mr.developer
 GoogleAppEngineCloudStorageClient
 https://github.com/potatolondon/search/archive/master.zip#egg=search-0.0.0
