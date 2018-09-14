@@ -27,9 +27,8 @@ class ProjectAPIMixin(object):
             check_fn: Allows an arbitrary function to be passed in to check
             permissions. I.e. check_fn=lambda p: p.is_owner(self.current_user)
         """
-        assert (not (assigned_only and check_fn),
-                "Cannot use assigned_only with check_fn"
-                )
+        assert not (assigned_only and check_fn), "Cannot use assigned_only with check_fn"
+
         if assigned_only:
             check_fn = lambda p: p.is_assigned(self.current_user)
 
