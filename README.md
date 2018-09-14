@@ -5,26 +5,27 @@
 - Create a new API key and a new OAuth 2.0 client ID in the Credentials section of the Google Cloud APIs & Services. Make sure the client ID is restricted to `http://localhost:8080`.
 - Enable APIs for YouTube, Google+, Maps.
 - Create a settings file `appengine/src/greenday_core/settings/local.py` based on `appengine/src/greenday_core/settings/local.py.sample` and fill the API keys as per above.
+- Create a settings file `appengine/src/greenday_core/settings/test.py` based on `appengine/src/greenday_core/settings/test.py.sample` and fill the API keys as per above.
 - `docker-compose build`
 - `docker-compose up`
+- `docker-compose exec montage grunt build`
 - Navigate to [http://localhost:8080](http://localhost:8080) for the app
 - Navigate to [http://localhost:8000](http://localhost:8000) for the admin UI
 
 ## Development using Docker Compose
 
-`docker-compose exec montage bash` to get inside the running container
+`docker-compose exec montage bash` to get inside the running container. The Python virtual environment is automatically activated for you.
 
 ### Backend
 
-- `. ./GREENDAY/bin/activate`
 - `python bin/manage.py shell` and other Python / Django commands are available
 - Editing the Python code from your code editor will automatically reflect in the running service
-- `./run_tests.sh` to run backend tests
+- `npm run test:backend` to run backend tests
 
 ### Frontend
 
 - `grunt watch` to watch code changes in JavaScript / HTML and rebuild the package
-- `grunt karma:unitSingle` to run all unit tests
+- `npm run test:frontend` to run unit tests
 
 ## Deployment
 

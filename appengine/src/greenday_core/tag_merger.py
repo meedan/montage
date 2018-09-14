@@ -118,9 +118,7 @@ class TagMerger(object):
         """
             Merges tag instances from a video_tag to another video_tag
         """
-        assert (
-            video_tag.video_id == master_video_tag.video_id,
-            "Both video tags must have an FK to the same video")
+        assert video_tag.video_id == master_video_tag.video_id, "Both video tags must have an FK to the same video"
 
         for tag_instance in video_tag.tag_instances.all():
             if not tag_instance.has_times:

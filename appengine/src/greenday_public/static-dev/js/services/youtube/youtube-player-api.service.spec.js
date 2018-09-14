@@ -20,7 +20,7 @@ describe('Unit: Testing services', function () {
 			}
 		};
 
-	beforeEach(module('app.services'));
+	beforeEach(module('app'));
 
 	beforeEach(inject(function (_YouTubePlayerService_, _$q_, _$window_, _$timeout_, _GapiLoader_, _oAuthParams_) {
 		YouTubePlayerService = _YouTubePlayerService_;

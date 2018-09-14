@@ -2,7 +2,7 @@
 """
     Tests for :mod:`greenday_public.export_views <greenday_public.export_views>`
 """
-import os, datetime
+import os, datetime, csv
 
 from django.core.urlresolvers import reverse
 from django.contrib.auth import get_user_model
@@ -249,7 +249,7 @@ class ExportProjectTagTestCase(TestCaseTagHelpers, AppengineTestBed):
         resp = self.client.post(url)
         self.assertEqual(200, resp.status_code)
 
-        tags = list(read_csv_to_dict(resp.content, encoding='utf-16'))
+        tags = list(read_csv_to_dict(resp.content, encoding='utf-16', dialect=csv.excel))
         self.assertEqual(2, len(tags))
 
         tag1 = next(t for t in tags if long(t['id']) == self.tag1.pk)
@@ -260,11 +260,11 @@ class ExportProjectTagTestCase(TestCaseTagHelpers, AppengineTestBed):
             timezone.make_naive(
                 self.tag1.created, timezone.utc
             ).strftime("%Y-%m-%d %H:%M:%S+00:00"),
-            datetime.datetime.strptime(tag1['created'], '%Y-%m-%d %H:%M:%S.%f+00:00').strftime("%Y-%m-%d %H:%M:%S+00:00"))
+            datetime.datetime.strptime(tag1['created'], '%Y-%m-%d %H:%M:%S+00:00').strftime("%Y-%m-%d %H:%M:%S+00:00"))
         self.assertEqual(
             timezone.make_naive(
                 self.tag1.modified, timezone.utc
             ).strftime("%Y-%m-%d %H:%M:%S+00:00"),
-            datetime.datetime.strptime(tag1['modified'], '%Y-%m-%d %H:%M:%S.%f+00:00').strftime("%Y-%m-%d %H:%M:%S+00:00"))
+            datetime.datetime.strptime(tag1['modified'], '%Y-%m-%d %H:%M:%S+00:00').strftime("%Y-%m-%d %H:%M:%S+00:00"))
         self.assertEqual('2', tag1['instance_count'])
         self.assertEqual('', tag1['parent_id'])

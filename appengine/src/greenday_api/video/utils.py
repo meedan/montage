@@ -12,9 +12,7 @@ def make_batch_response_message(
         Creates a response item for a batch request indicating the status of a
         single item processed in the request
     """
-    assert (
-        sum(map(int, [not_found, forbidden, success, bool(error)])) == 1,
-        "Exactly one of not_found, forbidden, success, error must be passed")
+    assert sum(map(int, [not_found, forbidden, success, bool(error)])) == 1, "Exactly one of not_found, forbidden, success, error must be passed"
 
     if not_found:
         message = 'Video with youtube_id %s does not exist' % youtube_id

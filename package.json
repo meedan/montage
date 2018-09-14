@@ -9,7 +9,10 @@
     "deploy-qa": "grunt deployQa",
     "deploy-live": "grunt deployLive",
     "full-deploy-qa": "npm run authenticate && npm run deploy-qa && npm run migrate-qa",
-    "full-deploy-live": "npm run authenticate && npm run deploy-live && npm run migrate-live"
+    "full-deploy-live": "npm run authenticate && npm run deploy-live && npm run migrate-live",
+    "test:frontend": "grunt karma:unitSingle",
+    "test:backend": "find . -name '*.pyc' -exec rm -rf {} \\; && ./bin/manage.py test greenday_api greenday_core greenday_public greenday_channel --settings=greenday_core.settings.test",
+    "test": "npm run test:frontend && npm run test:backend"
   },
   "devDependencies": {
     "grunt": "^1.0.3",
@@ -34,6 +37,7 @@
     "grunt-usemin": "^3.1.1",
     "grunt-usemin-list": "^0.1.5",
     "install": "^0.12.1",
+    "jasmine": "^3.2.0",
     "karma": "^3.0.0",
     "karma-chrome-launcher": "^2.2.0",
     "karma-coverage": "^1.1.2",

@@ -42,11 +42,13 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'HOST': 'mysql',
-        'NAME': 'greenday',
+        'NAME': 'greenday_v2',
+        'PASSWORD': '',
         'USER': 'root',
-        'OPTIONS': {
-            'init_command': 'SET default_storage_engine=INNODB',
-        },
+        'TEST': {
+            'CHARSET': 'utf8',
+            'COLLATION': 'utf8_general_ci'
+        }
     }
 }
 
@@ -54,3 +56,7 @@ ANALYTICS_ID = 'test'
 
 OAUTH_SETTINGS['client_id'] = 'test'
 OAUTH_SETTINGS['api_key'] = 'test'
+
+WHITELIST = [
+    'admin@example.com'
+]

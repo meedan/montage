@@ -90,6 +90,8 @@ appengine/src/greenday_public/static-dev/scss/sprite.scss
 appengine/src/greenday_core/settings/local.py
 appengine/src/greenday_core/settings/qa.py
 appengine/src/greenday_core/settings/live.py
+appengine/src/greenday_core/settings/test.py
+configurator
 
 # MySQL and AppEngine data
 mysql/data/*

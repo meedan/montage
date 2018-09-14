@@ -10,7 +10,7 @@ describe('Unit: Testing services', function () {
 			tags: [1, 2, 3, 4],
 			date: new Date('13 October 1981').toISOString()
 		},
-		testSearchString = 'JTdCJTIybG9jYXRpb24lMjIlM0ElN0IlMjJsYXQlMjIlM0ExMjMuNCUyQyUyMmxuZyUyMiUzQTU2Ny44JTJDJTIyem9vbSUyMiUzQTklN0QlMkMlMjJjaGFubmVsJTIyJTNBbnVsbCUyQyUyMnRhZ3MlMjIlM0ElNUIxJTJDMiUyQzMlMkM0JTVEJTJDJTIyZGF0ZSUyMiUzQSUyMjE5ODEtMTAtMTJUMjMlM0EwMCUzQTAwLjAwMFolMjIlN0Q=',
+		testSearchString = 'JTdCJTIybG9jYXRpb24lMjIlM0ElN0IlMjJsYXQlMjIlM0ExMjMuNCUyQyUyMmxuZyUyMiUzQTU2Ny44JTJDJTIyem9vbSUyMiUzQTklN0QlMkMlMjJjaGFubmVsJTIyJTNBbnVsbCUyQyUyMnRhZ3MlMjIlM0ElNUIxJTJDMiUyQzMlMkM0JTVEJTJDJTIyZGF0ZSUyMiUzQSUyMjE5ODEtMTAtMTNUMDAlM0EwMCUzQTAwLjAwMFolMjIlN0Q=',
 		testCacheObj = {
 			watch_count: 1,
 			favourited: true,
@@ -20,7 +20,7 @@ describe('Unit: Testing services', function () {
 		},
 		testCacheString = 'a=5&b=4&favourited=true&highlighted=false&watch_count=1';
 
-	beforeEach(module('app.services'));
+	beforeEach(module('app'));
 
 	beforeEach(inject(function (_FilterUtils_) {
 		FilterUtils = _FilterUtils_;

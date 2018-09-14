@@ -134,7 +134,7 @@ class ProjectModelTestCase(AppengineTestBed):
         self.user = milkman.deliver(User, email="user@example.com")
         self.admin = milkman.deliver(
             User, email="admin@example.com", is_superuser=True, is_googler=True)
-        self.project_owner = milkman.deliver(User, email="admin@example.com")
+        self.project_owner = milkman.deliver(User, email="project_owner@example.com")
         self.project = milkman.deliver(Project)
         self.project.set_owner(self.project_owner)
         self.project.add_admin(self.admin, pending=False)

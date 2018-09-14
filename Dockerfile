@@ -31,8 +31,10 @@ RUN apt-get update \
 
 RUN mkdir /app
 WORKDIR /app
-COPY . /app/
 
+# TODO Copy the minimal set of files needed to avoid rebuilding each time any file changes.
+#COPY requirements.txt buildout.cfg gaetools.cfg appengine/ /app/
+COPY . /app/
 RUN pip install virtualenv \
     && virtualenv GREENDAY \
     && . ./GREENDAY/bin/activate \
@@ -49,6 +51,8 @@ RUN mkdir /usr/local/nvm \
     && nvm alias default $NODE_VERSION \
     && nvm use default
 
+# TODO Copy the minimal set of files needed to avoid rebuilding each time any file changes.
+#COPY package.json package-lock.json bower.json .bowerrc .jshintrc .scss-lint.yml Gruntfile.js grunt/ /app/
 ENV NODE_PATH $NVM_DIR/v$NODE_VERSION/lib/node_modules
 ENV PATH $NVM_DIR/versions/node/v$NODE_VERSION/bin:$PATH
 RUN npm -g install grunt-cli karma-cli bower jshint \
@@ -61,4 +65,5 @@ ENV PATH /app/bin:$PATH
 EXPOSE 8000 8080 8081 8082 8083 8084
 
 COPY ./docker-entrypoint.sh /app
+RUN cat .bashrc | tee -a /root/.bashrc
 CMD ["/app/docker-entrypoint.sh"]
