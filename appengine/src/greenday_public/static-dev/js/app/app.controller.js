@@ -36,6 +36,10 @@
 			$mdSidenav(sidebarId).toggle();
 		};
 
+		ctrl.openKeepControls = function() {
+			console.log("THIS");
+		};
+
 		ctrl.closeSideBar = function(sidebarId) {
 			$timeout(function () {
 				$mdSidenav(sidebarId).close();
