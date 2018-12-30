@@ -28,6 +28,9 @@
 	<div layout="column" layout-align="center" class="video-list-item__cell video-list-item__added">
 		{{ ::video.pretty_created }}
 	</div>
+	<div layout="column" layout-align="center" class="video-list-item__cell video-list-item__keep">
+		<icon class="ic-check"></icon>
+	</div>
 	<div layout="column" layout-align="center" class="video-list-item__cell video-list-item__favourite">
 		<gd-favourite-video-button video="video" ng-if="::(!video.missing_from_youtube)"></gd-favourite-video-button>
 	</div>

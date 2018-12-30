@@ -128,9 +128,11 @@ md-content.video-list {
 }
 
 .video-list__thead-cell--favourite,
+.video-list__thead-cell--keep,
 .video-list__thead-cell--quick-add,
 .video-list__thead-cell--reorder,
 .video-list-item__favourite,
+.video-list-item__keep,
 .video-list-item__reorder,
 .video-list-item__select {
 	padding: 0 $baseline-component-grid;
@@ -143,6 +145,7 @@ md-content.video-list {
 	text-align: center;
 }
 
+.video-list__thead-cell--keep,
 .video-list__thead-cell--favourite,
 .video-list__thead-cell--reorder,
 .video-list-item {
@@ -182,6 +185,11 @@ md-content.video-list {
 	icon {
 		@include rem(font-size, 16px);
 		cursor: pointer;
+	}
+}
+.video-list__thead-cell--keep {
+	icon {
+		@include rem(font-size, 16px);
 	}
 }
 
@@ -323,7 +331,6 @@ md-content.video-list {
 .video-list-item__watch-count,
 .video-list-item__tag-count {
 	white-space: nowrap;
-
 	icon {
 		@include rem(font-size, 17px);
 		margin-right: $baseline-type-grid;
