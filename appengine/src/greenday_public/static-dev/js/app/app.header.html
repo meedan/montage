@@ -31,6 +31,8 @@
 				<gd-button ng-show="appctrl.page.projectId" ng-click="appctrl.openKeepControls()" class="toolbar__item">
 					<icon class="icon-keep"></icon>
 					<md-tooltip md-delay="100">Configure Keep</md-tooltip>
+					<bif-popover name="Scoped name"></bif-popover>
+					<bif-switch title="Scoped Title" text="Scoped Text"></bif-switch>
 				</gd-button>
 				<gd-button ng-click="appctrl.openSideBar('tagSidebar')" class="toolbar__item" ng-show="appctrl.page.projectId">
 					<icon class="ic-label"></icon>
@@ -47,4 +49,5 @@
 			</div>
 		</div>
 	</md-toolbar>
+
 </div>
