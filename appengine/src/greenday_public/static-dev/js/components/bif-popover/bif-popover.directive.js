@@ -8,9 +8,8 @@
 			templateUrl: 'components/bif-popover/bif-popover.html',
 			restrict: 'E',
 			replace: true,
-			scope: {
-				name: '@',
-			}
+			transclude: true,
+			scope: {},
 		};
 		return directive;
 	}
