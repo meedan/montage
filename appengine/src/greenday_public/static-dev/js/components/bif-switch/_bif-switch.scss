@@ -3,11 +3,15 @@
 }
 
 .bif-switch__name {
+  margin: 0;
   button {
+    @include type(menu);
+    align-content: center;
+    align-items: center;
     background: transparent;
     border: none;
     box-shadow: none;
-    color: black;
+    color: $colour-black-pure;
     cursor: pointer;
     display: block;
     display: flex;
@@ -18,25 +22,37 @@
     width: 100%;
   }
   span {
-    height: 20px;
-    width: 40px;
     display: inline-block;
     position: relative;
+    width: 36px;
     &:after,
     &:before {
-      height: 20px;
       border-radius: 1000px;
       content: ' ';
       display: block;
+      height: 20px;
       position: absolute;
       right: 0;
-      top: 0;
+      top: 50%;
+      transform: translateY(-50%);
       transition: background 0.2s, margin 0.2s;
+    }
+    &:before {
+      background: $colour-gd-accent;
+      height: 12px;
+      width: 36px;
+    }
+    &:after {
+      background: $content-background-color;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.25);
+      height: 20px;
+      width: 20px;
     }
   }
 }
 
 .bif-switch__text {
-  color: #333;
+  color: $colour-body-text;
   font-size: 13px;
+  text-align: left;
 }
