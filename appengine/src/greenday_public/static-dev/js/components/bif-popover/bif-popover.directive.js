@@ -5,11 +5,16 @@
 	/** @ngInject */
 	function bifPopover() {
 		var directive = {
-			templateUrl: 'components/bif-popover/bif-popover.html',
-			restrict: 'E',
 			replace: true,
+			restrict: 'E',
+			templateUrl: 'components/bif-popover/bif-popover.html',
 			transclude: true,
-			scope: {},
+			scope: {
+				content: "@"
+			},
+			link: function(scope, el, attrs, ctrl, transclude) {
+	      el.find('.bif-popover__content').append(transclude());
+	    }
 		};
 		return directive;
 	}

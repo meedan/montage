@@ -1,3 +1,42 @@
 .bif-switch {
-  
+
+}
+
+.bif-switch__name {
+  button {
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    color: black;
+    cursor: pointer;
+    display: block;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    outline: none;
+    text-align: left;
+    width: 100%;
+  }
+  span {
+    height: 20px;
+    width: 40px;
+    display: inline-block;
+    position: relative;
+    &:after,
+    &:before {
+      height: 20px;
+      border-radius: 1000px;
+      content: ' ';
+      display: block;
+      position: absolute;
+      right: 0;
+      top: 0;
+      transition: background 0.2s, margin 0.2s;
+    }
+  }
+}
+
+.bif-switch__text {
+  color: #333;
+  font-size: 13px;
 }
