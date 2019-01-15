@@ -1,5 +1,6 @@
 options:
   livereload: true
+  interval: 1000
 
 scss:
   options:
