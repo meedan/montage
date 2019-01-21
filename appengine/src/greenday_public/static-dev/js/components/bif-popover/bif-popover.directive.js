@@ -1,5 +1,6 @@
 (function () {
 	angular.module('components')
+		// .controller('bifPopoverCtrl', bifPopoverCtrl)
 		.directive('bifPopover', bifPopover);
 
 	/** @ngInject */
@@ -12,10 +13,28 @@
 			scope: {
 				content: "@"
 			},
-			link: function(scope, el, attrs, ctrl, transclude) {
-	      el.find('.bif-popover__content').append(transclude());
+			// controller: 'bifPopoverCtrl',
+			link: function(scope, element, attrs) {
+				console.log(scope);
+				console.log(element);
+				console.log(attrs);
 	    }
 		};
 		return directive;
 	}
+
+	// function bifPopoverCtrl($scope) {
+	//
+	// 	// $scope.shields = []
+	// 	$scope.isActive = false;
+	//
+	// 	this.show = function() {
+	// 		console.log("SHOW POPOVER");
+	// 	};
+	// 	this.hide = function() {
+	// 		console.log("HIDE POPOVER");
+	// 	};
+	//
+	// }
+
 }());
