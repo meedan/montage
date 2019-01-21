@@ -1,28 +1,47 @@
 <md-dialog class="dialog keep-settings-dialog" flex="50">
-	<md-content class="keep-settings-dialog__content">
-		<h2>Preserve media with <strong>Keep</strong></h2>
-		<p>Videos added to this project will be automatically sent to Keep and remain available even when the original source media is deleted. If you wish to take advantage of Keep, please, select at least one back-up service to store your media with:</p>
+  <md-content class="keep-settings-dialog__content">
+    <h2>Preserve media with <strong>Keep</strong></h2>
+    <p>
+      Videos added to this project will be automatically sent to Keep and remain
+      available even when the original source media is deleted. If you wish to
+      take advantage of Keep, please, select at least one back-up service to
+      store your media with:
+    </p>
 
-		<md-checkbox
-			aria-label="Archive.org"
-			ng-change="ctrl.enableService('archiveOrg')"
-			ng-disabled="ctrl.isBusy"
-			ng-model="ctrl.keepSettings.archiveOrg"
-		>
-		  Archive.org
-		</md-checkbox>
-		<md-checkbox
-			aria-label="Archive.is"
-			ng-change="ctrl.enableService('archiveIs')"
-			ng-disabled="ctrl.isBusy"
-			ng-model="ctrl.keepSettings.archiveIs"
-		>
-		  Archive.is
-		</md-checkbox>
+    <md-checkbox
+      aria-label="Archive.org"
+      ng-change="ctrl.enableService('archiveOrg')"
+      ng-disabled="ctrl.isBusy"
+      ng-model="ctrl.keepSettings.archiveOrg"
+    >
+      Archive.org
+    </md-checkbox>
+    <md-checkbox
+      aria-label="Archive.is"
+      ng-change="ctrl.enableService('archiveIs')"
+      ng-disabled="ctrl.isBusy"
+      ng-model="ctrl.keepSettings.archiveIs"
+    >
+      Archive.is
+    </md-checkbox>
 
-		<div layout="row" layout-align="end">
-			<md-button class="dialog__action--ok" type="submit" aria-label="OK" ng-click="ctrl.close()">Done</md-button>
-		</div>
+    <div layout="row" layout-align="end">
+      <md-button
+        aria-label="OK"
+        class="dialog__action--ok"
+        ng-click="ctrl.close()"
+        type="submit"
+        >Done</md-button
+      >
+    </div>
 
-	</md-content>
+    <section
+      ng-show="ctrl.isBusy"
+      class="page-loader ng-hide fade"
+      layout-align="center center"
+      layout="column"
+    >
+      <holo-spinner class="holo-spinner--layer"></holo-spinner>
+    </section>
+  </md-content>
 </md-dialog>
