@@ -47,6 +47,7 @@
     "karma-ng-scenario": "1.0.0",
     "karma-phantomjs-launcher": "1.0.4",
     "load-grunt-config": "1.0.1",
-    "node-sass": "4.11.0"
-  }
+    "node-sass": "4.11.0",
+    "prettier": "1.16.0"
+  },
 }
