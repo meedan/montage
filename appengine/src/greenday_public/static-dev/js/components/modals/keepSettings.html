@@ -1,21 +1,27 @@
 <md-dialog class="dialog keep-settings-dialog" flex="50">
 	<md-content class="keep-settings-dialog__content">
 		<h2>Preserve media with <strong>Keep</strong></h2>
-		<p>Videos added to this project will be automatically sent to Keep and remain available even when the original source media is deleted. Please, select at least one back-up service to store your media with:</p>
+		<p>Videos added to this project will be automatically sent to Keep and remain available even when the original source media is deleted. If you wish to take advantage of Keep, please, select at least one back-up service to store your media with:</p>
 
-		<md-checkbox ng-disabled="false" ng-model="locationsAll" aria-label="All locations">
-		  All services
-		</md-checkbox>
-		<md-checkbox ng-disabled="false" ng-model="locationsArchiveOrg" aria-label="Archive.org">
+		<md-checkbox
+			aria-label="Archive.org"
+			ng-change="ctrl.enableService('archiveOrg')"
+			ng-disabled="ctrl.isBusy"
+			ng-model="ctrl.keepSettings.archiveOrg"
+		>
 		  Archive.org
 		</md-checkbox>
-		<md-checkbox ng-disabled="false" ng-model="locationsArchiveIs" aria-label="Archive.is">
+		<md-checkbox
+			aria-label="Archive.is"
+			ng-change="ctrl.enableService('archiveIs')"
+			ng-disabled="ctrl.isBusy"
+			ng-model="ctrl.keepSettings.archiveIs"
+		>
 		  Archive.is
 		</md-checkbox>
 
 		<div layout="row" layout-align="end">
-			<md-button class="dialog__action--cancel" type="button" ng-click="ctrl.close()">Cancel</md-button>
-			<md-button class="dialog__action--ok" type="submit">Save</md-button>
+			<md-button class="dialog__action--ok" type="submit" aria-label="OK" ng-click="ctrl.close()">Done</md-button>
 		</div>
 
 	</md-content>
