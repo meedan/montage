@@ -13,6 +13,7 @@
 				confirm: confirm,
 				showAddCollectionDialog: showAddCollectionDialog,
 				showAddCollaboratorsDialog: showAddCollaboratorsDialog,
+				showKeepSettingsDialog: showKeepSettingsDialog,
 				showUserSettingsDialog: showUserSettingsDialog,
 				hide: hide,
 				cancel: cancel
@@ -49,6 +50,18 @@
 				templateUrl: 'components/modals/addCollaborators.html',
 				targetEvent: e,
 				controller: addCollaboratorsController,
+				controllerAs: 'ctrl'
+			});
+
+			return dialogPromise;
+		}
+
+		function showKeepSettingsDialog(e) {
+			var dialogPromise = $mdDialog.show({
+				templateUrl: 'components/modals/keepSettings.html',
+				targetEvent: e,
+				// controller: addCollaboratorsController,
+				controller: keepSettingsController,
 				controllerAs: 'ctrl'
 			});
 
@@ -214,6 +227,11 @@
 			ctrl.close = cancel;
 
 			ctrl.resetCollaborator();
+		}
+
+		function keepSettingsController($scope) { 
+			console.log($scope)
+			return null;
 		}
 
 		function hide() {

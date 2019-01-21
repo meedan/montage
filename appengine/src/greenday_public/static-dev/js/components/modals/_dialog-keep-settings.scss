@@ -1,0 +1,85 @@
+md-dialog.collaborators-dialog {
+	width: 60%;
+
+	.gd-autocomplete__dropdown {
+		left: 14px;
+	}
+}
+
+.collaborators-dialog__actions {
+	margin-top: $baseline-component-grid * 2;
+}
+
+.collaborators__list {
+	flex-wrap: wrap;
+}
+
+.collaborators__item {
+	margin-bottom: $baseline-component-grid * 3;
+
+	&.is-user:hover {
+		.collaborators__user-image img {
+			opacity: 0;
+		}
+
+		.collaborators__remove-user-button {
+			opacity: 1;
+		}
+	}
+}
+
+.collaborators__user-image img,
+.collaborators__remove-user-button {
+	border-radius: 50%;
+	transition: $swift-ease-in-out;
+}
+
+.collaborators__user-image {
+	height: $baseline-component-grid * 5;
+	margin-right: $baseline-component-grid;
+	overflow: hidden;
+	position: relative;
+	width: $baseline-component-grid * 5;
+
+	img {
+		opacity: 1;
+	}
+}
+
+.collaborators__remove-user-button {
+	background-color: $colour-gd-accent;
+	color: $colour-white-pure;
+	left: 0;
+	opacity: 0;
+	position: absolute;
+	top: 0;
+}
+
+.collaborators__user-name,
+.collaborators__user-email {
+	@include type(body-1);
+}
+
+.collaborators__user-type {
+	@include type(caption);
+	@include rem('font-size', 11px);
+}
+
+.collaborators__autocomplete {
+	@include type(body-1);
+	border-bottom: 1px solid shade-colour(dividers);
+}
+
+.collaborators__autocomplete-input {
+	@extend %base-text-input;
+	border-bottom: 0;
+}
+
+.collaborators__autocomplete-icon {
+	margin-right: $baseline-component-grid;
+
+	icon {
+		@include type(title);
+		color: shade-colour(hint-text);
+	}
+}

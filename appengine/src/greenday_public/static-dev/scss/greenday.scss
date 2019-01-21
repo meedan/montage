@@ -34,8 +34,6 @@
 @import 'components/user-settings';
 @import 'components/hotkeys';
 
-@import '../js/components/bif-popover/bif-popover';
-@import '../js/components/bif-switch/bif-switch';
 @import '../js/components/gd-backdrop/gd-backdrop';
 @import '../js/components/holo-spinner/holo-spinner';
 @import '../js/components/dialog/dialog';
@@ -77,6 +75,7 @@
 @import '../js/components/gd-progress/gd-progress';
 
 @import '../js/components/modals/dialog-collaborators';
+@import '../js/components/modals/dialog-keep-settings';
 
 @import '../js/pages/accept-nda/accept-nda';
 @import '../js/pages/projects/projects';

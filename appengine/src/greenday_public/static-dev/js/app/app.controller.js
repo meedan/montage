@@ -77,6 +77,10 @@
 			DialogService.showAddCollaboratorsDialog(evt);
 		};
 
+		ctrl.showKeepSettingsDialog = function (evt) {
+			DialogService.showKeepSettingsDialog(evt);
+		};
+
 		ctrl.onRouteChangeUpdate = function () {
 			ctrl.closeSideBar('left');
 			var qs = $location.search();

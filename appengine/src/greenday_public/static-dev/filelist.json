@@ -47,8 +47,6 @@
         "appengine/src/greenday_public/static-dev/js/services/youtube/youtube-data-api.service.js",
         "appengine/src/greenday_public/static-dev/js/services/video-collection.service.js",
         "appengine/src/greenday_public/static-dev/js/components/components.module.js",
-        "appengine/src/greenday_public/static-dev/js/components/bif-switch/bif-switch.directive.js",
-        "appengine/src/greenday_public/static-dev/js/components/bif-popover/bif-popover.directive.js",
         "appengine/src/greenday_public/static-dev/js/components/gd-backdrop/gd-backdrop.module.js",
         "appengine/src/greenday_public/static-dev/js/components/gd-backdrop/gd-backdrop.constants.js",
         "appengine/src/greenday_public/static-dev/js/components/gd-backdrop/gd-backdrop.directive.js",
