@@ -13,6 +13,42 @@
 					<label for="projectDescription">Description</label>
 					<input id="projectDescription" multiline type="text" ng-model="ctrl.project.description">
 				</md-input-container>
+				<div class="project__keep-settings" layout="column">
+					<h2>Select <strong>Keep</strong> back-up services:
+						<span>
+							<icon class="ic-info-outline"></icon>
+							<md-tooltip>
+								Videos added to this project will automatically be<br/>
+								sent to Keep and remain available even when the<br/>
+								original source media is deleted. If you wish to take<br/>
+								advantage of Keep, please, select at least one<br/>
+								back-up service to store your media with.
+							</md-tooltip>
+						</span>
+					</h2>
+					<div layout="row">
+						<div layout="column" flex="33">
+							<md-checkbox
+								aria-label="Archive.org"
+								ng-change="ctrl.enableKeepService('archiveOrg')"
+								ng-disabled="ctrl.isBusy"
+								ng-model="ctrl.keepSettings.archiveOrg"
+							>
+								Archive.org
+							</md-checkbox>
+						</div>
+						<div layout="column" flex="33">
+							<md-checkbox
+								aria-label="Archive.is"
+								ng-change="ctrl.enableKeepService('archiveIs')"
+								ng-disabled="ctrl.isBusy"
+								ng-model="ctrl.keepSettings.archiveIs"
+							>
+								Archive.is
+							</md-checkbox>
+						</div>
+					</div>
+				</div>
 				<div layout="column" flex></div>
 				<div layout="row" layout-align="end center">
 					<md-button class="md-primary" aria-label="Cancel" ng-disabled="ctrl.imageUploaderBusy == true" type="button" ng-click="ctrl.cancel()">Cancel</md-button>

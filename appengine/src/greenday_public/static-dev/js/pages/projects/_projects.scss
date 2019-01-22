@@ -81,7 +81,7 @@
 .projects__create-prompt__content,
 .projects__no-create-prompt__content {
 	@include type(subhead-2);
-	max-width: 300px;
+	max-width: 250px;
 	text-align: center;
 }
 
@@ -91,7 +91,7 @@
 
 .project__image {
 	background-color: $colour-white-light;
-	height: 210px;
+	height: 250px;
 	position: relative;
 	width: 210px;
 
@@ -113,7 +113,7 @@
 	background-color: $colour-white-light;
 	border-radius: 2px;
 	margin-bottom: 15px;
-	max-height: 210px;
+	max-height: 250px;
 	overflow: hidden;
 	position: relative;
 	transition: all .4s ease-in-out;
@@ -140,7 +140,7 @@
 }
 
 .project {
-	height: 210px;
+	height: 250px;
 	overflow: visible;
 }
 
@@ -290,4 +290,11 @@
 	background-color: $colour-white-pure;
 	position: relative;
 	z-index: 2;
+}
+
+.project__keep-settings {
+	h2 { font-size: 14px; margin: 20px 0 10px; };
+	md-checkbox { float: left; margin: 0; }
+	md-checkbox .md-label { font-size: 13px; }
+	icon { font-size: 18px; position: relative; top: 2px; }
 }

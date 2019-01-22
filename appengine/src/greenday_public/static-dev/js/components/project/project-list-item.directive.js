@@ -44,6 +44,7 @@
 			ctrl.removeProject = removeProject;
 			ctrl.inviteAccept = inviteAccept;
 			ctrl.inviteReject = inviteReject;
+			ctrl.enableKeepService = enableKeepService;
 			ctrl.cancel = cancel;
 			ctrl.modes = {
 				edit: !ctrl.project.id
@@ -176,6 +177,10 @@
 								ctrl.loading = false;
 							});
 					});
+			}
+
+			function enableKeepService(service) { // TODO: change KEEP settings
+				console.log(service);
 			}
 
 			function fetchExtraInfo() {

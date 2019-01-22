@@ -58,7 +58,6 @@
       var dialogPromise = $mdDialog.show({
         templateUrl: "components/modals/keepSettings.html",
         targetEvent: e,
-        // controller: addCollaboratorsController,
         controller: keepSettingsController,
         controllerAs: "ctrl"
       });
