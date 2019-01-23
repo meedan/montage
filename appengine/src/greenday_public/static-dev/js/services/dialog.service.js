@@ -267,20 +267,25 @@
       })();
 
       ctrl.toggleKeepService = function(service) {
-        ctrl.isBusy = true;
-        setTimeout(function() {
-  				if (service === 'all') {
-  					for (key in ctrl.keepSettings.services) {
-  						ctrl.keepSettings.services[key] = ctrl.keepSettings.services.all;
-  					}
-  				} else {
-  					if (ctrl.keepSettings.services[service] === false) {
-  						ctrl.keepSettings.services.all = false;
-  					}
-  				}
-  				console.log(`New Keep Settings: `, ctrl.keepSettings); // TODO: change KEEP settings
-          ctrl.isBusy = false;
-        }, 350);
+
+				var services = ctrl.keepSettings.services;
+				ctrl.isBusy = true;
+				setTimeout(function() { // TODO: setting timeout to emulate lentghy api call — remove this
+					if (service === 'all') {
+						for (key in services) {
+							services[key] = services.all;
+						}
+					} else {
+						if (!services.all && services.archiveIs && services.archiveOrg) {
+							services.all = true;
+						} else if (services[service] === false) {
+							services.all = false;
+						}
+					}
+					ctrl.isBusy = false;
+					console.log(`New Keep Settings: `, ctrl.keepSettings); // TODO: set Keep settings via API
+				}, 1000);
+
       };
 
       // configure modal buttons.

@@ -31,7 +31,7 @@
 							<md-checkbox
 								aria-label="All services"
 								ng-change="ctrl.toggleKeepService('all')"
-								ng-disabled="ctrl.isBusy"
+								ng-disabled="ctrl.loading"
 								ng-model="ctrl.keepSettings.services.all"
 							>
 								All services
@@ -41,7 +41,7 @@
 							<md-checkbox
 								aria-label="Archive.org"
 								ng-change="ctrl.toggleKeepService('archiveOrg')"
-								ng-disabled="ctrl.isBusy"
+								ng-disabled="ctrl.loading"
 								ng-model="ctrl.keepSettings.services.archiveOrg"
 							>
 								Archive.org
@@ -51,7 +51,7 @@
 							<md-checkbox
 								aria-label="Archive.is"
 								ng-change="ctrl.toggleKeepService('archiveIs')"
-								ng-disabled="ctrl.isBusy"
+								ng-disabled="ctrl.loading"
 								ng-model="ctrl.keepSettings.services.archiveIs"
 							>
 								Archive.is

@@ -192,16 +192,23 @@
 
 			function toggleKeepService(service) {
 
-				if (service === 'all') {
-					for (key in ctrl.keepSettings.services) {
-						ctrl.keepSettings.services[key] = ctrl.keepSettings.services.all;
+				var services = ctrl.keepSettings.services;
+				ctrl.loading = true;
+				setTimeout(function() { // TODO: setting timeout to emulate lentghy api call — remove this
+					if (service === 'all') {
+						for (key in services) {
+							services[key] = services.all;
+						}
+					} else {
+						if (!services.all && services.archiveIs && services.archiveOrg) {
+							services.all = true;
+						} else if (services[service] === false) {
+							services.all = false;
+						}
 					}
-				} else {
-					if (ctrl.keepSettings.services[service] === false) {
-						ctrl.keepSettings.services.all = false;
-					}
-				}
-				console.log(`New Keep Settings: `, ctrl.keepSettings); // TODO: change KEEP settings
+					ctrl.loading = false;
+					console.log(`New Keep Settings: `, ctrl.keepSettings); // TODO: set Keep settings via API
+				}, 1000);
 
 			}
 
