@@ -284,7 +284,7 @@
 					}
 					ctrl.isBusy = false;
 					console.log(`New Keep Settings: `, ctrl.keepSettings); // TODO: set Keep settings via API
-				}, 1000);
+				}, 5);
 
       };
 
