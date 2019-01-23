@@ -19,7 +19,7 @@
 				getUserStats: getUserStats,
 				acceptNDA: acceptNDA,
 				authorizationToken: authorizationToken,
-        setGoogleAuth: setGoogleAuth
+				setGoogleAuth: setGoogleAuth
 			},
 			userFetchInProgress = false,
 			authDeferred = null,
@@ -35,9 +35,9 @@
 
 		return service;
 
-    function setGoogleAuth(ga) {
-      googleAuth = ga;
-    }
+		function setGoogleAuth(ga) {
+			googleAuth = ga;
+		}
 
 		function authorizationToken(){
 			var defer = $q.defer();
@@ -186,11 +186,13 @@
 						// An account gets created and activated for them, but because
 						// data is not carried out.
 						if (now.diff(lastLogin, 'hours') > 4 || !google_plus_profile) {
-							gapi.client.load('plus', 'v1', function() {
-								var request = gapi.client.plus.people.get({'userId': 'me'});
+							gapi.client.load('people', 'v1', function() {
+								var request = gapi.client.people.people.get({'resourceName': 'people/me','personFields': 'photos,addresses,emailAddresses,names,locales,urls'});
 								request.execute(function(profile) {
 									gPlusUserDfd.resolve(profile);
+									console.log(profile);
 								});
+
 							});
 						} else {
 							gPlusUserDfd.reject('No update needed');
@@ -223,9 +225,9 @@
 				}, function (reason) {
 					userFetchInProgress = false;
 					userDeferred.reject(reason);
-				  if ($location.path() !== '/welcome') {
-				  	$location.path('/welcome');
-				  }
+					if ($location.path() !== '/welcome') {
+						$location.path('/welcome');
+					}
 				});
 			}
 
@@ -252,12 +254,12 @@
 		}
 
 		function attachUserProfile(user, profile) {
-			var profile_img = profile.image.url ? profile.image.url.split('?')[0] : '';
-			user.first_name = profile.name.givenName;
-			user.last_name = profile.name.familyName;
+			var profile_img = profile.photos[0].url;//image.url ? profile.image.url.split('?')[0] : '';
+			user.first_name = profile.names[0].givenName;
+			user.last_name = profile.names[0].familyName;
 			user.profile_img_url = profile_img;
-			user.language = profile.language;
-			user.google_plus_profile = profile.url;
+			user.language = profile.locales[0].value;
+			user.google_plus_profile = null;
 			user.last_login = moment.utc().format();
 			return user;
 		}
@@ -322,32 +324,32 @@
 
 (function() {
 
-    angular
-        .module('app.services')
-        .factory('HeapService', HeapService);
+	angular
+		.module('app.services')
+		.factory('HeapService', HeapService);
 
-    /** @ngInject */
-    function HeapService($rootScope, UserService) {
-        return {
-            engage: engage
-        };
+	/** @ngInject */
+	function HeapService($rootScope, UserService) {
+		return {
+			engage: engage
+		};
 
-        function engage() {
-            $rootScope.$on('user:signIn:complete', function() {
-                UserService.getUser().then(function(user) {
-                    if (window.heap) {
-                        heap.identify({
-                            handle: user.email
-                        });
-                    }
-                    if (window.FS) {
-                        FS.identify(user.id, {
-                            displayName: user.first_name + ' ' + user.last_name,
-                            email: user.email
-                        });
-                    }
-                });
-            });
-        }
-    }
+		function engage() {
+			$rootScope.$on('user:signIn:complete', function() {
+				UserService.getUser().then(function(user) {
+					if (window.heap) {
+						heap.identify({
+							handle: user.email
+						});
+					}
+					if (window.FS) {
+						FS.identify(user.id, {
+							displayName: user.first_name + ' ' + user.last_name,
+							email: user.email
+						});
+					}
+				});
+			});
+		}
+	}
 })();
