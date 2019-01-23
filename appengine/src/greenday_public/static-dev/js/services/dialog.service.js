@@ -247,10 +247,14 @@
         projectId = PageService.getPageData().projectId,
         projectFilter = { project_id: projectId };
 
-      ctrl.dummySettings = {
-        archiveOrg: true,
-        archiveIs: true
-      };
+      ctrl.keepSettings = {
+				isActive: true,
+				services: {
+					all: true,
+					archiveOrg: true,
+					archiveIs: true
+				}
+      }
 
       ctrl.getKeepSettings = (function() {
         console.log("getting keep settings for this project…"); // TODO: fetch real settings
@@ -258,15 +262,23 @@
         setTimeout(function() {
           console.log("getting keep settings for this project: DONE!");
           ctrl.isBusy = false;
-          return ctrl.dummySettings;
+          return ctrl.keepSettings;
         }, 350);
       })();
 
-      ctrl.enableService = function(service) {
-        console.log("setting the flag for: " + service + "…"); // TODO: change settings
+      ctrl.toggleKeepService = function(service) {
         ctrl.isBusy = true;
         setTimeout(function() {
-          console.log("setting the flag for: " + service + ": DONE!");
+  				if (service === 'all') {
+  					for (key in ctrl.keepSettings.services) {
+  						ctrl.keepSettings.services[key] = ctrl.keepSettings.services.all;
+  					}
+  				} else {
+  					if (ctrl.keepSettings.services[service] === false) {
+  						ctrl.keepSettings.services.all = false;
+  					}
+  				}
+  				console.log(`New Keep Settings: `, ctrl.keepSettings); // TODO: change KEEP settings
           ctrl.isBusy = false;
         }, 350);
       };

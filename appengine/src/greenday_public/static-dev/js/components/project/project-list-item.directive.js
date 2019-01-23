@@ -44,7 +44,6 @@
 			ctrl.removeProject = removeProject;
 			ctrl.inviteAccept = inviteAccept;
 			ctrl.inviteReject = inviteReject;
-			ctrl.enableKeepService = enableKeepService;
 			ctrl.cancel = cancel;
 			ctrl.modes = {
 				edit: !ctrl.project.id
@@ -179,8 +178,31 @@
 					});
 			}
 
-			function enableKeepService(service) { // TODO: change KEEP settings
-				console.log(service);
+			// KEEP
+
+			ctrl.toggleKeepService = toggleKeepService;
+			ctrl.keepSettings = {
+				isActive: true,
+				services: {
+					all: true,
+					archiveOrg: true,
+					archiveIs: true
+				}
+			};
+
+			function toggleKeepService(service) {
+
+				if (service === 'all') {
+					for (key in ctrl.keepSettings.services) {
+						ctrl.keepSettings.services[key] = ctrl.keepSettings.services.all;
+					}
+				} else {
+					if (ctrl.keepSettings.services[service] === false) {
+						ctrl.keepSettings.services.all = false;
+					}
+				}
+				console.log(`New Keep Settings: `, ctrl.keepSettings); // TODO: change KEEP settings
+
 			}
 
 			function fetchExtraInfo() {

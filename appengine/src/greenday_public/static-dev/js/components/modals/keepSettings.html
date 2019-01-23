@@ -9,18 +9,26 @@
     </p>
 
     <md-checkbox
-      aria-label="Archive.org"
-      ng-change="ctrl.enableService('archiveOrg')"
+      aria-label="All services"
+      ng-change="ctrl.toggleKeepService('all')"
       ng-disabled="ctrl.isBusy"
-      ng-model="ctrl.keepSettings.archiveOrg"
+      ng-model="ctrl.keepSettings.services.all"
+    >
+      All services
+    </md-checkbox>
+    <md-checkbox
+      aria-label="Archive.org"
+      ng-change="ctrl.toggleKeepService('archiveOrg')"
+      ng-disabled="ctrl.isBusy"
+      ng-model="ctrl.keepSettings.services.archiveOrg"
     >
       Archive.org
     </md-checkbox>
     <md-checkbox
       aria-label="Archive.is"
-      ng-change="ctrl.enableService('archiveIs')"
+      ng-change="ctrl.toggleKeepService('archiveIs')"
       ng-disabled="ctrl.isBusy"
-      ng-model="ctrl.keepSettings.archiveIs"
+      ng-model="ctrl.keepSettings.services.archiveIs"
     >
       Archive.is
     </md-checkbox>
