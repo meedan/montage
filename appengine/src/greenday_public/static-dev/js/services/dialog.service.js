@@ -270,7 +270,7 @@
 
 				var services = ctrl.keepSettings.services;
 				ctrl.isBusy = true;
-				setTimeout(function() { // TODO: setting timeout to emulate lentghy api call — remove this
+				// setTimeout(function() { // TODO: setting timeout to emulate lentghy api call — remove this
 					if (service === 'all') {
 						for (key in services) {
 							services[key] = services.all;
@@ -284,7 +284,7 @@
 					}
 					ctrl.isBusy = false;
 					console.log(`New Keep Settings: `, ctrl.keepSettings); // TODO: set Keep settings via API
-				}, 5);
+				// }, 5);
 
       };
 
