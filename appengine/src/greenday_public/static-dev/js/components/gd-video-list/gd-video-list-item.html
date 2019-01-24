@@ -29,7 +29,18 @@
 		{{ ::video.pretty_created }}
 	</div>
 	<div layout="column" layout-align="center" class="video-list-item__cell video-list-item__keep">
-		<icon class="ic-check"></icon>
+		<span>
+			<icon class="bif-icon-circle-check"></icon>
+			<md-tooltip md-delay="100">Safely stored with Keep</md-tooltip>
+		</span>
+		<span>
+			<icon class="bif-icon-circle-warning"></icon>
+			<md-tooltip md-delay="100">Keep syncronization failed</md-tooltip>
+		</span>
+		<span>
+			<icon class="bif-icon-upload-arrow"></icon>
+			<md-tooltip md-delay="100">Send to Keep</md-tooltip>
+		</span>
 	</div>
 	<div layout="column" layout-align="center" class="video-list-item__cell video-list-item__favourite">
 		<gd-favourite-video-button video="video" ng-if="::(!video.missing_from_youtube)"></gd-favourite-video-button>

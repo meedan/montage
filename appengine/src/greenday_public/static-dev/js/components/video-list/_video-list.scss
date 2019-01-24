@@ -140,6 +140,12 @@ md-content.video-list {
 	width: $base-icon-size + ($video-list-base-padding * 2);
 }
 
+.video-list-item__keep {
+	icon {
+		font-size: 16px;
+	}
+}
+
 .video-list__thead--add-all {
 	padding: 0 $video-list-base-padding;
 	text-align: center;
