@@ -258,7 +258,11 @@
             user.last_name = profile.names[0].familyName;
             user.profile_img_url = profile_img;
             user.language = profile.locales[0].value;
-            user.google_plus_profile = null;
+            if (profile.hasOwnProperty('urls')) {
+                user.google_plus_profile = profile.urls[0].value;
+            } else {
+                user.google_plus_profile = null;
+            }
             user.last_login = moment.utc().format();
             return user;
         }
