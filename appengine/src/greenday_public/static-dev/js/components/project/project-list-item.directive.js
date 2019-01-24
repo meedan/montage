@@ -209,7 +209,7 @@
 
 				// setTimeout(function() { // TODO: setting timeout to emulate lentghy api call — remove this
 					if (service === 'all') {
-						for (key in services) {
+						for (var key in services) {
 							services[key] = services.all;
 						}
 					} else {
@@ -220,8 +220,8 @@
 						}
 					}
 					ctrl.loading = false;
-					console.log(`New Keep Settings: `, ctrl.keepSettings); // TODO: set Keep settings via API
 				// }, 500);
+					console.log('New Keep Settings:', ctrl.keepSettings); // TODO: set Keep settings via API
 
 			}
 

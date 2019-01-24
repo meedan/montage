@@ -254,7 +254,7 @@
 					archiveOrg: true,
 					archiveIs: true
 				}
-      }
+      };
 
       ctrl.getKeepSettings = (function() {
         console.log("getting keep settings for this project…"); // TODO: fetch real settings
@@ -272,7 +272,7 @@
 				ctrl.isBusy = true;
 				// setTimeout(function() { // TODO: setting timeout to emulate lentghy api call — remove this
 					if (service === 'all') {
-						for (key in services) {
+						for (var key in services) {
 							services[key] = services.all;
 						}
 					} else {
@@ -283,8 +283,8 @@
 						}
 					}
 					ctrl.isBusy = false;
-					console.log(`New Keep Settings: `, ctrl.keepSettings); // TODO: set Keep settings via API
 				// }, 5);
+					console.log('New Keep Settings:', ctrl.keepSettings); // TODO: set Keep settings via API
 
       };
 
