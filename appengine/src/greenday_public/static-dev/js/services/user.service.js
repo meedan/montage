@@ -190,7 +190,6 @@
                                 });
                                 request.execute(function (profile) {
                                     gPlusUserDfd.resolve(profile);
-                                    console.log(profile);
                                 });
 
                             });
