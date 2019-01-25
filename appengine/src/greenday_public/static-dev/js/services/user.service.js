@@ -182,7 +182,7 @@
                         // This is to cater for when new users are invited to a project.
                         // An account gets created and activated for them, but because
                         // data is not carried out.
-                        if (now.diff(lastLogin, 'hours') < 4 || !google_plus_profile) {
+                        if (now.diff(lastLogin, 'hours') > 4 || !google_plus_profile) {
                             gapi.client.load('people', 'v1', function () {
                                 var request = gapi.client.people.people.get({
                                     'resourceName': 'people/me',
@@ -264,9 +264,6 @@
                 user.google_plus_profile = null;
             }
             user.last_login = moment.utc().format();
-            console.log("----------------");
-            console.log(user);
-            console.log("----------------");
             return user;
         }
 
