@@ -21,8 +21,6 @@
 		function controller($scope, $element, $attrs) {
 			var ctrl = this;
 
-			console.log('<gd-floating-element> controller', $scope);
-
 			$scope.component = '<gd-floating-element>';
 			$scope.id = $attrs.id;
 
@@ -36,8 +34,6 @@
 		}
 
 		function link(scope, element, attrs, ctrl, transclude) {
-			console.log('<gd-floating-element> link');
-
 			/////////////////
 			// DOM events
 			/////////////////
@@ -47,7 +43,6 @@
 			// Scope events
 			/////////////////
 			scope.$on('$destroy', function () {
-				console.log('<gd-floating-element> $destroy');
 				$($window).off('resize', position);
 			});
 

@@ -158,8 +158,7 @@
 
 				$mdDialog.hide();
 			}, function (response) {
-				console.log('Could not save changes', response);
-				ToastService.showError('There was a problem saving your changes', 0);
+				ToastService.showError('Error: ' + response.data.error.message, 0);
 			}).finally(function () {
 				$scope.saving = false;
 			});
@@ -206,7 +205,6 @@
 
 			videoPromise = VideoModel.find($scope.video.project_id + COMPOUND_KEY_SEPARATOR + ytVideoId);
 			videoPromise.then(function(v) {
-				console.log('Retrieved video', v);
 				if (!_.findWhere($scope.duplicates, {id: v.id})) {
 					$scope.duplicates.push(v);
 
@@ -216,7 +214,6 @@
 					ToastService.showError('Video is already marked as a duplicate', 0);
 				}
 			}, function (response) {
-				console.log('Couldn\'t retrieve video', response);
 				ToastService.showError('Error: ' + response.data.error.message, 0);
 			})
 			.finally(function() {
