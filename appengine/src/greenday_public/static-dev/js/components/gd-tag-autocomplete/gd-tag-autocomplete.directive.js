@@ -132,7 +132,6 @@
 			}
 
 			function destroy() {
-				console.log('<gd-tag-autocomplete> $destoy');
 				$input.off('focus', showPopup);
 				element.off('keydown', onKeyDown);
 			}
@@ -255,8 +254,6 @@
 						}
 					}
 				}
-
-				// console.log('highlightedSection: ' + scope.highlightedSection, ' index: ' + scope.highlightedIndex);
 			}
 
 			function highlightPrevItem() {

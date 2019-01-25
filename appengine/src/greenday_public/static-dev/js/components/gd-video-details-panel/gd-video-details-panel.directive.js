@@ -83,9 +83,10 @@
 					});
 			};
 
+			/*
 			ctrl.showRecordedDateDatepicker = function ($event) {
-				console.log('showRecordedDateDatepicker');
 			};
+			*/
 
 			ctrl.createCollection = function (projectId, collectionName) {
 				if (!projectId || !collectionName) {

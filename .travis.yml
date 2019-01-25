@@ -10,7 +10,7 @@ before_install:
 - until curl --silent -XGET --fail http://localhost:8080; do printf '.'; sleep 1; done
 - docker-compose exec montage grunt build
 script:
-- docker-compose exec montage npm run test
+- docker-compose exec montage npm run test:frontend
 notifications:
   slack:
     secure: bAH5WbtFi3elw4rsUZVP8nRwxLENM4u7EZwmO1HBdUJeiqF4y3LB/BKjfm8Miet5HFKATBvUoqX8P4NuKLju7ReuOwIduJev5O6mGbfmZVDy7t4x4mhfYQ26+vgZ8HiHdZ0iM476/mPVC24JqBjPq9FZlK225ClZ0HFKxFeN6Q6UlFfnTVijWVLvjH7izmiT/KaqPdAwz31MuI5WDT6LbeFaX5YDLtbi/9aMWzC59TXX7aYWi51pYoLm+1gay9yULIbLwRffkIy5uKaHpDHRmd9iG3fuUuwDt83vJQNsy0HaHjcCYpOWVKdW1VsPs2wG4yQc8vcm8h0IQFTA08EAP62QkHPkPtw6cOT/6mmy0iuTTAQVTakYFt9KoleQfw7lS44GaBrPiHRYcV26MBrKNP6L98wtD/fe95NBEjGoJ52CNrtwHkPMceBCDFtRCeBJTdhvouwHb8lnl3L4dC3sVeRlTIJoxWwLSaL0x/wtOCqIygIymgdpKNmcQz8zql+tVLIrkw9DSUHaPCLCCI/UjXd25cfz8axr0/lu1UdQWbyKZQAzNf8PGAScai43CGf1oPc5AXJ9m+3vIjA1oF3k0RapMmx26uzlR1aBl+8/yFdjeBIeUmiO1EYON8TRv0IG0px01DyMUPqB3H+PPzXDVfQGZrZV8q86isM3MVLuOGA=

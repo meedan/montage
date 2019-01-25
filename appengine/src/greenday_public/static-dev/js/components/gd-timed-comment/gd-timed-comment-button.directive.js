@@ -31,8 +31,6 @@
 			ctrl.showPreview = function ($event) {
 				var options = getPopupOptions();
 
-				console.log('showPreview', $event);
-
 				angular.extend(options, {
 					'backdrop': false
 				});
@@ -52,8 +50,6 @@
 			};
 
 			ctrl.hidePreview = function ($event) {
-				console.log('hidePreview', $event);
-
 				// The user may have clicked the avatar which will already have
 				// hidden the preview, so we need to check if the preview still
 				// exists before trying to hide it.

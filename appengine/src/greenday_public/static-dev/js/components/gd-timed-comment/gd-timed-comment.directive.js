@@ -180,9 +180,10 @@
 				}
 			});
 
+			/*
 			scope.$watch('data.editingText', function (nv) {
-				console.log(nv);
 			});
+			*/
 
 			/////////////////
 			// Initialisation

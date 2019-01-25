@@ -10,10 +10,11 @@
         engage: engage
       };
 
-      function engage(){
+      function engage() {
+        /*
         $rootScope.$on('user:signIn:complete', function(user) {
-          console.log(user);
         });
+        */
       }
 
     }
