@@ -52,7 +52,7 @@
 			/////////////////
 			// Scope events
 			/////////////////
-			scope.$on('$destroy', destroy);
+			//scope.$on('$destroy', destroy);
 
 			/////////////////
 			// Setup
@@ -62,14 +62,14 @@
 			// Private functions
 			/////////////////
 			var updateImage = _.debounce(function () {
-				console.log('updating YouTube thumbnail');
 				updateThumbnailUrl();
 				preloadImage();
 			}, YT_THUMB_UPDATE_INTERVAL);
 
+			/*
 			function destroy() {
-				console.log('<gd-youtube-thumbnail> $destoy');
 			}
+			*/
 
 			function imagePreloadResolve(imageLocations) {
 				ctrl.loaded = true;
@@ -78,7 +78,6 @@
 
 			function imagePreloadReject(imageLocation) {
 				console.error('Image Failed', imageLocation);
-				console.info('Preload Failure');
 			}
 
 			function updateThumbnailUrl() {

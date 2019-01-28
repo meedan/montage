@@ -127,7 +127,7 @@
 			/////////////////
 			// Scope events
 			/////////////////
-			scope.$on('$destroy', destroy);
+			//scope.$on('$destroy', destroy);
 
 			/////////////////
 			// Setup
@@ -136,9 +136,10 @@
 			/////////////////
 			// Private functions
 			/////////////////
+			/*
 			function destroy() {
-				console.log('<gd-tag-autocomplete-popup> $destoy');
 			}
+			*/
 		}
 	}
 }());

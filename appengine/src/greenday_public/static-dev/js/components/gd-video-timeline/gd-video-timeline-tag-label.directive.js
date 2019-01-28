@@ -130,8 +130,6 @@
 			ctrl.removeTagRow = function () {
 				var remove;
 
-				console.log('<gd-video-timeline-tag-label> removeTagRow');
-
 				$scope.busy = true;
 
 				remove = VideoTagModel.destroy($scope.tag.id)
