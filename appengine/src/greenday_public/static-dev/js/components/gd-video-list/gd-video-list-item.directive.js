@@ -27,7 +27,7 @@
 				ctrl.isBusy = false;
 				ToastService.show('“' + $scope.video.name + '” has been saved in selected Keep locations.', true);
 				ToastService.closeAfter(5000);
-			};
+			}
 
 		}
 	}
