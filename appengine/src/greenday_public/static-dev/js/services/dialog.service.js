@@ -248,7 +248,7 @@
         projectFilter = { project_id: projectId };
 
       ctrl.keepSettings = {
-				isActive: true,
+				isActive: false,
 				services: {
 					all: true,
 					archiveOrg: true,
@@ -265,6 +265,14 @@
           return ctrl.keepSettings;
         }, 350);
       })();
+
+			function toggleKeep() {
+				ctrl.loading = true;
+				// setTimeout(function() { // TODO: setting timeout to emulate lentghy api call — remove this
+					ctrl.loading = false;
+					// }, 500);
+					console.log('New Keep Settings:', ctrl.keepSettings); // TODO: set Keep settings via API
+			}
 
       ctrl.toggleKeepService = function(service) {
 

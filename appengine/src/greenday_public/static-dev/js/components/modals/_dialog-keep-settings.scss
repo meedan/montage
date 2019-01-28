@@ -1,9 +1,26 @@
 md-dialog.keep-settings-dialog {
+	max-width: 500px;
 	.md-label {
 		font-size: 13px;
 	}
 	md-checkbox {
-		margin-left: 0;
-		margin-right: 0;
+		margin: 5px 0;
+	}
+	.keep-settings-dialog__services {
+		padding-left: 30px;
+		margin: 10px 0;
+		md-checkbox .md-icon {
+			width: 14px;
+			height: 14px;
+			&:after {
+				height: 11px;
+				left: 5px;
+				top: 1px;
+				width: 4px;
+			}
+		}
+		md-checkbox .md-label {
+			margin-left: 5px;
+		}
 	}
 }

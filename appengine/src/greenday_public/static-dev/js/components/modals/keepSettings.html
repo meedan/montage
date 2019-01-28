@@ -2,36 +2,49 @@
   <md-content class="keep-settings-dialog__content">
     <h2>Preserve media with <strong>Keep</strong></h2>
     <p>
-      Videos added to this project will be automatically sent to Keep and remain
-      available even when the original source media is deleted. If you wish to
-      take advantage of Keep, please, select at least one back-up service to
-      store your media with:
+      Videos added to this project will automatically be sent to selected <strong>Keep</strong> locations and remain available even when the original source media is deleted.
     </p>
 
     <md-checkbox
-      aria-label="All services"
-      ng-change="ctrl.toggleKeepService('all')"
+      ng-change="ctrl.toggleKeep()"
       ng-disabled="ctrl.isBusy"
-      ng-model="ctrl.keepSettings.services.all"
+      ng-model="ctrl.keepSettings.isActive"
     >
-      All services
+      Automatically back up added videos with selected <strong>Keep</strong> services
     </md-checkbox>
-    <md-checkbox
-      aria-label="Archive.org"
-      ng-change="ctrl.toggleKeepService('archiveOrg')"
-      ng-disabled="ctrl.isBusy"
-      ng-model="ctrl.keepSettings.services.archiveOrg"
-    >
-      Archive.org
-    </md-checkbox>
-    <md-checkbox
-      aria-label="Archive.is"
-      ng-change="ctrl.toggleKeepService('archiveIs')"
-      ng-disabled="ctrl.isBusy"
-      ng-model="ctrl.keepSettings.services.archiveIs"
-    >
-      Archive.is
-    </md-checkbox>
+
+    <div class="keep-settings-dialog__services">
+      <div>
+        <md-checkbox
+          aria-label="All services"
+          ng-change="ctrl.toggleKeepService('all')"
+          ng-disabled="!ctrl.keepSettings.isActive || ctrl.isBusy"
+          ng-model="ctrl.keepSettings.services.all"
+        >
+          All services
+        </md-checkbox>
+      </div>
+      <div>
+        <md-checkbox
+          aria-label="Archive.org"
+          ng-change="ctrl.toggleKeepService('archiveOrg')"
+          ng-disabled="!ctrl.keepSettings.isActive || ctrl.isBusy"
+          ng-model="ctrl.keepSettings.services.archiveOrg"
+        >
+          Archive.org
+        </md-checkbox>
+      </div>
+      <div>
+        <md-checkbox
+          aria-label="Archive.is"
+          ng-change="ctrl.toggleKeepService('archiveIs')"
+          ng-disabled="!ctrl.keepSettings.isActive || ctrl.isBusy"
+          ng-model="ctrl.keepSettings.services.archiveIs"
+        >
+          Archive.is
+        </md-checkbox>
+      </div>
+    </div>
 
     <div layout="row" layout-align="end">
       <md-button
