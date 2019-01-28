@@ -14,17 +14,24 @@
 					<input id="projectDescription" multiline type="text" ng-model="ctrl.project.description">
 				</md-input-container>
 				<div class="project__keep-settings" layout="column">
-					<h2>Automatically back up added videos to selected <strong>Keep</strong> services:
-						<span>
+					<h2>
+						<md-checkbox
+							ng-change="ctrl.toggleKeep()"
+							ng-disabled="ctrl.loading"
+							ng-model="ctrl.keepSettings.isActive"
+						>
+							Automatically back up added videos with selected <strong>Keep</strong> services
+						</md-checkbox>
+						<div style="display: inline-block; position: relative;">
 							<icon class="ic-info-outline"></icon>
 							<md-tooltip>
 								Videos added to this project will automatically be<br/>
 								sent to selected Keep locations and remain available<br/>
 								even when the original source media is deleted.
 							</md-tooltip>
-						</span>
+						</div>
 					</h2>
-					<div layout="row">
+					<div layout="row" class="project__keep-services" ng-show="ctrl.keepSettings.isActive">
 						<div layout="column" flex="33">
 							<md-checkbox
 								aria-label="All services"

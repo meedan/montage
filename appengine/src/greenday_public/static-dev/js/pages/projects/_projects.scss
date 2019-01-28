@@ -294,7 +294,21 @@
 
 .project__keep-settings {
 	h2 { font-size: 14px; margin: 20px 0 10px; };
+	md-switch { margin: 0; }
 	md-checkbox { float: left; margin: 0; }
 	md-checkbox .md-label { font-size: 13px; }
 	icon { font-size: 18px; position: relative; top: 2px; }
+	.project__keep-services {
+		padding-left: 30px;
+		md-checkbox .md-icon {
+			width: 14px;
+			height: 14px;
+			&:after {
+				height: 11px;
+				left: 5px;
+				top: 1px;
+				width: 4px;
+			}
+		}
+	}
 }

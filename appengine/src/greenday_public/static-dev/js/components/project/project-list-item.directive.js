@@ -180,11 +180,11 @@
 
 			// KEEP
 
-			// ctrl.toggleKeep = toggleKeep;
+			ctrl.toggleKeep = toggleKeep;
 			ctrl.toggleKeepService = toggleKeepService;
 
 			ctrl.keepSettings = {
-				isActive: true,
+				isActive: false,
 				services: {
 					all: true,
 					archiveOrg: true,
@@ -192,15 +192,13 @@
 				}
 			};
 
-			// function toggleKeep() {
-			// 	ctrl.loading = true;
-			//
-			// 	// setTimeout(function() { // TODO: setting timeout to emulate lentghy api call — remove this
-			// 		let keepStatus = ctrl.keepSettings.isActive;
-			// 		ctrl.keepSettings.isActive = !keepStatus;
-			// 		ctrl.loading = false;
-			// 	// }, 500);
-			// }
+			function toggleKeep() {
+				ctrl.loading = true;
+				// setTimeout(function() { // TODO: setting timeout to emulate lentghy api call — remove this
+					ctrl.loading = false;
+					// }, 500);
+					console.log('New Keep Settings:', ctrl.keepSettings); // TODO: set Keep settings via API
+			}
 
 			function toggleKeepService(service) {
 
