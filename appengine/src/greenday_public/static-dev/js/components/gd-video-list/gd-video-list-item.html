@@ -29,22 +29,28 @@
 		{{ ::video.pretty_created }}
 	</div>
 	<div layout="column" layout-align="center" class="video-list-item__cell video-list-item__keep">
-		<span>
+
+		<div class="video-list-item__keep-flag video-list-item__keep-flag--success" ng-show="false"><!-- TODO: show when synced -->
 			<icon class="bif-icon-circle-check"></icon>
 			<md-tooltip md-delay="100">Safely stored with Keep</md-tooltip>
-		</span>
-		<span>
-			<icon class="bif-icon-circle-warning"></icon>
-			<md-tooltip md-delay="100">Keep syncronization failed</md-tooltip>
-		</span>
-		<span>
+		</div>
+		<div class="video-list-item__keep-flag video-list-item__keep-flag--progress" ng-show="false"><!-- TODO: show when syncing -->
 			<md-progress-circular md-mode="indeterminate" md-diameter="16"></md-progress-circular>
-			<md-tooltip md-delay="100">Sending to Keep…</md-tooltip>
-		</span>
-		<md-button class="md-icon-button md-accent" aria-label="Send to Keep">
-			<icon class="bif-icon-upload-arrow"></icon>
-			<md-tooltip md-delay="100">Send to Keep</md-tooltip>
-		</md-button>
+			<md-tooltip md-delay="100">Syncing with Keep services…</md-tooltip>
+		</div>
+		<div class="video-list-item__keep-flag video-list-item__keep-flag--error" ng-show="false"><!-- TODO: show when returns error -->
+			<md-button class="md-icon-button md-accent" aria-label="Retry">
+				<icon class="bif-icon-circle-warning"></icon>
+				<md-tooltip md-delay="100">Syncronization failed. Retry?</md-tooltip>
+			</md-button>
+		</div>
+		<div class="video-list-item__keep-flag video-list-item__keep-flag--cta" ng-hide="false"><!-- TODO: hide only when one of the above is shown instead -->
+			<md-button class="md-icon-button md-accent" aria-label="Send to Keep">
+				<icon class="bif-icon-upload-arrow"></icon>
+				<md-tooltip md-delay="100">Sync with Keep services</md-tooltip>
+			</md-button>
+		</div>
+
 	</div>
 	<div layout="column" layout-align="center" class="video-list-item__cell video-list-item__favourite">
 		<gd-favourite-video-button video="video" ng-if="::(!video.missing_from_youtube)"></gd-favourite-video-button>
