@@ -36,18 +36,18 @@
 		</div>
 		<div class="video-list-item__keep-flag video-list-item__keep-flag--progress" ng-show="false"><!-- TODO: show when syncing -->
 			<md-progress-circular md-mode="indeterminate" md-diameter="16"></md-progress-circular>
-			<md-tooltip md-delay="100">Syncing with Keep services…</md-tooltip>
+			<md-tooltip md-delay="100">Sending to Keep locations…</md-tooltip>
 		</div>
 		<div class="video-list-item__keep-flag video-list-item__keep-flag--error" ng-show="false"><!-- TODO: show when returns error -->
-			<md-button class="md-icon-button md-accent" aria-label="Retry">
+			<md-button class="md-icon-button md-accent" aria-label="Retry" ng-click="ctrl.sendToKeep()">
 				<icon class="bif-icon-circle-warning"></icon>
 				<md-tooltip md-delay="100">Syncronization failed. Retry?</md-tooltip>
 			</md-button>
 		</div>
-		<div class="video-list-item__keep-flag video-list-item__keep-flag--cta" ng-hide="false"><!-- TODO: hide only when one of the above is shown instead -->
+		<div class="video-list-item__keep-flag video-list-item__keep-flag--cta" ng-hide="false" ng-click="ctrl.sendToKeep()"><!-- TODO: hide only when one of the above is shown instead -->
 			<md-button class="md-icon-button md-accent" aria-label="Send to Keep">
 				<icon class="bif-icon-upload-arrow"></icon>
-				<md-tooltip md-delay="100">Sync with Keep services</md-tooltip>
+				<md-tooltip md-delay="100">Send to Keep locations</md-tooltip>
 			</md-button>
 		</div>
 
