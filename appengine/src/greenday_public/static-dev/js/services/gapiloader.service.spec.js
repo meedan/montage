@@ -23,7 +23,7 @@ describe('Unit: Testing services', function () {
 			'username': '1234567890'
 		},
 		fakeProfile = {
-			'kind': 'plus#person',
+			'kind': 'people#person',
 			'etag': '\"KJHSFVCB8273ryfghHJGSLF/KJHSFVCB8273ryfghHJGSLF\"',
 			'gender': 'male',
 			'emails': [{
@@ -33,17 +33,21 @@ describe('Unit: Testing services', function () {
 			'objectType': 'person',
 			'id': '1234567890',
 			'displayName': 'Someone Awesome',
-			'name': {
-				'familyName': 'Awesome',
-				'givenName': 'Someone'
-			},
-			'url': 'https://plus.google.com/1234567890',
-			'image': {
-				'url': 'https://lh5.googleusercontent.com/-mV0aK-lwZHoW7ukXRMSdCAtOAWpKPgsHl0rYP7giTs?sz=50',
-				'isDefault': false
-			},
-			'isPlusUser': true,
-			'language': 'en_GB',
+      'names': [{
+        'familyName': 'Awesome',
+        'givenName': 'Someone'
+      }],
+      'urls': [{
+        'value': 'https://plus.google.com/1234567890'
+      }],
+      'photos': [{
+        'url': 'https://lh5.googleusercontent.com/-mV0aK-lwZHoW7ukXRMSdCAtOAWpKPgsHl0rYP7giTs?sz=50',
+        'isDefault': false
+      }],
+      'isPlusUser': true,
+      'locales': [{
+        'value': 'en_GB'
+      }],
 			'circledByCount': 0,
 			'verified': false,
 			'domain': 'somewhere.com'
@@ -120,7 +124,7 @@ describe('Unit: Testing services', function () {
 			client: {
 				load: function (apiName, apiVersion, callback) { callback(); },
 				setApiKey: function (apiKey) {},
-				plus: {
+				people: {
 					people: {
 						get: function (params) {
 							return { execute: function (callback) { callback(fakeProfile); } };
@@ -172,7 +176,7 @@ describe('Unit: Testing services', function () {
 			$httpBackend.expectGET('users/me').respond(fakeUser);
 			$httpBackend.expectGET('project').respond(fakeProject);
 			$httpBackend.expectPUT('users/me').respond(fakeUserWithProfile);
-			
+
       var mockDeferred = $q.defer();
 
 			spyOn(GapiLoader, 'load').and.callFake(function () {

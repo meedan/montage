@@ -39,7 +39,7 @@ describe('Unit: Testing services', function () {
       },
 		},
 		fakeProfile = {
-			'kind': 'plus#person',
+			'kind': 'people#person',
 			'etag': '\"KJHSFVCB8273ryfghHJGSLF/KJHSFVCB8273ryfghHJGSLF\"',
 			'gender': 'male',
 			'emails': [{
@@ -49,17 +49,21 @@ describe('Unit: Testing services', function () {
 			'objectType': 'person',
 			'id': '1234567890',
 			'displayName': 'Someone Awesome',
-			'name': {
+			'names': [{
 				'familyName': 'Awesome',
 				'givenName': 'Someone'
-			},
-			'url': 'https://plus.google.com/1234567890',
-			'image': {
+			}],
+			'urls': [{
+        'value': 'https://plus.google.com/1234567890'
+      }],
+			'photos': [{
 				'url': 'https://lh5.googleusercontent.com/-mV0aK-lwZHoW7ukXRMSdCAtOAWpKPgsHl0rYP7giTs?sz=50',
 				'isDefault': false
-			},
+			}],
 			'isPlusUser': true,
-			'language': 'en_GB',
+			'locales': [{
+        'value': 'en_GB'
+      }],
 			'circledByCount': 0,
 			'verified': false,
 			'domain': 'somewhere.com'
@@ -140,7 +144,7 @@ describe('Unit: Testing services', function () {
 			client: {
 				load: function (apiName, apiVersion, callback) { callback(); },
 				setApiKey: function (apiKey) {},
-				plus: {
+				people: {
 					people: {
 						get: function (params) {
 							return { execute: function (callback) { callback(fakeProfile); } };
@@ -219,7 +223,7 @@ describe('Unit: Testing services', function () {
           }
         });
 				$httpBackend.expectGET('project').respond(fakeProject);
-				
+
         UserService.getUser().then(function (user) {
           expect(user.first_name).toBe('Someone');
 					done();
@@ -229,7 +233,7 @@ describe('Unit: Testing services', function () {
 				profile.image = {};
 
 				var fakeGapi = angular.copy(gapi);
-				fakeGapi.client.plus.people.get = function (params) {
+				fakeGapi.client.people.people.get = function (params) {
 					return { execute: function (callback) { callback(profile); } };
 				};
 
@@ -264,7 +268,7 @@ describe('Unit: Testing services', function () {
           }
         });
 				$httpBackend.expectGET('project').respond(fakeProject);
-				
+
         UserService.signOut().then(function () {
 					done();
 				});
@@ -282,7 +286,7 @@ describe('Unit: Testing services', function () {
           }
         });
 				$httpBackend.expectGET('project').respond(fakeProject);
-				
+
         UserService.getUser().then(function () {
 					UserService.getUserStats().then(function () {
 						done();
@@ -302,7 +306,7 @@ describe('Unit: Testing services', function () {
           }
         });
 				$httpBackend.expectGET('project').respond(fakeProject);
-				
+
         UserService.getUser().then(function () {
 					UserService.getUserStats().then(function () {
 						UserService.getUserStats().then(function () {
@@ -324,7 +328,7 @@ describe('Unit: Testing services', function () {
           }
         });
 				$httpBackend.expectGET('project').respond(fakeProject);
-        
+
         UserService.getUserStats().then(function () {
 					UserService.getUserStats(true).then(function () {
 						done();

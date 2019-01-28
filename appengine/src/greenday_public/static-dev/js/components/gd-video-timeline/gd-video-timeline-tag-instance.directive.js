@@ -228,14 +228,15 @@
 			/////////////////
 			// Scope events
 			/////////////////
-			scope.$on('$destroy', destroy);
+			//scope.$on('$destroy', destroy);
 
 			/////////////////
 			// Private functions
 			/////////////////
+			/*
 			function destroy() {
-				console.log('<gd-video-timeline-tag-instance> $destoy');
 			}
+			*/
 
 			function updatePosition() {
 				element.attr('style', 'left: ' + scope.ctrl.getLeft() + '%; width: ' + scope.ctrl.getWidth() + '%;');
@@ -436,8 +437,6 @@
 					return;
 				}
 
-				console.log('onEndResize');
-
 				// Notify the timeline that the user has finished interacting
 				// with the tag so it can bind it's UI events again.
 				scope.timelineCtrl.onTagInteractionEnd();
@@ -503,11 +502,6 @@
 					scope.timelineCtrl.isDraggingPlayhead()) {
 					return;
 				}
-
-				console.log('showFineTuneControls',
-					!!scope.video.archived_at,
-					scope.timelineCtrl.isResizingTag(),
-					scope.timelineCtrl.isDraggingPlayhead());
 
 				controls = element
 					.find('.gd-video-timeline-tag-instance__fine-tune');
