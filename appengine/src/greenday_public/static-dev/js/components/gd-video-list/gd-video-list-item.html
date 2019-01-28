@@ -38,9 +38,13 @@
 			<md-tooltip md-delay="100">Keep syncronization failed</md-tooltip>
 		</span>
 		<span>
+			<md-progress-circular md-mode="indeterminate" md-diameter="16"></md-progress-circular>
+			<md-tooltip md-delay="100">Sending to Keep…</md-tooltip>
+		</span>
+		<md-button class="md-icon-button md-accent" aria-label="Send to Keep">
 			<icon class="bif-icon-upload-arrow"></icon>
 			<md-tooltip md-delay="100">Send to Keep</md-tooltip>
-		</span>
+		</md-button>
 	</div>
 	<div layout="column" layout-align="center" class="video-list-item__cell video-list-item__favourite">
 		<gd-favourite-video-button video="video" ng-if="::(!video.missing_from_youtube)"></gd-favourite-video-button>
