@@ -23,6 +23,10 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+[class^="bif-icon-"]:before, [class*=" bif-icon-"]:before {
+  position: relative;
+  top: -1px;
+}
 
 .bif-icon-circle-check:before {
   content: "\e901";

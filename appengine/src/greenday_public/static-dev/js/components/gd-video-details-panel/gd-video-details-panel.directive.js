@@ -212,6 +212,29 @@
 					ToastService.showError('Unable to save date changes', 3000);
 				});
 			};
+
+			ctrl.sendToKeep = sendToKeep;
+
+			function sendToKeep() {
+
+				ctrl.isLoading = true;
+
+				new Promise(function(resolve, reject) {
+					var simulateSuccess = false;
+					if (simulateSuccess) {
+						setTimeout(function(){
+							resolve("Success!");
+						}, 250);
+					} else {
+						ToastService.show("Error!", true);
+					}
+				}).then(function(msg) {
+					ctrl.isBusy = false;
+					ToastService.show(msg, true);
+				});
+
+			}
+
 		}
 
 		function link(scope, element, attrs, ctrl) {

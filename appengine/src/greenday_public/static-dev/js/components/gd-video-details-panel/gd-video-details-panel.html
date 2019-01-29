@@ -53,6 +53,23 @@
 			No recorded date set
 		</span>
 	</div>
+	<div class="video-theater__keep-status">
+		<icon class="bif-icon-keep"></icon>
+
+		<span class="video-theater__keep-flag video-theater__keep-flag--success" ng-show="false"><!-- TODO: show when synced -->
+			Safely saved with Keep
+		</span>
+		<span class="video-theater__keep-flag video-theater__keep-flag--progress" ng-show="false"><!-- TODO: show when syncing -->
+			Sending video to Keep locations…
+		</span>
+		<span class="video-theater__keep-flag video-theater__keep-flag--error" ng-show="false"><!-- TODO: show when returns error -->
+			Sending to Keep failed. <a ng-click="videoDetailsPanelCtrl.sendToKeep()">Retry?</a>
+		</span>
+		<span class="video-theater__keep-flag video-theater__keep-flag--cta" ng-hide="false"><!-- TODO: hide only when one of the above is shown instead -->
+			<a ng-click="videoDetailsPanelCtrl.sendToKeep()">Send video to Keep locations</a>
+		</span>
+
+	</div>
 	<div class="video-theater__has-duplicates" ng-if="gdVideoData.duplicate_count > 0">
 		<icon class="ic-texture"></icon>
 		<span class="video-theater__highlighted-metric" ng-class="{'video-theater__link': !gdVideoData.archived_at}" ng-click="!gdVideoData.archived_at ? videoDetailsPanelCtrl.manageDuplicates($event) : angular.noop()">

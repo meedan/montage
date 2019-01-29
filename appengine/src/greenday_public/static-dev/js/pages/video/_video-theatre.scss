@@ -35,6 +35,15 @@ $gd-video-theatre-map-height: 16%;
 	padding: 6px 3px;
 }
 
+.video-theater__keep-status {
+	font-size: 13px;
+	line-height: 24px;
+	a {
+		color: #ff6d01;
+		cursor: pointer;
+	}
+}
+
 .video-theater__nav-arrow {
 	height: 100%;
 	position: absolute;
