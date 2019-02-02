@@ -1,3 +1,4 @@
 {
-  "directory" : "appengine/src/greenday_public/static-dev/libs"
+  "directory" : "appengine/src/greenday_public/static-dev/libs",
+  "resolvers": [ "bower-git-subdirectory-resolver" ]
 }

@@ -7,6 +7,7 @@
 		<!-- build:css(appengine/src/greenday_public) css/greenday.css -->
 		<link rel="stylesheet" type="text/css" href="/static-dev/libs/angular-material/angular-material.css">
 		<link rel="stylesheet" type="text/css" href="/static-dev/css/greenday.css">
+		<link rel="stylesheet" type="text/css" href="/static-dev/libs/montage-components/packages/video-timeline/build/static/css/main.css">
 		<!-- endbuild -->
 		{% else %}
 		<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/greenday.css">
@@ -57,7 +58,8 @@
 		</script>
 		{% if DEBUG %}
 		<!-- build:js(appengine/src/greenday_public) js/libs.js -->
-		<script src="/static-dev/libs/r2a-sample/build/static/js/main.js"></script>
+		<!-- <script src="/static-dev/libs/r2a-sample/build/static/js/main.js"></script> -->
+		<script src="/static-dev/libs/montage-components/packages/video-timeline/build/static/js/main.js"></script>
 		<script src="/static-dev/libs/jquery/dist/jquery.js"></script>
 		<script src="/static-dev/libs/angular/angular.js"></script>
 		<script src="/static-dev/libs/angular-component.js/dist/angular-component.js"></script>

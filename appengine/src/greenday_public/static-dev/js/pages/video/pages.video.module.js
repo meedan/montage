@@ -5,5 +5,9 @@
  * this module.
  */
 (function () {
-	angular.module('pages.video', []);
+	angular
+		.module('pages.video', [])
+		.component('barfoo', window.AngularVideoTimeline)
+		// .component('foobar', window.AngularSample2)
+		;
 }());

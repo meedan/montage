@@ -44,5 +44,8 @@
     "karma-phantomjs-launcher": "^1.0.4",
     "load-grunt-config": "^0.19.2",
     "node-sass": "^4.9.3"
+  },
+  "dependencies": {
+    "bower-git-subdirectory-resolver": "github:kokoska/bower-git-subdirectory-resolver"
   }
 }

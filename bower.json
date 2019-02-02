@@ -22,7 +22,7 @@
     "js-data": "~1.8.0",
     "js-data-angular": "~2.4.0",
     "angular-material": "~0.8.3",
-    "r2a-sample": "git://github.com/Laurian/r2a-sample.git"
+    "montage-components": "git@github.com:meedan/montage-components#d311a97a86c022defab5c1b946cefee20960a71e"
   },
   "devDependencies": {
     "angular-mocks": "1.3.15",
