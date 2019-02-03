@@ -1,4 +1,9 @@
 version: '2'
+networks:
+  dev:
+volumes:
+  mysqldata:
+  gaedata:
 services:
   mysql:
     image: mysql:5.5
@@ -10,11 +15,14 @@ services:
     ports:
       - "3306:3306"
     volumes:
-      - ./mysql/data:/var/lib/mysql
+      - "mysqldata:/var/lib/mysql"
+    networks:
+      - dev
   montage:
     build: .
     volumes:
-      - .:/app
+      - ".:/app"
+      - "gaedata:/app/data"
       - /app/parts
       - /app/bin
       - /app/GREENDAY
@@ -32,6 +40,23 @@ services:
       DJANGO_SETTINGS_MODULE: greenday_core.settings.local
     depends_on:
       - "mysql"
+      - "pender"
     ports:
       - "8080:8080"
+      - "8082:8082"
       - "8000:8000"
+    networks:
+      - dev
+  pender:
+    build: pender
+    shm_size: 1G
+    ports:
+      - "3200:3200"
+      - "9555:9555"
+    volumes:
+      - "./pender:/app"
+    environment:
+      RAILS_ENV: development
+      SERVER_PORT: 3200
+    networks:
+      - dev

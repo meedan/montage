@@ -3,7 +3,7 @@ services:
 before_install:
 - sudo /etc/init.d/mysql stop
 - git clone https://${TOKEN}:x-oauth-basic@github.com/meedan/configurator ./configurator
-- cp configurator/montage/local/appengine/src/greenday_core/settings/*.py ./appengine/src/greenday_core/settings
+- cp -r configurator/montage/local/* .
 - docker-compose build
 - docker-compose up -d
 - docker-compose logs -f &

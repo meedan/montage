@@ -187,7 +187,8 @@ class ProjectAPI(BaseAPI, ProjectAPIMixin):
             image_url=request.image_url,
             image_gcs_filename=request.image_gcs_filename,
             privacy_project=request.privacy_project or Project.PRIVATE,
-            privacy_tags=request.privacy_tags or Project.PUBLIC
+            privacy_tags=request.privacy_tags or Project.PUBLIC,
+            project_settings=request.project_settings
         )
 
         project.set_owner(self.current_user)

@@ -94,10 +94,6 @@ appengine/src/greenday_core/settings/test.py
 configurator
 
 # MySQL and AppEngine data
-mysql/data/*
-!mysql/data/.gitkeep
-mysql/appengine/*
-!mysql/appengine/.gitkeep
 *.sql
 
 # Deployment configuration

@@ -1,0 +1,4 @@
+[submodule "pender"]
+	path = pender
+	url = https://github.com/meedan/pender
+	branch = develop

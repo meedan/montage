@@ -14,7 +14,7 @@ def execute_from_command_line():
     _patch_deferred()
 
     # TODO: get app_id from app.yaml
-    storage_path = _get_storage_path("/app/mysql/appengine", "greenday-project-v02-dev")
+    storage_path = _get_storage_path("/app/data", "greenday-project-v02-dev")
     search_stub = simple_search_stub.SearchServiceStub(
         index_file=os.path.join(storage_path, 'search_indexes'))
     apiproxy_stub_map.apiproxy.RegisterStub('search', search_stub)

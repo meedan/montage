@@ -54,6 +54,10 @@
 			};
 			window.CHANNELS_API_BASE = "{{ CHANNELS_API_BASE }}";
 			window.API_BASE = "{{ API_BASE }}";
+			window.PENDER_SETTINGS = {
+				host: "{{ PENDER_SETTINGS.host }}",
+				key: "{{ PENDER_SETTINGS.key }}"
+			};
 		</script>
 		{% if DEBUG %}
 		<!-- build:js(appengine/src/greenday_public) js/libs.js -->

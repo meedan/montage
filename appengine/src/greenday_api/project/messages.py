@@ -47,6 +47,7 @@ class ProjectRequestMessage(DjangoProtoRPCMessage):
             description
             privacy_project (should be either 2 (PUBLIC) or 1 (PRIVATE)
             privacy_tags (should be either 2 (PUBLIC) or 1 (PRIVATE)
+            project_settings
     """
     class Meta:
         model = Project
@@ -55,6 +56,7 @@ class ProjectRequestMessage(DjangoProtoRPCMessage):
             'image_gcs_filename',
             'name',
             'description',
+            'project_settings'
         )
 
     privacy_project = messages.IntegerField(
@@ -116,6 +118,7 @@ class ProjectResponseMessageBasic(DjangoProtoRPCMessage):
             'privacy_project',
             'privacy_tags',
             'video_tag_instance_count',
+            'project_settings'
         )
 
 

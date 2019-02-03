@@ -1,9 +1,13 @@
 import os
 import logging
 from protorpc import message_types, messages
+from jsonfield import JSONField
 
 from django.db import models
 
+# Register JSONField as an acceptable ProtoRPC field type.
+class ProtoRPCJsonField(messages.StringField):
+    type = dict
 
 MODEL_FIELD_MAP = {
     models.AutoField: (
@@ -34,9 +38,10 @@ MODEL_FIELD_MAP = {
         (messages.BooleanField, None, ),
     models.EmailField:
         (messages.StringField, None, ),
-
     models.ForeignKey:
-        (messages.IntegerField, messages.Variant.INT32,)
+        (messages.IntegerField, messages.Variant.INT32, ),
+    JSONField:
+        (ProtoRPCJsonField, None, )
 }
 
 

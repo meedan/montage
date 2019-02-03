@@ -106,6 +106,13 @@
 			function saveProject() {
 				var promise;
 
+				// KEEP
+				ctrl.project.project_settings.keep = {
+					'enabled': ctrl.keepSettings.isActive,
+					'archive.org': ctrl.keepSettings.services.archiveOrg,
+					'archive.is': ctrl.keepSettings.services.archiveIs
+				};
+
 				// RobC 10/04/2015 - manually set tag privacy to private by
 				// default as we are removing all references to public and
 				// private tags from the interfaces. All projects going forward
@@ -180,47 +187,30 @@
 
 			// KEEP
 
-			ctrl.toggleKeep = toggleKeep;
 			ctrl.toggleKeepService = toggleKeepService;
 
 			ctrl.keepSettings = {
-				isActive: false,
+				isActive: !!ctrl.project.project_settings.keep.enabled,
 				services: {
-					all: true,
-					archiveOrg: true,
-					archiveIs: true
+					all: !!ctrl.project.project_settings.keep['archive.org'] && !!ctrl.project.project_settings.keep['archive.is'],
+					archiveOrg: !!ctrl.project.project_settings.keep['archive.org'],
+					archiveIs: !!ctrl.project.project_settings.keep['archive.is']
 				}
 			};
 
-			function toggleKeep() {
-				ctrl.loading = true;
-				// setTimeout(function() { // TODO: setting timeout to emulate lentghy api call — remove this
-					ctrl.loading = false;
-					// }, 500);
-					console.log('New Keep Settings:', ctrl.keepSettings); // TODO: set Keep settings via API
-			}
-
 			function toggleKeepService(service) {
-
 				var services = ctrl.keepSettings.services;
-				ctrl.loading = true;
-
-				// setTimeout(function() { // TODO: setting timeout to emulate lentghy api call — remove this
-					if (service === 'all') {
-						for (var key in services) {
-							services[key] = services.all;
-						}
-					} else {
-						if (!services.all && services.archiveIs && services.archiveOrg) {
-							services.all = true;
-						} else if (services[service] === false) {
-							services.all = false;
-						}
+				if (service === 'all') {
+					for (var key in services) {
+						services[key] = services.all;
 					}
-					ctrl.loading = false;
-				// }, 500);
-					console.log('New Keep Settings:', ctrl.keepSettings); // TODO: set Keep settings via API
-
+				} else {
+					if (!services.all && services.archiveIs && services.archiveOrg) {
+						services.all = true;
+					} else if (services[service] === false) {
+						services.all = false;
+					}
+				}
 			}
 
 			function fetchExtraInfo() {

@@ -32,6 +32,7 @@ class MasterView(TemplateView):
         context['OAUTH_SETTINGS'] = settings.OAUTH_SETTINGS
         context['CHANNELS_API_BASE'] = settings.CHANNELS_API_BASE
         context['API_BASE'] = settings.API_BASE
+        context['PENDER_SETTINGS'] = settings.PENDER_SETTINGS
         return context
 
 

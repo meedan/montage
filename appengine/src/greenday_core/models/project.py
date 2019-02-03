@@ -5,6 +5,7 @@ from django.conf import settings
 from django.db import models
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
+from jsonfield import JSONField
 
 from ..utils import CONDITIONAL_CASCADE
 
@@ -54,6 +55,9 @@ class Project(BaseModel, TrashableMixin):
 
     # denormalised
     video_tag_instance_count = models.PositiveIntegerField(default=0)
+
+    # generic settings
+    project_settings = JSONField(default={})
 
     objects = ProjectManager()
     all_objects = ProjectQuerySet.as_manager()
