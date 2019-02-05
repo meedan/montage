@@ -39,6 +39,13 @@
 			ctrl.loading = false;
 			ctrl.isVisible = $scope.isVisible;
 			ctrl.project = $scope.project;
+			ctrl.project.project_settings = Object.assign({
+				keep: {
+					enabled: false,
+					'archive.org': false,
+					'archive.is': false
+				}
+			}, ctrl.project.project_settings);
 			ctrl.originalProject = angular.copy(ctrl.project);
 			ctrl.saveProject = saveProject;
 			ctrl.removeProject = removeProject;
@@ -192,11 +199,13 @@
 			ctrl.keepSettings = {
 				isActive: !!ctrl.project.project_settings.keep.enabled,
 				services: {
-					all: !!ctrl.project.project_settings.keep['archive.org'] && !!ctrl.project.project_settings.keep['archive.is'],
 					archiveOrg: !!ctrl.project.project_settings.keep['archive.org'],
 					archiveIs: !!ctrl.project.project_settings.keep['archive.is']
 				}
 			};
+			ctrl.keepSettings.services.all =
+				ctrl.keepSettings.services.archiveOrg &&
+				ctrl.keepSettings.services.archiveIs;
 
 			function toggleKeepService(service) {
 				var services = ctrl.keepSettings.services;
